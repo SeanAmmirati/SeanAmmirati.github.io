@@ -28,7 +28,10 @@ PATH = 'content'
 
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
+PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering',
+           'liquid_tags.img', 'liquid_tags.video',
+           'liquid_tags.youtube', 'liquid_tags.vimeo',
+           'liquid_tags.include_code', 'liquid_tags.notebook']
 MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
