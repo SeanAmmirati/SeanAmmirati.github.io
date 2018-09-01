@@ -46,7 +46,7 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = 'Z:/Repositories/website/html5-dopetrope'
+THEME = 'html5-dopetrope'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
