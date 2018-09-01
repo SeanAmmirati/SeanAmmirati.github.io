@@ -28,8 +28,7 @@ PATH = 'content'
 
 MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering',
-           'assets']
+PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
 MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
@@ -45,9 +44,7 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = bulrush.PATH
-JINJA_ENVIRONMENT = bulrush.ENVIRONMENT
-JINJA_FILTERS = bulrush.FILTERS
+THEME = 'Z:/Repositories/~/pelican-themes/html5-dopetrope'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
