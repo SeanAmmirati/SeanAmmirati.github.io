@@ -18,7 +18,7 @@ SIDEBAR_TAGS = ['Statistics',
                 ]
 MENUITEMS = [('Home', '/'),
              ('Topics', '/pages/topics'),
-             ('About', 'pages/about'),
+             ('About', '/pages/about'),
              ]
 
 DEFAULT_METADATA = {
@@ -68,4 +68,4 @@ SOCIAL = (('You can add links in your config file', '#'),
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+RELATIVE_URLS = False
