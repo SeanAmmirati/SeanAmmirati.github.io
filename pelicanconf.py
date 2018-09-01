@@ -6,7 +6,7 @@ import bulrush
 AUTHOR = 'Sean Ammirati'
 SITENAME = 'Stats Works'
 SITESUBTITLE = 'Making Statistics Work for You'
-SITEURL = 'statsworks.github.io'
+SITEURL = 'https://seanammirati.github.io'
 SIDEBAR_NAME = AUTHOR
 SIDEBAR_EMAIL = 'ammirati.sean@gmail.com'
 SIDEBAR_TAGS = ['Statistics',
@@ -41,13 +41,12 @@ MARKDOWN = {
     'output_format': 'html5'
 }
 
-ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/'
 
 TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = 'Z:/Repositories/~/pelican-themes/html5-dopetrope'
+THEME = 'Z:/Repositories/website/html5-dopetrope'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
