@@ -6,7 +6,7 @@ import bulrush
 AUTHOR = 'Sean Ammirati'
 SITENAME = 'Stats Works'
 SITESUBTITLE = 'Making Statistics Work for You'
-SITEURL = 'https://seanammirati.github.io'
+SITEURL = 'seanammirati.github.io'
 SIDEBAR_NAME = AUTHOR
 SIDEBAR_EMAIL = 'ammirati.sean@gmail.com'
 SIDEBAR_TAGS = ['Statistics',
