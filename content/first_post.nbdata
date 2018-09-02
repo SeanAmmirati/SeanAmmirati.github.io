@@ -1,8 +1,9 @@
-Title: First Post
-Slug: first-post
-Date: 2018/09/01
-Category: Topics
-Tags: Pelican, Data Science
+Title: Summary Statistics Part 1: Central Tendency
+Slug: sumstatscentraltendency
+Date: 2018/09/02
+Category: Statistics, Beginner
+Tags: Statistics, Summary Statistics, Mean, Median, Mode, Trimean, Windsorized Mean,
+Data Science
 author: Sean Ammirati
-Summary: My first post, read it to find out.
+Summary: An overview of statistics and central tendency. 
 Status: published
