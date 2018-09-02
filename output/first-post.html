@@ -1046,16 +1046,156 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="This-is-the-example">This is the example<a class="anchor-link" href="#This-is-the-example">&#182;</a></h1>
+<h2 id="Summary-Statistics-(and-what-they-mean)">Summary Statistics (and what they mean)<a class="anchor-link" href="#Summary-Statistics-(and-what-they-mean)">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Welcome! In this (very first) post, we are going to be going over a few basic statistical concepts involving summary statistics and how we can use them. This is a great place to start for getting some idea on how statistics can work for you!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Statistics courses usually start with a discussion of summary statistics, and for good reason. Summary statistics are the essential building blocks of statistics. When we talk about expectation, or prediction, we are actually talking about a summary statistic -- in many cases, and algorithms, the mean. For the most part, summary statistics can give us a good idea of the underlying distribution and, in some cases, are <b> sufficient </b> in describing a set of data points for a particular algorithm.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Don't-Be-Another-Statistic">Don't Be Another Statistic<a class="anchor-link" href="#Don't-Be-Another-Statistic">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first question that will come up immediately when discussing this is what exactly a statistic is. In everyday language many people use statistic to mean a way of summarizing data into a single datapoint. When people say things like "You are not just a statistic!", what they are generally referring to is how statistics are <b> aggregates </b> of data. That is, statistics cannot capture all of the truth, but only an average.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So is it fair to say that statistics are purporting to be cold-hard facts gathered from data? Not exactly. Statistics are gathered from sample data, and are often used as an estimation of the population. In statistican speak, a <b> population </b> is the theoretical overarching group that we wish to infer about. For instance, the population can be men living in the United States, all of the atoms in the universe, or the set of all possible combinations of people into couples. A <b> sample </b> is a subset of the population, a smaller group derived from it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We use statistics derived from the sample to make inferences about the population, but by definition these are not exact -- they depend on the sample that we choose. Almost surely, if we were to choose another sample we would come up with a different statistic. Therefore, a statistician would not take a summary statistic to be the hard, cold "truth", but a signal, or estimation, of the "cold hard truth."</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Statistics-vs-Statistic">Statistics vs Statistic<a class="anchor-link" href="#Statistics-vs-Statistic">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Unfortunately, much of the confusion about the nature of a <b> statistic </b> has to do with the field known as <b> statistics.</b> Confusing, but true. Statistics is generally what people are referring to when they talk about the hand-wavy idea -- "gathering insights from data." But this treats data as though it is a fixed, constant thing. This couldn't be further from the case! This is exactly what makes statistics such an interesting field -- statistics deals with random variation. Statistics isn't used for cases of absolute certainty, like many of the sciences do, but revels in the uncertainty of real life. Indeed, nearly everything has random variation involved in it, and therefore nearly everything is in the scope of statistics. The way we can quantify uncertainty is by using the theories of <b> probability.</b> But that is for another post!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In general, we do not say that a statistic is the "ground truth" but a description of <b> sample data. </b> This sample statistic is then used to estimate the &lt;/b&gt; population parameters.&lt;/b&gt; This comes from the initial distinction that many people make -- samples themselves are not a representation of the ground truth. When a statistic is used as a statement about the population, we call this statistic an <b> estimator </b> of the population parameter.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In fact, population parameters are not nearly as interesting as sample statistics. A population parameter is not probabilistic at all -- if it is obtainable, then it will be a single value with no variation. Sample statistics, however, do vary, and sometimes considerably based on how the data is sampled and how large the sample is.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But, I could go on all day about this. Luckily for you, I won't. I am going to be using some code to give examples of how these things work. Don't worry if you don't understand how the code works, as I will create a future article describing how this code is written using python. In this post, which I will be calling a "framework" post, I will only be describing how these things work. Then, in a "application" post, I will show how to write code to solve these problems with real-world data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Class-Grades">Class Grades<a class="anchor-link" href="#Class-Grades">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, onto an example. Suppose we have a class of 7th graders who had gotten the following grades on the previous exam: 95, 80, 50, 80, 100, 94.</p>
+<p>Let's start with the situation where this is the entire class. In this case, we are dealing with the <b>population.</b> That means, if we take the common 'statistics', we will not have a statistic at all but a <b> parameter. </b> This distinction makes it clear that we are not estimating anything, but are looking at the "cold, hard truth." The population is then "the grades of 7th graders on math test last week."</p>
+<p>If, however, we were trying to estimate their performance in the class overall from this test alone, then this is a <b> sample </b>, presuming there were other tests. Thus, the phrasing of the question is a large distinction.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[165]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span></span>
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> </span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></span>
+<span class="code-line"><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span></span>
+<span class="code-line"><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">plt</span></span>
+<span class="code-line"><span class="o">%</span><span class="k">matplotlib</span> inline</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[249]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">class_grades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;John&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">,</span> </span>
+<span class="code-line">                          <span class="s1">&#39;Mary&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> </span>
+<span class="code-line">                          <span class="s1">&#39;Jacob&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> </span>
+<span class="code-line">                          <span class="s1">&#39;Jose&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> </span>
+<span class="code-line">                          <span class="s1">&#39;Sarah&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> </span>
+<span class="code-line">                          <span class="s1">&#39;Laura&#39;</span><span class="p">:</span> <span class="mi">94</span><span class="p">})</span></span>
+<span class="code-line"><span class="n">class_grades</span></span>
 </pre></div>
 
 </div>
@@ -1068,17 +1208,2097 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[249]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="code-line">6</pre>
+<pre><span class="code-line">Jacob     50</span>
+<span class="code-line">John      95</span>
+<span class="code-line">Jose      80</span>
+<span class="code-line">Laura     94</span>
+<span class="code-line">Mary      80</span>
+<span class="code-line">Sarah    100</span>
+<span class="code-line">dtype: int64</pre>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="First----Central-Tendency">First -- Central Tendency<a class="anchor-link" href="#First----Central-Tendency">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given a set of data points, where do we start? A good start is determining the <b> central tendency </b> or what we often call the <b> average. </b> Here, I use the word <b> average </b> as a general case of central tendency -- we want to know what the average student in this class looks like.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Arithmetic-Mean">Arithmetic Mean<a class="anchor-link" href="#Arithmetic-Mean">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One common example of an average is the arithmetic mean. We are all familiar with this from our schooling days, but to be consice:</p>
+$$
+\frac{ \sum_i x_{i} }{n} 
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we say that we sum over all of the possible values, and divide by the total number. We can see the results on our simple dataset above:</p>
+$$
+95 + 80 + 50 + 80 + 100 + 94 = 499 = T \\
+\bar{x} = \frac{T}{6} = 83.166
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">class_grades</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">mean</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[94]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">83.16666666666667</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Median">Median<a class="anchor-link" href="#Median">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another measure of central tendency is the median. The <b> median </b> is the value which half of the data is smaller and half is larger than. If there is an even number of points, we take the average of the two closest to the "center" of the ranked numbers.</p>
+<p>For example, we first list the points from largest to smallest:</p>
+$$ 
+50, 80, 80, 94, 95, 100
+$$<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
+$$ 
+50, 80, 80, 94, 95, 100\\
+    80, 80, 94, 95\\
+        80, 94\\
+$$<p>Now that we have two values (since 6 = n is even), we take an average of these values. That is:
+$$
+\frac{(80 + 94)}{2} = 87
+$$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">median</span> <span class="o">=</span> <span class="n">class_grades</span><span class="o">.</span><span class="n">median</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">median</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[95]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">87.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Mode">Mode<a class="anchor-link" href="#Mode">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally there is the mode. The mode is simply the most likely value, or the most recurring value. Thus there can be multiple modes if there are two values which are equally likely and are the most recurring in the dataset.</p>
+<p>We can summarize this by looking at the frequencies of each data point. For convenience, I have done this using pandas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">class_grades</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[96]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">80     2</span>
+<span class="code-line">95     1</span>
+<span class="code-line">94     1</span>
+<span class="code-line">100    1</span>
+<span class="code-line">50     1</span>
+<span class="code-line">dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because 80 occurs twice, it is the mode.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">mode</span> <span class="o">=</span> <span class="n">class_grades</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">mode</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[97]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">0    80</span>
+<span class="code-line">dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Other-Measures-of-Central-Tendency">Other Measures of Central Tendency<a class="anchor-link" href="#Other-Measures-of-Central-Tendency">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are all of the "canoncial" measures of central tendency that you have likely heard about before. However, there are others as well such as those listed <a href="https://en.wikipedia.org/wiki/Central_tendency">here</a>. Check them out -- they're pretty interesting! For fun, I will show some examples below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Trimean">Trimean<a class="anchor-link" href="#Trimean">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The trimean is the weighted arithmetic mean of the median and two quartiles. A <b> quartile </b> is the data point that is greater then some multiple of 25% of the data. It is called a quartile because it seperates the data into four segments. The first quartile is the data point which is greater than 25% of the data, the second is the median (50% of the data), the third is for 75% of the data, and the forth quartile is also the maximum, greater than all of the data. Interestingly, this is often not considered a quartile, but by the same logic it can be considered one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The trimean is then defined as:</p>
+$$
+TM = \frac{Q_1 + 2M + Q_3}{4}
+$$<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
+$$ 
+MH = \frac{Q_1 + Q_2}{2} 
+$$<p>This is calculated below:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">trimean</span><span class="p">(</span><span class="n">series</span><span class="p">):</span></span>
+<span class="code-line">    <span class="n">T</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">series</span><span class="o">.</span><span class="n">median</span><span class="p">()</span> <span class="o">+</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">75</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">TM</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="mi">4</span></span>
+<span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">trimean</span><span class="p">(</span><span class="n">class_grades</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[117]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">87.1875</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In practice, it turns out that this estimator is a remarkably <b> efficient </b> estimator of the population, meaning it can accurately estimate the population mean if calculated on a sample with relatively fewer points than other estimators. For a symmetric distribution like the <b> normal </b> distribution, it is the most efficient as compared with the median, and other L-3 estimators. See <a href="https://en.wikipedia.org/wiki/Trimean">here</a> for more information. It is also is more robust than the mean, which will be discussed further below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Winsorized-Mean">Winsorized Mean<a class="anchor-link" href="#Winsorized-Mean">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This will be a good segue into the next section, which examines the most appropriate method of central tendency to use. The Winsorized Mean attempts to mitigate the effect of outliers -- values that are very far from what we would call the "average" value. If this doesn't make sense yet, don't worry. I'll be discussing it further later in the section on robustness. For now, we will just examine what this will look like.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the winsorized mean, we will take the most extreme values of our sample and replace them with the most extreme remaining values. In this case, this is 50 and 100. So, our new, adjusted, sample to calculate the central tendency is:</p>
+$$
+\tilde{S} = {80, 80, 80, 94, 95, 95}
+$$<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
+$$ 
+\frac{ \sum_i \tilde{s}_{i} }{n},\\
+\forall \tilde{s}_i \in \tilde{S}
+$$<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
+<p>In general, we can take the largest and smallest p% of data and replace it with the most extreme values within this range. This is often taken to be 10 to 25% of the ends replaced. In this example, we are taking the top and bottom 1/6, which is roughly 16%.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="nb">max</span><span class="p">(</span><span class="n">class_grades</span><span class="p">[</span><span class="n">class_grades</span> <span class="o">&lt;</span> <span class="n">class_grades</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span><span class="p">)])</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[112]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">95</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">winsorized_mean</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">percent_removed</span><span class="p">):</span></span>
+<span class="code-line">    <span class="c1">## Taking the value which is greater than/less than percent_removed </span></span>
+<span class="code-line">    <span class="n">bot_quant</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">percent_removed</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">top_quant</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">percent_removed</span><span class="p">)</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="c1">#Finding the values to replace</span></span>
+<span class="code-line">    <span class="n">bottom</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">series</span> <span class="o">&lt;</span> <span class="n">bot_quant</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">top</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="n">series</span> <span class="o">&gt;</span> <span class="n">top_quant</span><span class="p">]</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="c1">#Replacements</span></span>
+<span class="code-line">    <span class="n">rep_bottom</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">series</span> <span class="o">&gt;</span> <span class="n">bot_quant</span><span class="p">])</span></span>
+<span class="code-line">    <span class="n">rep_top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">series</span> <span class="o">&lt;</span> <span class="n">top_quant</span><span class="p">])</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="n">replacement_dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="n">rep_bottom</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bottom</span><span class="p">}</span></span>
+<span class="code-line">    <span class="n">replacement_dic</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="n">rep_top</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">top</span><span class="p">})</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="c1"># Make replacements, find mean</span></span>
+<span class="code-line">    <span class="n">S_tilde</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">replacement_dic</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">winsorized_mean</span> <span class="o">=</span> <span class="n">S_tilde</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
+<span class="code-line">    <span class="k">return</span><span class="p">(</span><span class="n">winsorized_mean</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="n">winsorized_mean</span><span class="p">(</span><span class="n">class_grades</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[115]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">87.33333333333333</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But wait! How can you just replace values like that!</p>
+<p>I know, it seems dishonest. The idea is that these values are extremely unlikely. In the case of 6 people, this is probably not the case. But imagine we had the following values:</p>
+$$
+0, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 100
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ex_outliers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">[</span><span class="mi">100</span><span class="p">]]))</span></span>
+<span class="code-line"><span class="n">ex_outliers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">92.5625</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But, would we say that the average student recieved a grade of 92? This seems like an underestimation. Naively, if we choose the winsorized mean, we would get the following:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">winsorized_mean</span><span class="p">(</span><span class="n">ex_outliers</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[120]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">95.40625</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This seems like a more accurate representation of the data. In the cases of outliers, one must be careful to examine the distribution of the data well before naively using one measure of central tendency, as the results may be very misleading.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Which-to-choose?">Which to choose?<a class="anchor-link" href="#Which-to-choose?">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is not always clear, as we saw above for the windsorized mean. If we look at a histogram of the values, we can get a sense of the <b> shape </b> of the distribution. It turns out that the shape can help us determine which measure of central tendency best describes the distribution.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">plot</span> <span class="o">=</span> <span class="n">class_grades</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Arithmetic Mean&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">median</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Median&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mode&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">TM</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Trimean&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">winsorized_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Winsorized Mean&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[79]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">&lt;matplotlib.legend.Legend at 0x16c6b6a38d0&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIsAAANSCAYAAADlGU4HAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAIABJREFUeJzs3X2YV3WB///XAUECCRDLTDSsNeNmcBBQwpumLGDNXE1L
+yPIuy3Yr1zZzbXPFbqz2qjZXv/7yZnWpVGwvTSu1RLdmNdEtNEIMC7cdFXI10EFgwRw8vz/Ad9w6
+gwzOgI/HdXEx57zP53zeZ+Y6n8Gn53M+VV3XAQAAAIAk6dHVEwAAAACg+xCLAAAAACjEIgAAAAAK
+sQgAAACAQiwCAAAAoBCLAAAAACjEIgAAAAAKsQgAAACAQiwCAAAAoNipqyewKbvttls9dOjQrp7G
+VluxYkX69evX1dOAbs+5Ah3jXIH2/XbJb7N69eoMf+3wrp5K1/jtb9f8vd9+XTuP7cxv137f9ivf
+t7Xfx+yXJb9dkiQZvN/gl39i25jfK9AxO9K5ct999y2u6/o17W3XLWPR0KFDM3v27K6exlZrbm5O
+U1NTV08Duj3nCnSMcwXa1zS9Ka2trZl95vb/b8mX5IXXiObmrpzFdueF19bm8n1rWvt3c6Y3TU+S
+nNx88ss6p5eD3yvQMTvSuVJV1SMd2c7b0AAAAAAoxCIAAAAACrEIAAAAgKJb3rNoU5577rksXLgw
+q1at6uqpdNiAAQMyf/78rp7GdqFPnz4ZMmRIevXq1dVTAQAAgFe07SYWLVy4MP3798/QoUNTVVVX
+T6dDli1blv79+3f1NLq9uq6zZMmSLFy4MPvss09XTwcAAABe0babt6GtWrUqgwcP3m5CER1XVVUG
+Dx68XV01BgAAADuq7SYWJRGKdmB+tgAAANA9bFexCAAAAIBtSyzaQjfddFOqqspDDz30ottNmDAh
+SdLS0pJrr722rJ8+fXo+8YlPdPq8Nnye2bNn54wzzujw45uamrL33nunruuy7uijj84uu+zSqfME
+AAAAujexaAvNmDEjhxxySGbMmLHJ8ba2tiTJrFmzkmwccbaVDZ9n7Nixueiii7ZoHwMHDszdd9+d
+JGltbc3jjz/eqXMEAAAAuj+xaAssX748P//5z3PllVfmuuuuK+ubm5tz6KGH5qijjsrw4cOTpFyR
+c8455+Suu+5KY2NjvvnNbyZJ/vCHP2Ty5MnZd999c/bZZ5f97LLLLvnMZz6TESNG5J3vfGd+8Ytf
+pKmpKW984xvzwx/+MEmyevXqfOYzn8m4ceMyatSoXHbZZZt8nubm5hx55JFl3qecckoaGhoyatSo
+3HDDDZs8vilTppTj+v73v5/3vve9641/7WtfK887bdq0sv7oo4/OmDFjMmLEiFx++eXrHc/nPve5
+7L///hk/fnyeeOKJl/BdBwAAAF5OO3X1BF6SM89M5szp3H02NiYXXviim/zgBz/I5MmT8+Y3vzmD
+Bw/OfffdlzFjxiRJ7r///sybN2+jj37/6le/mq9//eu5+eabk6x5G9qcOXPyq1/9KjvvvHP222+/
+fPKTn8xee+2VFStW5B3veEe+9rWv5Zhjjsm5556b22+/Pb/5zW9y0kkn5aijjsqVV16ZAQMG5Je/
+/GWeffbZHHzwwZk4ceJGz9Pc3Fzm8MUvfjEDBgzIAw88kCR5+umnN3l8hx9+eD7ykY9k9erVue66
+63L55Zfni1/8YpJk5syZWbBgQX7xi1+kruscddRRufPOO3PYYYflqquuyq677pqVK1dm3LhxOfbY
+YzN48OCsWLEi48ePzwUXXJCzzz47V1xxRc4999wt/9kAAAAAL5vtMxZ1kRkzZuRv//Zvk6y5CmfG
+jBklFh144IEbhaLNOfzwwzNgwIAkyfDhw/PII49kr732Su/evTN58uQkSUNDQ3beeef06tUrDQ0N
+aWlpSbIm2sydOzfXX399kmTp0qVZsGBBevfuvdnnu+OOO9a7EmrQoEGb3K5nz5455JBDct1112Xl
+ypUZOnRoGZs5c2ZmzpyZ0aNHJ1lztdKCBQty2GGH5aKLLsqNN96YJHnssceyYMGCDB48OL179y5X
+N40ZMya33357h74/AAAAQNfZPmNRO1cAbQtPPfVUfvrTn+aBBx5IVVVZvXp1qqrK1772tSRJv379
+OryvnXfeuXzds2fPcp+jXr16lY+Q79GjR9muR48eZZu6rnPxxRdn0qRJ6+1z3SuJtsaUKVNyzDHH
+5Pzzz19vfV3X+exnP5vTTz99o+e94447cs8996Rv375pamrKqlWrNjqedY8TAAAA6L7cs6iDrr/+
++nzoQx/KI488kpaWljz22GPZZ599ctddd73o4/r3759ly5Z12jwmTZqUb33rW3nuueeSJL/73e+y
+YsWKF32ed73rXbnkkkvK8ubehpYkhx56aD772c9m6tSpGz3vVVddleXLlydJFi1alCeffDJLly7N
+oEGD0rdv3zz00EO59957t/YQAQAAgC4kFnXQjBkzcswxx6y37thjj93sp6K9YNSoUenZs2f233//
+coPrrXHaaadl+PDhOeCAAzJy5MicfvrpaWtre9HnOffcc/P0009n5MiR2X///fOzn/1ss/uvqipn
+nXVWdtttt/XWT5w4MR/4wAfy1re+NQ0NDTnuuOOybNmyTJ48OW1tbRk2bFjOOeecjB8/fquPEQAA
+AOg6VV3XXT2HjYwdO7aePXv2euvmz5+fYcOGddGMXpply5alf//+XT2N7cb2+DOmczQ3N6epqamr
+pwHdnnMF2tc0vSmtra2Zc2YnfxjK9uKF14hOukXBK8ULr61/vrVD09q/mzO9aXqS5OTmk1/WOb0c
+/F6BjtmRzpWqqu6r63pse9u5sggAAACAQiwCAAAAoBCLAAAAACjEIgAAAAAKsQgAAACAQiwCAAAA
+oBCLtkBVVfngBz9Yltva2vKa17wmRx555Bbtp6mpKbNnz06SHHHEEWltbe3UeQIAAAC8VDt19QS2
+J/369cu8efOycuXKvOpVr8rtt9+ePffcc6v2eeutt3bS7AAAAAC2niuLttARRxyRW265JUkyY8aM
+TJ06tYytWLEip556ag488MCMHj26bLdy5cpMmTIlw4YNyzHHHJOVK1eWxwwdOjSLFy9Okhx99NEZ
+M2ZMRowYkcsvv7xss8suu+Rzn/tc9t9//4wfPz5PPPHEy3GoAAAAwCvQdnll0Zlnnpk5c+Z06j4b
+Gxtz4YUXtrvdlClT8oUvfCFHHnlk5s6dm1NPPTV33XVXkuSCCy7IO97xjlx11VVpbW3N2LFj8573
+vCeXXXZZ+vbtm/nz52fu3Lk54IADNrnvq666KrvuumtWrlyZcePG5dhjj83gwYOzYsWKjB8/Phdc
+cEHOPvvsXHHFFTn33HM79fgBAAAAElcWbbFRo0alpaUlM2bMyBFHHLHe2MyZM/PVr341jY2NaWpq
+yrPPPptHH300d955Z7nX0ahRozJq1KhN7vuiiy4qVw899thjWbBgQZKkd+/e5b5IY8aMSUtLy7Y7
+QAAAAOAVbbu8sqgjVwBtS0cddVTOOuusNDc3Z8mSJWV9Xde54YYbst9++yVJli1blv79+3don83N
+zbnjjjtyzz33pG/fvmlqasqqVauSJL169UpVVUmSnj17pq2trZOPCAAAAGANVxa9BKeeemqmTZuW
+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
++FEPPfRQvvOd72Ts2LEbjS1YsCDXX3993vKWt+SAAw5Inz59MmvWrNxwww356le/muuvvz5f+MIX
+Mnny5EyfPj1PP/10DjrooLzrXe/KHnvskdtvvz19+vTJQw89lJNOOqkEo/vvvz8PPvhgdt9994wf
+Pz733ntvxo8fv7XfAAAAAABXFm2tN73pTZsMRUnyxje+McOHD0+PHj0yfPjwHH744UmShoaGtLS0
+JElmzpyZCy64II2NjXn729+eVatW5dFHH82zzz6bD3/4wxk5cmSmTJmS3/zmN2W/48ePz+tf//r0
+7NkzjY2NZV8AAAAAW2s7vbJoy68A2lb69eu32bGdd965fN2jR4+y3KNHj7S1tSVZc6+jm266KW96
+05vWe+y5556bvfbaK1dffXWee+657LLLLpvcb8+ePcu+AAAAALaWK4u62KRJk3LxxReX5V/96ldJ
+kqVLl2aPPfZIVVX59re/nbquu2qKAAAAwCuIWNTFpk2blhUrVqShoSEjRozI+eefnyT5xCc+kX/9
+13/N/vvvn//5n/9Z72oiAAAAgG1lO30bWtd5IeYkyV/8xV9kzpz1b7S9cOHCJMnAgQNz9913l/VX
+X331Jh/Xr1+/XHHFFRs9z3777ZcHHnigLH/5y19Okrzzne/MO9/5zrL+0ksv3YqjAQAAAFifK4sA
+AAAAKMQiAAAAAAqxCAAAAIBCLAIAAACgEIsAAAAAKMQiAAAAAAqxqIM+9alP5cILLyzLkyZNymmn
+nVaWP/3pT+ef//mf84c//CHHHXfcNp3LpZdemu985ztbvZ+hQ4dm8eLFm1x/6KGHrreusbExI0eO
+3OrnBAAAALo3saiDDj744MyaNStJ8vzzz2fx4sV58MEHy/isWbMyYcKEvP71r8/111+/zebR1taW
+j33sYznxxBO32XMkybJly/LYY48lSebPn79NnwsAAADoPsSiDpowYULuueeeJMmDDz6YkSNHpn//
+/nn66afz7LPPZv78+TnggAPS0tJSrsC55ppr8t73vjeTJ0/Ovvvum7PPPjtJsnr16px88skZOXJk
+Ghoa8s1vfjNJMmfOnIwfPz6jRo3KMccck6effjpJ0tTUlDPPPDNjx47Nv/zLv+T888/P17/+9fzh
+D39IY2Nj+dOzZ8888sgj+eMf/5hjjz0248aNy7hx43L33XcnSZYsWZKJEydmxIgROe2001LX9WaP
+9/3vf3++973vJUlmzJiRqVOnlrHVq1fnM5/5TMaNG5dRo0blsssuS5IsX748hx9+eA444IA0NDTk
+Bz/4QZKkpaUlw4YNy0c+8pGMGDEiEydOzMqVKzvtZwMAAAB0np26egIvxU/O/En+d87/duo+X9f4
+uky+cPJmx1//+tdnp512yqOPPppZs2blrW99axYtWpR77rknAwYMSENDQ3r37r3R4+bMmZNf/epX
+2XnnnbPffvvlk5/8ZJ588sksWrQo8+bNS5K0trYmSU488cRcfPHFedvb3pbzzjsvn//858tb3/70
+pz9l9uzZSZLzzz+/zGnOnDlJkksuuST/+Z//mTe84Q35wAc+kE996lM55JBD8uijj2bSpEmZP39+
+Pv/5z+eQQw7Jeeedl1tuuSVXXnnlZo/32GOPzSmnnJKzzjorP/rRj3LNNdfku9/9bpLkyiuvzIAB
+A/LLX/4yzz77bA4++OBMnDgxe+21V2688ca8+tWvzuLFizN+/PgcddRRSZIFCxZkxowZueKKK/L+
+978/N9xwQz74wQ9uyY8IAAAAeBlsl7Goq0yYMCGzZs3KrFmz8nd/93dZtGhRZs2alQEDBuTggw/e
+5GMOP/zwDBgwIEkyfPjwPPLIIxkxYkR+//vf55Of/GTe/e53Z+LEiVm6dGlaW1vztre9LUly0kkn
+5X3ve1/Zz/HHH7/Zed1999254oor8vOf/zxJcscdd+Q3v/lNGX/mmWeyfPny3Hnnnfn+97+fJHn3
+u9+dQYMGbXafgwcPzqBBg3Lddddl2LBh6du3bxmbOXNm5s6dW95ut3Tp0ixYsCBDhgzJP/zDP+TO
+O+9Mjx49smjRojzxxBNJkn322SeNjY1JkjFjxqSlpWWzzw0AAAB0ne0yFr3YFUDb0gv3LXrggQcy
+cuTI7LXXXvnGN76RV7/61TnllFM2+Zidd965fN2zZ8+0tbVl0KBB+fWvf53bbrstl156af793/+9
+vBVtc/r167fJ9Y8//ng+/OEP54c//GF22WWXJGvuqXTvvfemT58+L/FI1zj++OPz8Y9/PNOnT19v
+fV3XufjiizNp0qT11k+fPj1//OMfc99996VXr14ZOnRoVq1alWTj74O3oQEAAED35J5FW2DChAm5
++eabs+uuu6Znz57Zdddd09ramnvuuScTJkzo8H4WL16c559/Pscee2y+9KUv5f7778+AAQMyaNCg
+3HXXXUmS7373u+Uqo8157rnn8r73vS//9E//lDe/+c1l/cSJE3PxxReX5RfeqnbYYYfl2muvTZL8
++Mc/LvdE2pxjjjkmZ5999kZRaNKkSfnWt76V5557Lknyu9/9LitWrMjSpUvz2te+Nr169crPfvaz
+PPLIIx38jgAAAADdxXZ5ZVFXaWhoyOLFi/OBD3xgvXXLly/Pbrvt1uH9LFq0KKecckqef/75JMlX
+vvKVJMm3v/3tfOxjH8v//d//5Y1vfGP+7d/+7UX3M2vWrMyePTvTpk3LtGnTkiS33nprLrroonz8
+4x/PqFGj0tbWlsMOOyyXXnpppk2blqlTp2bEiBGZMGFC9t577xfdf//+/fP3f//3G60/7bTT0tLS
+kgMOOCB1Xec1r3lNbrrpppxwwgl5z3vek4aGhowdOzZvectbOvw9AQAAALoHsWgL9OzZM88888x6
+6zZ8i9bQoUPLjatPOOGE9O/fv4zdfPPN5ev7779/o/03Njbm3nvv3Wh9c3Pzessv3OA6SXmb14Ze
++CSzdQ0ePDgzZ87c5Pbr2tT9hNY9rh49euTLX/5yvvzlL2+03QufGLehFx6bJGeddVa7cwAAAAC6
+hrehAQAAAFCIRQAAAAAU21Usquu6q6fANuJnCwAAAN3DdhOL+vTpkyVLlogKO6C6rrNkyZL06dOn
+q6cCAAAAr3jbzQ2uhwwZkoULF+aPf/xjV0+lw1atWiWAdFCfPn0yZMiQrp4GAAAAvOJtN7GoV69e
+2Weffbp6Glukubk5o0eP7uppAAAAAHTYdvM2NAAAAAC2PbEIAAAAgEIsAgAAAKAQiwAAAAAoxCIA
+AAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAA
+CrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEI
+AAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAA
+gEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIs
+AgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAAAKAQiwAAAAAoxCIAAAAACrEIAAAAgEIsAgAA
+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
+IRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYB
+AAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAA
+UIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhF
+AAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAA
+ABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRi
+EQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAA
+AACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACF
+WAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQAAABAIRYBAAAAUIhFAAAAABRiEQAAAACFWAQA
+AABAIRYBAAAAULQbi6qquqqqqierqpq3mfETqqqaW1XVA1VVzaqqav91xlrWrp9TVdXszpw4AAAA
+AJ2vI1cWTU8y+UXG/yfJ2+q6bkjyxSSXbzD+9rquG+u6HvvSpggAAADAy2Wn9jao6/rOqqqGvsj4
+rHUW700yZOunBQAAAEBXaDcWbaEPJ/nxOst1kjuqqlqd5LK6rje86qioquqjST6aJLvvvnuam5s7
+eWovv+XLl+8QxwHbmnMFOsa5Au1rbW1N757JGQ1tXT2VLjGkX50k+XQ3O/7u/trV2tqa5M/zbGxc
+szxnTvNGYzsSv1e6n+527rLGK/Fc6bRYVFXV27MmFh2yzupD6rpeVFXVa5PcXlXVQ3Vd37mpx68N
+SZcnydixY+umpqbOmlqXaW5uzo5wHLCtOVegY5wr0L6BLQOz6InF+cYDnf3/RLcP41ZUSdLtjr/l
+hKaunsKLGjhwYJKs8xr75+WWgS0bjO04/F7pfk4+55aungKbMH1yv1fcudIpn4ZWVdWoJP+a5K/q
+ul7ywvq6rhet/fvJJDcmObAzng8AAACAbWOrY1FVVXsn+X6SD9V1/bt11verqqr/C18nmZhkk5+o
+BgAAAED30O71qVVVzUjSlGS3qqoWJpmWpFeS1HV9aZLzkgxO8v9VVZUkbWs/+Wz3JDeuXbdTkmvr
+uv7JNjgGAAAAADpJRz4NbWo746clOW0T63+fZP+XPjUAAAAAXm6dcs8iAAAAAHYMYhEAAAAAhVgE
+AAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAA
+QCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEW
+AQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAA
+AFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCI
+RQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAA
+AAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAU
+YhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEA
+AAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAA
+hVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgE
+AAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAAQCEWAQAAAFCIRQAAAAAUYhEAAAAAhVgEAAAA
+QCEWAQAAAFC0G4uqqrqqqqonq6qat5nxqqqqi6qqeriqqrlVVR2wztjkqqp+u3bsnM6cOAAAAACd
+ryNXFk1PMvlFxv8yyb5r/3w0ybeSpKqqnkkuWTs+PMnUqqqGb81kAQAAANi22o1FdV3fmeSpF9nk
+r5J8p17j3iQDq6raI8mBSR6u6/r3dV3/Kcl1a7cFAAAAoJvqjHsW7ZnksXWWF65dt7n1AAAAAHRT
+O3X1BF5QVdVHs+ZtbNl9993T3NzctRPqBE8+tTQXX/ODrp4GG2jYc0BXT4ENLF++fIc452Fbc65A
++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
+WAQAAABA+1+tG5cJrTzQ1wAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All of these represent central tendency. To see this more easily, let's consider it on a larger dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[158]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">likelihood_estim</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">class_grades</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">random_var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">likelihood_estim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">likelihood_estim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span></span>
+<span class="code-line"><span class="n">random_var</span> <span class="o">=</span> <span class="n">random_var</span><span class="o">.</span><span class="n">floordiv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="code-line">C:\Users\Sean\Anaconda3\lib\site-packages\scipy\stats\_continuous_distns.py:404: RuntimeWarning:</span>
+<span class="code-line"></span>
+<span class="code-line">invalid value encountered in sqrt</span>
+<span class="code-line"></span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><b> If you're curious about this... </b></p>
+<p>(For the reasons behind why I created the data this way, I assumed that our 6 students actually were a sample from the population. I then fit a beta distribution to the observed data, and found the maximum likelihood estimators (MLE) based on a Beta distribution (used to model probabilities). I then sampled 100 values randomly from this distribution.</p>
+<p>For all intents and purposes, you can consider this "new" dataset as a completely different sample. The example is included for those who are interested. I will be discussing the Beta, as well as other distributions, at a later point on this website.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[160]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pyplot</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">plot</span> <span class="o">=</span> <span class="n">random_var</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">random_var</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Arithmetic Mean&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">random_var</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Median&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">random_var</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mode&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">winsorized_mean</span><span class="p">(</span><span class="n">random_var</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Winsorized Mean&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">trimean</span><span class="p">(</span><span class="n">random_var</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Trimean&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[160]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">&lt;matplotlib.legend.Legend at 0x16c70ff5dd8&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIEAAANSCAYAAADyO97OAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAALEgAACxIB0t1+/AAAIABJREFUeJzs3X+0VXWB///XBlECERCNTC2cfhA/vQg6hEp30oDQGklN
+qVQ0y5p+jC3JrAxssnKmZjJdrUzHBi3FGjUz+yFa3ZFE/Q4KEYpJMyFClkGAXgZUdH//4Ho/EiBX
+4Hovvh+PtVj3nL332ee9zznvf57ss09V13UAAAAAeHnr0tEDAAAAAKD9iUAAAAAABRCBAAAAAAog
+AgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFEIAAAAIAC7PZSPtk+++xTDxgw4KV8
+yhdl7dq16dmzZ0cPA3Y55g5sH3MHto+5s4v77W83/h04cFsbtvzd1nas/O3KJEm/gf22uW1nmj+/
+bfksDNzmZwF2vt+ubPn89Wvb568zzZ0tuffee1fUdb3vtrZ7SSPQgAEDMnfu3JfyKV+UpqamNDY2
+dvQwYJdj7sD2MXdg+5g7u7jn3rumpm1t2PJ3W9sxo3FGkmRK05RtbtuZ5s9z42ja5mcBdr7GGY1J
+kqYpTW3avjPNnS2pqurhtmzn62AAAAAABRCBAAAAAAogAgEAAAAU4CW9JtCWPP3001m2bFnWr1/f
+0UNJ7969s2jRoo4exstK9+7dc8ABB6Rbt24dPRQAAAAoWodHoGXLlqVXr14ZMGBAqqrq0LE88cQT
+6dWrV4eO4eWkruusXLkyy5Yty0EHHdTRwwEAAICidfjXwdavX59+/fp1eABi56uqKv369esUZ3kB
+AABA6To8AiURgF7GvLcAAADQOWwzAlVV1b2qqv+vqqpfV1V1f1VVn29ZvndVVbdVVbW45W/f9h8u
+AAAAANujLWcCPZnkrXVdH5ykIcmEqqpGJzkvyc/run5Dkp+33N9l3XTTTdlrr73y4IMPvuB2Y8aM
+SZIsWbIk1157bevyGTNm5KMf/ehOH9dfP8/cuXPz8Y9/vM2Pb2xszGte85rUdd267Ljjjsuee+65
+U8cJAAAAdG7bjED1Rs0td7u1/KuT/H2Sq1qWX5XkuHYZ4Utk5syZefOb35yZM2ducf2GDRuSJHPm
+zEmyeZxpL3/9PKNGjcoll1zyovbRp0+f3HnnnUmS1atX59FHH92pYwQAAAA6vzb9OlhVVV2T3Jvk
+9Um+Udf1PVVV9a/r+rma8Mck/bfy2A8m+WCS9O/fP01NTZus7927d5544ontG/1O0tzcnNmzZ+fm
+m2/O5MmTM3Xq1CTJ7Nmzc+GFF6ZPnz556KGHMm/evOy333559NFH88lPfjIPPfRQhg8fnsmTJ6dv
+375ZunRpjj766Pz+97/PO97xjnzhC19Ikuy33355//vfn1mzZuVVr3pVpk2blmnTpmXZsmW56KKL
+MnHixDzzzDOZPn16Zs+enaeeeiof+MAHcsYZZ2z2PAcffHAuueSS/Od//meam5vzyU9+MvPmzUtV
+VTnvvPPy93//95sc2zPPPJNJkybl6quvzsEHH5xrr702xxxzTO6///7W1/3rX/96brzxxjz11FM5
+9thj89nPfjZJMnny5Cxfvjzr16/Phz/84Zx++umtx/PhD384P/vZz9K9e/dcd911eeUrX7nV13f9
++vWbve+8vDQ3N3uPYTuYO7B9zJ1dW8Pq1UmS+dt4DxsaWrab/8LbsfE/epO0aV50pvnzYsYNO9uL
+/fx1prmzI9oUgeq6fiZJQ1VVfZL8oKqqoX+1vq6qqt7KYy9PcnmSjBo1qm5sbNxk/aJFi/7fz7Kf
+fXYyf/6LPIRtaGhILr74BTe5+eab8/a3vz0DBw7Mvvvum4ceeigjR45Mjx498utf/zoLFy7c5CfO
+e/Xqla985Sv56le/mltuuSXJxq+DLVy4MPPmzcsee+yRgQMH5pxzzsmBBx6YtWvXZsKECfn617+e
+SZMm5ctf/nJ+8Ytf5IEHHshpp52Wk046KZdffnn23Xff3HfffXnyySdz+OGH553vfOdmz9PU1JTd
+dtstvXr1yoUXXph99tkn999/f5Jk1apVm/3EfdeuXTNx4sR84AMfSI8ePXLTTTfl8ssvz7/8y7+k
+V69emTVrVpYuXZp77703dV3nne98Z+bNm5exY8fm6quvzt57751169bl0EMPzXvf+97069cva9eu
+zdixY/OVr3wl5557bmbOnJnzzz9/q69v9+7dM2LEiO16+9g1NDU15a/nNrBt5g5sH3NnF9enT5K0
+4T1s63Ys6bMkSdteq840f/q0+bMAO1+fJS/u89eZ5s6OaFMEek5d16urqvplkglJ/lRV1X51XT9a
+VdV+SR5rlxG+BGbOnJl//Md/TJKcfPLJmTlzZkaOHJkkOeywwzYJQC/kqKOOSu/evZMkgwcPzsMP
+P5wDDzwwu+++eyZMmJAkGTZsWPbYY49069Ytw4YNy5IlS5Iks2bNyoIFC3L99dcnSdasWZPFixdn
+99133+rz3X777bnuuuta7/ftu+Vrc3ft2jVHHHFErrvuuqxbty4DBgxoXTdr1qzMmjWrNdI0Nzdn
+8eLFGTt2bC655JL84Ac/SJI88sgjWbx4cfr165fdd989xx57bJJk5MiRue2229r0+gAAAAAdZ5sR
+qKqqfZM83RKAXpHkbUn+OcnNSU5LclHL3x/u8Gi2ccZOe/jLX/6SX/ziF/nNb36TJHn22WdTVVW+
+8pWvJEl69uzZ5n3tsccerbe7du3aeh2hbt26tf5UepcuXVq369KlS+s2dV3n0ksvzfjx4zfZ5846
+3ezkk0/OpEmTcsEFF2yyvK7rfPrTn85ZZ5212fPefvvtueuuu9KjR480NjZm/fr1mx3P848TAAAA
+6Lza8utg+yX5ZVVVC5L8d5Lb6rq+JRvjz9uqqlqc5OiW+7uc66+/PqecckoefvjhLFy4MI888kgO
+OuigzJ49+wUf16tXr516LaPx48fnm9/8Zp5++ukkyUMPPZS1a9e+4PO87W1vyze+8Y3W+6tWrdrq
+/o888sh8+tOfzuTJkzd73m9/+9tpbt547e/ly5fnsccey5o1a9K3b9/06NEjDz74YO6+++4dPUQA
+AACgA7Xl18EW1HU9oq7r4XVdD63r+p9alq+s6/qouq7fUNf10XVd/6X9h7vzzZw5M5MmTdpk2fHH
+H7/VXwl7zvDhw9O1a9ccfPDB+drXvrbD4zjzzDMzePDgHHLIIRk6dGjOOuusbNiw4QWf5/zzz8+q
+VasydOjQHHzwwfnlL3+51f1XVZWpU6dmn3322WT5uHHj8p73vCdvfvObM2zYsJxwwgl54oknMmHC
+hGzYsCGDBg3Keeedl9GjR+/wMQIAAAAdp6rrLV7PuV2MGjWqnjt37ibLFi1alEGDBr1kY3ghTzzx
+xGYXVmbHdab3mPbxcrlIGrzUzB3YPubOLu65926blz1o2S7b2o4ZjTOSJFOapmxz2840f54bx8vh
+F5fY9TTOaEySNE1patP2nWnubElVVffWdT1qW9u15etgAAAAAOziRCAAAACAAohAAAAAAAUQgQAA
+AAAKIAIBAAAAFEAEAgAAACiACJSkqqq8733va72/YcOG7Lvvvjn22GNf1H4aGxszd+7cJMnEiROz
+evXqnTpOAAAAgO21W0cPoDPo2bNnFi5cmHXr1qVXr1657bbbsv/+++/QPn/yk5/spNEBAAAA7Dhn
+ArWYOHFibr311iTJzJkzM3ny5NZ1a9euzRlnnJHDDjssI0aMyA9/+MMkybp163LyySdn0KBBmTRp
+UtatW9f6mAEDBmTFihVJkuOOOy4jR47MkCFDcvnll7dus+eee+azn/1sDj744IwePTp/+tOfXopD
+BQAAAArUqc4EOvvsszN//vydus+GhoZcfPHF29zu5JNPzrRp03LiiSdmwYIFOeOMMzJ79uwkyRe/
++MW89a1vzbe//e2sXr06hx12WI4++uh861vfSo8ePbJo0aIsWLAghxxyyBb3/e1vfzt777131q1b
+l0MPPTTHH398+vXrl7Vr12b06NH54he/mHPPPTdXXHFFzj///J16/AAAAACJM4FaDR8+PEuXLs3M
+mTMzceLETdbNmjUrF110URoaGtLY2Jj169dn6dKlueOOO1qvJTR8+PAMHz58i/u+5JJLWs/2eeSR
+R7J48eIkye6779563aGRI0dmyZIl7XeAAAAAQNE61ZlAbTljpz29/e1vz9SpU9PU1JSVK1e2Lq/r
+OjfccEMGDhz4ovfZ1NSU22+/PXfddVd69OjRGpGSpFu3bqmqKknStWvXbNiwYeccCAAAAMBfcSbQ
+85xyyimZPn16hg0btsny8ePH59JLL01d10mSefPmJUnGjh2ba6+9NkmycOHCLFiwYLN9rlmzJn37
+9k2PHj3y4IMP5u67727nowAAAADYnAj0PPvvv38+/vGPb7b8c5/7XJ5++ukMHz48Q4YMyec+97kk
+yYc//OE0Nzdn0KBBmTZtWkaOHLnZYydMmJANGzZk0KBBOe+88zJ69Oh2Pw4AAACAv9apvg7WUZqb
+mzdb1tjYmMbGxiTJK17xinzrW9/abJtXvOIVue6667a4z+df3+enP/3pNp/3hBNOyAknnPAiRg0A
+AADQds4EAgAAACiACAQAAABQABEIAAAAoAAiEAAAAEABRCAAAACAAvh1MAAAAOAlM+C8H3f0EPLH
+3Vdm9N/06+hhvOScCZSkqqq8733va72/YcOG7Lvvvjn22GNf1H4GDBiQFStW7OzhAQAAAOwwEShJ
+z549s3Dhwqxbty5Jctttt2X//ffv4FEBAAAA7DwiUIuJEyfm1ltvTZLMnDkzkydPbl33l7/8Jccd
+d1yGDx+e0aNHZ8GCBUmSlStXZty4cRkyZEjOPPPM1HXd+pjvfve7Oeyww9LQ0JCzzjorzzzzzEt7
+QAAAAADP06muCXT2z87O/D/O36n7bHhVQy6ecPE2tzv55JMzbdq0nHjiiVmwYEHOOOOMzJ49O0ky
+ffr0jBgxIjfddFN+8Ytf5NRTT838+fPz+c9/PkcccUSmTZuWH//4x7nyyiuTJIsWLcr3vve93Hnn
+nenWrVv+4R/+Iddcc01OPfXUnXpsAAAAAG3VqSJQRxo+fHiWLl2amTNnZuLEiZus+9WvfpUbbrgh
+SfLWt741K1euzOOPP5477rgjN954Y5LkmGOOSd++fZMkP//5z3Pvvffm0EMPTZKsW7cur3zlK1/C
+owEAAADYVKeKQG05Y6c9vf3tb8/UqVPT1NSUlStXbvd+6rrOaaedli9/+cs7cXQAAAAA2881gZ7n
+lFNOyfTp0zNs2LBNlh955JG55pprkiRNTU3ZZ599stdee2Xs2LG59tprkyQ//elPs2rVqiTJUUcd
+leuvvz6PPfZYko3XFHr44YdfwiMBAAAA2FSnOhOoo+2///75+Mc/vtnyCy64IGeccUaGDx+eHj16
+5Kqrrkqy8VpBkydPzpAhQzJmzJi85jWvSZIMHjw4F154YcaNG5dnn3023bp1yze+8Y289rWvfUmP
+BwAAAOA5IlCS5ubmzZY1NjamsbExSbL33nvnpptu2mybfv36ZdasWVvc50knnZSTTjppp44TAAAA
+YHv5OhgAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAoQPER6BOf+EQuvvji
+1vvjx4/PmWee2Xr/nHPOyb/927/lD3/4Q0444YR2Hctll12Wq6++eof3M2DAgKxYsWKLy4888shN
+ljU0NGTo0KE7/JwAAABA51Z8BDr88MMzZ86cJMmzzz6bFStW5P77729dP2fOnIwZMyavfvWrc/31
+17fbODZs2JAPfehDOfXUU9vtOZLkiSeeyCOPPJIkWbRoUbs+FwAAANB5FB+BxowZk7vuuivJxigy
+dOjQ9OrVK6tWrcqTTz6ZRYsW5ZBDDsmSJUtaz5iZMWNG3vWud2XChAl5wxvekHPPPTdJ8swzz2TK
+lCkZOnRohg0blq997WtJkvnz52f06NEZPnx4Jk2alFWrViVJGhsbc/bZZ2fUqFH5+te/ngsuuCBf
+/epX84c//CENDQ2t/7p27ZqHH344f/7zn3P88cfn0EMPzaGHHpo777wzSbJy5cqMGzcuQ4YMyZln
+npm6rrd6vO9+97vzve99L0kyc+bMTJ48uXXdM888k09+8pM59NBDM3z48HzrW99KkjQ3N+eoo47K
+IYcckmHDhuWHP/xhkmTJkiUZNGhQPvCBD2TIkCEZN25c1q1bt9PeGwAAAGDn2a2jB7Cps5PM38n7
+bEhy8VbXvvrVr85uu+2WpUuX5p577smb3/zmLF++PHfddVd69+6dYcOGZffdd9/scfPnz8+8efOy
+xx57ZODAgfnYxz6Wxx57LMuXL8/ChQuTJKtXr06SnHrqqbn00kvzlre8JdOmTcvnP//51q+gPfXU
+U5k7d26S5IILLmgd0/z5G1+Hb3zjG/mv//qvvPa1r8173vOefOITn8gRRxyRpUuXZvz48Vm0aFE+
+//nP54gjjsi0adPy4x//OFdeeeVWj/f444/P6aefnqlTp+ZHP/pRrrnmmnznO99Jklx55ZXp3bt3
+/vu//ztPPvlkDj/88IwbNy4HHnhgfvCDH2SvvfbKihUrMnr06Lzzne9MkixevDgzZ87MFVdckXe/
++9254YYb8r73ve9FvD8AAADAS6GTRaCOMWbMmMyZMyf33HNPPvWpT2X58uWZM2dOevfuncMPP3yL
+jznqqKPSu3fvJMngwYPz8MMPZ8iQIfnf//3ffOxjH8sxxxyTcePGZc2aNVm9enXe8pa3JElOO+20
+nHjiia37Oemkk7Y6rjvvvDNXXHFFfvWrXyVJbr/99jzwwAOt6x9//PE0NzfnjjvuyI033pgkOeaY
+Y9K3b9+t7rNfv37p27dvrrvuugwaNCg9evRoXTdr1qwsWLCg9Wtva9asyeLFi3PAAQfkM5/5TO64
+44506dIly5cvz5/+9KckyUEHHZSGhoYkyciRI7NkyZKtPjcAAADQcTpZBNr6GTvt6bnrAj3wwAMZ
+OnRoDjzwwPzrv/5r9tprr5x++ulbfMwee+zRertr167ZsGFD+vbtm1//+te59dZbc9lll+X73/9+
+61fCtqZnz55bXP7oo4/m/e9/f26++ebsueeeSTZes+juu+9O9+7dt/NINzrppJPykY98JDNmzNhk
+eV3XufTSSzN+/PhNls+YMSN//vOfc++996Zbt24ZMGBA1q9fn2Tz18HXwQAAAKBzKv6aQMnGM4Fu
+ueWW9O3bN127ds3ee++d1atX56677sqYMWPavJ8VK1bk2WefzfHHH58LL7ww9913X3r37p2+fftm
+9uzZSZLvfOc7rWcFbc3TTz+dE088Mf/8z/+cN77xja3Lx40bl0svvbT1/nNfGRs7dmyuvfbaJMlP
+f/rT1msObc2kSZNy7rnnbhZ7xo8fn29+85t5+umnkyQPPfRQ1q5dmzVr1uSVr3xlunXrll/+8pd5
++OGH2/iKAAAAAJ1FJzsTqGMMGzYsK1asyPHHH7/Jsubm5uyzzz5t3s/y5ctz+umn59lnn02SfPnL
+X06SXHXVVfnQhz6U//u//8vf/M3f5D/+4z9ecD9z5szJ3LlzM3369EyfPj1J8pOf/CSXXHJJPvKR
+j2T48OHZsGFDxo4dm8suuyzTp0/P5MmTM2TIkIwZMyavec1rXnD/vXr1yqc+9anNlp955plZsmRJ
+DjnkkNR1nX333Tc33XRT3vve9+Yd73hHhg0bllGjRuVNb3pTm18TAAAAoHMQgbLxa0yPP/54nnji
+idZlf/1VqQEDBrRe8HnKlCmZMmVK67pbbrml9fZ999232f4bGhpy9913b7a8qalpk/vPXRg6SevX
+rf7ac7/s9Xz9+vXLrFmztrj9823pej3PP64uXbrkS1/6Ur70pS9ttt1zv6D21557bJJMnTp1m2MA
+AAAAOoavgwEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFEIAAAAIACFB+BVq5cmYaG
+hjQ0NOT1r3999t9//9b7Tz311Cbbjh8/fpOfkQcAAADYVezW0QPoaP369cv8+fOTJJ/+9KfTr1+/
+TJ06dZNt6rpOXde59dZbO2KIAAAAADus+DOBtuZ3v/tdBg8enPe+970ZMmRIHn300RxwwAFZvXp1
+fve732Xo0KE55ZRT8sY3vjGnnnpqbr311owZMyZveMMbMnfu3CRJc3NzpkyZksMOOywjRozIj370
+oyTJ//zP/+TII4/MiBEjMnLkyNxzzz1Jkttvvz1HHXVU3vWud2XgwIE59dRTO+z4AQAAgJeXTnUm
+0M/O/ln+OP+PO3Wfr2p4VSZcPGG7Hvvggw/m6quvzqhRozZb99vf/jbf//7386Y3vSmHHHJIunfv
+njlz5uSGG27IRRddlOuvvz7/9E//lAkTJmTGjBlZtWpV/vZv/zZve9vbst9+++W2225L9+7d8+CD
+D+a0005rDUH33Xdf7r///vTv3z+jR4/O3XffndGjR+/QawAAAADgTKAX8LrXvW6LAShJXv/612fw
+4MHp0qVLBg8enKOOOipJMmzYsCxZsiRJMmvWrHzxi19MQ0ND/u7v/i7r16/P0qVL8+STT+b9739/
+hg4dmpNPPjkPPPBA635Hjx6dV7/61enatWsaGhpa9wUAAACwIzrVmUDbe8ZOe+nZs+dW1+2xxx6t
+t7t06dJ6v0uXLtmwYUOSjdcSuummm/K6171uk8eef/75OfDAA/Pd7343Tz/9dPbcc88t7rdr166t
++wIAAADYEc4Eakfjx4/PpZde2np/3rx5SZI1a9Zkv/32S1VVueqqq1LXdUcNEQAAACiECNSOpk+f
+nrVr12bYsGEZMmRILrjggiTJRz/60fz7v/97Dj744Pz+97/f5OwfAAAAgPbQqb4O1tE+85nPpFev
+Xkk2XvPnuZ+Of86yZcuSJH369Nlk3Xe/+93W289/XM+ePXPFFVds9jwDBw7Mb37zm9b7X/rSl5Ik
+Rx99dI4++ujW5ZdddtmOHhIAAABAEmcCAQAAABRBBAIAAAAoQKeIQC6M/PLlvQUAAIDOocMjUPfu
+3bNy5Uqx4GWoruusXLky3bt37+ihAAAAQPE6/MLQBxxwQJYtW5Y///nPHT2UrF+/XrDYybp3754D
+Djigo4cBAAAAxevwCNStW7ccdNBBHT2MJElTU1NGjBjR0cMAAAAA2Ok6/OtgAAAAALQ/EQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACg
+ANuMQFVVHVhV1S+rqnqgqqr7q6r6x5blF1RVtbyqqvkt/ya2/3ABAAAA2B67tWGbDUnOqev6vqqq
+eiW5t6qq21rWfa2u66+23/AAAAAA2Bm2GYHqun40yaMtt5+oqmpRkv3be2AAAAAA7DxtOROoVVVV
+A5KMSHJPksOTfKyqqlOTzM3Gs4VWbeExH0zywSTp379/mpqadmzE7ai5ublTjw86K3MHto+5A9vH
+3Nm1NaxenSSZv433sKGhZbv5L7wdyeqW17Qt86IzzZ8XM25eXs4ZtqGjh5BLltVZvXp1mz9/nWnu
+7Ig2R6CqqvZMckOSs+u6fryqqm8m+UKSuuXvvyY5468fV9f15UkuT5JRo0bVjY2NO2HY7aOpqSmd
+eXzQWZk7sH3MHdg+5s4urk+fJGnDe9jW7VjSZ0mStr1WnWn+9GnzZ4GXmynn/bijh5A/7l5ldP8+
+bf78daa5syPa9OtgVVV1y8YAdE1d1zcmSV3Xf6rr+pm6rp9NckWSw9pvmAAAAADsiLb8OliV5Mok
+i+q6/rfnLd/veZtNSrJw5w8PAAAAgJ2hLV8HOzzJKUl+U1XV/JZln0kyuaqqhmz8OtiSJGe1ywgB
+AAAA2GFt+XWwXyWptrDqJzt/OAAAAAC0hzZdEwgAAACAXZsIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgAAACgACIQAAAAQAFE
+IAAAAIBwpOG0AAAcg0lEQVQCiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACiEAAAAAABRCBAAAAAAogAgEAAAAUQAQCAAAAKIAIBAAAAFAAEQgA
+AACgACIQAAAAQAFEIAAAAIACbDMCVVV1YFVVv6yq6oGqqu6vquofW5bvXVXVbVVVLW7527f9hwsA
+AADA9mjLmUAbkpxT1/XgJKOTfKSqqsFJzkvy87qu35Dk5y33AQAAAOiEthmB6rp+tK7r+1puP5Fk
+UZL9k/x9kqtaNrsqyXHtNUgAAAAAdsxuL2bjqqoGJBmR5J4k/eu6frRl1R+T9N/KYz6Y5INJ0r9/
+/zQ1NW3nUNtfc3Nzpx4fdFbmDmwfcwe2j7mza2tYvTpJMn8b72FDQ8t28194O5LVLa9pW+ZFZ5o/
+L2bcvLycM2xDRw8hlyyrs3r16jZ//jrT3NkRbY5AVVXtmeSGJGfXdf14VVWt6+q6rquqqrf0uLqu
+L09yeZKMGjWqbmxs3KEBt6empqZ05vFBZ2XuwPYxd2D7mDu7uD59kqQN72Fbt2NJnyVJ2vZadab5
+06fNnwVebqac9+OOHkL+uHuV0f37tPnz15nmzo5o06+DVVXVLRsD0DV1Xd/YsvhPVVXt17J+vySP
+tc8QAQAAANhRbfl1sCrJlUkW1XX9b89bdXOS01pun5bkhzt/eAAAAADsDG35OtjhSU5J8puqqua3
+LPtMkouSfL+qqvcneTjJu9tniAAAAADsqG1GoLquf5Wk2srqo3bucAAAAABoD226JhAAAAAAuzYR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAKIQAAAAAAFEIEAAAAACiACAQAAABRABAIAAAAogAgEAAAAUAAR
+CAAAAKAAIhAAAABAAUQgAAAAgAJsMwJVVfXtqqoeq6pq4fOWXVBV1fKqqua3/JvYvsMEAAAAYEe0
+5UygGUkmbGH51+q6bmj595OdOywAAAAAdqZtRqC6ru9I8peXYCwAAAAAtJMduSbQx6qqWtDydbG+
+O21EAAAAAOx0u23n476Z5AtJ6pa//5rkjC1tWFXVB5N8MEn69++fpqam7XzK9tfc3NypxwedlbkD
+28fcge1j7uzaGlavTpLM38Z72NDQst38F96OZHXLa9qWedGZ5s+LGTcvL+cM29DRQ8gly+qsXr26
+zZ+/zjR3dsR2RaC6rv/03O2qqq5IcssLbHt5ksuTZNSoUXVjY+P2POVLoqmpKZ15fNBZmTuwfcwd
+2D7mzi6uT58kacN72NbtWNJnSZK2vVadaf70afNngZebKef9uKOHkD/uXmV0/z5t/vx1prmzI7br
+62BVVe33vLuTkizc2rYAAAAAdLxtnglUVdXMJI1J9qmqalmS6Ukaq6pqyMavgy1JclY7jhEAAACA
+HbTNCFTX9eQtLL6yHcYCAAAAQDvZkV8HAwAAAGAXIQIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+oAAiEAAAAEABRCAAAACAAohAAAAAAAUQgQAAAAAKIAIBAAAAFEAEAgAAACiACAQAAABQABEIAAAA
+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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see that this is a skewed distribution -- in particular it is <b> left skewed </b>. A majority of the students did well on the exam, but there were some who did particularly poorly, with some extreme values on the far left. In this case, where there are many extreme values, the mean is not a good "average" -- it is dragged down by the very small values in the tail. We can see this as the mean is close to 70, but it appears that the "average" student did better than this. The median is a more <b> robust </b> measure, because it is less sensitive to anamolies in the sample. The mode is not very useful in this case, as it is at the bin with the largest values. The "average" student likely did worse than this.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In general, as a rule of thumb, for a <b> unimodal </b> distribution (meaning there is only one mode), it is often but not always the case that:</p>
+<p>Let $\bar{X}_{median}$ be the median of a distribution and $\bar{X}_{mean}$ be the arithmetic mean. Then:</p>
+<p>if $\bar{X}_{median} &lt;&lt; \bar{X}_{mean}$, 
+X is <b> right skewed </b></p>
+<p>if $\bar{X}_{median} \approx \bar{X}_{mean}$,<br>
+X is approximately <b> symmetric </b></p>
+<p>if $\bar{X}_{median} &gt;&gt; \bar{X}_{mean}$, 
+X is <b> left skewed </b></p>
+<p>This can be used as a guideline to see how skewed our distribution is. However, it is not foolproof - in some cases this fails. See <a href="https://en.wikipedia.org/wiki/Skewness#Relationship_of_mean_and_median">this wikipedia article</a> for more information. For instance, consider -6, -4, 0, 0, 2, 8. The mean and median are zero, but this distribution is skewed to the left, i.e. not symmetric.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span></span>
+<span class="code-line"><span class="n">pd</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">av</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In general, since the median is a more robust measure, if we are given a sample and wish to estimate the behavior of the population and we believe that the skewed values are <b> anomolies </b>, the median is a better "guess" of the central tendency.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Interestingly, the two "non-typical" central tendency estimators, the Windsorized Mean and the Trimean, lay between the mean and the median. The Windsorized Mean and Trimean are both more robust then the mean.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice also that the median and mean tell us different things about the data. The mean uses all of the information available, and each datapoint contributes equally to the evaluation of it. On the other hand, the median "cuts away" all of the data not at the 50% mark. In this way, the median can be seen as an extreme version of the Windsorized Mean where we cut out the bottom 49% and 51%. In this case, we are seeing a tradeoff between <b> robustness </b> which is the variability of the estimator under anomolies and varying sample distributions, and <b> power </b> (or efficiency), which can determine a more stable solution with less data assuming certain assumptions are met. For instance, if we know that the population distribution follows some "known" distribution, it can often be shown that the mean is a <b> sufficient, unbiased </b> estimator of the true population mean. In the case of the normal distribution, it is the most efficient estimator of the population mean, while the median is relatively inefficient.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Samples-of-samples-of-samples,-oh-my!">Samples of samples of samples, oh my!<a class="anchor-link" href="#Samples-of-samples-of-samples,-oh-my!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are certain situations where the mean and median are more appropriate. Let us look at an example.</p>
+<p>Suppose, as we talked about before, the <b> population </b> in a simplistic example is 95, 80, 50, 80, 100, 94. Let's consider all possible samples of 3 of this data.</p>
+<p>There are 6 datapoints and we wish to choose 3. This means there are 6 choose 3, or 20 possible samples. The possible samples are:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[216]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">possible_samples</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">(</span><span class="n">class_grades</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></span>
+<span class="code-line"><span class="nb">list</span><span class="p">(</span><span class="n">possible_samples</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[216]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">[(50, 95, 80),</span>
+<span class="code-line"> (50, 95, 94),</span>
+<span class="code-line"> (50, 95, 80),</span>
+<span class="code-line"> (50, 95, 100),</span>
+<span class="code-line"> (50, 80, 94),</span>
+<span class="code-line"> (50, 80, 80),</span>
+<span class="code-line"> (50, 80, 100),</span>
+<span class="code-line"> (50, 94, 80),</span>
+<span class="code-line"> (50, 94, 100),</span>
+<span class="code-line"> (50, 80, 100),</span>
+<span class="code-line"> (95, 80, 94),</span>
+<span class="code-line"> (95, 80, 80),</span>
+<span class="code-line"> (95, 80, 100),</span>
+<span class="code-line"> (95, 94, 80),</span>
+<span class="code-line"> (95, 94, 100),</span>
+<span class="code-line"> (95, 80, 100),</span>
+<span class="code-line"> (80, 94, 80),</span>
+<span class="code-line"> (80, 94, 100),</span>
+<span class="code-line"> (80, 80, 100),</span>
+<span class="code-line"> (94, 80, 100)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We remember from before that the population mean is 83.16666. This is a population parameter -- it is not a statistic. However, suppose we sampled randomly from this population and got the data 80, 94, 80. Then our <b> estimate </b> of the population mean would be 84.6. Remember when I said that the statistic is never the "cold hard" truth? Here is a direct example.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>However, there are some nice properties of this. Consider the means and medians of all the samples:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[245]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sample_dict</span> <span class="o">=</span> <span class="p">{}</span></span>
+<span class="code-line"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">class_grades</span><span class="p">,</span> <span class="mi">3</span><span class="p">)):</span></span>
+<span class="code-line">    <span class="n">sample_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span></span>
+<span class="code-line">    </span>
+<span class="code-line"><span class="n">sample_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sample_dict</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></span>
+<span class="code-line"><span class="n">sample_results</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_results</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> </span>
+<span class="code-line"><span class="n">sample_results</span><span class="p">[</span><span class="s1">&#39;median&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">sample_results</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[245]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>mean</th>
+      <th>median</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>50</td>
+      <td>200</td>
+      <td>80</td>
+      <td>110.000000</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>50</td>
+      <td>200</td>
+      <td>94</td>
+      <td>114.666667</td>
+      <td>94.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>50</td>
+      <td>200</td>
+      <td>80</td>
+      <td>110.000000</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>50</td>
+      <td>200</td>
+      <td>100</td>
+      <td>116.666667</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>50</td>
+      <td>80</td>
+      <td>94</td>
+      <td>74.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50</td>
+      <td>80</td>
+      <td>80</td>
+      <td>70.000000</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>50</td>
+      <td>80</td>
+      <td>100</td>
+      <td>76.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>50</td>
+      <td>94</td>
+      <td>80</td>
+      <td>74.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>50</td>
+      <td>94</td>
+      <td>100</td>
+      <td>81.333333</td>
+      <td>94.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>50</td>
+      <td>80</td>
+      <td>100</td>
+      <td>76.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>200</td>
+      <td>80</td>
+      <td>94</td>
+      <td>124.666667</td>
+      <td>94.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>200</td>
+      <td>80</td>
+      <td>80</td>
+      <td>120.000000</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>200</td>
+      <td>80</td>
+      <td>100</td>
+      <td>126.666667</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>200</td>
+      <td>94</td>
+      <td>80</td>
+      <td>124.666667</td>
+      <td>94.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>200</td>
+      <td>94</td>
+      <td>100</td>
+      <td>131.333333</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>200</td>
+      <td>80</td>
+      <td>100</td>
+      <td>126.666667</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>80</td>
+      <td>94</td>
+      <td>80</td>
+      <td>84.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>80</td>
+      <td>94</td>
+      <td>100</td>
+      <td>91.333333</td>
+      <td>94.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>80</td>
+      <td>80</td>
+      <td>100</td>
+      <td>86.666667</td>
+      <td>80.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>94</td>
+      <td>80</td>
+      <td>100</td>
+      <td>91.333333</td>
+      <td>94.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see that both the mean and the median vary around the true population mean for each sample. This is the <b> sampling distribution of the sample mean. </b> This is what has a distribution and can vary! Remember, our population parameter is fixed, but the variation implicit in <i> each sample </i> is what controls the distribution here. Since this too is a distribution, we can examine statistics about it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[246]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sample_results</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">sample_results</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[246]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">mean      100.666667</span>
+<span class="code-line">median     88.200000</span>
+<span class="code-line">dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[236]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">mean</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[236]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">83.16666666666667</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hm, that seems odd. It turns out that the expectation, or arithmetic mean, of the sampling distribution of the sample mean is equal to the true population mean! 
+This property actually follows directly from the definition of the arithmetic mean.</p>
+<p>We're going to go into some maths here, but feel free to skip over it if you don't want to. The point here is that <b> the sample mean is an unbiased estimator of the population mean </b>.</p>
+<p><b>Theorum 1:</b>
+If $S$ is a sample of size $k$ from a population of size $N$ drawn <b>randomly</b> and <b>without replacement</b>, then the mean of the sample, $\bar{X}_S$, is an unbiased estimator of the population mean.</p>
+<p>Let $\bar{X}_P$ be the population mean. Then
+$$
+\bar{X}_P = \frac{ \sum_i x_{i} }{N}\\
+i = 1,...,N
+$$
+Let $\bar{X}_s$ be the mean of a sample of size k, called $S_s$. Then,
+$$
+\bar{X}_s = \frac{ \sum_j x_{j, s} }{k}\\
+$$
+Where $X_{j,s}$ is the $j$th sample from sample $s$. It follows that there are ${N}\choose{k}$ possible samples, ie, $s$ runs from $1$ to ${N}\choose{k}$.</p>
+<p>Let $M =$ ${N}\choose{k}$. Then:
+$$
+\sum_{s=0}^{M} \frac{\bar{X}_s}{M}
+=\frac{\sum_{s=0}^{M} \sum_j \frac{x_{j, s}}{k}}{M}\\
+=\frac{\sum_{s=0}^{M} \sum_j x_{j, s}}{kM}
+$$
+Each value of the population will appear in ${N}\choose{k}$ - ${N-1}\choose{k}$ = $M - \frac{M(N-k)}{N}$ samples. We can say this because it is the total number of possible samples ${N}\choose{k}$ minus the total number of samples of size k which do not contain observation $j$, ${N-1}\choose{k}$. So then we have:</p>
+$$
+\frac{M - \frac{M(N-k)}{N}}{kM} \sum_i x_i
+$$<p>Expanding the left hand side: 
+$$
+\frac{M - \frac{M(N-k)}{N}}{kM}
+= \frac{1}{k} - \frac{N-k}{kN}
+=\frac{1}{N}
+$$
+so
+$$ 
+\sum_{s=0}^{M} \frac{\bar{X}_s}{M} = \frac{ \sum_i x_{i} }{N}\\
+$$
+But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! Since we weighed each sample equally in this expectation, this is equivalent to sampling <b> without replacement </b>. This means that we have proven the result -- the sample mean is an <b> unbiased estimator </b> of the population mean. This is a powerful result!</p>
+<p>Hopefully you can begin to see why statistics is so exciting now! We have proven that any inference about the population mean using a sample mean will, on average, be accurate. This fact, known as the <b> Law of Averages </b> is a feature that comes up again and again in Statistics.</p>
+<p>However, it is important to note that while the sample mean is unbiased, it does not make it an accurate estimator. This will be covered in the next post, when we discuss the <b> Measures of Spread. </b></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We've seemed to disreguard the median in this case. Why is this? Well, the median is <b> not </b> an unbiased estimator of the population mean. Nor is the mean of the medians an unbiased estimator of the population median. However, we see that the case changes quite a bit when we take the medians!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[247]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sample_results</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[247]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">mean      100.666667</span>
+<span class="code-line">median     87.000000</span>
+<span class="code-line">dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[235]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">median</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[235]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">87.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this case we see that both the mean and the median are equal to the population values. What gives?! Well, it turns out that the sample median is a <b> median unbiased estimator </b> of the population median. This one is a bit tougher to prove, so I will leave it for now. Perhaps we can get back to it when we discuss probability density functions, as it requires some use of this.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What about the mean? Why is the mean a median unbiased estimator of the population mean? The reason is because of the central limit theorum, but this is something that will take some time to discuss! However, because the sampling distribution of the sample mean will tend to a normal distribution relatively quickly, it also becomes symmetric quickly. In this case, the median converges towards the mean. That is why we see that the mean in this case is again equal to the median. We can look at a histogram to see the details:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[248]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sample_results</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[248]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="code-line">&lt;matplotlib.axes._subplots.AxesSubplot at 0x16c711d9c88&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this first post, we went over what a statistic is and the distinction between a <b> sample </b> and a <b> population.</b> We also discussed measures of central tendencies and their relation to sampling distributions.</p>
+<p>In the next post, we will be discussing the <b> Measures of Spread </b> which will shed light further on the sampling distribution of the sample mean. Hope you enjoyed!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span> </span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
