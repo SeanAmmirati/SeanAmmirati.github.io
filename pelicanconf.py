@@ -27,6 +27,11 @@ DEFAULT_METADATA = {
 
 PATH = 'content'
 
+CATEGORY_URL = "category/{slug}"
+CATEGORY_SAVE_AS = "category/{slug}/index.html"
+
+USE_FOLDER_AS_CATEGORY = True
+
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = ['ipynb.markup', 'rmd_reader', 'render_math',

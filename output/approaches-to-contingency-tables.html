@@ -60,7 +60,7 @@
 								<article class="box is-post">
 									<div class="post-infos">
 										<ul class="tags">
-											<li><a class="button" href="category/misc.html">Misc</a></li>
+											<li><a class="button" href="category/r_markdown">R_markdown</a></li>
 										</ul>
 									</div>
 
@@ -71,7 +71,8 @@
 <p>The first two are standard procedures in frequentist statistics, the chi-squared test and the Fischer's Exact test.  </p>
 <p>Consider a contingency table that looks like this:</p>
 <div class="highlight"><pre><span class="code-line"><span></span>cont_table <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">20</span><span class="p">),</span> nrow <span class="o">=</span> <span class="m">2</span><span class="p">,</span></span>
-<span class="code-line">                     dimnames <span class="o">=</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Has traveled outside US&#39;</span><span class="p">,</span><span class="s">&#39;Has not traveled outside US&#39;</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;Non-Artist&#39;</span><span class="p">,</span><span class="s">&#39;Artist&#39;</span><span class="p">)))</span></span>
+<span class="code-line">                     dimnames <span class="o">=</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Has traveled outside US&#39;</span><span class="p">,</span><span class="s">&#39;Has not traveled outside US&#39;</span><span class="p">),</span> </span>
+<span class="code-line">                                     <span class="kt">c</span><span class="p">(</span><span class="s">&#39;Non-Artist&#39;</span><span class="p">,</span><span class="s">&#39;Artist&#39;</span><span class="p">)))</span></span>
 <span class="code-line">cont_table</span>
 </pre></div>
 
@@ -85,7 +86,8 @@
 <p>Consider if we ask the question -- are artists and non-artists equally likely to travel outside of the US...?</p>
 <p>The first approach we can take is the chi-squared test, which is an asymptotically accurate. If each was equally likely to travel, we would expect a cont_table like this :</p>
 <div class="highlight"><pre><span class="code-line"><span></span>cont_table_exp <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">25</span><span class="p">,</span> <span class="m">25</span><span class="p">),</span> nrow <span class="o">=</span> <span class="m">2</span><span class="p">,</span></span>
-<span class="code-line">                         dimnames <span class="o">=</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Has traveled outside US&#39;</span><span class="p">,</span><span class="s">&#39;Has not traveled outside US&#39;</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;Non-Artist&#39;</span><span class="p">,</span><span class="s">&#39;Artist&#39;</span><span class="p">)))</span></span>
+<span class="code-line">                         dimnames <span class="o">=</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Has traveled outside US&#39;</span><span class="p">,</span><span class="s">&#39;Has not traveled outside US&#39;</span><span class="p">),</span> </span>
+<span class="code-line">                                         <span class="kt">c</span><span class="p">(</span><span class="s">&#39;Non-Artist&#39;</span><span class="p">,</span><span class="s">&#39;Artist&#39;</span><span class="p">)))</span></span>
 <span class="code-line"></span>
 <span class="code-line">cont_table_exp</span>
 </pre></div>
@@ -116,7 +118,9 @@ given the row and column totals we can deduce the others. In order to calculate 
 <p>So we would reject the notion of independence based on these observations.</p>
 <p>More generally:</p>
 <div class="highlight"><pre><span class="code-line"><span></span>chi_squared_test <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>cont_table<span class="p">,</span></span>
-<span class="code-line">                             cont_table_exp <span class="o">=</span> <span class="kp">t</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>cont_table<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span><span class="o">/</span><span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">),</span><span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">)),</span> ncol <span class="o">=</span> <span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">)))){</span></span>
+<span class="code-line">                             cont_table_exp <span class="o">=</span> <span class="kp">t</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>cont_table<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span><span class="o">/</span><span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">),</span></span>
+<span class="code-line">                                                           <span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">)),</span> </span>
+<span class="code-line">                                                       ncol <span class="o">=</span> <span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">)))){</span></span>
 <span class="code-line">  df <span class="o">&lt;-</span> <span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>cont_table<span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kp">ncol</span><span class="p">(</span>cont_table<span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span></span>
 <span class="code-line">  zsq <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">((</span>cont_table <span class="o">-</span> cont_table_exp<span class="p">)</span><span class="o">^</span><span class="m">2</span> <span class="o">/</span> cont_table_exp<span class="p">)</span></span>
 <span class="code-line">  probability <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> pchisq<span class="p">(</span>zsq<span class="p">,</span> df<span class="p">)</span></span>
@@ -181,7 +185,8 @@ manipulations, we can write the posterior distribution of <span class="math">\(p
 <span class="code-line">  obs_rows_w_prior <span class="o">=</span> cont_table <span class="o">-</span> <span class="m">1</span></span>
 <span class="code-line"></span>
 <span class="code-line">  constant <span class="o">&lt;-</span> <span class="p">(</span><span class="kp">prod</span><span class="p">(</span><span class="kp">gamma</span><span class="p">(</span>obs_row_totals<span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="kp">prod</span><span class="p">(</span><span class="kp">gamma</span><span class="p">(</span>obs_coordinates<span class="p">))))</span></span>
-<span class="code-line">  ret <span class="o">&lt;-</span> constant<span class="o">*</span><span class="p">(</span>p<span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> p<span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="kp">q</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">])</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="kp">q</span><span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span></span>
+<span class="code-line">  ret <span class="o">&lt;-</span> constant<span class="o">*</span><span class="p">(</span>p<span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> p<span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">])</span> <span class="o">*</span></span>
+<span class="code-line">          <span class="p">(</span><span class="kp">q</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="kp">q</span><span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span></span>
 <span class="code-line">  <span class="kr">return</span><span class="p">(</span>ret<span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
@@ -225,16 +230,39 @@ We can then test, for a certain level of expected variance in their difference, 
 <span class="code-line">  logit2 <span class="o">&lt;-</span> <span class="kp">log</span><span class="p">((</span><span class="kp">q</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="kp">q</span><span class="p">)))</span></span>
 <span class="code-line"></span>
 <span class="code-line">  expo <span class="o">&lt;-</span> <span class="kp">exp</span><span class="p">((</span><span class="o">-</span><span class="p">(</span>logit1 <span class="o">-</span> logit2<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">2</span><span class="o">*</span>sigmasq<span class="p">))</span></span>
-<span class="code-line">  ret <span class="o">&lt;-</span> expo<span class="o">*</span><span class="p">(</span>p<span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> p<span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="kp">q</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">])</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="kp">q</span><span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span></span>
+<span class="code-line">  ret <span class="o">&lt;-</span> expo<span class="o">*</span><span class="p">(</span>p<span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> p<span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">])</span> <span class="o">*</span></span>
+<span class="code-line">          <span class="p">(</span><span class="kp">q</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="kp">q</span><span class="p">)</span><span class="o">^</span>obs_rows_w_prior<span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">])</span></span>
 <span class="code-line">  <span class="kr">return</span><span class="p">(</span>ret<span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
 
 
 <p>We then approximate <span class="math">\({P}(p&lt; q)\)</span> given various assumed sigmas in the prior.</p>
-<div class="highlight"><pre><span class="code-line"><span></span>estimb1 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span>approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">estimb2 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">.25</span><span class="p">)</span><span class="o">/</span>approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">.25</span><span class="p">)</span></span>
-<span class="code-line">estimb3 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">4</span><span class="p">)</span><span class="o">/</span>approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">4</span><span class="p">)</span></span>
+<div class="highlight"><pre><span class="code-line"><span></span>estimb1 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">                  num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span></span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">1</span><span class="p">)</span> <span class="o">/</span></span>
+<span class="code-line">           approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> </span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">estimb2 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">                  num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span></span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">.25</span><span class="p">)</span> <span class="o">/</span> </span>
+<span class="code-line">           approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">                  num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> </span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">.25</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">estimb3 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">                  num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span></span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="o">/</span></span>
+<span class="code-line">           approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">                  num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span></span>
+<span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">                  sigmasq <span class="o">=</span> <span class="m">4</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"><span class="c1"># sigmasq = 1</span></span>
 <span class="code-line">estimb1</span>
@@ -264,7 +292,14 @@ We can then test, for a certain level of expected variance in their difference, 
 
 
 <div class="highlight"><pre><span class="code-line"><span></span><span class="c1">#sigma sq = 400000 (close to complete independence)</span></span>
-<span class="code-line">approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">400000</span><span class="p">)</span><span class="o">/</span>approx<span class="p">(</span>posteriorc<span class="p">,</span>num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> cont_table <span class="o">=</span> cont_table<span class="p">,</span> sigmasq <span class="o">=</span> <span class="m">400000</span><span class="p">)</span></span>
+<span class="code-line">approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">       num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> </span>
+<span class="code-line">       cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">       sigmasq <span class="o">=</span> <span class="m">400000</span><span class="p">)</span> <span class="o">/</span> </span>
+<span class="code-line">approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
+<span class="code-line">       num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> </span>
+<span class="code-line">       cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
+<span class="code-line">       sigmasq <span class="o">=</span> <span class="m">400000</span><span class="p">)</span></span>
 </pre></div>
 
 
@@ -357,6 +392,11 @@ probability that the two probabilities are different. The conclusion then is tha
 									</header>
 									<ul class="dates">
 										<li>
+											<span class="date">Sep <strong>09</strong></span>
+											<h3><a href="sumstatsmeasuresofspread.html">Summary Statistics Part 2: Measures of Spread</a></h3>
+											<p><p>An overview of statistics and central tendency.</p></p>
+										</li>
+										<li>
 											<span class="date">Sep <strong>02</strong></span>
 											<h3><a href="sumstatscentraltendency.html">Summary Statistics Part 1: Central Tendency</a></h3>
 											<p><p>An overview of statistics and central tendency.</p></p>
@@ -390,8 +430,8 @@ probability that the two probabilities are different. The conclusion then is tha
 										<h2>Categories</h2>
 									</header>
 									<ul class="divided">
-											<li><a href="https://seanammirati.github.io/category/misc.html">misc</a></li>
-											<li><a href="https://seanammirati.github.io/category/statistics-beginner.html">Statistics, Beginner</a></li>
+											<li><a href="https://seanammirati.github.io/category/r_markdown">r_markdown</a></li>
+											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
 									</ul>
 								</section>
 							</div>
