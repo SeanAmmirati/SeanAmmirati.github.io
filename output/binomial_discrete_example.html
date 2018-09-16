@@ -1,0 +1,431 @@
+
+<!DOCTYPE HTML>
+<!--
+	Dopetrope 2.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
+<html>
+	<head>
+			<title>Stats Works</title>
+			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<meta charset="utf-8" />
+			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic" rel="stylesheet" />
+				<link rel="stylesheet" href="/theme/css/pygment.css" />
+			<noscript>
+				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
+				<link rel="stylesheet" href="/theme/css/style.css" />
+				<link rel="stylesheet" href="/theme/css/style-desktop.css" />
+			</noscript>
+	</head>
+	<body class="no-sidebar">
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="12u">
+
+							<!-- Header -->
+								<section id="header">
+
+									<!-- Logo -->
+									<h1><a href="https://seanammirati.github.io/">Stats Works</a></h1>
+
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+														<li><a href="/">Home</a></li>
+														<li><a href="/pages/topics">Topics</a></li>
+														<li><a href="/pages/about">About</a></li>
+											</ul>
+										</nav>
+
+								</section>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+				<div class="container">
+
+<div class="row">
+	<div class="12u">
+			<section>
+				<div>
+					<div class="row">
+						<div class="12u skel-cell-mainContent">
+							<!-- Content -->
+								<article class="box is-post">
+									<div class="post-infos">
+										<ul class="tags">
+											<li><a class="button" href="category/r_markdown">R_markdown</a></li>
+										</ul>
+									</div>
+
+									<div class="pennant pennant-alt date">2018-07-29</div>
+									<h2>Binomial Discrete with Bayes</h2>
+									<p><em>Please note that the source code for the functions used in this example are available on my GitHub repository <a href="https://github.com/SeanAmmirati/stats-works">here</a>.</em></p>
+<h1>Example -- Thunderstorms</h1>
+<p>Example: consider if we observed 11 events -- as an example, the number of thunderstorms in a month. We want to estimate the probability of a thunderstorm
+given the new data. Assuming weather each day is independent (which is a simplifying assumption), we can assume that the number of thunderstorms in n days can be modeled by
+a binomial distribution. If we believe prior to this that the distribution looks as it does below (with the highest belief in 35 and 45%), we can now find the
+posterior of the probabilities after observing the 11 thunderstorms as follows:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>posprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.05</span><span class="p">,</span><span class="m">.15</span><span class="p">,</span><span class="m">.25</span><span class="p">,</span><span class="m">.35</span><span class="p">,</span><span class="m">.45</span><span class="p">,</span><span class="m">.55</span><span class="p">,</span><span class="m">.65</span><span class="p">,</span><span class="m">.75</span><span class="p">,</span><span class="m">.85</span><span class="p">,</span><span class="m">.95</span><span class="p">)</span></span>
+<span class="code-line">probsofprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.07</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.07</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">)</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span>probsofprobs<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>## [1] TRUE</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>pos <span class="o">&lt;-</span> posterior<span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="m">27</span><span class="p">,</span>posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<span class="code-line">pos</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>##  [1] 3.095425e-08 1.718005e-03 1.278404e-01 5.244571e-01 2.873813e-01</span>
+<span class="code-line">##  [6] 5.673647e-02 1.826165e-03 4.046863e-05 4.523481e-08 3.571776e-15</span>
+</pre></div>
+
+
+<p>So we now believe with 0.52  probability that the actual p value is 0.35. This means the data supports the assumption of 0.35 chance of thunderstorms a day, given our prior beliefs and the independence of events.</p>
+<h1>Behaviors for different n and k.</h1>
+<div class="highlight"><pre><span class="code-line"><span></span>n <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">150</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">300</span><span class="p">,</span><span class="m">500</span><span class="p">)</span></span>
+<span class="code-line">k <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>n<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="kp">seq</span><span class="p">(</span>n<span class="o">/</span><span class="m">10</span><span class="p">,</span>n<span class="p">,</span>n<span class="o">/</span><span class="m">10</span><span class="p">))</span></span>
+<span class="code-line"><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> <span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>j<span class="p">)</span> posterior<span class="p">(</span>k<span class="p">[[</span>i<span class="p">]][</span>j<span class="p">],</span>n<span class="p">[</span>i<span class="p">],</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)))</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>## [[1]]</span>
+<span class="code-line">##               [,1]         [,2]         [,3]         [,4]         [,5]</span>
+<span class="code-line">##  [1,] 1.599929e-01 3.044837e-02 4.175353e-03 4.535141e-04 3.970198e-05</span>
+<span class="code-line">##  [2,] 3.275858e-01 2.090328e-01 9.611020e-02 3.500202e-02 1.027402e-02</span>
+<span class="code-line">##  [3,] 3.539850e-01 4.266587e-01 3.705460e-01 2.549013e-01 1.413272e-01</span>
+<span class="code-line">##  [4,] 1.367042e-01 2.661665e-01 3.734142e-01 4.149510e-01 3.716434e-01</span>
+<span class="code-line">##  [5,] 1.954070e-02 5.781053e-02 1.232366e-01 2.080849e-01 2.831819e-01</span>
+<span class="code-line">##  [6,] 2.112971e-03 9.338145e-03 2.973675e-02 7.500583e-02 1.524825e-01</span>
+<span class="code-line">##  [7,] 7.431490e-05 4.990432e-04 2.414717e-03 9.254710e-03 2.858795e-02</span>
+<span class="code-line">##  [8,] 4.150223e-06 4.502043e-05 3.518955e-04 2.178644e-03 1.087132e-02</span>
+<span class="code-line">##  [9,] 4.740131e-08 9.712589e-07 1.433988e-05 1.676966e-04 1.580618e-03</span>
+<span class="code-line">## [10,] 2.691558e-12 1.849159e-10 9.153996e-09 3.589348e-07 1.134342e-05</span>
+<span class="code-line">##               [,6]         [,7]         [,8]         [,9]        [,10]</span>
+<span class="code-line">##  [1,] 0.0000027423 1.387873e-07 4.323270e-09 6.308829e-11 3.898065e-13</span>
+<span class="code-line">##  [2,] 0.0023794092 4.037659e-04 4.217143e-05 2.063387e-06 4.274713e-08</span>
+<span class="code-line">##  [3,] 0.0618245522 1.981654e-02 3.909516e-03 3.613198e-04 1.413919e-05</span>
+<span class="code-line">##  [4,] 0.2626259078 1.359817e-01 4.333627e-02 6.469879e-03 4.089826e-04</span>
+<span class="code-line">##  [5,] 0.3040687011 2.392268e-01 1.158446e-01 2.627942e-02 2.524175e-03</span>
+<span class="code-line">##  [6,] 0.2445832762 2.874519e-01 2.079370e-01 7.046474e-02 1.011058e-02</span>
+<span class="code-line">##  [7,] 0.0696762613 1.244281e-01 1.367666e-01 7.042313e-02 1.535375e-02</span>
+<span class="code-line">##  [8,] 0.0428016131 1.234723e-01 2.192337e-01 1.823553e-01 6.422345e-02</span>
+<span class="code-line">##  [9,] 0.0117546882 6.405116e-02 2.148182e-01 3.375116e-01 2.245279e-01</span>
+<span class="code-line">## [10,] 0.0002828487 5.167684e-03 5.811202e-02 3.061326e-01 6.828370e-01</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[2]]</span>
+<span class="code-line">##               [,1]         [,2]         [,3]         [,4]         [,5]</span>
+<span class="code-line">##  [1,] 2.322306e-01 2.277038e-04 1.627936e-08 1.818866e-13 3.574528e-19</span>
+<span class="code-line">##  [2,] 7.025229e-01 2.919046e-01 8.843776e-03 4.187267e-05 3.487212e-08</span>
+<span class="code-line">##  [3,] 6.469033e-02 6.463265e-01 4.708481e-01 5.360506e-02 1.073459e-03</span>
+<span class="code-line">##  [4,] 5.556787e-04 6.106833e-02 4.893556e-01 6.128149e-01 1.349860e-01</span>
+<span class="code-line">##  [5,] 5.305619e-07 4.722849e-04 3.065408e-02 3.109343e-01 5.547583e-01</span>
+<span class="code-line">##  [6,] 9.330045e-11 6.178079e-07 2.982905e-04 2.250721e-02 2.987160e-01</span>
+<span class="code-line">##  [7,] 7.534734e-16 4.041228e-11 1.580429e-07 9.659015e-05 1.038354e-02</span>
+<span class="code-line">##  [8,] 4.093039e-22 2.414743e-16 1.038753e-11 6.983126e-08 8.257379e-05</span>
+<span class="code-line">##  [9,] 7.955005e-32 1.128490e-24 1.167269e-18 1.886864e-13 5.364942e-09</span>
+<span class="code-line">## [10,] 4.695776e-53 2.822892e-43 1.237364e-34 8.476110e-27 1.021294e-19</span>
+<span class="code-line">##               [,6]         [,7]         [,8]         [,9]        [,10]</span>
+<span class="code-line">##  [1,] 1.133380e-25 4.692851e-33 9.915429e-42 9.158596e-52 4.024562e-64</span>
+<span class="code-line">##  [2,] 4.685598e-12 8.221589e-17 7.361397e-23 2.881425e-30 5.365704e-40</span>
+<span class="code-line">##  [3,] 3.468201e-06 1.463279e-09 3.150385e-14 2.965123e-20 1.327682e-28</span>
+<span class="code-line">##  [4,] 4.797193e-03 2.226331e-05 5.272371e-09 5.458393e-14 2.688413e-21</span>
+<span class="code-line">##  [5,] 1.596901e-01 6.002831e-03 1.151458e-05 9.655674e-10 3.852028e-16</span>
+<span class="code-line">##  [6,] 6.396382e-01 1.788605e-01 2.552161e-03 1.592005e-06 4.724468e-12</span>
+<span class="code-line">##  [7,] 1.800931e-01 4.078990e-01 4.714352e-02 2.381957e-04 5.725563e-09</span>
+<span class="code-line">##  [8,] 1.575337e-02 3.924721e-01 4.989510e-01 2.772998e-02 7.331850e-06</span>
+<span class="code-line">##  [9,] 2.461095e-05 1.474333e-02 4.506889e-01 6.022830e-01 3.829100e-03</span>
+<span class="code-line">## [10,] 1.985380e-13 5.040118e-08 6.529073e-04 3.697472e-01 9.961636e-01</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[3]]</span>
+<span class="code-line">##                [,1]         [,2]         [,3]         [,4]         [,5]</span>
+<span class="code-line">##  [1,]  1.681094e-01 3.253710e-07 2.125097e-15 2.142022e-25 4.909985e-37</span>
+<span class="code-line">##  [2,]  8.283783e-01 2.879221e-01 3.377024e-04 6.112778e-09 2.516253e-15</span>
+<span class="code-line">##  [3,]  3.512017e-03 7.057761e-01 4.786194e-01 5.009090e-03 1.192171e-06</span>
+<span class="code-line">##  [4,]  2.591346e-07 6.300791e-03 5.169849e-01 6.546450e-01 1.885146e-02</span>
+<span class="code-line">##  [5,]  4.724763e-13 7.537045e-07 4.057283e-03 3.370657e-01 6.368031e-01</span>
+<span class="code-line">##  [6,]  2.713443e-20 2.395219e-12 7.134818e-07 3.279939e-03 3.428940e-01</span>
+<span class="code-line">##  [7,]  6.193798e-30 3.587014e-20 7.010065e-13 2.114250e-07 1.450113e-03</span>
+<span class="code-line">##  [8,]  1.827734e-42 1.280703e-30 3.028285e-21 1.105072e-13 9.170548e-08</span>
+<span class="code-line">##  [9,]  6.904020e-62 2.797059e-47 3.823967e-35 8.068112e-25 3.871158e-16</span>
+<span class="code-line">## [10,] 2.405669e-104 1.750229e-84 4.297013e-67 1.628110e-51 1.402853e-37</span>
+<span class="code-line">##               [,6]         [,7]         [,8]          [,9]         [,10]</span>
+<span class="code-line">##  [1,] 2.390928e-50 1.908017e-65 6.183221e-83 4.790963e-103 4.663388e-128</span>
+<span class="code-line">##  [2,] 2.200391e-23 3.153370e-33 1.835130e-45  2.553491e-60  4.463467e-80</span>
+<span class="code-line">##  [3,] 6.027656e-12 4.994449e-19 1.680520e-28  1.351995e-40  1.366398e-57</span>
+<span class="code-line">##  [4,] 1.153226e-05 1.156147e-10 4.706828e-18  4.581622e-28  5.602487e-43</span>
+<span class="code-line">##  [5,] 2.555794e-02 1.681031e-05 4.489961e-11  2.867377e-19  2.300370e-32</span>
+<span class="code-line">##  [6,] 7.615247e-01 2.771644e-02 4.096451e-06  1.447617e-12  6.426434e-24</span>
+<span class="code-line">##  [7,] 2.112891e-01 5.045242e-01 4.892194e-03  1.134229e-07  3.303457e-17</span>
+<span class="code-line">##  [8,] 1.616703e-03 4.670834e-01 5.479937e-01  1.537206e-03  5.417007e-11</span>
+<span class="code-line">##  [9,] 3.945844e-09 6.591258e-04 4.471091e-01  7.251607e-01  1.477494e-05</span>
+<span class="code-line">## [10,] 2.567855e-25 7.702970e-15 9.383455e-07  2.733020e-01  9.999852e-01</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[4]]</span>
+<span class="code-line">##                [,1]          [,2]         [,3]         [,4]         [,5]</span>
+<span class="code-line">##  [1,]  1.107643e-01  4.405508e-10 2.684835e-22 2.367143e-37 5.982118e-55</span>
+<span class="code-line">##  [2,]  8.890622e-01  2.691023e-01 1.248039e-05 8.373825e-13 1.610436e-22</span>
+<span class="code-line">##  [3,]  1.735437e-04  7.302817e-01 4.708659e-01 4.392272e-04 1.174370e-09</span>
+<span class="code-line">##  [4,]  1.099922e-10  6.160028e-04 5.286018e-01 6.562356e-01 2.335149e-03</span>
+<span class="code-line">##  [5,]  3.829650e-19  1.139742e-09 5.197324e-04 3.428767e-01 6.483654e-01</span>
+<span class="code-line">##  [6,]  7.182782e-30  8.799248e-18 1.651672e-09 4.485257e-04 3.491198e-01</span>
+<span class="code-line">##  [7,]  4.634269e-44  3.016902e-29 3.009308e-18 4.342672e-10 1.796269e-04</span>
+<span class="code-line">##  [8,]  7.428738e-63  6.436268e-45 8.544342e-31 1.640999e-19 9.033616e-11</span>
+<span class="code-line">##  [9,]  5.453795e-92  6.569224e-70 1.212425e-51 3.237282e-36 2.477594e-23</span>
+<span class="code-line">## [10,] 1.121759e-155 1.028262e-125 1.444221e-99 2.934596e-76 1.709177e-55</span>
+<span class="code-line">##               [,6]         [,7]          [,8]          [,9]         [,10]</span>
+<span class="code-line">##  [1,] 4.352666e-75 6.550695e-98 3.686537e-124 2.330906e-154 5.383043e-192</span>
+<span class="code-line">##  [2,] 8.917289e-35 1.021301e-49  4.373953e-68  2.104599e-90 3.698805e-120</span>
+<span class="code-line">##  [3,] 9.040460e-18 1.439487e-28  8.570856e-43  5.733443e-61  1.400889e-86</span>
+<span class="code-line">##  [4,] 2.392431e-08 5.069857e-16  4.017457e-27  3.576694e-42  1.163079e-64</span>
+<span class="code-line">##  [5,] 3.529975e-03 3.975163e-08  1.673931e-16  7.919452e-29  1.368515e-48</span>
+<span class="code-line">##  [6,] 7.824049e-01 3.626771e-03  6.286488e-09  1.224252e-18  8.708245e-36</span>
+<span class="code-line">##  [7,] 2.139220e-01 5.269520e-01  4.853847e-04  5.023147e-11  1.898728e-25</span>
+<span class="code-line">##  [8,] 1.431808e-04 4.693963e-01  5.754317e-01  7.925428e-05  3.987023e-16</span>
+<span class="code-line">##  [9,] 5.459457e-13 2.488287e-05  4.240829e-01  8.120372e-01  5.679342e-08</span>
+<span class="code-line">## [10,] 2.866126e-37 9.941121e-22  1.289361e-09  1.878836e-01  9.999999e-01</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[5]]</span>
+<span class="code-line">##                [,1]          [,2]          [,3]          [,4]         [,5]</span>
+<span class="code-line">##  [1,]  7.104943e-02  5.922330e-13  3.379216e-29  2.598468e-49 7.174233e-73</span>
+<span class="code-line">##  [2,]  9.289422e-01  2.497120e-01  4.594956e-07  1.139466e-16 1.014561e-29</span>
+<span class="code-line">##  [3,]  8.348616e-06  7.502282e-01  4.614914e-01  3.825709e-05 1.138720e-12</span>
+<span class="code-line">##  [4,]  4.545189e-14  5.979292e-05  5.384418e-01  6.534405e-01 2.847278e-04</span>
+<span class="code-line">##  [5,]  3.021978e-25  1.711165e-12  6.632596e-05  3.464603e-01 6.498007e-01</span>
+<span class="code-line">##  [6,]  1.851049e-39  3.209411e-23  3.809116e-12  6.092579e-05 3.498927e-01</span>
+<span class="code-line">##  [7,]  3.375660e-58  2.519236e-38  1.286976e-23  8.860336e-13 2.190214e-05</span>
+<span class="code-line">##  [8,]  2.939479e-83  3.211438e-59  2.401706e-40  2.420574e-25 8.759387e-14</span>
+<span class="code-line">##  [9,] 4.194196e-122  1.531814e-92  3.829611e-68  1.290273e-47 1.560864e-30</span>
+<span class="code-line">## [10,] 5.092329e-207 5.997807e-167 4.835705e-132 5.254184e-101 2.049781e-73</span>
+<span class="code-line">##                [,6]          [,7]          [,8]          [,9]</span>
+<span class="code-line">##  [1,] 7.761429e-100 2.199369e-130 2.183705e-165 1.092007e-205</span>
+<span class="code-line">##  [2,]  3.539674e-46  3.234733e-66  1.035745e-90 1.670332e-120</span>
+<span class="code-line">##  [3,]  1.328098e-23  4.057267e-38  4.342864e-57  2.341286e-81</span>
+<span class="code-line">##  [4,]  4.861406e-11  2.174123e-21  3.406793e-36  2.688703e-56</span>
+<span class="code-line">##  [5,]  4.775456e-04  9.192632e-11  6.200177e-22  2.106221e-38</span>
+<span class="code-line">##  [6,]  7.873659e-01  4.640968e-04  9.584730e-12  9.969808e-25</span>
+<span class="code-line">##  [7,]  2.121441e-01  5.382274e-01  4.784536e-05  2.142148e-14</span>
+<span class="code-line">##  [8,]  1.242044e-05  4.613076e-01  6.003209e-01  3.934703e-06</span>
+<span class="code-line">##  [9,]  7.398719e-17  9.186252e-07  3.996313e-01  8.756210e-01</span>
+<span class="code-line">## [10,]  3.133413e-49  1.254637e-28  1.760184e-12  1.243751e-01</span>
+<span class="code-line">##               [,10]</span>
+<span class="code-line">##  [1,] 6.213665e-256</span>
+<span class="code-line">##  [2,] 3.065096e-160</span>
+<span class="code-line">##  [3,] 1.436230e-115</span>
+<span class="code-line">##  [4,]  2.414522e-86</span>
+<span class="code-line">##  [5,]  8.141324e-65</span>
+<span class="code-line">##  [6,]  1.180008e-47</span>
+<span class="code-line">##  [7,]  1.091315e-33</span>
+<span class="code-line">##  [8,]  2.934483e-21</span>
+<span class="code-line">##  [9,]  2.183052e-10</span>
+<span class="code-line">## [10,]  1.000000e+00</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[6]]</span>
+<span class="code-line">##                [,1]          [,2]          [,3]          [,4]</span>
+<span class="code-line">##  [1,]  2.801810e-02  1.063030e-18  5.342638e-43  3.126056e-73</span>
+<span class="code-line">##  [2,]  9.719819e-01  2.135714e-01  6.216290e-10  2.106446e-24</span>
+<span class="code-line">##  [3,]  1.851748e-08  7.864281e-01  4.424250e-01  2.897684e-07</span>
+<span class="code-line">##  [4,]  7.438546e-21  5.595560e-07  5.575739e-01  6.468330e-01</span>
+<span class="code-line">##  [5,]  1.803483e-37  3.831083e-18  1.078039e-06  3.531656e-01</span>
+<span class="code-line">##  [6,]  1.178215e-58  4.240769e-34  2.021940e-17  1.122335e-06</span>
+<span class="code-line">##  [7,]  1.716603e-86  1.744793e-56  2.349209e-34  3.682392e-18</span>
+<span class="code-line">##  [8,] 4.411003e-124  7.941267e-88  1.893851e-59  5.258144e-37</span>
+<span class="code-line">##  [9,] 2.377414e-182 8.272745e-138 3.813273e-101  2.046336e-70</span>
+<span class="code-line">## [10,]  0.000000e+00 2.026886e-249 5.410727e-197 1.681561e-150</span>
+<span class="code-line">##                [,5]          [,6]          [,7]          [,8]</span>
+<span class="code-line">##  [1,] 1.027607e-108 2.453048e-149 2.461865e-195 7.599331e-248</span>
+<span class="code-line">##  [2,]  4.010131e-44  5.543903e-69  3.222195e-99 5.760246e-136</span>
+<span class="code-line">##  [3,]  1.066232e-18  2.849056e-35  3.200587e-57  1.105888e-85</span>
+<span class="code-line">##  [4,]  4.215713e-06  1.995256e-16  3.970137e-32  2.429771e-54</span>
+<span class="code-line">##  [5,]  6.499970e-01  8.687466e-06  4.881509e-16  8.436610e-33</span>
+<span class="code-line">##  [6,]  3.499984e-01  7.926078e-01  7.546226e-06  2.209807e-17</span>
+<span class="code-line">##  [7,]  3.242856e-07  2.073834e-01  5.575703e-01  4.610821e-07</span>
+<span class="code-line">##  [8,]  8.201784e-20  9.290369e-08  4.424221e-01  6.480279e-01</span>
+<span class="code-line">##  [9,]  6.169433e-45  1.350710e-24  1.243250e-09  3.519716e-01</span>
+<span class="code-line">## [10,] 2.936020e-109  3.722665e-73  1.984396e-42  3.253535e-18</span>
+<span class="code-line">##                [,9]         [,10]</span>
+<span class="code-line">##  [1,]  0.000000e+00  0.000000e+00</span>
+<span class="code-line">##  [2,] 9.809006e-181 2.104793e-240</span>
+<span class="code-line">##  [3,] 3.639884e-122 1.509609e-173</span>
+<span class="code-line">##  [4,]  1.416511e-84 1.040579e-129</span>
+<span class="code-line">##  [5,]  1.388918e-57  2.881283e-97</span>
+<span class="code-line">##  [6,]  6.164155e-37  2.166673e-71</span>
+<span class="code-line">##  [7,]  3.632048e-21  3.605167e-50</span>
+<span class="code-line">##  [8,]  9.041600e-09  1.589635e-31</span>
+<span class="code-line">##  [9,]  9.491867e-01  3.225493e-15</span>
+<span class="code-line">## [10,]  5.081331e-02  1.000000e+00</span>
+<span class="code-line">## </span>
+<span class="code-line">## [[7]]</span>
+<span class="code-line">##                [,1]          [,2]          [,3]          [,4]         [,5]</span>
+<span class="code-line">##  [1,]  4.077774e-03  3.356530e-30  1.329459e-70 4.520793e-121 0.000000e+00</span>
+<span class="code-line">##  [2,]  9.959222e-01  1.531050e-01  1.132584e-15  7.192949e-40 6.261217e-73</span>
+<span class="code-line">##  [3,]  8.525991e-14  8.468950e-01  4.047914e-01  1.661071e-11 9.342445e-31</span>
+<span class="code-line">##  [4,]  1.864613e-34  4.802534e-11  5.952086e-01  6.333201e-01 9.236188e-10</span>
+<span class="code-line">##  [5,]  6.011486e-62  1.882004e-29  2.835151e-10  3.666799e-01 6.500000e-01</span>
+<span class="code-line">##  [6,]  4.467517e-97  7.256421e-56  5.671471e-28  3.805609e-10 3.500000e-01</span>
+<span class="code-line">##  [7,] 4.154515e-143  8.202257e-93  7.792260e-56  6.355485e-29 7.104760e-11</span>
+<span class="code-line">##  [8,] 9.296075e-206 4.758935e-145  1.172295e-97  2.479245e-60 7.186496e-32</span>
+<span class="code-line">##  [9,]  0.000000e+00  0.000000e+00 3.763777e-167 5.143123e-116 9.632641e-74</span>
+<span class="code-line">## [10,]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00 0.000000e+00</span>
+<span class="code-line">##                [,6]          [,7]          [,8]          [,9]</span>
+<span class="code-line">##  [1,]  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00</span>
+<span class="code-line">##  [2,] 1.358072e-114 3.180392e-165  0.000000e+00  0.000000e+00</span>
+<span class="code-line">##  [3,]  1.309319e-58  1.981179e-95 6.974733e-143 7.827823e-204</span>
+<span class="code-line">##  [4,]  3.356408e-27  1.316892e-53  1.202129e-90 3.498338e-141</span>
+<span class="code-line">##  [5,]  2.871125e-09  1.369255e-26  1.519296e-54  5.374148e-96</span>
+<span class="code-line">##  [6,]  8.020923e-01  1.984605e-09  1.142483e-28  2.096692e-61</span>
+<span class="code-line">##  [7,]  1.979077e-01  5.952086e-01  4.164871e-11  9.290590e-35</span>
+<span class="code-line">##  [8,]  5.190718e-12  4.047914e-01  7.344474e-01  4.248147e-14</span>
+<span class="code-line">##  [9,]  4.495482e-40  2.265169e-15  2.655526e-01  9.924534e-01</span>
+<span class="code-line">## [10,] 5.247219e-121  4.937990e-70  1.081177e-29  7.546632e-03</span>
+<span class="code-line">##               [,10]</span>
+<span class="code-line">##  [1,]  0.000000e+00</span>
+<span class="code-line">##  [2,]  0.000000e+00</span>
+<span class="code-line">##  [3,] 1.667804e-289</span>
+<span class="code-line">##  [4,] 1.932693e-216</span>
+<span class="code-line">##  [5,] 3.608840e-162</span>
+<span class="code-line">##  [6,] 7.304831e-119</span>
+<span class="code-line">##  [7,]  3.934374e-83</span>
+<span class="code-line">##  [8,]  4.664757e-52</span>
+<span class="code-line">##  [9,]  7.041419e-25</span>
+<span class="code-line">## [10,]  1.000000e+00</span>
+</pre></div>
+
+
+<p>Each list represents n = 10,50,100,150,200,300,500, and each column represents possible ks from n/10 to n.
+We see what is expected with Bayesian probabilities -- as n increases, our confidence in probabilities becomes stronger -- we get values that are nearly 1 for the observations
+which have p = k/n and 0 otherwise. This shows that the prior does not matter in these cases, as we get more observations, the data will overwhelm the prior. 
+For small values of n, we see the opposite -- it is highly skewed by our prior, so that we are not so confident that p = k/n if p was not deemed probable prior.</p>
+<h1>Machine Zeros problem:</h1>
+<div class="highlight"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>##  [1] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN</span>
+</pre></div>
+
+
+<p>Notice that we have many machine zeros for large n. This interferes with our calculations, and gives us NaNs for the calculations. 
+The following uses a log transformation to avoid machine zeros:</p>
+<div class="highlight"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>##  [1] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>log_transf_posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">)</span></span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="code-line"><span></span>##  [1]  0.000000e+00 5.596221e-289 3.467465e-121  3.312387e-37  6.500000e-01</span>
+<span class="code-line">##  [6]  3.500000e-01  2.547990e-38 2.667281e-122 8.609571e-290  0.000000e+00</span>
+</pre></div>
+								</article>
+						</div>
+					</div>
+				</div>
+			</section>
+	</div>
+</div>
+
+				</div>
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<!-- Footer -->
+					<section id="footer" class="container">
+						<div class="row">
+							<div class="8u">
+								<section>
+									<header>
+										<h2>Latest articles</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Sep <strong>09</strong></span>
+											<h3><a href="sumstatsmeasuresofspread.html">Summary Statistics Part 2: Measures of Spread</a></h3>
+											<p><p>An overview of statistics and central tendency.</p></p>
+										</li>
+										<li>
+											<span class="date">Sep <strong>02</strong></span>
+											<h3><a href="sumstatscentraltendency.html">Summary Statistics Part 1: Central Tendency</a></h3>
+											<p><p>An overview of statistics and central tendency.</p></p>
+										</li>
+										<li>
+											<span class="date">Jul <strong>29</strong></span>
+											<h3><a href="binomial_discrete_example.html">Binomial Discrete with Bayes</a></h3>
+											<p><p>Using a discrete Binomial prior to predict posterior probabilities.</p></p>
+										</li>
+										<li>
+											<span class="date">Mar <strong>09</strong></span>
+											<h3><a href="approaches-to-contingency-tables.html">Approaches To Contingency Tables</a></h3>
+											<p><p>Some approaches to contingency tables using R and Bayesian Statistics</p></p>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+						<div class="row">
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Blogroll</h2>
+									</header>
+									<ul class="divided">
+											<li><a href="http://getpelican.com/">Pelican</a></li>
+											<li><a href="http://python.org/">Python.org</a></li>
+											<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+											<li><a href="#">You can modify those links in your config file</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Categories</h2>
+									</header>
+									<ul class="divided">
+											<li><a href="https://seanammirati.github.io/category/r_markdown">r_markdown</a></li>
+											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+
+								<section>
+									<header>
+										<h2>Contact</h2>
+									</header>
+									<ul class="social">
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+			</div>
+		<script src="/theme/js/jquery.min.js"></script>
+		<script src="/theme/js/jquery.dropotron.js"></script>
+		<script src="/theme/js/config.js"></script>
+		<script src="/theme/js/skel.min.js"></script>
+		<script src="/theme/js/skel-panels.min.js"></script>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
+	</body>
+</html>
