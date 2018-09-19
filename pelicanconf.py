@@ -61,7 +61,7 @@ TIMEZONE = 'America/New_York'
 DEFAULT_LANG = 'English'
 
 THEME_REL = os.path.join(os.path.dirname(__file__), 'html5-dopetrope')
-THEME = os.path.abspath(THEME_REL)
+THEME = 'html5-dopetrope'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

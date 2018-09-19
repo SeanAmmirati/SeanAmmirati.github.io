@@ -38,6 +38,7 @@
 	{
 		color: #252122;
 		font-weight: 700;
+		text-align: center;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
@@ -45,6 +46,11 @@
 			color: inherit;
 			text-decoration: none;
 		}
+
+	h1
+	{
+		font-size: 1.75em;
+	}
 
 	a
 	{
@@ -101,6 +107,7 @@
 	{
 		font-size: 1.4em;
 		margin-bottom: 2em;
+		line-height: 1.4em;
 	}
 
 	section,
