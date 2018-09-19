@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import os 
 
 AUTHOR = 'Sean Ammirati'
 SITENAME = 'Stats Works'
@@ -33,11 +34,12 @@ USE_FOLDER_AS_CATEGORY = True
 
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'rmd_reader', 'render_math',
+PLUGINS = ['ipynb.markup', 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.img', 'liquid_tags.video',
            'liquid_tags.youtube', 'liquid_tags.vimeo',
-           'liquid_tags.include_code', 'liquid_tags.notebook']
+           'liquid_tags.include_code', 'liquid_tags.notebook',
+           'rmd_reader']
 MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
@@ -46,6 +48,9 @@ MARKDOWN = {
     },
     'output_format': 'html5'
 }
+# Jupyter Notebook 
+IGNORE_FILES = ['.ipynb_checkpoints']
+
 # R-Markdown compatibility
 STATIC_PATHS = ['figure']
 RMD_READER_RENAME_PLOT = 'directory'
@@ -55,7 +60,8 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = 'Z:/Repositories/~/pelican-themes/html5-dopetrope'
+THEME_REL = os.path.join(os.path.dirname(__file__), 'html5-dopetrope')
+THEME = os.path.abspath(THEME_REL)
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

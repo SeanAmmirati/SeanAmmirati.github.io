@@ -5,9 +5,6 @@
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-
 <html>
 	<head>
 			<title>Stats Works</title>
@@ -27,13 +24,13 @@
 				<div class="container">
 					<div class="row">
 						<div class="12u">
-
+						
 							<!-- Header -->
 								<section id="header">
-
+									
 									<!-- Logo -->
 									<h1><a href="https://seanammirati.github.io/">Stats Works</a></h1>
-
+									
 									<!-- Nav -->
 										<nav id="nav">
 											<ul>
@@ -49,11 +46,10 @@
 					</div>
 				</div>
 			</div>
-
+		
 		<!-- Main Wrapper -->
 			<div id="main-wrapper">
 				<div class="container">
-
 <div class="row">
 	<div class="12u">
 			<section>
@@ -1277,11 +1273,12 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One common example of an average is the arithmetic mean. We are all familiar with this from our schooling days:</p>
-$$
+<p>$$
 \begin{equation}
 \bar{X}_{mean} = \frac{ \sum_{i=0}^{n} x_{i} }{n} 
 \end{equation}
-$$
+$$</p>
+
 </div>
 </div>
 </div>
@@ -1290,10 +1287,11 @@ $$
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here, we say that we sum over all of the possible values, and divide by the total number. We can see the results on our simple dataset above:</p>
-$$
+<p>$$
 95 + 80 + 50 + 80 + 100 + 94 = 499 = T \\
 \bar{x} = \frac{T}{6} = 83.166
-$$
+$$</p>
+
 </div>
 </div>
 </div>
@@ -1353,17 +1351,20 @@ $$
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For example, we first list the points from smallest to largest:</p>
-$$ 
+<p>$$ 
 50, 80, 80, 94, 95, 100
-$$<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
-$$ 
+$$</p>
+<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
+<p>$$ 
 50, 80, 80, 94, 95, 100\\
     80, 80, 94, 95\\
         80, 94\\
-$$<p>Now that we have two values (since 6 = n is even), we take an average of these values. That is:</p>
-$$
+$$</p>
+<p>Now that we have two values (since 6 = n is even), we take an average of these values. That is:</p>
+<p>$$
 \frac{(80 + 94)}{2} = 87
-$$<p>Note that we can also express this as follows:</p>
+$$</p>
+<p>Note that we can also express this as follows:</p>
 
 </div>
 </div>
@@ -1613,16 +1614,18 @@ $$</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The trimean is then defined as:</p>
-$$
+<p>$$
 \begin{equation}
 TM = \frac{Q_1 + 2M + Q_3}{4}
 \end{equation}
-$$<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
-$$ 
+$$</p>
+<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
+<p>$$ 
 \begin{equation}
 MH = \frac{Q_1 + Q_3}{2} 
 \end{equation}
-$$<p>This is calculated below:</p>
+$$</p>
+<p>This is calculated below:</p>
 
 </div>
 </div>
@@ -1698,13 +1701,15 @@ $$<p>This is calculated below:</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the Winsorized mean, we will take the most extreme values of our sample and replace them with the most extreme remaining values. In this case, this is 50 and 100. So, our new, adjusted, sample to calculate the central tendency is:</p>
-$$
+<p>$$
 \tilde{S} = {80, 80, 80, 94, 95, 95}
-$$<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
-$$ 
+$$</p>
+<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
+<p>$$ 
 \frac{ \sum_i \tilde{s}_{i} }{n},\\
 \forall \tilde{s}_i \in \tilde{S}
-$$<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
+$$</p>
+<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
 <p>In general, we can take the largest and smallest p% of data and replace it with the most extreme values within this range. This value is arbitrary, but is often taken to be 10 to 25% of the ends replaced. In this example, we take the top and bottom 10%, which trims the most extreme values on both sides.</p>
 
 </div>
@@ -1772,9 +1777,10 @@ $$<p>If you don't understand the notation, don't worry. We're just taking an ave
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But wait! How can you just replace values like that!</p>
 <p>I know, it seems dishonest. The idea is that these values are extremely unlikely. In the case of 6 people, this is probably not the case. But imagine we had the following values:</p>
-$$
+<p>$$
 0, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 100
-$$
+$$</p>
+
 </div>
 </div>
 </div>
@@ -3220,9 +3226,10 @@ $$
 =\frac{\sum_{s=1}^{M} \sum_j x_{j, s}}{kM}
 $$
 Each value of the population will appear in ${N}\choose{k}$ - ${N-1}\choose{k}$ = $M - \frac{M(N-k)}{N}$ samples. We can say this because it is the total number of possible samples ${N}\choose{k}$ minus the total number of samples of size $k$ which do not contain observation $j$, ${N-1}\choose{k}$. So then we have:</p>
-$$
+<p>$$
 \frac{M - \frac{M(N-k)}{N}}{kM} \sum_i x_i
-$$<p>Expanding the left hand side: 
+$$
+Expanding the left hand side: 
 $$
 \frac{M - \frac{M(N-k)}{N}}{kM}
 = \frac{1}{k} - \frac{N-k}{kN}
@@ -3592,6 +3599,11 @@ bQAAAI2JNgAAgMZEGwAAQGOiDQAAoDHRBgAA0JhoAwAAaOz/A3nJ7643ixzoAAAAAElFTkSuQmCC
 									</header>
 									<ul class="dates">
 										<li>
+											<span class="date">Sep <strong>16</strong></span>
+											<h3><a href="factor-analysis-factor-analysis.html">['Factor Analysis', 'Factor Analysis']</a></h3>
+											<p><p>A project detailing the methodolgy and use of Factor Analysis.</p></p>
+										</li>
+										<li>
 											<span class="date">Sep <strong>09</strong></span>
 											<h3><a href="sumstatsmeasuresofspread.html">Summary Statistics Part 2: Measures of Spread</a></h3>
 											<p><p>An overview of statistics and central tendency.</p></p>
@@ -3600,11 +3612,6 @@ bQAAAI2JNgAAgMZEGwAAQGOiDQAAoDHRBgAA0JhoAwAAaOz/A3nJ7643ixzoAAAAAElFTkSuQmCC
 											<span class="date">Sep <strong>02</strong></span>
 											<h3><a href="sumstatscentraltendency.html">Summary Statistics Part 1: Central Tendency</a></h3>
 											<p><p>An overview of statistics and central tendency.</p></p>
-										</li>
-										<li>
-											<span class="date">Jul <strong>29</strong></span>
-											<h3><a href="binomial_discrete_example.html">Binomial Discrete with Bayes</a></h3>
-											<p><p>Using a discrete Binomial prior to predict posterior probabilities.</p></p>
 										</li>
 										<li>
 											<span class="date">Mar <strong>09</strong></span>
@@ -3635,13 +3642,14 @@ bQAAAI2JNgAAgMZEGwAAQGOiDQAAoDHRBgAA0JhoAwAAaOz/A3nJ7643ixzoAAAAAElFTkSuQmCC
 										<h2>Categories</h2>
 									</header>
 									<ul class="divided">
+											<li><a href="https://seanammirati.github.io/category/py_beginners_stats">py_beginners_stats</a></li>
 											<li><a href="https://seanammirati.github.io/category/r_markdown">r_markdown</a></li>
 											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
 									</ul>
 								</section>
 							</div>
 							<div class="4u">
-
+							
 								<section>
 									<header>
 										<h2>Contact</h2>

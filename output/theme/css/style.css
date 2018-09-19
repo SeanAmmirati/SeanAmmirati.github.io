@@ -21,10 +21,11 @@
 	{
 		font-family: 'Source Sans Pro';
 		font-weight: 300;
-		font-size: 1.5em;
 		background: #252122;
 		background-image: url('images/bg02.png');
-		color: #5d5d5d;
+		color: #080707;
+		padding: 0.5em 0.5em 0.5em 0.5em;
+		font-size: 1.5em;
 	}
 
 	strong, b
@@ -33,21 +34,8 @@
 		font-weight: 700;
 	}
 
-	h1, h2
+	h1, h2, h3, h4, h5, h6
 	{
-		font-weight: 700;
-		text-align: center;
-		font-size: 1.5em;
-		padding-bottom: 2em;
-	}
-	h2
-	{
-		color: #6a23d5;
-		padding-bottom: 5em;
-	}
-	h3, h4, h5, h6
-	{
-		font-family: 'Nobile';
 		color: #252122;
 		font-weight: 700;
 	}
@@ -111,6 +99,7 @@
 
 	p, ul, ol, dl, table
 	{
+		font-size: 1.4em;
 		margin-bottom: 2em;
 	}
 
@@ -189,12 +178,12 @@
 
 				.button-alt:hover
 				{
-					background: #112084;
+					background: #353132;
 				}
 
 				.button-alt:active
 				{
-					background:#1a2ca5;
+					background: #151112;
 				}
 
 			.button-icon
@@ -335,6 +324,10 @@
 		.is-post
 		{
 		}
+			.is-post p
+			{
+				font-size:1.5em;
+			}
 
 	/* List */
 
@@ -390,7 +383,7 @@
 				position: absolute;
 				left: 0;
 				top: 1.3em;
-				background-color: #6a23d5;
+				background-color: #d52349;
 				height: 3.5em;
 				text-align: center;
 				color: #fff;
@@ -565,7 +558,7 @@
 
 		#banner header
 		{
-			background-color: #161299;
+			background-color: #252122;
 			background-color: rgba(34,30,31,0.98);
 			text-align: center;
 		}
@@ -574,13 +567,12 @@
 			{
 				color: #fff;
 				font-weight: 700;
-				text-align: center
 			}
 
 			#banner header .byline
 			{
-				color: #4f23d5;
-				padding: 10;
+				color: #d52349;
+				padding: 0;
 				font-style: normal;
 			}
 

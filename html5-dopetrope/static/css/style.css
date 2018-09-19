@@ -23,7 +23,9 @@
 		font-weight: 300;
 		background: #252122;
 		background-image: url('images/bg02.png');
-		color: #5d5d5d;
+		color: #080707;
+		padding: 0.5em 0.5em 0.5em 0.5em;
+		font-size: 1.5em;
 	}
 
 	strong, b
@@ -97,6 +99,7 @@
 
 	p, ul, ol, dl, table
 	{
+		font-size: 1.4em;
 		margin-bottom: 2em;
 	}
 
@@ -321,6 +324,10 @@
 		.is-post
 		{
 		}
+			.is-post p
+			{
+				font-size:1.5em;
+			}
 
 	/* List */
 
