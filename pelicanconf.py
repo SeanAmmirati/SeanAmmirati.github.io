@@ -33,17 +33,19 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 ARTICLE_URL = '/category/{slug}.html'
 ARTICLE_SAVE_AS = 'category/{slug}.html'
 
+# Favicon
+STATIC_PATHS = ['images', 'extra/favicon.ico', 'figure']
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
 # Category options 
-USE_FOLDER_AS_CATEGORY = True
+USE_FOLDER_AS_CATEGORY = True 
 DISPLAY_CATEGORIES_ON_MENU = True 
 
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math',
+PLUGINS = ['ipynb.markup', #'render_math',
            'better_codeblock_line_numbering',
-           'liquid_tags.img', 'liquid_tags.video',
-           'liquid_tags.youtube',
-            'liquid_tags.vimeo',
            'liquid_tags.include_code', 'liquid_tags.notebook',
            'rmd_reader']
 MARKDOWN = {
@@ -58,7 +60,6 @@ MARKDOWN = {
 IGNORE_FILES = ['.ipynb_checkpoints']
 
 # R-Markdown compatibility
-STATIC_PATHS = ['figure']
 RMD_READER_RENAME_PLOT = 'directory'
 RMD_READER_KNITR_OPTS_CHUNK = {'fig.path': 'figure/'}
 

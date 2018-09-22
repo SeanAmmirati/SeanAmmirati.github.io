@@ -10,7 +10,7 @@
 			<title>Stats Works</title>
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 			<meta charset="utf-8" />
-			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
 				<link rel="stylesheet" href="/theme/css/pygment.css" />
 			<noscript>
 				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
@@ -100,9 +100,9 @@
 
 
 <p>If we assume that artistry and travel likelihood are independent, our sum of the differences from this expectation divided by the square root of the expectation
-should be roughly normally distributed and so the squared differences will be approximately <span class="math">\(\chi ^{2}\left ( 1 \right )\)</span>.</p>
-<p>Here, we assume that the observed counts are Poisson distributed, so that their expectation and variance are defined by <span class="math">\(E_{i}\)</span> and <span class="math">\(\frac{1}{\sqrt{E_{i}}}\)</span>.
-As <span class="math">\(n \to \infty\)</span>, this is asymptotically normal GIVEN the hypothesis of independence.</p>
+should be roughly normally distributed and so the squared differences will be approximately $\chi ^{2}\left ( 1 \right )$.</p>
+<p>Here, we assume that the observed counts are Poisson distributed, so that their expectation and variance are defined by $E_{i}$ and $\frac{1}{\sqrt{E_{i}}}$.
+As $n \to \infty$, this is asymptotically normal GIVEN the hypothesis of independence.</p>
 <p>Because we know the row and column totals, in this case we have a degree of freedom of 1 -- when one value is known on this contingency table,
 given the row and column totals we can deduce the others. In order to calculate an (approximate) probability of this example given independence
 (the null hypothesis), we perform the following calculation.</p>
@@ -169,10 +169,10 @@ less than or equal to five, we would do the following in this case:</p>
 <h1>Bayesian Approach -- using Beta distributions</h1>
 <p>Let us assume that the probability of having traveled for artists and non-artists can be modeled using a Beta distribution. That is
 [P(travel \mid nonartist) = p \sim \ {Beta}(\alpha <em 1>{1}, \beta </em>)]  and [P(travel \mid artist) = q \sim \ {Beta}(\alpha <em 2>{2}, \beta </em>)]</p>
-<p>We can now make an approximation to determine the probability that <span class="math">\(p &lt; q\)</span>. That is, we want the posterior distribution of <span class="math">\(p\)</span> and <span class="math">\(q\)</span> given
+<p>We can now make an approximation to determine the probability that $p &lt; q$. That is, we want the posterior distribution of $p$ and $q$ given
 our contingency table. Because our likelihood is multinomial, we know that the posterior distribution is also Beta distributed. After doing some
-manipulations, we can write the posterior distribution of <span class="math">\(p\)</span> and <span class="math">\(q\)</span>.</p>
-<p>If we assume uninformative priors, we set <span class="math">\(\alpha = \beta = 1\)</span> to get the following:</p>
+manipulations, we can write the posterior distribution of $p$ and $q$.</p>
+<p>If we assume uninformative priors, we set $\alpha = \beta = 1$ to get the following:</p>
 <div class="highlight"><pre><span class="code-line"><span></span>posteriorb <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>p<span class="p">,</span><span class="kp">q</span><span class="p">,</span> cont_table<span class="p">,</span> num <span class="o">=</span> <span class="kc">FALSE</span><span class="p">){</span></span>
 <span class="code-line">  <span class="kr">if</span> <span class="p">(</span>num <span class="o">==</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="p">{</span></span>
 <span class="code-line">    <span class="kr">if</span> <span class="p">(</span>p <span class="o">&gt;=</span> <span class="kp">q</span><span class="p">)</span> <span class="p">{</span></span>
@@ -192,7 +192,7 @@ manipulations, we can write the posterior distribution of <span class="math">\(p
 </pre></div>
 
 
-<p>Note that this will only work for 2x2 contingency tables and assuming an (invalid) prior of <span class="math">\(\alpha = \beta = 1\)</span>  for each prior. If we wanted to include
+<p>Note that this will only work for 2x2 contingency tables and assuming an (invalid) prior of $\alpha = \beta = 1$  for each prior. If we wanted to include
 prior information, we could change these for each prior, which would result in a different number being added/subtracted above.</p>
 <p>This joint distribution is somewhat difficult to determine analytically. There are alternative
 here to estimate this probability (gtools, MCMCpack, etc), but I have included a numerical approximation.</p>
@@ -209,11 +209,11 @@ here to estimate this probability (gtools, MCMCpack, etc), but I have included a
 </pre></div>
 
 
-<p>We estimate <span class="math">\({P}(p&lt; q) = .9966\)</span>. Here, we individual values of p,q and compare their pdf evaluations at each point.</p>
+<p>We estimate ${P}(p&lt; q) = .9966$. Here, we individual values of p,q and compare their pdf evaluations at each point.</p>
 <h1>Bayesian Approach -- Assuming Dependence Structure</h1>
-<p>Let's use another formulation that allows <span class="math">\(p\)</span> and <span class="math">\(q\)</span> to depend on one another. That is, it is unlikely that <span class="math">\(p\)</span> and <span class="math">\(q\)</span> are distributed independently --
+<p>Let's use another formulation that allows $p$ and $q$ to depend on one another. That is, it is unlikely that $p$ and $q$ are distributed independently --
 there is an underlying 'willing to travel' factor that is prevalent in both groups. We saw this when we considered the earlier tests.<br>
-If we assume then that <span class="math">\(\ln \frac{p}{1-p} - \ln \frac{q}{1-q}\)</span>, the difference in their log odds ratios is normally distributed with mean 0 and some arbitrary variance,
+If we assume then that $\ln \frac{p}{1-p} - \ln \frac{q}{1-q}$, the difference in their log odds ratios is normally distributed with mean 0 and some arbitrary variance,
 we are allowing for some dependencies based on the value of sigma squared that we select.
 Selecting a small value of sigmasquared introduces a higher dependency structure.
 We can then test, for a certain level of expected variance in their difference, whether they are independent or not.</p>
@@ -237,7 +237,7 @@ We can then test, for a certain level of expected variance in their difference, 
 </pre></div>
 
 
-<p>We then approximate <span class="math">\({P}(p&lt; q)\)</span> given various assumed sigmas in the prior.</p>
+<p>We then approximate ${P}(p&lt; q)$ given various assumed sigmas in the prior.</p>
 <div class="highlight"><pre><span class="code-line"><span></span>estimb1 <span class="o">&lt;-</span> approx<span class="p">(</span>posteriorc<span class="p">,</span></span>
 <span class="code-line">                  num <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span></span>
 <span class="code-line">                  cont_table <span class="o">=</span> cont_table<span class="p">,</span> </span>
@@ -307,68 +307,13 @@ We can then test, for a certain level of expected variance in their difference, 
 </pre></div>
 
 
-<p>We see that the larger the variance, the higher <span class="math">\({P}(p&lt; q)\)</span> is. When we condsidered them to be independent, we got an estimate of
+<p>We see that the larger the variance, the higher ${P}(p&lt; q)$ is. When we condsidered them to be independent, we got an estimate of
 .9965571. It makes sense, then, that as we increase the variance, and therefore the two become closer to being
 what we would consider as independent from one another, it approaches the value when they are assumed to be independent
 explicitly. Considering them to have a small variance (.25) will lead to the probability p &lt; q to be smaller than any other
 method, including the chisquare and Fischer Exact test. When we have a high variance (even at sigma sq = 4), we obtain a higher
 probability that the two probabilities are different. The conclusion then is that the two groups are different from one another.</p>
 <p>When the variance is small, we are less confident that the two groups are different from one another, both in prior and posterior distribution.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
 								</article>
 						</div>
 					</div>
