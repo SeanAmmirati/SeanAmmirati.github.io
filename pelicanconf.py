@@ -33,7 +33,10 @@ PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 ARTICLE_URL = '{category}/{slug}.html'
 ARTICLE_SAVE_AS = '{category}/{slug}.html'
+
+# Category options 
 USE_FOLDER_AS_CATEGORY = True
+DISPLAY_CATEGORIES_ON_MENU = True 
 
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
