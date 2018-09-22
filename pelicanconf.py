@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
-import os 
 
 AUTHOR = 'Sean Ammirati'
 SITENAME = 'Stats Works'
@@ -67,7 +66,6 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME_REL = os.path.join(os.path.dirname(__file__), 'html5-dopetrope')
 THEME = 'html5-dopetrope'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -76,15 +74,13 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
-
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (
+          ('GitHub', 'https://github.com/SeanAmmirati'),
+          ('LinkedIn', 'https://www.linkedin.com/in/sean-ammirati-4795a4ba/'),
+          ('Kaggle', 'https://www.kaggle.com/seanammirati'),
+          ('Email', SIDEBAR_EMAIL)
+          )
 
 DEFAULT_PAGINATION = 10
 

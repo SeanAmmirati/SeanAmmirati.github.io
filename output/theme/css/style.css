@@ -60,7 +60,7 @@
 
 	a
 	{
-		color: #d52349;
+		color: #6a23d5;
 		text-decoration: underline;
 	}
 
@@ -396,7 +396,7 @@
 				position: absolute;
 				left: 0;
 				top: 1.3em;
-				background-color: #d52349;
+				background-color: #6a23d5;
 				height: 3.5em;
 				text-align: center;
 				color: #fff;
@@ -412,7 +412,7 @@
 					position: absolute;
 					bottom: 0;
 					right: -1.2em;
-					border-left: solid 1.25em #d52349;
+					border-left: solid 1.25em #6a23d5;
 					border-top: solid 1.8em transparent;
 					border-bottom: solid 1.8em transparent;
 				}
@@ -511,7 +511,7 @@
 		{
 			position: relative;
 			display: inline-block;
-			background-color: #d52349;
+			background-color: #6a23d5;
 			width: 9em;
 			padding: 1.5em 0 0.5em 0;
 			border-top-left-radius: 5px;
@@ -524,7 +524,7 @@
 				position: absolute;
 				bottom: -1.98em;
 				left: 0;
-				border-top: solid 2em #d52349;
+				border-top: solid 2em #6a23d5;
 				border-left: solid 4.5em transparent;
 				border-right: solid 4.5em transparent;
 			}
@@ -584,7 +584,7 @@
 
 			#banner header .byline
 			{
-				color: #d52349;
+				color: #6a23d5;
 				padding: 0;
 				font-style: normal;
 			}
