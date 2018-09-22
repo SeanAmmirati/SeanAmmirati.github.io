@@ -116,6 +116,12 @@
 		line-height: 1.4em;
 	}
 
+	ol
+	{
+		list-style-type: decimal;
+		text-indent: 30px;
+		padding: 2em;
+	}
 	section,
 	article
 	{
