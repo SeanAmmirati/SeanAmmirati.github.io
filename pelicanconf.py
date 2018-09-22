@@ -29,7 +29,10 @@ PATH = 'content'
 
 CATEGORY_URL = "category/{slug}"
 CATEGORY_SAVE_AS = "category/{slug}/index.html"
-
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+ARTICLE_URL = '{category}/{slug}.html'
+ARTICLE_SAVE_AS = '{category}/{slug}.html'
 USE_FOLDER_AS_CATEGORY = True
 
 MARKUP = ('md', 'rmd', 'ipynb')
@@ -37,7 +40,8 @@ PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = ['ipynb.markup', 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.img', 'liquid_tags.video',
-           'liquid_tags.youtube', 'liquid_tags.vimeo',
+           'liquid_tags.youtube',
+            'liquid_tags.vimeo',
            'liquid_tags.include_code', 'liquid_tags.notebook',
            'rmd_reader']
 MARKDOWN = {
