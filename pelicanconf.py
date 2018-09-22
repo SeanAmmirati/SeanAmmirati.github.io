@@ -27,11 +27,11 @@ DEFAULT_METADATA = {
 PATH = 'content'
 
 CATEGORY_URL = "/category/{slug}"
-CATEGORY_SAVE_AS = "/category/{slug}/index.html"
-PAGE_URL = '/{slug}/'
-PAGE_SAVE_AS = '/{slug}/index.html'
-ARTICLE_URL = '/{category}/{slug}.html'
-ARTICLE_SAVE_AS = '/{category}/{slug}.html'
+CATEGORY_SAVE_AS = "category/{slug}/index.html"
+PAGE_URL = '/pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+ARTICLE_URL = '/category/{slug}.html'
+ARTICLE_SAVE_AS = 'category/{slug}.html'
 
 # Category options 
 USE_FOLDER_AS_CATEGORY = True
@@ -83,6 +83,3 @@ SOCIAL = (
           )
 
 DEFAULT_PAGINATION = 10
-
-# Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = False
