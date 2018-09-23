@@ -110,7 +110,7 @@
 									{% for article in articles[0:4] %}
 										<li>
 											<span class="date">{{ article.date|strftime('%b') }} <strong>{{ article.date|strftime('%d') }}</strong></span>
-											<h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+											<h3><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h3>
 											<p>{{ article.summary }}</p>
 										</li>
 									{% endfor %}

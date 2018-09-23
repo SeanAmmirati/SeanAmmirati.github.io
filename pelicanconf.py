@@ -30,22 +30,22 @@ CATEGORY_URL = "category/{slug}"
 CATEGORY_SAVE_AS = "category/{slug}/index.html"
 PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
-ARTICLE_URL = 'category/{slug}.html'
-ARTICLE_SAVE_AS = 'category/{slug}.html'
+ARTICLE_URL = 'category/{category}/{slug}.html'
+ARTICLE_SAVE_AS = 'category/{category}/{slug}.html'
 
-TAG_URL = 'tag/{slug}/'
-TAG_SAVE_AS = 'tag/{slug}/index.html'
-TAGS_URL = 'tags/'
-TAGS_SAVE_AS = 'tags/index.html'
+TAG_URL = '/tag/{slug}/'
+TAG_SAVE_AS = '/tag/{slug}/index.html'
+TAGS_URL = '/tags/'
+TAGS_SAVE_AS = '/tags/index.html'
 
 # Favicon
 STATIC_PATHS = ['images', 'extra/favicon.ico', 'figure']
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
-# Category options 
-USE_FOLDER_AS_CATEGORY = True 
-DISPLAY_CATEGORIES_ON_MENU = True 
+# Category options
+USE_FOLDER_AS_CATEGORY = True
+DISPLAY_CATEGORIES_ON_MENU = True
 
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
@@ -61,7 +61,7 @@ MARKDOWN = {
     },
     'output_format': 'html5'
 }
-# Jupyter Notebook 
+# Jupyter Notebook
 IGNORE_FILES = ['.ipynb_checkpoints']
 
 # R-Markdown compatibility
@@ -93,4 +93,5 @@ DEFAULT_PAGINATION = 10
 # Disqus for Comments
 DISQUS_SITENAME = "statsworks"
 
+DEFAULT_PAGINATION = False
 RELATIVE_URLS = False

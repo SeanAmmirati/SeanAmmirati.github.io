@@ -14,7 +14,7 @@
 									<div class="post-infos">
 										<ul class="tags">
 											{% if article.category %}
-											<li><a class="button" href="{{ article.category.url }}">{{ article.category|capitalize }}</a></li>
+											<li><a class="button" href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category|capitalize }}</a></li>
 											{% endif %}
 											{% for tag in article.tags %}
 												<li><a class="button button-alt" href="{{ tag.url }}">{{ tag|capitalize }}</a></li>
