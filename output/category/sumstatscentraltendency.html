@@ -1154,7 +1154,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>But, I could go on all day about this. Luckily for you, I won't. I am going to be using some code to give examples of how these things work. Don't worry if you don't understand how the code works, as I will create a future article describing how this code is written using python. In this post, which I will be calling a "framework" post, I will only be describing how these things work. Then, in a "application" post, I will show how to write code to solve these problems with real-world data.</p>
+<p>Throughout this exercise, I am going to be using some code to give examples of how these things work. I will only be displaying code that I believe is helpful for the task at hand, and I will create a future article describing how this code is written using python. In this post, which I will be calling a "framework" post, I will only be describing how these things work. Then, in a "application" post, I will show how to write code to solve these problems with real-world data.</p>
 
 </div>
 </div>
@@ -1717,7 +1717,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="k">def</span> <span class="nf">winsorized_mean</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">percent_removed</span><span class="p">):</span></span>
@@ -1756,15 +1756,21 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre><span class="code-line">87.33333333333333</pre>
+<div class="output_subarea output_text output_error">
+<pre><span class="code-line"></span>
+<span class="code-line"><span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span></span>
+<span class="code-line"><span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)</span>
+<span class="code-line"><span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-5e5d6d9f4757&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span></span>
+<span class="code-line"><span class="ansi-green-fg">     21</span> </span>
+<span class="code-line"><span class="ansi-green-fg">     22</span> </span>
+<span class="code-line"><span class="ansi-green-intense-fg ansi-bold">---&gt; 23</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>wm <span class="ansi-yellow-intense-fg ansi-bold">=</span> winsorized_mean<span class="ansi-yellow-intense-fg ansi-bold">(</span>class_grades<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-cyan-intense-fg ansi-bold">.1</span><span class="ansi-yellow-intense-fg ansi-bold">)</span></span>
+<span class="code-line"><span class="ansi-green-fg">     24</span> wm</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;class_grades&#39; is not defined</pre>
 </div>
-
 </div>
 
 </div>
@@ -2241,16 +2247,6 @@ SUVORK5CYII=
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="If-you're-curious-about-this...">If you're curious about this...<a class="anchor-link" href="#If-you're-curious-about-this...">&#182;</a></h4><p>For the reasons behind why I 'created', or <b> simulated </b> the data this way, I assumed that our 6 students actually were a sample from a population. I then fit a beta distribution to the observed data, and found the maximum likelihood estimators (MLE) based on a Beta distribution (used to model probabilities). I then sampled 100 values randomly from this distribution.</p>
-<p>For all intents and purposes, you can consider this "new" dataset as a completely different sample. The example is included for those who are interested. I will be discussing the Beta, as well as other distributions, at a later point on this website.)</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
@@ -2539,7 +2535,9 @@ QmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We see that this is a skewed distribution -- in particular it is <b> left skewed </b>. A majority of the students did well on the exam, but there were some who did particularly poorly, with some extreme values on the far left. In this case, where there are many extreme values, the mean is not a good "average" -- it is dragged down by the very small values in the tail. We can see this as the mean is close to 70, but it appears that the "average" student did better than this. The median is a more <b> robust </b> measure, because it is less sensitive to anomalies in the sample. The mode is not very useful in this case, as it is at the bin with the largest values. The "average" student likely did worse than this.</p>
+<p>We see that this is a skewed distribution -- in particular it is <b> left skewed </b>.</p>
+<p>A majority of the students did well on the exam, but there were some who did particularly poorly, with some extreme values on the far left. In this case, where there are many extreme values, the mean is not a good "average" -- it is dragged down by the very small values in the tail. We can see this as the mean is close to 70, but it appears that the "average" student did better than this.</p>
+<p>The median is a more <b> robust </b> measure, because it is less sensitive to anomalies in the sample. The mode is not very useful in this case, as it is at the bin with the largest values. The "average" student likely did worse than this.</p>
 
 </div>
 </div>
@@ -2882,7 +2880,7 @@ YII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We remember from before that the population mean is 83.16666. This is a population parameter -- it is not a statistic. However, suppose we sampled randomly from this population and got the data 80, 94, 80. Then our <b> estimate </b> of the population mean would be 84.6. Remember when I said that the statistic is never the "cold hard" truth? Here is a direct example.</p>
+<p>We remember from before that the population mean is 83.16666. This is a population parameter -- it is not a statistic. However, suppose we sampled randomly from this population and retrieved the sample data:  80, 94, 80. Then our <b> estimate </b> of the population mean would be 84.6. Remember when I said that the statistic is never the "cold hard" truth? Here is a direct example.</p>
 
 </div>
 </div>
@@ -3239,7 +3237,7 @@ so
 $$ 
 \sum_{s=1}^{M} \frac{\bar{X}_s}{M} = \frac{ \sum_{i=1}^{N} x_{i} }{N}\\
 $$
-But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! Since we weighed each sample equally in this expectation, this is equivalent to sampling <b> randomly without replacement </b>. This means that we have proven the result -- the sample mean is an <b> unbiased estimator </b> of the population mean. This is a powerful result!</p>
+But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! Since we weighed each sample equally in this expectation, this is equivalent to sampling <b> randomly without replacement.</b> This means that we have proven the result -- the sample mean is an <b> unbiased estimator </b> of the population mean. This is a powerful result!</p>
 <p>Hopefully you can begin to see why statistics is so exciting now! We have proven that any inference about the population mean using a sample mean will, on average, be accurate.</p>
 <p>However, it is important to note that while the sample mean is unbiased, it does not make it the most accurate estimator. This will be covered in the next post, when we discuss the <b> Measures of Spread. </b></p>
 
@@ -3539,7 +3537,7 @@ bQAAAI2JNgAAgMZEGwAAQGOiDQAAoDHRBgAA0JhoAwAAaOz/A3nJ7643ixzoAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this first post, we went over what a statistic is and the distinction between a <b> sample </b> and a <b> population.</b> We also discussed measures of central tendencies and their relation to sampling distributions.</p>
-<p>In the next post, we will be discussing the <b> Measures of Spread </b> which will shed light further on the sampling distribution of the sample mean. Hope you enjoyed!</p>
+<p>In the next post, we will be discussing the <a href="./Measures of Spread">Measures of Spread</a> which will shed light further on the sampling distribution of the sample mean. Hope you enjoyed!</p>
 
 </div>
 </div>
@@ -3577,6 +3575,15 @@ bQAAAI2JNgAAgMZEGwAAQGOiDQAAoDHRBgAA0JhoAwAAaOz/A3nJ7643ixzoAAAAAElFTkSuQmCC
 </script>
 
 								</article>
+ <div id="disqus_thread" class="box"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'statsworks';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
 						</div>
 					</div>
 				</div>

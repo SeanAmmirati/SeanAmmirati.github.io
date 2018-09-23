@@ -84,3 +84,6 @@ SOCIAL = (
           )
 
 DEFAULT_PAGINATION = 10
+
+# Disqus for Comments
+DISQUS_SITENAME = "statsworks"
