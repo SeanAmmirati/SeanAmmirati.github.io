@@ -1044,8 +1044,7 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1053,8 +1052,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1080,8 +1078,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1089,8 +1086,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1112,8 +1108,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1122,8 +1117,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1131,29 +1125,30 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Our model is constructed as follows: For each observation vector of $p$ variables, we have</p>
-$$
+<p>$$
 y_1 - \mu_1 = \lambda_{1 1}f_1 + \lambda_{1 2}f_2 + ... + \lambda_{1 m}f_m + \epsilon_1 \\
 y_2 - \mu_2 = \lambda_{2 1}f_1 + \lambda_{2 2}f_2 + ... + \lambda_{2 m}f_m + \epsilon_2 \\
 ... \\
 y_p - \mu_p = \lambda_{p 1}f_1 + \lambda_{p 2}f_2 + ... + \lambda_{p m}f_m + \epsilon_p
-$$<p>On the left side of the equations, $y_1, ..., y_p$ are the variables in the dataset, and $\mu_1, ..., \mu_p$ are the corresponding means of these variables. We do this in order to center the variables.</p>
+$$</p>
+<p>On the left side of the equations, $y_1, ..., y_p$ are the variables in the dataset, and $\mu_1, ..., \mu_p$ are the corresponding means of these variables. We do this in order to center the variables.</p>
 <p>On the right side of the equations,  $\lambda_{i j}$ are the <strong>loadings</strong> for the $ith$ variable and $jth$ factor, $f_1, f_2, ..., f_m$ are the $m$ factors, and $\epsilon_1, \epsilon_2, ..., \epsilon_p$ are the $p$ error terms associated with each variable.</p>
-<p>Our goal in doing factor analysis is to find some $m << p$ such that the factors specified above are appropriate for the $p$ variables of interest.</p>
+<p>Our goal in doing factor analysis is to find some $m &lt;&lt; p$ such that the factors specified above are appropriate for the $p$ variables of interest.</p>
 <p>In doing this, we are defining the original $p$ variables into a linear combination of $m$ factors. The $f$s in the above model are the $m$ factors themselves, while the lambdas are the loadings, which serve as weights for each factor for each of the $p$ variables.</p>
 <p>While this may seem similar to a more typical <strong>multiple regression model</strong>, there are key differences.</p>
 <p>Perhaps the most important thing to note here is that the $fs$ are unobserved random variables, not fixed effects like in multiple regression. Factor analysis only represents one observation vector, while multiple regression represents all of the observations simultaneously -- in this way, factor analysis is looking more to <em>individual</em> variation as opposed to <em>aggregate</em> or population level aggregation.</p>
 <p>Our model can be written more simply in matrix notation as:</p>
-$$
+<p>$$
 \begin{equation}
 \vec{y} - \vec{\mu} = \Lambda\vec{f} + \vec{\epsilon}
 \end{equation}
-$$<p>where
+$$
+where
 $$
 \vec{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_p \end{bmatrix} \\
 \vec{\mu} = \begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{bmatrix} \\
@@ -1172,7 +1167,7 @@ $$</p>
 </li>
 <li><p>$\mathbb{E}[\vec{\epsilon}] = \vec{0}$</p>
 </li>
-<li><p>$\Sigma_{\vec{\epsilon}} = \Phi_{mxm} \text{, where } \Phi{pxp} = \begin{pmatrix} \sigma^2_{\epsilon_1}  & 0 & \dots & 0 \\ 0 & \sigma^2_{\epsilon_2}  & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma^2_{\epsilon_p} \end{pmatrix}$</p>
+<li><p>$\Sigma_{\vec{\epsilon}} = \Phi_{mxm} \text{, where } \Phi{pxp} = \begin{pmatrix} \sigma^2_{\epsilon_1}  &amp; 0 &amp; \dots &amp; 0 \\ 0 &amp; \sigma^2_{\epsilon_2}  &amp; \dots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \dots &amp; \sigma^2_{\epsilon_p} \end{pmatrix}$</p>
 </li>
 <li>$\Sigma_{\vec{f}, \vec{\epsilon}} = 0_{mxm}$</li>
 </ol>
@@ -1198,8 +1193,7 @@ where $h_i^2 = \lambda_{i 1}^2 + \lambda_{i 2}^2 + ... + \lambda_{i m}^2$ and $\
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1208,8 +1202,7 @@ where $h_i^2 = \lambda_{i 1}^2 + \lambda_{i 2}^2 + ... + \lambda_{i m}^2$ and $\
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1217,8 +1210,7 @@ where $h_i^2 = \lambda_{i 1}^2 + \lambda_{i 2}^2 + ... + \lambda_{i m}^2$ and $\
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1242,8 +1234,7 @@ and</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1252,8 +1243,7 @@ and</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1301,7 +1291,9 @@ and</li>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -1322,7 +1314,9 @@ and</li>
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -1346,8 +1340,7 @@ and</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1358,8 +1351,7 @@ and</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1367,8 +1359,7 @@ and</li>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1392,8 +1383,7 @@ and</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1419,7 +1409,9 @@ and</li>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -1474,8 +1466,7 @@ and</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1502,7 +1493,9 @@ and</li>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -1515,8 +1508,7 @@ and</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1542,7 +1534,9 @@ and</li>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -1555,8 +1549,7 @@ and</li>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1583,7 +1576,9 @@ and</li>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1768,7 +1763,9 @@ EBIgQEiAACEBAoQECBASIEBIgAAhAQKEBAgQEiDw/3Sx1D9KE1dEAAAAAElFTkSuQmCC"
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="code-line">Parallel analysis suggests that the number of factors =  9  and the number of components =  7 </span>
@@ -1777,7 +1774,9 @@ EBIgQEiAACEBAoQECBASIEBIgAAhAQKEBAgQEiDw/3Sx1D9KE1dEAAAAAElFTkSuQmCC"
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -2066,8 +2065,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2079,8 +2077,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2107,7 +2104,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2164,8 +2163,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2196,7 +2194,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2248,7 +2248,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2303,8 +2305,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2315,8 +2316,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2324,8 +2324,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2352,7 +2351,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="code-line"></span>
@@ -2411,8 +2412,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2422,8 +2422,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2431,8 +2430,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -2461,7 +2459,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2573,7 +2573,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2685,7 +2687,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -2727,7 +2731,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -3080,8 +3086,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3111,7 +3116,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="code-line"></span>
@@ -3170,8 +3177,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3180,8 +3186,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3189,8 +3194,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3224,7 +3228,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -3298,7 +3304,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="code-line"> [1] 0.8289141 0.6015374 0.6382330 0.5680873 0.4298459 0.4542829 0.4993689</span>
@@ -3332,7 +3340,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre><span class="code-line"></span>
@@ -3391,8 +3401,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3403,8 +3412,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3412,8 +3420,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3423,8 +3430,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3449,7 +3455,9 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 <div class="output_html rendered_html output_subarea ">
@@ -3506,8 +3514,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -3584,6 +3591,11 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 									</header>
 									<ul class="dates">
 										<li>
+											<span class="date">Sep <strong>26</strong></span>
+											<h3><a href="https://seanammirati.github.io/category/projects/tsa_lake_erie.html">Time Series Analysis: Lake Erie</a></h3>
+											<p><p>A time series analysis of Lake Erie water levels using various techniques.s</p></p>
+										</li>
+										<li>
 											<span class="date">Sep <strong>16</strong></span>
 											<h3><a href="https://seanammirati.github.io/category/projects/Factor Analysis.html">Factor Analysis</a></h3>
 											<p><p>A project detailing the methodology and use of Factor Analysis on a psychological survey.</p></p>
@@ -3597,11 +3609,6 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 											<span class="date">Sep <strong>02</strong></span>
 											<h3><a href="https://seanammirati.github.io/category/statistics-beginner/sumstatscentraltendency.html">Summary Statistics Part 1: Central Tendency</a></h3>
 											<p><p>An overview of statistics and central tendency.</p></p>
-										</li>
-										<li>
-											<span class="date">Dec <strong>04</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/projects/nypd_stop_frisk.html">NYPD Stop and Frisk</a></h3>
-											<p><p>An analysis of NYPD Stop and Frisk policy using publically available data for 2015. Uses various statistical learning methods to predict whether someone is arrested after a stop or not.</p></p>
 										</li>
 									</ul>
 								</section>
