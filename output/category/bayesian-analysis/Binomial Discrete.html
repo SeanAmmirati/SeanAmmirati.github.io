@@ -1,0 +1,1617 @@
+
+<!DOCTYPE HTML>
+<!--
+	Dopetrope 2.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+			<title>Stats Works</title>
+			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<meta charset="utf-8" />
+			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
+				<link rel="stylesheet" href="/theme/css/pygment.css" />
+			<noscript>
+				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
+				<link rel="stylesheet" href="/theme/css/style.css" />
+				<link rel="stylesheet" href="/theme/css/style-desktop.css" />
+			</noscript>
+	</head>
+	<body class="no-sidebar">
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="12u">
+
+							<!-- Header -->
+								<section id="header">
+
+									<!-- Logo -->
+									<h1><a href="https://seanammirati.github.io/">Stats Works</a></h1>
+
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+														<li><a href="/">Home</a></li>
+														<li><a href="/pages/topics">Topics</a></li>
+														<li><a href="/pages/about">About</a></li>
+											</ul>
+										</nav>
+
+								</section>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+				<div class="container">
+<div class="row">
+	<div class="12u">
+			<section>
+				<div>
+					<div class="row">
+						<div class="12u skel-cell-mainContent">
+							<!-- Content -->
+								<article class="box is-post">
+									<div class="post-infos">
+										<ul class="tags">
+											<li><a class="button" href="https://seanammirati.github.io/category/bayesian-analysis">Bayesian analysis</a></li>
+												<li><a class="button button-alt" href="/tag/binomial/">Binomial</a></li>
+
+												<li><a class="button button-alt" href="/tag/discrete/">Discrete</a></li>
+
+												<li><a class="button button-alt" href="/tag/bayesian-methodology/">Bayesian methodology</a></li>
+
+										</ul>
+									</div>
+
+									<div class="pennant pennant-alt date">2018-10-23</div>
+									<h2>Bayesian Analysis: Binomial Discrete</h2>
+									<style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="c1">## Finds posterior distribution of observed values assuming that k follows a binomial distribution. p is discrete in this case.</span></span>
+<span class="code-line"></span>
+<span class="code-line">numerator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span> n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## finds the numerator -- ie P(k|p)P(p)</span></span>
+<span class="code-line">  <span class="c1">## k (integer) : the total number of observed successes.</span></span>
+<span class="code-line">  <span class="c1">## n (integer) : the total number of observed trials.</span></span>
+<span class="code-line">  <span class="c1">## posprobs (vector): possible p values associated with the random variable k.</span></span>
+<span class="code-line">  <span class="c1">## probsofprobs (vector): this is our prior, mapping a probability to each possible probability</span></span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="kr">function</span><span class="p">(</span>p<span class="p">){</span></span>
+<span class="code-line">    <span class="c1">## For a particular p, this will find the posterior probability of p given observed values. This is a function generator -- given</span></span>
+<span class="code-line">    <span class="c1">## values of k and n, we can then find the probability of any particular p.</span></span>
+<span class="code-line">    x <span class="o">&lt;-</span> posprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line">    px <span class="o">&lt;-</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">    res <span class="o">&lt;-</span> <span class="p">(</span>x<span class="o">^</span>k<span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> x<span class="p">)</span><span class="o">^</span><span class="p">(</span>n<span class="o">-</span>k<span class="p">))</span><span class="o">*</span>px</span>
+<span class="code-line">    <span class="kr">return</span><span class="p">(</span>res<span class="p">)</span></span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">denominator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the denominator, the multiplicative constant. Same for all values of p. P(k)</span></span>
+<span class="code-line">  <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span> numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">probabilityfinder <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the posterior probability of a particular p value.</span></span>
+<span class="code-line">  numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)(</span>p<span class="p">)</span><span class="o">/</span>denominator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">posterior <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the posterior probability mass function of the p values.</span></span>
+<span class="code-line">  <span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>p<span class="p">)</span> probabilityfinder<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">log_transf_numerator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## finds the numerator -- ie P(k|p)P(p), using log transform to avoid machine zeros</span></span>
+<span class="code-line">  <span class="c1">## k (integer) : the total number of observed successes.</span></span>
+<span class="code-line">  <span class="c1">## n (integer) : the total number of observed trials.</span></span>
+<span class="code-line">  <span class="c1">## posprobs (vector): possible p values associated with the random variable k.</span></span>
+<span class="code-line">  <span class="c1">## probsofprobs (vector): this is our prior, mapping a probability to each possible probability</span></span>
+<span class="code-line">  <span class="kr">function</span><span class="p">(</span>p<span class="p">){</span></span>
+<span class="code-line">    <span class="c1">## For a particular p, this will find the posterior probability of p given observed values. This is a function generator -- given</span></span>
+<span class="code-line">    <span class="c1">## values of k and n, we can then find the probability of any particular p.</span></span>
+<span class="code-line"></span>
+<span class="code-line">    x <span class="o">&lt;-</span> posprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line">    px <span class="o">&lt;-</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">    mx <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>posprobs<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>pr<span class="p">)</span> k<span class="o">*</span><span class="kp">log</span><span class="p">(</span>pr<span class="p">)</span> <span class="o">+</span> <span class="p">(</span>n <span class="o">-</span> k<span class="p">)</span><span class="o">*</span><span class="kp">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> pr<span class="p">)))</span></span>
+<span class="code-line"></span>
+<span class="code-line">    res <span class="o">&lt;-</span> <span class="kp">exp</span><span class="p">(</span>k<span class="o">*</span><span class="kp">log</span><span class="p">(</span>x<span class="p">)</span> <span class="o">+</span> <span class="p">(</span>n <span class="o">-</span> k<span class="p">)</span><span class="o">*</span><span class="kp">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> x<span class="p">)</span> <span class="o">-</span> mx<span class="p">)</span> <span class="o">*</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line">    <span class="kr">return</span><span class="p">(</span>res<span class="p">)</span></span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">log_transf_denominator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the denominator, the multiplicative constant, using log transform for machine zeros. Same for all values of p. P(k)</span></span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span> log_transf_numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">log_transf_probabilitydist <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the posterior probability of a particular p value using log transform.</span></span>
+<span class="code-line">  log_transf_numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)(</span>p<span class="p">)</span><span class="o">/</span>log_transf_denominator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">log_transf_posterior <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line">  <span class="c1">## Finds the posterior probability mass function of the p values using log transform</span></span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> log_transf_probabilitydist<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>x<span class="p">))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Example----Thunderstorms">Example -- Thunderstorms<a class="anchor-link" href="#Example----Thunderstorms">&#182;</a></h1><p>Example: consider if we observed 11 events -- as an example, the number of thunderstorms in a month. We want to estimate the probability of a thunderstorm
+given the new data. Assuming weather each day is independent (which is a simplifying assumption), we can assume that the number of thunderstorms in n days can be modeled by
+a binomial distribution. If we believe prior to this that the distribution looks as it does below (with the highest belief in 35 and 45%), we can now find the
+posterior of the probabilities after observing the 11 thunderstorms as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.05</span><span class="p">,</span><span class="m">.15</span><span class="p">,</span><span class="m">.25</span><span class="p">,</span><span class="m">.35</span><span class="p">,</span><span class="m">.45</span><span class="p">,</span><span class="m">.55</span><span class="p">,</span><span class="m">.65</span><span class="p">,</span><span class="m">.75</span><span class="p">,</span><span class="m">.85</span><span class="p">,</span><span class="m">.95</span><span class="p">)</span></span>
+<span class="code-line">probsofprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.07</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.07</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">)</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span>probsofprobs<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">pos <span class="o">&lt;-</span> posterior<span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="m">27</span><span class="p">,</span>posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<span class="code-line">pos</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+TRUE
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>3.09542456575459e-08</li>
+	<li>0.00171800516798861</li>
+	<li>0.127840396867586</li>
+	<li>0.524457130783577</li>
+	<li>0.287381288937406</li>
+	<li>0.0567364681485292</li>
+	<li>0.00182616527753213</li>
+	<li>4.04686283214896e-05</li>
+	<li>4.52348105717942e-08</li>
+	<li>3.57177567935303e-15</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we now believe with <code>r round(pos[which.max(pos)],2)</code>  probability that the actual p value is <code>r posprobs[which.max(pos)]</code>. This means the data supports the assumption of <code>r posprobs[which.max(pos)]</code> chance of thunderstorms a day, given our prior beliefs and the independence of events.</p>
+<h1 id="Behaviors-for-different-n-and-k.">Behaviors for different n and k.<a class="anchor-link" href="#Behaviors-for-different-n-and-k.">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>n <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">150</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">300</span><span class="p">,</span><span class="m">500</span><span class="p">)</span></span>
+<span class="code-line">k <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>n<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="kp">seq</span><span class="p">(</span>n<span class="o">/</span><span class="m">10</span><span class="p">,</span>n<span class="p">,</span>n<span class="o">/</span><span class="m">10</span><span class="p">))</span></span>
+<span class="code-line"><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> <span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>j<span class="p">)</span> posterior<span class="p">(</span>k<span class="p">[[</span>i<span class="p">]][</span>j<span class="p">],</span>n<span class="p">[</span>i<span class="p">],</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)))</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol>
+	<li><table>
+<tbody>
+	<tr><td>1.599929e-01</td><td>3.044837e-02</td><td>4.175353e-03</td><td>4.535141e-04</td><td>3.970198e-05</td><td>0.0000027423</td><td>1.387873e-07</td><td>4.323270e-09</td><td>6.308829e-11</td><td>3.898065e-13</td></tr>
+	<tr><td>3.275858e-01</td><td>2.090328e-01</td><td>9.611020e-02</td><td>3.500202e-02</td><td>1.027402e-02</td><td>0.0023794092</td><td>4.037659e-04</td><td>4.217143e-05</td><td>2.063387e-06</td><td>4.274713e-08</td></tr>
+	<tr><td>3.539850e-01</td><td>4.266587e-01</td><td>3.705460e-01</td><td>2.549013e-01</td><td>1.413272e-01</td><td>0.0618245522</td><td>1.981654e-02</td><td>3.909516e-03</td><td>3.613198e-04</td><td>1.413919e-05</td></tr>
+	<tr><td>1.367042e-01</td><td>2.661665e-01</td><td>3.734142e-01</td><td>4.149510e-01</td><td>3.716434e-01</td><td>0.2626259078</td><td>1.359817e-01</td><td>4.333627e-02</td><td>6.469879e-03</td><td>4.089826e-04</td></tr>
+	<tr><td>1.954070e-02</td><td>5.781053e-02</td><td>1.232366e-01</td><td>2.080849e-01</td><td>2.831819e-01</td><td>0.3040687011</td><td>2.392268e-01</td><td>1.158446e-01</td><td>2.627942e-02</td><td>2.524175e-03</td></tr>
+	<tr><td>2.112971e-03</td><td>9.338145e-03</td><td>2.973675e-02</td><td>7.500583e-02</td><td>1.524825e-01</td><td>0.2445832762</td><td>2.874519e-01</td><td>2.079370e-01</td><td>7.046474e-02</td><td>1.011058e-02</td></tr>
+	<tr><td>7.431490e-05</td><td>4.990432e-04</td><td>2.414717e-03</td><td>9.254710e-03</td><td>2.858795e-02</td><td>0.0696762613</td><td>1.244281e-01</td><td>1.367666e-01</td><td>7.042313e-02</td><td>1.535375e-02</td></tr>
+	<tr><td>4.150223e-06</td><td>4.502043e-05</td><td>3.518955e-04</td><td>2.178644e-03</td><td>1.087132e-02</td><td>0.0428016131</td><td>1.234723e-01</td><td>2.192337e-01</td><td>1.823553e-01</td><td>6.422345e-02</td></tr>
+	<tr><td>4.740131e-08</td><td>9.712589e-07</td><td>1.433988e-05</td><td>1.676966e-04</td><td>1.580618e-03</td><td>0.0117546882</td><td>6.405116e-02</td><td>2.148182e-01</td><td>3.375116e-01</td><td>2.245279e-01</td></tr>
+	<tr><td>2.691558e-12</td><td>1.849159e-10</td><td>9.153996e-09</td><td>3.589348e-07</td><td>1.134342e-05</td><td>0.0002828487</td><td>5.167684e-03</td><td>5.811202e-02</td><td>3.061326e-01</td><td>6.828370e-01</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td>2.322306e-01</td><td>2.277038e-04</td><td>1.627936e-08</td><td>1.818866e-13</td><td>3.574528e-19</td><td>1.133380e-25</td><td>4.692851e-33</td><td>9.915429e-42</td><td>9.158596e-52</td><td>4.024562e-64</td></tr>
+	<tr><td>7.025229e-01</td><td>2.919046e-01</td><td>8.843776e-03</td><td>4.187267e-05</td><td>3.487212e-08</td><td>4.685598e-12</td><td>8.221589e-17</td><td>7.361397e-23</td><td>2.881425e-30</td><td>5.365704e-40</td></tr>
+	<tr><td>6.469033e-02</td><td>6.463265e-01</td><td>4.708481e-01</td><td>5.360506e-02</td><td>1.073459e-03</td><td>3.468201e-06</td><td>1.463279e-09</td><td>3.150385e-14</td><td>2.965123e-20</td><td>1.327682e-28</td></tr>
+	<tr><td>5.556787e-04</td><td>6.106833e-02</td><td>4.893556e-01</td><td>6.128149e-01</td><td>1.349860e-01</td><td>4.797193e-03</td><td>2.226331e-05</td><td>5.272371e-09</td><td>5.458393e-14</td><td>2.688413e-21</td></tr>
+	<tr><td>5.305619e-07</td><td>4.722849e-04</td><td>3.065408e-02</td><td>3.109343e-01</td><td>5.547583e-01</td><td>1.596901e-01</td><td>6.002831e-03</td><td>1.151458e-05</td><td>9.655674e-10</td><td>3.852028e-16</td></tr>
+	<tr><td>9.330045e-11</td><td>6.178079e-07</td><td>2.982905e-04</td><td>2.250721e-02</td><td>2.987160e-01</td><td>6.396382e-01</td><td>1.788605e-01</td><td>2.552161e-03</td><td>1.592005e-06</td><td>4.724468e-12</td></tr>
+	<tr><td>7.534734e-16</td><td>4.041228e-11</td><td>1.580429e-07</td><td>9.659015e-05</td><td>1.038354e-02</td><td>1.800931e-01</td><td>4.078990e-01</td><td>4.714352e-02</td><td>2.381957e-04</td><td>5.725563e-09</td></tr>
+	<tr><td>4.093039e-22</td><td>2.414743e-16</td><td>1.038753e-11</td><td>6.983126e-08</td><td>8.257379e-05</td><td>1.575337e-02</td><td>3.924721e-01</td><td>4.989510e-01</td><td>2.772998e-02</td><td>7.331850e-06</td></tr>
+	<tr><td>7.955005e-32</td><td>1.128490e-24</td><td>1.167269e-18</td><td>1.886864e-13</td><td>5.364942e-09</td><td>2.461095e-05</td><td>1.474333e-02</td><td>4.506889e-01</td><td>6.022830e-01</td><td>3.829100e-03</td></tr>
+	<tr><td>4.695776e-53</td><td>2.822892e-43</td><td>1.237364e-34</td><td>8.476110e-27</td><td>1.021294e-19</td><td>1.985380e-13</td><td>5.040118e-08</td><td>6.529073e-04</td><td>3.697472e-01</td><td>9.961636e-01</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td> 1.681094e-01</td><td>3.253710e-07 </td><td>2.125097e-15 </td><td>2.142022e-25 </td><td>4.909985e-37 </td><td>2.390928e-50 </td><td>1.908017e-65 </td><td>6.183221e-83 </td><td>4.790963e-103</td><td>4.663388e-128</td></tr>
+	<tr><td> 8.283783e-01</td><td>2.879221e-01 </td><td>3.377024e-04 </td><td>6.112778e-09 </td><td>2.516253e-15 </td><td>2.200391e-23 </td><td>3.153370e-33 </td><td>1.835130e-45 </td><td> 2.553491e-60</td><td> 4.463467e-80</td></tr>
+	<tr><td> 3.512017e-03</td><td>7.057761e-01 </td><td>4.786194e-01 </td><td>5.009090e-03 </td><td>1.192171e-06 </td><td>6.027656e-12 </td><td>4.994449e-19 </td><td>1.680520e-28 </td><td> 1.351995e-40</td><td> 1.366398e-57</td></tr>
+	<tr><td> 2.591346e-07</td><td>6.300791e-03 </td><td>5.169849e-01 </td><td>6.546450e-01 </td><td>1.885146e-02 </td><td>1.153226e-05 </td><td>1.156147e-10 </td><td>4.706828e-18 </td><td> 4.581622e-28</td><td> 5.602487e-43</td></tr>
+	<tr><td> 4.724763e-13</td><td>7.537045e-07 </td><td>4.057283e-03 </td><td>3.370657e-01 </td><td>6.368031e-01 </td><td>2.555794e-02 </td><td>1.681031e-05 </td><td>4.489961e-11 </td><td> 2.867377e-19</td><td> 2.300370e-32</td></tr>
+	<tr><td> 2.713443e-20</td><td>2.395219e-12 </td><td>7.134818e-07 </td><td>3.279939e-03 </td><td>3.428940e-01 </td><td>7.615247e-01 </td><td>2.771644e-02 </td><td>4.096451e-06 </td><td> 1.447617e-12</td><td> 6.426434e-24</td></tr>
+	<tr><td> 6.193798e-30</td><td>3.587014e-20 </td><td>7.010065e-13 </td><td>2.114250e-07 </td><td>1.450113e-03 </td><td>2.112891e-01 </td><td>5.045242e-01 </td><td>4.892194e-03 </td><td> 1.134229e-07</td><td> 3.303457e-17</td></tr>
+	<tr><td> 1.827734e-42</td><td>1.280703e-30 </td><td>3.028285e-21 </td><td>1.105072e-13 </td><td>9.170548e-08 </td><td>1.616703e-03 </td><td>4.670834e-01 </td><td>5.479937e-01 </td><td> 1.537206e-03</td><td> 5.417007e-11</td></tr>
+	<tr><td> 6.904020e-62</td><td>2.797059e-47 </td><td>3.823967e-35 </td><td>8.068112e-25 </td><td>3.871158e-16 </td><td>3.945844e-09 </td><td>6.591258e-04 </td><td>4.471091e-01 </td><td> 7.251607e-01</td><td> 1.477494e-05</td></tr>
+	<tr><td>2.405669e-104</td><td>1.750229e-84 </td><td>4.297013e-67 </td><td>1.628110e-51 </td><td>1.402853e-37 </td><td>2.567855e-25 </td><td>7.702970e-15 </td><td>9.383455e-07 </td><td> 2.733020e-01</td><td> 9.999852e-01</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td> 1.107643e-01</td><td> 4.405508e-10</td><td>2.684835e-22 </td><td>2.367143e-37 </td><td>5.982118e-55 </td><td>4.352666e-75 </td><td>6.550695e-98 </td><td>3.686537e-124</td><td>2.330906e-154</td><td>5.383043e-192</td></tr>
+	<tr><td> 8.890622e-01</td><td> 2.691023e-01</td><td>1.248039e-05 </td><td>8.373825e-13 </td><td>1.610436e-22 </td><td>8.917289e-35 </td><td>1.021301e-49 </td><td> 4.373953e-68</td><td> 2.104599e-90</td><td>3.698805e-120</td></tr>
+	<tr><td> 1.735437e-04</td><td> 7.302817e-01</td><td>4.708659e-01 </td><td>4.392272e-04 </td><td>1.174370e-09 </td><td>9.040460e-18 </td><td>1.439487e-28 </td><td> 8.570856e-43</td><td> 5.733443e-61</td><td> 1.400889e-86</td></tr>
+	<tr><td> 1.099922e-10</td><td> 6.160028e-04</td><td>5.286018e-01 </td><td>6.562356e-01 </td><td>2.335149e-03 </td><td>2.392431e-08 </td><td>5.069857e-16 </td><td> 4.017457e-27</td><td> 3.576694e-42</td><td> 1.163079e-64</td></tr>
+	<tr><td> 3.829650e-19</td><td> 1.139742e-09</td><td>5.197324e-04 </td><td>3.428767e-01 </td><td>6.483654e-01 </td><td>3.529975e-03 </td><td>3.975163e-08 </td><td> 1.673931e-16</td><td> 7.919452e-29</td><td> 1.368515e-48</td></tr>
+	<tr><td> 7.182782e-30</td><td> 8.799248e-18</td><td>1.651672e-09 </td><td>4.485257e-04 </td><td>3.491198e-01 </td><td>7.824049e-01 </td><td>3.626771e-03 </td><td> 6.286488e-09</td><td> 1.224252e-18</td><td> 8.708245e-36</td></tr>
+	<tr><td> 4.634269e-44</td><td> 3.016902e-29</td><td>3.009308e-18 </td><td>4.342672e-10 </td><td>1.796269e-04 </td><td>2.139220e-01 </td><td>5.269520e-01 </td><td> 4.853847e-04</td><td> 5.023147e-11</td><td> 1.898728e-25</td></tr>
+	<tr><td> 7.428738e-63</td><td> 6.436268e-45</td><td>8.544342e-31 </td><td>1.640999e-19 </td><td>9.033616e-11 </td><td>1.431808e-04 </td><td>4.693963e-01 </td><td> 5.754317e-01</td><td> 7.925428e-05</td><td> 3.987023e-16</td></tr>
+	<tr><td> 5.453795e-92</td><td> 6.569224e-70</td><td>1.212425e-51 </td><td>3.237282e-36 </td><td>2.477594e-23 </td><td>5.459457e-13 </td><td>2.488287e-05 </td><td> 4.240829e-01</td><td> 8.120372e-01</td><td> 5.679342e-08</td></tr>
+	<tr><td>1.121759e-155</td><td>1.028262e-125</td><td>1.444221e-99 </td><td>2.934596e-76 </td><td>1.709177e-55 </td><td>2.866126e-37 </td><td>9.941121e-22 </td><td> 1.289361e-09</td><td> 1.878836e-01</td><td> 9.999999e-01</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td> 7.104943e-02</td><td> 5.922330e-13</td><td> 3.379216e-29</td><td> 2.598468e-49</td><td>7.174233e-73 </td><td>7.761429e-100</td><td>2.199369e-130</td><td>2.183705e-165</td><td>1.092007e-205</td><td>6.213665e-256</td></tr>
+	<tr><td> 9.289422e-01</td><td> 2.497120e-01</td><td> 4.594956e-07</td><td> 1.139466e-16</td><td>1.014561e-29 </td><td> 3.539674e-46</td><td> 3.234733e-66</td><td> 1.035745e-90</td><td>1.670332e-120</td><td>3.065096e-160</td></tr>
+	<tr><td> 8.348616e-06</td><td> 7.502282e-01</td><td> 4.614914e-01</td><td> 3.825709e-05</td><td>1.138720e-12 </td><td> 1.328098e-23</td><td> 4.057267e-38</td><td> 4.342864e-57</td><td> 2.341286e-81</td><td>1.436230e-115</td></tr>
+	<tr><td> 4.545189e-14</td><td> 5.979292e-05</td><td> 5.384418e-01</td><td> 6.534405e-01</td><td>2.847278e-04 </td><td> 4.861406e-11</td><td> 2.174123e-21</td><td> 3.406793e-36</td><td> 2.688703e-56</td><td> 2.414522e-86</td></tr>
+	<tr><td> 3.021978e-25</td><td> 1.711165e-12</td><td> 6.632596e-05</td><td> 3.464603e-01</td><td>6.498007e-01 </td><td> 4.775456e-04</td><td> 9.192632e-11</td><td> 6.200177e-22</td><td> 2.106221e-38</td><td> 8.141324e-65</td></tr>
+	<tr><td> 1.851049e-39</td><td> 3.209411e-23</td><td> 3.809116e-12</td><td> 6.092579e-05</td><td>3.498927e-01 </td><td> 7.873659e-01</td><td> 4.640968e-04</td><td> 9.584730e-12</td><td> 9.969808e-25</td><td> 1.180008e-47</td></tr>
+	<tr><td> 3.375660e-58</td><td> 2.519236e-38</td><td> 1.286976e-23</td><td> 8.860336e-13</td><td>2.190214e-05 </td><td> 2.121441e-01</td><td> 5.382274e-01</td><td> 4.784536e-05</td><td> 2.142148e-14</td><td> 1.091315e-33</td></tr>
+	<tr><td> 2.939479e-83</td><td> 3.211438e-59</td><td> 2.401706e-40</td><td> 2.420574e-25</td><td>8.759387e-14 </td><td> 1.242044e-05</td><td> 4.613076e-01</td><td> 6.003209e-01</td><td> 3.934703e-06</td><td> 2.934483e-21</td></tr>
+	<tr><td>4.194196e-122</td><td> 1.531814e-92</td><td> 3.829611e-68</td><td> 1.290273e-47</td><td>1.560864e-30 </td><td> 7.398719e-17</td><td> 9.186252e-07</td><td> 3.996313e-01</td><td> 8.756210e-01</td><td> 2.183052e-10</td></tr>
+	<tr><td>5.092329e-207</td><td>5.997807e-167</td><td>4.835705e-132</td><td>5.254184e-101</td><td>2.049781e-73 </td><td> 3.133413e-49</td><td> 1.254637e-28</td><td> 1.760184e-12</td><td> 1.243751e-01</td><td> 1.000000e+00</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td> 2.801810e-02</td><td> 1.063030e-18</td><td> 5.342638e-43</td><td> 3.126056e-73</td><td>1.027607e-108</td><td>2.453048e-149</td><td>2.461865e-195</td><td>7.599331e-248</td><td> 0.000000e+00</td><td> 0.000000e+00</td></tr>
+	<tr><td> 9.719819e-01</td><td> 2.135714e-01</td><td> 6.216290e-10</td><td> 2.106446e-24</td><td> 4.010131e-44</td><td> 5.543903e-69</td><td> 3.222195e-99</td><td>5.760246e-136</td><td>9.809006e-181</td><td>2.104793e-240</td></tr>
+	<tr><td> 1.851748e-08</td><td> 7.864281e-01</td><td> 4.424250e-01</td><td> 2.897684e-07</td><td> 1.066232e-18</td><td> 2.849056e-35</td><td> 3.200587e-57</td><td> 1.105888e-85</td><td>3.639884e-122</td><td>1.509609e-173</td></tr>
+	<tr><td> 7.438546e-21</td><td> 5.595560e-07</td><td> 5.575739e-01</td><td> 6.468330e-01</td><td> 4.215713e-06</td><td> 1.995256e-16</td><td> 3.970137e-32</td><td> 2.429771e-54</td><td> 1.416511e-84</td><td>1.040579e-129</td></tr>
+	<tr><td> 1.803483e-37</td><td> 3.831083e-18</td><td> 1.078039e-06</td><td> 3.531656e-01</td><td> 6.499970e-01</td><td> 8.687466e-06</td><td> 4.881509e-16</td><td> 8.436610e-33</td><td> 1.388918e-57</td><td> 2.881283e-97</td></tr>
+	<tr><td> 1.178215e-58</td><td> 4.240769e-34</td><td> 2.021940e-17</td><td> 1.122335e-06</td><td> 3.499984e-01</td><td> 7.926078e-01</td><td> 7.546226e-06</td><td> 2.209807e-17</td><td> 6.164155e-37</td><td> 2.166673e-71</td></tr>
+	<tr><td> 1.716603e-86</td><td> 1.744793e-56</td><td> 2.349209e-34</td><td> 3.682392e-18</td><td> 3.242856e-07</td><td> 2.073834e-01</td><td> 5.575703e-01</td><td> 4.610821e-07</td><td> 3.632048e-21</td><td> 3.605167e-50</td></tr>
+	<tr><td>4.411003e-124</td><td> 7.941267e-88</td><td> 1.893851e-59</td><td> 5.258144e-37</td><td> 8.201784e-20</td><td> 9.290369e-08</td><td> 4.424221e-01</td><td> 6.480279e-01</td><td> 9.041600e-09</td><td> 1.589635e-31</td></tr>
+	<tr><td>2.377414e-182</td><td>8.272745e-138</td><td>3.813273e-101</td><td> 2.046336e-70</td><td> 6.169433e-45</td><td> 1.350710e-24</td><td> 1.243250e-09</td><td> 3.519716e-01</td><td> 9.491867e-01</td><td> 3.225493e-15</td></tr>
+	<tr><td> 0.000000e+00</td><td>2.026886e-249</td><td>5.410727e-197</td><td>1.681561e-150</td><td>2.936020e-109</td><td> 3.722665e-73</td><td> 1.984396e-42</td><td> 3.253535e-18</td><td> 5.081331e-02</td><td> 1.000000e+00</td></tr>
+</tbody>
+</table>
+</li>
+	<li><table>
+<tbody>
+	<tr><td> 4.077774e-03</td><td> 3.356530e-30</td><td> 1.329459e-70</td><td>4.520793e-121</td><td>0.000000e+00 </td><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td></tr>
+	<tr><td> 9.959222e-01</td><td> 1.531050e-01</td><td> 1.132584e-15</td><td> 7.192949e-40</td><td>6.261217e-73 </td><td>1.358072e-114</td><td>3.180392e-165</td><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td></tr>
+	<tr><td> 8.525991e-14</td><td> 8.468950e-01</td><td> 4.047914e-01</td><td> 1.661071e-11</td><td>9.342445e-31 </td><td> 1.309319e-58</td><td> 1.981179e-95</td><td>6.974733e-143</td><td>7.827823e-204</td><td>1.667804e-289</td></tr>
+	<tr><td> 1.864613e-34</td><td> 4.802534e-11</td><td> 5.952086e-01</td><td> 6.333201e-01</td><td>9.236188e-10 </td><td> 3.356408e-27</td><td> 1.316892e-53</td><td> 1.202129e-90</td><td>3.498338e-141</td><td>1.932693e-216</td></tr>
+	<tr><td> 6.011486e-62</td><td> 1.882004e-29</td><td> 2.835151e-10</td><td> 3.666799e-01</td><td>6.500000e-01 </td><td> 2.871125e-09</td><td> 1.369255e-26</td><td> 1.519296e-54</td><td> 5.374148e-96</td><td>3.608840e-162</td></tr>
+	<tr><td> 4.467517e-97</td><td> 7.256421e-56</td><td> 5.671471e-28</td><td> 3.805609e-10</td><td>3.500000e-01 </td><td> 8.020923e-01</td><td> 1.984605e-09</td><td> 1.142483e-28</td><td> 2.096692e-61</td><td>7.304831e-119</td></tr>
+	<tr><td>4.154515e-143</td><td> 8.202257e-93</td><td> 7.792260e-56</td><td> 6.355485e-29</td><td>7.104760e-11 </td><td> 1.979077e-01</td><td> 5.952086e-01</td><td> 4.164871e-11</td><td> 9.290590e-35</td><td> 3.934374e-83</td></tr>
+	<tr><td>9.296075e-206</td><td>4.758935e-145</td><td> 1.172295e-97</td><td> 2.479245e-60</td><td>7.186496e-32 </td><td> 5.190718e-12</td><td> 4.047914e-01</td><td> 7.344474e-01</td><td> 4.248147e-14</td><td> 4.664757e-52</td></tr>
+	<tr><td> 0.000000e+00</td><td> 0.000000e+00</td><td>3.763777e-167</td><td>5.143123e-116</td><td>9.632641e-74 </td><td> 4.495482e-40</td><td> 2.265169e-15</td><td> 2.655526e-01</td><td> 9.924534e-01</td><td> 7.041419e-25</td></tr>
+	<tr><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td><td> 0.000000e+00</td><td>0.000000e+00 </td><td>5.247219e-121</td><td> 4.937990e-70</td><td> 1.081177e-29</td><td> 7.546632e-03</td><td> 1.000000e+00</td></tr>
+</tbody>
+</table>
+</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each list represents n = 10,50,100,150,200,300,500, and each column represents possible ks from n/10 to n.
+We see what is expected with Bayesian probabilities -- as n increases, our confidence in probabilities becomes stronger -- we get values that are nearly 1 for the observations
+which have p = k/n and 0 otherwise. This shows that the prior does not matter in these cases, as we get more observations, the data will overwhelm the prior.
+For small values of n, we see the opposite -- it is highly skewed by our prior, so that we are not so confident that p = k/n if p was not deemed probable prior.</p>
+<h1 id="Machine-Zeros-problem:">Machine Zeros problem:<a class="anchor-link" href="#Machine-Zeros-problem:">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice that we have many machine zeros for large n. This interferes with our calculations, and gives us NaNs for the calculations.
+The following uses a log transformation to avoid machine zeros:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<span class="code-line">log_transf_posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+	<li>NaN</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>0</li>
+	<li>5.59622100226468e-289</li>
+	<li>3.46746548211335e-121</li>
+	<li>3.31238703307168e-37</li>
+	<li>0.650000000000052</li>
+	<li>0.349999999999948</li>
+	<li>2.54799002543976e-38</li>
+	<li>2.66728114008719e-122</li>
+	<li>8.60957077271489e-290</li>
+	<li>0</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+								</article>
+ <div id="disqus_thread" class="box"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'statsworks';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+						</div>
+					</div>
+				</div>
+			</section>
+	</div>
+</div>
+
+				</div>
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<!-- Footer -->
+					<section id="footer" class="container">
+						<div class="row">
+							<div class="8u">
+								<section>
+									<header>
+										<h2>Latest articles</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Nov <strong>03</strong></span>
+											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/t test or not t test.html">To T-Test or Not to T-Test</a></h3>
+											<p><p>A more complex approach to the canonical t-test using bayesian methods and structure.</p></p>
+										</li>
+										<li>
+											<span class="date">Oct <strong>26</strong></span>
+											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/Poisson Discrete.html">Bayesian Analysis: Poisson Discrete</a></h3>
+											<p><p>A simple example showing how one can use bayesian statistics with a poisson discrete prior.</p></p>
+										</li>
+										<li>
+											<span class="date">Oct <strong>23</strong></span>
+											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/Binomial Discrete.html">Bayesian Analysis: Binomial Discrete</a></h3>
+											<p><p>A simple example showing how one can use bayesian statistics with a binomial discrete prior.</p></p>
+										</li>
+										<li>
+											<span class="date">Oct <strong>03</strong></span>
+											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/Approaches to Contingency Tables.html">Approaches to Contingency Tables</a></h3>
+											<p><p>A brief exercise using contingency tables to show different approaches.</p></p>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+						<div class="row">
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Blogroll</h2>
+									</header>
+									<ul class="divided">
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Categories</h2>
+									</header>
+									<ul class="divided">
+											<li><a href="https://seanammirati.github.io/category/bayesian-analysis">Bayesian Analysis</a></li>
+											<li><a href="https://seanammirati.github.io/category/projects">Projects</a></li>
+											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+
+								<section>
+									<header>
+										<h2>Contact</h2>
+									</header>
+									<ul class="social">
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+			</div>
+		<script src="/theme/js/jquery.min.js"></script>
+		<script src="/theme/js/jquery.dropotron.js"></script>
+		<script src="/theme/js/config.js"></script>
+		<script src="/theme/js/skel.min.js"></script>
+		<script src="/theme/js/skel-panels.min.js"></script>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
+	</body>
+</html>
