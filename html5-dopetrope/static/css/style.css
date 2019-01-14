@@ -777,6 +777,7 @@ article .date {
 
 article .post-infos {
   float: right;
+  padding: 3em;
 	overflow: hidden;
 }
 
