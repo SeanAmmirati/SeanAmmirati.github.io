@@ -49,7 +49,7 @@ DISPLAY_CATEGORIES_ON_MENU = True
 
 MARKUP = ('md', 'rmd', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', #'render_math',
+PLUGINS = ['ipynb.markup', 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.include_code', 'liquid_tags.notebook',
            'rmd_reader']
