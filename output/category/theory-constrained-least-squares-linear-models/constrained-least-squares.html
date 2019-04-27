@@ -1,85 +1,201 @@
+<!DOCTYPE html>
+<html lang="english">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Sean Ammirati" />
 
-<!DOCTYPE HTML>
-<!--
-	Dopetrope 2.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-			<title>Stats Works</title>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<meta charset="utf-8" />
-			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
-				<link rel="stylesheet" href="/theme/css/pygment.css" />
-			<noscript>
-				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
-				<link rel="stylesheet" href="/theme/css/style.css" />
-				<link rel="stylesheet" href="/theme/css/style-desktop.css" />
-			</noscript>
-	</head>
-	<body class="no-sidebar">
-		<!-- Header Wrapper -->
-			<div id="header-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="12u">
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
 
-							<!-- Header -->
-								<section id="header">
+<meta name="keywords" content="theory, constrained least squares, linear regression, theory, constrained least squares, linear models, " />
 
-									<!-- Logo -->
-									<h1><a href="https://seanammirati.github.io/">Stats Works</a></h1>
+<meta property="og:title" content="Constrained Least Squares "/>
+<meta property="og:url" content="../../category/theory-constrained-least-squares-linear-models/constrained-least-squares.html" />
+<meta property="og:description" content="A theoretical approach to a constrained least squares problem." />
+<meta property="og:site_name" content="Stats Works" />
+<meta property="og:article:author" content="Sean Ammirati" />
+<meta property="og:article:published_time" content="2018-12-29T00:00:00-05:00" />
+<meta name="twitter:title" content="Constrained Least Squares ">
+<meta name="twitter:description" content="A theoretical approach to a constrained least squares problem.">
 
-									<!-- Nav -->
-										<nav id="nav">
-											<ul>
-														<li><a href="/">Home</a></li>
-														<li><a href="/pages/topics">Topics</a></li>
-														<li><a href="/pages/about">About</a></li>
-											</ul>
-										</nav>
+        <title>Constrained Least Squares  · Stats Works
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
 
-								</section>
 
-						</div>
-					</div>
-				</div>
-			</div>
 
-		<!-- Main Wrapper -->
-			<div id="main-wrapper">
-				<div class="container">
-<div class="row">
-	<div class="12u">
-			<section>
-				<div>
-					<div class="row">
-						<div class="12u skel-cell-mainContent">
-							<!-- Content -->
-								<article class="box is-post">
-									<div class="post-infos">
-										<ul class="tags">
-											<li><a class="button" href="https://seanammirati.github.io/category/theory-constrained-least-squares-linear-models">Theory, constrained least squares, linear models</a></li>
-												<li><a class="button button-alt" href="/tag/theory/">Theory</a></li>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="../..">Home</a></li>
+                            <li ><a href="../../pages/about/">About This Website</a></li>
+                            <li ><a href="../../pages/topics/">Topics</a></li>
+                            <li ><a href="../../categories">Categories</a></li>
+                            <li ><a href="../../tags/">Tags</a></li>
+                            <li ><a href="../../archives">Archives</a></li>
+                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="../../category/theory-constrained-least-squares-linear-models/constrained-least-squares.html"> Constrained Least Squares  </a></h1>
+    </header>
+</div>
 
-												<li><a class="button button-alt" href="/tag/constrained-least-squares/">Constrained least squares</a></li>
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
 
-												<li><a class="button button-alt" href="/tag/linear-regression/">Linear regression</a></li>
-
-										</ul>
-									</div>
-
-									<div class="pennant pennant-alt date">2018-12-29</div>
-									<h2>Constrained Least Squares</h2>
-									<style type="text/css">/*!
+            
+            <style type="text/css">/*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -158,12 +274,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -176,27 +300,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -392,7 +528,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -402,11 +540,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -654,6 +805,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -692,7 +846,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -814,6 +968,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -830,16 +988,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -855,6 +1021,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -905,8 +1076,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1045,146 +1223,114 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p><strong>Constrained Least Squares -- Coefficient Calculation and
-Simulation</strong></p>
+<p>Consider the following: We wish to constrain the parameters of a linear model to have certain properties, for example, that the last coefficient is equal to 1, or that the sum of the coefficients are equal to one. How can we estimate the Least Squares Estimates using these constraints?</p>
+<p>Thus is constrained least squares, and this article will explore the theoretical basis for choosing a selection of coefficients that will minimize the least squares given some linear constraints on the coefficients.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Constrained Least Squares -- Coefficient Calculation and
+ Simulation</strong></p>
 <p>We want to maximize the likelihood equation of β. We know that Y in
-this context is normally distributed with mean Xβ and variance σ^2^.
-This means that the distribution of yi given X is as follows:</p>
-</blockquote>
-<p>$$f_{Y}\left( \mathbf{y}_{i} \middle| X \right) = {(2\pi\sigma^{2})}^{- 1/2}e^{\frac{\mathbf{- (y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$</p>
-<blockquote><p>So the likelihood of β is therefore:</p>
-</blockquote>
-<p>$$L\left( \beta,\sigma^{2} \middle| y,X \right) = \left( 2\pi\sigma^{2} \right)^{- \frac{N}{2}}e^{- \frac{\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$</p>
-<blockquote><p>Taking the natural logarithm gives us the log likelihood:</p>
-</blockquote>
-<p>$$l\left( \beta,\sigma^{2} \middle| y,X \right) = - \frac{1}{2\sigma^{2}}\sum_{\mathbf{i}}^{\mathbf{N}}{{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}^{\mathbf{2}}\mathbf{-}\frac{N}{2}\text{\ ln}\left( \sigma^{2} \right)\mathbf{+ C}}\mathbf{=} - \frac{1}{2\sigma^{2}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{\ ln}\left( \sigma^{2} \right)\mathbf{+ C}$$</p>
-<blockquote><p>Here, I have truncated the result to only those involving <strong>β</strong> and
-$\sigma^{2}$, as we are only interested in maximizing with respect to
-<strong>β</strong>. Note that I have transitioned $\sigma^{2}$ to a constant, as we
-are assuming the errors are iid with constant variance $\sigma^{2}$.
-Here, we obtain the same result as minimizing the least squares
-estimator, so the MLE and the least squares estimators are the same.
-If we were unconstrained, we would simply take the partial derivative
-here with respect to <strong>β</strong> to estimate <strong>β</strong> using maximum likelihood.</p>
+ this context is normally distributed with mean Xβ and variance σ^2^.
+ This means that the distribution of yi given X is as follows:</p>
+$$f_{Y}\left( \mathbf{y}_{i} \middle| X \right) = {(2\pi\sigma^{2})}^{- 1/2}e^{\frac{\mathbf{- (y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$<p>So the likelihood of β is therefore:</p>
+$$L\left( \beta,\sigma^{2} \middle| y,X \right) = \left( 2\pi\sigma^{2} \right)^{- \frac{N}{2}}e^{- \frac{\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$<p>Taking the natural logarithm gives us the log likelihood:</p>
+$$l\left( \beta,\sigma^{2} \middle| y,X \right) = - \frac{1}{2\sigma^{2}}\sum_{\mathbf{i}}^{\mathbf{N}}{{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}^{\mathbf{2}}\mathbf{-}\frac{N}{2}\text{ln}\left( \sigma^{2} \right)\mathbf{+ C}}\mathbf{=} - \frac{1}{2\sigma^{2}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{ln}\left( \sigma^{2} \right)\mathbf{+ C}$$<p>Here, I have truncated the result to only those involving <strong>β</strong> and
+ $\sigma^{2}$, as we are only interested in maximizing with respect to
+ <strong>β</strong>. Note that I have transitioned $\sigma^{2}$ to a constant, as we
+ are assuming the errors are iid with constant variance $\sigma^{2}$.
+ Here, we obtain the same result as minimizing the least squares
+ estimator, so the MLE and the least squares estimators are the same.
+ If we were unconstrained, we would simply take the partial derivative
+ here with respect to <strong>β</strong> to estimate <strong>β</strong> using maximum likelihood.</p>
 <p>Since $\sigma^{2}$ is unconstrained, we can find the maximum
-likelihood estimator directly and use this to maximize with respect to
-<strong>β.</strong> To do this, we differentiate the above equation with respect to
-σ. Doing so yields the normal estimate for $\sigma^{2}$:</p>
-</blockquote>
-<p>$${\widehat{\sigma}}^{2} = - \frac{1}{N}\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta}^{\mathbf{c}}\mathbf{)}}^{\mathbf{2}}\mathbf{=}\frac{\mathbf{1}}{\mathbf{N}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)$$</p>
-<p>Where $\mathbf{\beta}^{\mathbf{c}}$ is our new constrained estimates.
+ likelihood estimator directly and use this to maximize with respect to
+ <strong>β.</strong> To do this, we differentiate the above equation with respect to
+ σ. Doing so yields the normal estimate for $\sigma^{2}$:</p>
+$${\widehat{\sigma}}^{2} = - \frac{1}{N}\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta}^{\mathbf{c}}\mathbf{)}}^{\mathbf{2}}\mathbf{=}\frac{\mathbf{1}}{\mathbf{N}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)$$<p>Where $\mathbf{\beta}^{\mathbf{c}}$ is our new constrained estimates.
 Plugging this back into the log likelihood equation yields:</p>
-<p>$$l\left( \mathbf{\beta}^{\mathbf{c}} \middle| \mathbf{y},X \right) = - \frac{1}{- \frac{2}{N}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{\ ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$</p>
-<p>$$l\left( \beta \middle| y,X \right) = - \frac{N}{2} - \frac{N}{2}\text{\ ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$</p>
-<blockquote><p>However, we want to maximize the above equation with the constraint
-that: M<strong>β</strong> = d, where d is a known vector and M is an <em>r x p</em> matrix
-of rank <em>r \&lt; p.</em> This is an equality constraint. We can use the
-Lagrange multipliers to solve this maximization problem with such a
-constraint.</p>
+$$l\left( \mathbf{\beta}^{\mathbf{c}} \middle| \mathbf{y},X \right) = - \frac{1}{- \frac{2}{N}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$$$l\left( \beta \middle| y,X \right) = - \frac{N}{2} - \frac{N}{2}\text{ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$<p>However, we want to maximize the above equation with the constraint
+ that: M<strong>β</strong> = d, where d is a known vector and M is an <em>r x p</em> matrix
+ of rank <em>r \&lt; p.</em> This is an equality constraint. We can use the
+ Lagrange multipliers to solve this maximization problem with such a
+ constraint.</p>
 <p>We can see that, since the natural logarithm is a monotonically
-increasing function, and the division within the above logarithm is a
-constant, and that all other terms do not involve B, maximizing the
-above equation with respect to$\ \mathbf{\beta}^{\mathbf{c}}$ is
-equivalent to minimizing:</p>
-</blockquote>
-<p>$$f = \left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$</p>
-<blockquote><p>Where $\mathbf{\lambda}$ is the Lagrange multiplier (and so f is the
-Lagrange function). The Lagrange multiplier is especially useful in
-this case, as we are trying to minimize the least square error with
-some constraint on the parameters.</p>
+ increasing function, and the division within the above logarithm is a
+ constant, and that all other terms do not involve B, maximizing the
+ above equation with respect to$\ \mathbf{\beta}^{\mathbf{c}}$ is
+ equivalent to minimizing:</p>
+$$f = \left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$<p>Where $\mathbf{\lambda}$ is the Lagrange multiplier (and so f is the
+ Lagrange function). The Lagrange multiplier is especially useful in
+ this case, as we are trying to minimize the least square error with
+ some constraint on the parameters.</p>
 <p>Multiplying the error by the transpose gives:</p>
-</blockquote>
-<p>$$\mathbf{f =}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{y}^{\mathbf{'}}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right) = \mathbf{=}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{2}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$</p>
-<blockquote><p>Now we take derivatives with respect to $\mathbf{\beta}^{\mathbf{c}}$
-<strong>and</strong> $\mathbf{\lambda}$ <strong>to obtain </strong></p>
-</blockquote>
-<p>$$\frac{\text{δf}}{\text{δB}}\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$</p>
-<p>$$\frac{\text{δf}}{\text{δλ}}\mathbf{=}M\mathbf{\beta}^{\mathbf{c}}\ –\ d$$</p>
-<p>We can now set both of these equal to zero and solve this system of
+$$\mathbf{f =}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{y}^{\mathbf{'}}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right) = \mathbf{=}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{2}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$<p>Now we take derivatives with respect to $\mathbf{\beta}^{\mathbf{c}}$
+ <strong>and</strong> $\mathbf{\lambda}$ <strong>to obtain </strong></p>
+$$\frac{\text{δf}}{\text{δB}}\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$$$\frac{\text{δf}}{\text{δλ}}\mathbf{=}M\mathbf{\beta}^{\mathbf{c}}\ –\ d$$<p>We can now set both of these equal to zero and solve this system of
 equations to find the appropriate MLE estimate of
 $\mathbf{\beta}^{\mathbf{c}}$<strong>.</strong> However, there is a few simplifying
 steps which can make the result more useable. The first is to get the
 expression in terms of the original least squares estimator. If we
 multiply the first equation above by M(${X^{'}X)}^{- 1}$, we obtain:</p>
-<p>$$- \ 2M({X^{'}X)}^{- 1}X^{'}\mathbf{y}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$</p>
-<p>The first term on the right is the familiar $\mathbf{\beta}$ from
+$$- \ 2M({X^{'}X)}^{- 1}X^{'}\mathbf{y}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$<p>The first term on the right is the familiar $\mathbf{\beta}$ from
 unconstrained OLS (I will denote this $\mathbf{\beta}^{\mathbf{u}}$).
 Substituting, we get</p>
-<p>$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$</p>
-<p>$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$</p>
-<p>$$M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$$</p>
-<p>Solving for lambda:</p>
-<p>$$\mathbf{\lambda} = {(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack\mathbf{= 2}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>Plugging this back into the original equation and solving for
+$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$$$M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$$<p>Solving for lambda:</p>
+$$\mathbf{\lambda} = {(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack\mathbf{= 2}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>Plugging this back into the original equation and solving for
 ${\widehat{\mathbf{\beta}}}^{\mathbf{c}}$<strong>,</strong></p>
-<p>$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$</p>
-<p>$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}{2(M}^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack)}$$</p>
-<p>$$X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}X^{'}\mathbf{y}\mathbf{+}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{= (}{{X^{'}X)}^{- 1}X}^{'}\mathbf{y}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>This is the desired result, the maximum likelihood estimator given the
+$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}{2(M}^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack)}$$$$X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}X^{'}\mathbf{y}\mathbf{+}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{= (}{{X^{'}X)}^{- 1}X}^{'}\mathbf{y}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>This is the desired result, the maximum likelihood estimator given the
 constraint M$\mathbf{\beta =}d$.</p>
 <p>Now, we return to the first part of the problem.</p>
-<p>$$\beta_{p} = 0$$</p>
-<p>Is equivalent to the following constraint. <strong>α</strong>$\mathbf{'\beta = 0}$
+$$\beta_{p} = 0$$<p>Is equivalent to the following constraint. <strong>α</strong>$\mathbf{'\beta = 0}$
 where <strong>α</strong> is a vector of zeros in all but the last row, which is a 1.
 So,</p>
 <p>$\mathbf{\alpha} = \left( 0,\ 0,\ 0,\ 0,\ldots\ 1 \right)^{'}$</p>
 <p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ \mathbf{\alpha}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$</p>
-<p>Since $\mathbf{\alpha}^{\mathbf{- 1}}\mathbf{= \alpha}$ in this case, we
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ \mathbf{\alpha}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$<p>Since $\mathbf{\alpha}^{\mathbf{- 1}}\mathbf{= \alpha}$ in this case, we
 know that
 $\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1} = \mathbf{\alpha}^{'}\left( \mathbf{\alpha}^{'}\left( X^{'}X \right)\mathbf{\alpha} \right) = {X^{'}X}_{p,p}$
 which is a scalar that is the bottom right element of the X'X matrix. So
 we can simplify this to:</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}{X^{'}X}_{p,p}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$</p>
-<p>Since ${X^{'}X}_{p,p}\lbrack 1 - \ {\beta^{u}}_{p}\mathbf{\rbrack}$ is a
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}{X^{'}X}_{p,p}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$<p>Since ${X^{'}X}_{p,p}\lbrack 1 - \ {\beta^{u}}_{p}\mathbf{\rbrack}$ is a
 constant:</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{-}{X^{'}X}_{p,p}(\left\lbrack \ {\beta^{u}}_{p} \right\rbrack\mathbf{)}{{(X}^{'}X)}^{- 1}$$</p>
-<p>So, if we compute the unconstrained
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{-}{X^{'}X}_{p,p}(\left\lbrack \ {\beta^{u}}_{p} \right\rbrack\mathbf{)}{{(X}^{'}X)}^{- 1}$$<p>So, if we compute the unconstrained
 ${\widehat{\mathbf{\beta}}}^{\mathbf{u}}$ and ${{(X}^{'}X)}^{- 1}$, we
 can solve directly for the constrained $\mathbf{\text{β.}}$</p>
 <p>Now, for the second part of part a), this is equivalent to M being a
 vector of 1s, lets call it ϕ. Then</p>
 <p>ϕ = (1,1,1,1,...,1)' and d = 1.</p>
 <p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\phi^{'}{(\phi^{'}({X^{'}X)}^{- 1}\phi)}^{- 1}\lbrack 1 - \text{\ ϕ}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$</p>
-<p>The residual sum of squares is defined as:</p>
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\phi^{'}{(\phi^{'}({X^{'}X)}^{- 1}\phi)}^{- 1}\lbrack 1 - \text{ϕ}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>The residual sum of squares is defined as:</p>
 <p>$RSS = \ {(\mathbf{y -}\widehat{\mathbf{y}})}^{'}(\mathbf{y -}\widehat{\mathbf{y}})$</p>
 <p>In this case,
 $\widehat{\mathbf{y}} = X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}$<strong>=</strong>
-X<strong>(</strong>$\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$])$\mathbf{=}\mathbf{\ }X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{\ X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$</p>
+X<strong>(</strong>$\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$])$\mathbf{=}\mathbf{\ }X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$</p>
 <p>So it follows that
-$\left( \mathbf{y -}\widehat{\mathbf{y}_{\mathbf{c}}} \right) = \mathbf{y} - \ X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{\ X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$=</p>
-<p>$$\ \mathbf{\varepsilon +}\text{\ X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$$</p>
-<p>where $\mathbf{\varepsilon}$ is the error in the unconstrained case. So</p>
+$\left( \mathbf{y -}\widehat{\mathbf{y}_{\mathbf{c}}} \right) = \mathbf{y} - \ X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$=</p>
+$$\ \mathbf{\varepsilon +}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$$<p>where $\mathbf{\varepsilon}$ is the error in the unconstrained case. So</p>
 <p>RSSc -- RSS
-=$\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack'{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack)$</p>
+=$\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack'{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack)$</p>
 <p>Each of the errors are normally distributed with mean 0 and variance
 sigma squared. This implies that:</p>
 <p>$(\mathbf{y} - \check{\mathbf{y}})\ \mathbf{I}\frac{1}{\sigma}\sim\text{MVN}(0,I)$,
 iid. $\ $</p>
 <p>Where the estimator is the estimator from the restrained equation. We
 can write the sum of squares of the above as:</p>
-<p>$$\text{\ \ \ \ \ \ \ \ \ \ \ }\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)^{\mathbf{'}}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)\mathbf{+ 2(}\check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}}\mathbf{)'}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\mathbf{(y -}\check{\mathbf{y}}\mathbf{)}$$</p>
-<p>Where$\ {\check{y}}_{i}\ $is the estimator of the unconstrained model.
+$$\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)^{\mathbf{'}}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)\mathbf{+ 2(}\check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}}\mathbf{)'}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\mathbf{(y -}\check{\mathbf{y}}\mathbf{)}$$<p>Where$\ {\check{y}}_{i}\ $is the estimator of the unconstrained model.
 To show this, we remove the identical identity matrices and see that:</p>
-<p>$$\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) =$$</p>
-<p>$$\left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) + 2(\mathbf{y} - \check{\mathbf{y}})'\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$</p>
-<p>Now,</p>
-<p>$$\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \widehat{\mathbf{y}} - \left( \mathbf{y} - \check{\mathbf{y}} \right) \right) = \left( \ \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right)$$</p>
-<p>which we know from the above is
-$(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{\ M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$)'</p>
+$$\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) =$$$$\left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) + 2(\mathbf{y} - \check{\mathbf{y}})'\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$<p>Now,</p>
+$$\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \widehat{\mathbf{y}} - \left( \mathbf{y} - \check{\mathbf{y}} \right) \right) = \left( \ \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right)$$<p>which we know from the above is
+$(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$)'</p>
 <p>Rewriting, we have:</p>
-<p>$$\left( \mathbf{y} - \check{\mathbf{y}} \right)'\left( \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right) = \mathbf{\varepsilon}'(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack d - \ M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack)$$</p>
-<p>Using the fact that $\mathbf{\varepsilon'X = 0}$<strong>,</strong> we can remove this
+$$\left( \mathbf{y} - \check{\mathbf{y}} \right)'\left( \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right) = \mathbf{\varepsilon}'(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack d - \ M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack)$$<p>Using the fact that $\mathbf{\varepsilon'X = 0}$<strong>,</strong> we can remove this
 to obtain.</p>
-<p>$${\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)}^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$</p>
-<p>Thus the original standardized normal variable can be represented as a
+$${\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)}^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$<p>Thus the original standardized normal variable can be represented as a
 sum of Q1, and Q2 where:</p>
 <p>Q1 =
 $\left( \mathbf{y -}\check{\mathbf{y}} \right)^{\mathbf{'}}\left( \mathbf{y -}\check{\mathbf{y}} \right)$</p>
@@ -1200,12 +1346,187 @@ r\&lt;p. Thus by Cochran's Theorum, the two are independently distributed.</p>
 create three normal random variables, two of which are related to the
 others linearly and randomly. I compute the beta unconstrained, and then
 use this to compute the beta constrained. I then produce the errors for
-the constrained beta, and check the correlations in 100 samples of 1000
+the constrained beta, and check the correlations in 100 samples of 100
 each. The mean correlation is very close to zero, which is the expected
-result. This is included in the R file.</p>
+result. This is included below.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">const</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">unconst</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">correl</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nf">for </span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">x1</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">x2</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.01</span><span class="p">)</span> <span class="o">-</span> <span class="m">.3</span><span class="o">*</span><span class="n">y</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">Xmat</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">data2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">mod.sim.1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">y</span><span class="o">~</span><span class="n">x1</span><span class="o">+</span><span class="n">x2</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">data2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">constraint</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">data2</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">d</span> <span class="o">=</span> <span class="m">1</span></span>
+<span class="code-line">    <span class="n">M</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">mod.sim.1</span></span>
+<span class="code-line">    <span class="n">BetaUnconstr</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">mod.sim.1</span><span class="p">)</span><span class="o">$</span><span class="n">coef[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span></span>
+<span class="code-line">    <span class="n">b</span> <span class="o">&lt;-</span> <span class="n">d</span> <span class="o">-</span> <span class="nf">t</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">BetaUnconstr</span></span>
+<span class="code-line">    <span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">Xmat</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">Xmat</span></span>
+<span class="code-line">    <span class="n">c</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">%*%</span> <span class="nf">solve</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">M</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">const[i]</span>  <span class="o">&lt;-</span>  <span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">b</span></span>
+<span class="code-line">    <span class="n">unconst[i]</span>  <span class="o">&lt;-</span>  <span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">mod.sim.1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">  <span class="n">correl[j]</span>  <span class="o">&lt;-</span>  <span class="nf">cor</span><span class="p">(</span><span class="n">const</span><span class="p">,</span><span class="n">unconst</span><span class="p">)</span></span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line"><span class="n">correl</span></span>
+<span class="code-line"><span class="nf">mean</span><span class="p">(</span><span class="n">correl</span><span class="p">)</span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>-0.0531688267764585</li>
+	<li>-0.114464495425658</li>
+	<li>0.030905848126332</li>
+	<li>-0.0804090923830123</li>
+	<li>-0.0282214216966975</li>
+	<li>0.194785864859665</li>
+	<li>0.0830930039710045</li>
+	<li>0.0724914248601695</li>
+	<li>0.0829089181916613</li>
+	<li>0.0288906516772889</li>
+	<li>0.0279474715925631</li>
+	<li>-0.0533135707611509</li>
+	<li>0.0658332419742044</li>
+	<li>-0.0799946756911054</li>
+	<li>-0.0941441499229167</li>
+	<li>-0.024909668515204</li>
+	<li>0.0714084573952652</li>
+	<li>-0.0455394491591305</li>
+	<li>0.166193108785476</li>
+	<li>-0.077429232110221</li>
+	<li>-0.128495293842719</li>
+	<li>-0.0786313087721033</li>
+	<li>-0.135204615732129</li>
+	<li>0.00402444738581924</li>
+	<li>-0.210414921426846</li>
+	<li>-0.0466002337555276</li>
+	<li>-0.0744914482523485</li>
+	<li>0.0253724403628865</li>
+	<li>-0.144593000144071</li>
+	<li>-0.0558067022331745</li>
+	<li>0.0941802108323231</li>
+	<li>-0.0326002696533416</li>
+	<li>0.1191407256456</li>
+	<li>0.0742989188901125</li>
+	<li>0.0498008210293263</li>
+	<li>0.02980912239177</li>
+	<li>-0.132207185159464</li>
+	<li>-0.154762140608869</li>
+	<li>-0.0311445812733598</li>
+	<li>0.0213674326991292</li>
+	<li>-0.0563900846752629</li>
+	<li>0.113499475702925</li>
+	<li>-0.125719333220632</li>
+	<li>0.0434611514397736</li>
+	<li>0.202868180728299</li>
+	<li>-0.113919008868015</li>
+	<li>-0.0382369212754716</li>
+	<li>0.0491389841646633</li>
+	<li>-0.0198221517858243</li>
+	<li>0.0175352131496739</li>
+	<li>0.0264657952051942</li>
+	<li>0.119278436715872</li>
+	<li>-0.218521793800235</li>
+	<li>0.0159366944834975</li>
+	<li>0.194276086012615</li>
+	<li>-0.121180977909389</li>
+	<li>-0.165054100432551</li>
+	<li>-0.0651733446635078</li>
+	<li>-0.07680468077657</li>
+	<li>-0.0503302517530004</li>
+	<li>0.00823376132659068</li>
+	<li>0.00388666785680694</li>
+	<li>-0.00915532185917745</li>
+	<li>-0.0930607404292774</li>
+	<li>-0.171362738860478</li>
+	<li>-0.0310668331585724</li>
+	<li>-0.0210004347148357</li>
+	<li>0.0549900820264029</li>
+	<li>-0.0468877624516252</li>
+	<li>0.0868626310356565</li>
+	<li>0.0532565684252016</li>
+	<li>-0.168838788927617</li>
+	<li>0.0339257077316963</li>
+	<li>0.0762184886512164</li>
+	<li>-0.0890754231460831</li>
+	<li>-0.0647727147695691</li>
+	<li>-0.0889513202649563</li>
+	<li>0.000667073625725037</li>
+	<li>0.0509714346818621</li>
+	<li>-0.0940193584932185</li>
+	<li>-0.0839669876254321</li>
+	<li>0.106982624440368</li>
+	<li>0.145030507757848</li>
+	<li>-0.0757386310783636</li>
+	<li>0.161739345883223</li>
+	<li>0.214585243128979</li>
+	<li>-0.0764856927072532</li>
+	<li>0.0477290142665558</li>
+	<li>0.0126102486334496</li>
+	<li>-0.0741476392314046</li>
+	<li>-0.0725679361079652</li>
+	<li>-0.0807334358109478</li>
+	<li>0.0186774645788979</li>
+	<li>0.0234449247050084</li>
+	<li>0.0176989561150896</li>
+	<li>0.0516204767156866</li>
+	<li>0.120367846574953</li>
+	<li>0.0233333600272549</li>
+	<li>-0.00113490805336294</li>
+	<li>0.118557812809982</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+-0.00814363230874542
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
  
 
@@ -1239,102 +1560,140 @@ result. This is included in the R file.</p>
 }
 </script>
 
-								</article>
- <div id="disqus_thread" class="box"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'statsworks';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-						</div>
-					</div>
-				</div>
-			</section>
-	</div>
+            <div>
 </div>
 
-				</div>
-			</div>
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="../../category/theory-constrained-least-squares-linear-models/constrained-least-squares.html#disqus_thread",
+                id="disqus-accordion-toggle">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'statsworks';
+        var disqus_identifier = '../../category/theory-constrained-least-squares-linear-models/constrained-least-squares.html';
+    var disqus_url = '../../category/theory-constrained-least-squares-linear-models/constrained-least-squares.html';
 
-		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
-				<!-- Footer -->
-					<section id="footer" class="container">
-						<div class="row">
-							<div class="8u">
-								<section>
-									<header>
-										<h2>Latest articles</h2>
-									</header>
-									<ul class="dates">
-										<li>
-											<span class="date">Dec <strong>29</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/theory-constrained-least-squares-linear-models/constrained-least-squares.html">Constrained Least Squares</a></h3>
-											<p><p>A theoretical approach to a constrained least squares problem.</p></p>
-										</li>
-										<li>
-											<span class="date">Dec <strong>14</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html">Hidden Markov Models</a></h3>
-											<p><p>A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm.</p></p>
-										</li>
-										<li>
-											<span class="date">Dec <strong>09</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hmms-viterbi-algorithm.html">HMMs: Viterbi Algorithm</a></h3>
-											<p><p>A overview of the viterbi algorithm for HMMs.</p></p>
-										</li>
-										<li>
-											<span class="date">Nov <strong>03</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/t test or not t test.html">To T-Test or Not to T-Test</a></h3>
-											<p><p>A more complex approach to the canonical t-test using bayesian methods and structure.</p></p>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-						<div class="row">
-							<div class="4u">
-								<section>
-									<header>
-										<h2>Blogroll</h2>
-									</header>
-									<ul class="divided">
-									</ul>
-								</section>
-							</div>
-							<div class="4u">
-								<section>
-									<header>
-										<h2>Categories</h2>
-									</header>
-									<ul class="divided">
-											<li><a href="https://seanammirati.github.io/category/bayesian-analysis">Bayesian Analysis</a></li>
-											<li><a href="https://seanammirati.github.io/category/projects">Projects</a></li>
-											<li><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain">R, hidden markov, markov models, markov chain</a></li>
-											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
-									</ul>
-								</section>
-							</div>
-							<div class="4u">
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-								<section>
-									<header>
-										<h2>Contact</h2>
-									</header>
-									<ul class="social">
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
-			</div>
-		<script src="/theme/js/jquery.min.js"></script>
-		<script src="/theme/js/jquery.dropotron.js"></script>
-		<script src="/theme/js/config.js"></script>
-		<script src="/theme/js/skel.min.js"></script>
-		<script src="/theme/js/skel-panels.min.js"></script>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
-	</body>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-12-29T00:00:00-05:00">Dec 29, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="../../categories.html#theory-constrained-least-squares-linear-models-ref">theory, constrained least squares, linear models</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="../../tags/#constrained-least-squares-ref">constrained least squares
+                    <span>1</span>
+</a></li>
+                <li><a href="../../tags/#linear-regression-ref">linear regression
+                    <span>1</span>
+</a></li>
+                <li><a href="../../tags/#theory-ref">theory
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="https://github.com/SeanAmmirati" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="https://www.linkedin.com/in/sean-ammirati-4795a4ba/" title="My LinkedIn Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-linkedin sidebar-social-links"></i></a>
+    <a href="https://www.kaggle.com/seanammirati" title="My Kaggle Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-kaggle sidebar-social-links"></i></a>
+    <a href="ammirati.sean@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Stats Works</span> - Making Statistics Work for You</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'statsworks';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementById('disqus-accordion-toggle');
+    var old_innerHTML = link.innerHTML;
+    $(link).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
 </html>

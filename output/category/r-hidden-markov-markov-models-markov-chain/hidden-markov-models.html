@@ -1,85 +1,201 @@
+<!DOCTYPE html>
+<html lang="english">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Sean Ammirati" />
 
-<!DOCTYPE HTML>
-<!--
-	Dopetrope 2.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-			<title>Stats Works</title>
-			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<meta charset="utf-8" />
-			<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
-				<link rel="stylesheet" href="/theme/css/pygment.css" />
-			<noscript>
-				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
-				<link rel="stylesheet" href="/theme/css/style.css" />
-				<link rel="stylesheet" href="/theme/css/style-desktop.css" />
-			</noscript>
-	</head>
-	<body class="no-sidebar">
-		<!-- Header Wrapper -->
-			<div id="header-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="12u">
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
 
-							<!-- Header -->
-								<section id="header">
+<meta name="keywords" content="HMMS, markov chains, forwards-backwards, R, hidden markov, markov models, markov chain, " />
 
-									<!-- Logo -->
-									<h1><a href="https://seanammirati.github.io/">Stats Works</a></h1>
+<meta property="og:title" content="Hidden Markov Models  - Extensions "/>
+<meta property="og:url" content="../../category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html" />
+<meta property="og:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm." />
+<meta property="og:site_name" content="Stats Works" />
+<meta property="og:article:author" content="Sean Ammirati" />
+<meta property="og:article:published_time" content="2018-12-14T00:00:00-05:00" />
+<meta name="twitter:title" content="Hidden Markov Models  - Extensions ">
+<meta name="twitter:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm.">
 
-									<!-- Nav -->
-										<nav id="nav">
-											<ul>
-														<li><a href="/">Home</a></li>
-														<li><a href="/pages/topics">Topics</a></li>
-														<li><a href="/pages/about">About</a></li>
-											</ul>
-										</nav>
+        <title>Hidden Markov Models  - Extensions  · Stats Works
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
 
-								</section>
 
-						</div>
-					</div>
-				</div>
-			</div>
 
-		<!-- Main Wrapper -->
-			<div id="main-wrapper">
-				<div class="container">
-<div class="row">
-	<div class="12u">
-			<section>
-				<div>
-					<div class="row">
-						<div class="12u skel-cell-mainContent">
-							<!-- Content -->
-								<article class="box is-post">
-									<div class="post-infos">
-										<ul class="tags">
-											<li><a class="button" href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain">R, hidden markov, markov models, markov chain</a></li>
-												<li><a class="button button-alt" href="/tag/hmms/">Hmms</a></li>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="../..">Home</a></li>
+                            <li ><a href="../../pages/about/">About This Website</a></li>
+                            <li ><a href="../../pages/topics/">Topics</a></li>
+                            <li ><a href="../../categories">Categories</a></li>
+                            <li ><a href="../../tags/">Tags</a></li>
+                            <li ><a href="../../archives">Archives</a></li>
+                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="../../category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html"> Hidden Markov Models  <small> Extensions </small>  </a></h1>
+    </header>
+</div>
 
-												<li><a class="button button-alt" href="/tag/markov-chains/">Markov chains</a></li>
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
 
-												<li><a class="button button-alt" href="/tag/forwards-backwards/">Forwards-backwards</a></li>
-
-										</ul>
-									</div>
-
-									<div class="pennant pennant-alt date">2018-12-14</div>
-									<h2>Hidden Markov Models</h2>
-									<style type="text/css">/*!
+            
+            <style type="text/css">/*!
 *
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -158,12 +274,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -176,27 +300,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -392,7 +528,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -402,11 +540,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -654,6 +805,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -692,7 +846,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -814,6 +968,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -830,16 +988,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -855,6 +1021,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -905,8 +1076,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1045,8 +1223,7 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In my previous project, I developed the reasoning behind Hidden Markov
 Models (HMM) and developed a way of determining the most likely sequence
@@ -1078,8 +1255,7 @@ aspects of the HMM we are interested in. One such problem is, given a
 set of observed emissions $x_{1,\ldots,\ T}$, what is the probability of
 the observed emissions? This problem can be solved using the law of
 total probability, i.e.:</p>
-<p>$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}}\left| \ \mathbf{\pi} \right)P(\mathbf{\pi})\ $$</p>
-<p>where $\mathbf{\pi}$ refers to any vector of state sequences. This can
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}}\left| \ \mathbf{\pi} \right)P(\mathbf{\pi})\ $$<p>where $\mathbf{\pi}$ refers to any vector of state sequences. This can
 be computationally intensive -- for many steps, this will involve
 summing over an exponentially large number of possible state sequences.
 Thus, an algorithmic approach will be useful to make this result
@@ -1087,18 +1263,14 @@ practical to obtain for large <em>T.</em> This is a similar problem to the
 Viterbi algorithm, but not exactly the same. This can be solved using
 the <em>forward algorithm</em>, as described below. Note that we can also write
 the above as:</p>
-<p>$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}},\mathbf{\pi})\ $$</p>
-<p>Let's call $\alpha_{t}(\pi_{t})$ =
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}},\mathbf{\pi})\ $$<p>Let's call $\alpha_{t}(\pi_{t})$ =
 $P\left( x_{1},\ \ldots,x_{t},\ \pi_{t} \right) = \ \sum_{\pi_{t - 1}}^{}{P(x_{1},\ \ldots,x_{T},\ \pi_{t},\pi_{t - 1})}$</p>
 <p>It follows that our desired probability of the sequence is equal to the
 sum over all states of the above quantity.</p>
-<p>$$\alpha_{t}(\pi_{t}) = \ \sum_{\mathbf{\pi}_{t - 1}}^{}{P(x_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t},\ \pi_{t - 1})P(\pi_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$</p>
-<p>But $x_{t}$ is conditionally independent of everything but
+$$\alpha_{t}(\pi_{t}) = \ \sum_{\mathbf{\pi}_{t - 1}}^{}{P(x_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t},\ \pi_{t - 1})P(\pi_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$<p>But $x_{t}$ is conditionally independent of everything but
 $\pi_{t},\ $and $\pi_{t}$conditionally independent on everything but
 $\pi_{t - 1}$. So we can write this simply as:</p>
-<p>$$\alpha_{t}(\pi_{t}) = \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$</p>
-<p>$$= \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})\alpha_{t - 1}(\pi_{t - 1})$$</p>
-<p>It follows, then, that we can compute each $\alpha_{t}$ recursively.
+$$\alpha_{t}(\pi_{t}) = \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$$$= \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})\alpha_{t - 1}(\pi_{t - 1})$$<p>It follows, then, that we can compute each $\alpha_{t}$ recursively.
 This will eliminate the need to look at the probability of all states.
 This has a computation time of $O(\text{nm}^{2})$ which is far faster
 than doing it for each possible sequence, which is$\ O(\text{nm}^{n})$.
@@ -1109,27 +1281,22 @@ where $P\left( \pi_{1} \right)$ is to be considered the initial
 probabilities of entering the chain, predefined by the problem.</p>
 <p>Consider the following example of a fair and biased coin, where:</p>
 <p>Initial probabilities are equal, .5 for fair and .5 for biased</p>
-<p>$$\mathbf{P = \ }\begin{matrix}
+$$\mathbf{P = \ }\begin{matrix}
 .9 &amp; .1 \\
 .05 &amp; .95 \\
-\end{matrix}$$</p>
-<p>$$\mathbf{E = \ }\begin{matrix}
+\end{matrix}$$$$\mathbf{E = \ }\begin{matrix}
 .5 &amp; .5 \\
 .25 &amp; .75 \\
-\end{matrix}$$</p>
-<p>We observe the sequence HTHHTTHH and want to determine the probability
+\end{matrix}$$<p>We observe the sequence HTHHTTHH and want to determine the probability
 of this sequence occurring given our HMM. First,</p>
-<p>$$\alpha_{1}\left( \pi_{1} = F \right) = \ P\left( x_{1} \middle| \pi_{1} = F \right)P\left( \pi_{1} = F \right) = \left( 0.5 \right)\left( 0.5 \right) = \ .25$$</p>
-<p>$$\alpha_{1}\left( \pi_{1} = B \right) = P\left( x_{1} \middle| \pi_{1} = B \right)P\left( \pi_{1} = B \right) = \left( 0.25 \right)\left( 0.5 \right) = \ .135$$</p>
-<p>So it follows that the probability of a head being observed, alone, is
+$$\alpha_{1}\left( \pi_{1} = F \right) = \ P\left( x_{1} \middle| \pi_{1} = F \right)P\left( \pi_{1} = F \right) = \left( 0.5 \right)\left( 0.5 \right) = \ .25$$$$\alpha_{1}\left( \pi_{1} = B \right) = P\left( x_{1} \middle| \pi_{1} = B \right)P\left( \pi_{1} = B \right) = \left( 0.25 \right)\left( 0.5 \right) = \ .135$$<p>So it follows that the probability of a head being observed, alone, is
 the sum of these partial probabilities, or .385. To determine the
 probability of the full sequence, we continue this recursively,
 considering the results of the function at the last time step.</p>
 <p>We can also simplify this using matrix multiplication. If we consider
 $\mathbf{\alpha}_{\mathbf{t}}$ as a <em>nx1</em> vector pertaining to each of
 the <em>n</em> states, we can calculate the following:</p>
-<p>$${\mathbf{\alpha}_{\mathbf{t}}\mathbf{= \ E}}_{\mathbf{.,j}} x \mathbf{P'\alpha}_{\mathbf{t - 1}}$$</p>
-<p>Where j refers to a row vector of the jth column pertaining to the
+$${\mathbf{\alpha}_{\mathbf{t}}\mathbf{= \ E}}_{\mathbf{.,j}} x \mathbf{P'\alpha}_{\mathbf{t - 1}}$$<p>Where j refers to a row vector of the jth column pertaining to the
 observed value at time <em>t</em>. This can help to simplify the calculations.
 Here, x refers to component-wise multiplication. I have included a
 user-defined function to determine this probability recursively for the
@@ -1143,24 +1310,24 @@ problem at hand:</p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>forwardalgor <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>obs<span class="p">,</span> trans<span class="p">,</span>emissions<span class="p">,</span>init<span class="p">){</span></span>
-<span class="code-line">  alphas <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>init<span class="o">*</span>emissions<span class="p">[,</span>obs<span class="p">[</span><span class="m">1</span><span class="p">]])</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">forwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span><span class="n">emissions</span><span class="p">,</span><span class="n">init</span><span class="p">){</span></span>
+<span class="code-line">  <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">init</span><span class="o">*</span><span class="n">emissions[</span><span class="p">,</span><span class="n">obs[1]]</span><span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="p">)){</span></span>
-<span class="code-line">    alphasum <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>trans<span class="o">%*%</span>alphas<span class="p">[[</span>i<span class="p">]])</span></span>
-<span class="code-line">    alphas<span class="p">[[</span>i <span class="o">+</span> <span class="m">1</span><span class="p">]]</span> <span class="o">&lt;-</span> emissions<span class="p">[,</span>obs<span class="p">[</span>i<span class="m">-1</span><span class="p">]]</span><span class="o">*</span>alphasum</span>
+<span class="code-line">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="p">)){</span></span>
+<span class="code-line">    <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span><span class="o">%*%</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">alphas[[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span><span class="n">obs[i</span><span class="m">-1</span><span class="n">]]</span><span class="o">*</span><span class="n">alphasum</span></span>
 <span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">  <span class="kp">print</span><span class="p">(</span><span class="s">&quot;Sequences:&quot;</span><span class="p">)</span></span>
-<span class="code-line">  <span class="kp">print</span><span class="p">(</span>alphas<span class="p">)</span></span>
-<span class="code-line">  <span class="kp">print</span><span class="p">(</span><span class="s">&quot;Final Probability&quot;</span><span class="p">)</span></span>
-<span class="code-line">  <span class="kp">print</span><span class="p">(</span><span class="kp">sum</span><span class="p">(</span>alphas<span class="p">[[</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span><span class="m">+1</span><span class="p">]]))</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">sum</span><span class="p">(</span>alphas<span class="p">[[</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span><span class="m">+1</span><span class="p">]]))</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Sequences:&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Final Probability&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">forwardalgor<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span><span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)),</span><span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">forwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)),</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1170,7 +1337,7 @@ problem at hand:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1213,7 +1380,7 @@ problem at hand:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1228,8 +1395,7 @@ problem at hand:</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This gives us our result -- there is about a .2% chance of this
 observation being output by this particular HMM. This can be useful for
@@ -1237,8 +1403,7 @@ numerous applications: consider if one was testing against <em>n</em> possible
 HMMs. We could then find which HMM is the more likely fit by considering</p>
 <p>$\text{argmax}_{i}(P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right))$.
 Bayes' Rule tells us that:</p>
-<p>$$P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \propto \ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right)P(\text{HMM}_{i})$$</p>
-<p>If we consider our <em>n</em> models as equally likely, we can then determine
+$$P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \propto \ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right)P(\text{HMM}_{i})$$<p>If we consider our <em>n</em> models as equally likely, we can then determine
 which model is most probable given the observations simply by
 considering the likelihood in the fashion calculated above. That is,
 $\operatorname{}\left( P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \right) = \text{argmax}_{i}(\ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right))$.
@@ -1250,8 +1415,7 @@ order to avoid machine zeros.</p>
 <p>The closely related, but not exactly equivalent, Forwards-Backwards
 algorithm attempts to find probability of a particular state of a
 <em>particular</em> time point given all of the observations, i.e. :</p>
-<p>$$P({\pi_{k}|x}_{1},\ \ldots,x_{T})$$</p>
-<p>$$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = \ \frac{P\left( x_{k + 1},\ldots,x_{T}|{\pi_{k},x}_{1},\ \ldots,x_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)}{P\left( x_{k + 1},\ldots,x_{T} \right)}$$  $$\propto P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)$$</p>
+$$P({\pi_{k}|x}_{1},\ \ldots,x_{T})$$$$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = \ \frac{P\left( x_{k + 1},\ldots,x_{T}|{\pi_{k},x}_{1},\ \ldots,x_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)}{P\left( x_{k + 1},\ldots,x_{T} \right)}$$<p>$$\propto P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)$$</p>
 <p>This is due to the fact that $x_{k + 1},\ldots,x_{T}$ is conditionally
 independent of $x_{1},\ \ldots,x_{k}$ given $\pi_{k}$ and that
 $P\left( x_{k + 1},\ldots,x_{T} \right)$ is a multiplicative constant
@@ -1271,8 +1435,7 @@ $$= \sum_{\pi_{k + 1}}^{}{P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right)P(x_
 of the HMM. Notice now that
 $P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right) = \ b_{k + 1}\left( \pi_{k + 1} \right)$
 and we can now see the recursive nature of this function. That is,</p>
-<p>$$b_{k}\left( \pi_{k} \right) = \ \sum_{\pi_{k + 1}}^{}{b_{k + 1}\left( \pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$</p>
-<p>We take $b_{T}\left( \pi_{T} \right) = 1$ for all states, as this can be
+$$b_{k}\left( \pi_{k} \right) = \ \sum_{\pi_{k + 1}}^{}{b_{k + 1}\left( \pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$<p>We take $b_{T}\left( \pi_{T} \right) = 1$ for all states, as this can be
 considered the exit probability.</p>
 <p>Intuitively, this means that we are considering, for some intermediate
 time step, the probabilities of getting there from zero and the
@@ -1286,8 +1449,7 @@ to k. Normalize these at each step as well. Then, multiply the two
 results and normalize to get the probabilities of being in each state
 after <em>k</em> time steps.</p>
 <p>To calculate this, we may use the following formula:</p>
-<p>$${\mathbf{b}_{\mathbf{t}}\mathbf{= \ P(E}}_{\mathbf{.,j}} x \mathbf{b}_{\mathbf{t + 1}}\mathbf{)}$$</p>
-<p>Notice that this is similar to the formula from before for the forwards
+$${\mathbf{b}_{\mathbf{t}}\mathbf{= \ P(E}}_{\mathbf{.,j}} x \mathbf{b}_{\mathbf{t + 1}}\mathbf{)}$$<p>Notice that this is similar to the formula from before for the forwards
 portion, but the multiplications are "flipped." Thus we can implement
 the Forward-Backwards algorithm as follows:</p>
 
@@ -1299,34 +1461,34 @@ the Forward-Backwards algorithm as follows:</p>
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>bkforwardalgor <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>obs<span class="p">,</span> k<span class="p">,</span> trans<span class="p">,</span> emissions<span class="p">,</span> init<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    alphas <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> init <span class="o">*</span> emissions<span class="p">[,</span> obs<span class="p">[</span><span class="m">1</span><span class="p">]]</span><span class="o">/</span><span class="kp">sum</span><span class="p">(</span>init <span class="o">*</span> emissions<span class="p">[,</span> obs<span class="p">[</span><span class="m">1</span><span class="p">]]))</span></span>
-<span class="code-line">    betas <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kp">nrow</span><span class="p">(</span>trans<span class="p">)))</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">bkforwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">emissions</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="p">))</span></span>
+<span class="code-line">    <span class="n">betas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">trans</span><span class="p">)))</span></span>
 <span class="code-line">    </span>
-<span class="code-line">    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">3</span><span class="o">:</span><span class="p">(</span>k <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line">        alphasum <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>trans<span class="p">)</span> <span class="o">%*%</span> alphas<span class="p">[[</span>i <span class="o">-</span> <span class="m">1</span><span class="p">]])</span></span>
-<span class="code-line">        alphas<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> emissions<span class="p">[,</span> obs<span class="p">[</span>i <span class="o">-</span> <span class="m">1</span><span class="p">]]</span> <span class="o">*</span> alphasum</span>
-<span class="code-line">        alphas<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> alphas<span class="p">[[</span>i<span class="p">]]</span><span class="o">/</span><span class="kp">sum</span><span class="p">(</span>alphas<span class="p">[[</span>i<span class="p">]])</span></span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">3</span><span class="o">:</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">alphas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span> <span class="o">*</span> <span class="n">alphasum</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">alphas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
 <span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span> <span class="o">-</span> k <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line">        betasum <span class="o">&lt;-</span> emissions<span class="p">[,</span> obs<span class="p">[</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span> <span class="o">-</span> i <span class="o">+</span> <span class="m">2</span><span class="p">]]</span> <span class="o">*</span> betas<span class="p">[[</span>i <span class="o">-</span> <span class="m">1</span><span class="p">]]</span></span>
-<span class="code-line">        betas<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>trans <span class="o">%*%</span> betasum<span class="p">)</span></span>
-<span class="code-line">        betas<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> betas<span class="p">[[</span>i<span class="p">]]</span><span class="o">/</span><span class="kp">sum</span><span class="p">(</span>betas<span class="p">[[</span>i<span class="p">]])</span></span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">betasum</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="n">]]</span> <span class="o">*</span> <span class="n">betas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span> <span class="o">%*%</span> <span class="n">betasum</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="n">betas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">betas[[i]]</span><span class="p">)</span></span>
 <span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    pointalph <span class="o">&lt;-</span> alphas<span class="p">[[(</span>k <span class="o">+</span> <span class="m">1</span><span class="p">)]]</span></span>
-<span class="code-line">    pointbet <span class="o">&lt;-</span> betas<span class="p">[[(</span><span class="kp">length</span><span class="p">(</span>obs<span class="p">)</span> <span class="o">-</span> k <span class="o">+</span> <span class="m">1</span><span class="p">)]]</span></span>
+<span class="code-line">    <span class="n">pointalph</span> <span class="o">&lt;-</span> <span class="n">alphas[</span><span class="nf">[</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
+<span class="code-line">    <span class="n">pointbet</span> <span class="o">&lt;-</span> <span class="n">betas[</span><span class="nf">[</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
 <span class="code-line">    </span>
-<span class="code-line">    <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>forward <span class="o">=</span> alphas<span class="p">,</span> backward <span class="o">=</span> betas<span class="p">,</span> probstates <span class="o">=</span> pointalph <span class="o">*</span> pointbet<span class="o">/</span><span class="kp">sum</span><span class="p">(</span>pointalph <span class="o">*</span> </span>
-<span class="code-line">        pointbet<span class="p">)))</span></span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">forward</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">backward</span> <span class="o">=</span> <span class="n">betas</span><span class="p">,</span> <span class="n">probstates</span> <span class="o">=</span> <span class="n">pointalph</span> <span class="o">*</span> <span class="n">pointbet</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">pointalph</span> <span class="o">*</span> </span>
+<span class="code-line">        <span class="n">pointbet</span><span class="p">)))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line">bkforwardalgor<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">3</span><span class="p">,</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.1</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span> <span class="m">0.05</span><span class="p">)),</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> </span>
-<span class="code-line">    <span class="m">0.5</span><span class="p">),</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.75</span><span class="p">)),</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">bkforwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">3</span><span class="p">,</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.1</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span> <span class="m">0.05</span><span class="p">)),</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> </span>
+<span class="code-line">    <span class="m">0.5</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.75</span><span class="p">)),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1336,7 +1498,7 @@ the Forward-Backwards algorithm as follows:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1413,8 +1575,7 @@ the Forward-Backwards algorithm as follows:</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So, at the third time step, we are close to 95% certain that we were in
 the first state (Heads), given all of the observations.</p>
@@ -1437,8 +1598,7 @@ follows:</p>
 <p>Initial probabilities = $\gamma_{i}\left( 1 \right)$. This is the
 expected frequency spent in state <em>i</em> at time 1.</p>
 <p>The new transition matrix, <strong>P'</strong>, will have entries:</p>
-<p>$$\mathbf{P'}_{\text{ij}} = \frac{\sum_{t = 1}^{T - 1}{\ \xi_{i,j}\left( t \right)}\ }{\sum_{t = 1}^{T - 1}{\gamma_{i}\left( t \right)}}$$</p>
-<p>This is the expected number of transitions from state <em>i</em> to <em>j</em>
+$$\mathbf{P'}_{\text{ij}} = \frac{\sum_{t = 1}^{T - 1}{\ \xi_{i,j}\left( t \right)}\ }{\sum_{t = 1}^{T - 1}{\gamma_{i}\left( t \right)}}$$<p>This is the expected number of transitions from state <em>i</em> to <em>j</em>
 compared to the expected total number of transitions away from state <em>i</em>
 (including itself).</p>
 <p>The new emission matrix, <strong>E'</strong>, will have entries:</p>
@@ -1461,13 +1621,13 @@ the <em>HMM</em> package in R to determine this. Here is the output:</p>
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kn">library</span><span class="p">(</span>HMM<span class="p">)</span></span>
-<span class="code-line">chk <span class="o">&lt;-</span> initHMM<span class="p">(</span>States <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">),</span>Symbols <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">),</span>startProbs <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span></span>
-<span class="code-line">               transProbs <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span> emissionProbs <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)))</span></span>
-<span class="code-line">baumWelch<span class="p">(</span>chk<span class="p">,</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">))</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">library</span><span class="p">(</span><span class="n">HMM</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">chk</span> <span class="o">&lt;-</span> <span class="nf">initHMM</span><span class="p">(</span><span class="n">States</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">),</span><span class="n">Symbols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">),</span><span class="n">startProbs</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span></span>
+<span class="code-line">               <span class="n">transProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span> <span class="n">emissionProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)))</span></span>
+<span class="code-line"><span class="nf">baumWelch</span><span class="p">(</span><span class="n">chk</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1477,7 +1637,7 @@ the <em>HMM</em> package in R to determine this. Here is the output:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1640,8 +1800,7 @@ the <em>HMM</em> package in R to determine this. Here is the output:</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here, we see that the algorithm suggests changing the transition
 probabilities to almost never transition when in the Biased state, and
@@ -1696,102 +1855,140 @@ for many applications of the HMM model.</p>
 }
 </script>
 
-								</article>
- <div id="disqus_thread" class="box"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'statsworks';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-						</div>
-					</div>
-				</div>
-			</section>
-	</div>
+            <div>
 </div>
 
-				</div>
-			</div>
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="../../category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html#disqus_thread",
+                id="disqus-accordion-toggle">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'statsworks';
+        var disqus_identifier = '../../category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html';
+    var disqus_url = '../../category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html';
 
-		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
-				<!-- Footer -->
-					<section id="footer" class="container">
-						<div class="row">
-							<div class="8u">
-								<section>
-									<header>
-										<h2>Latest articles</h2>
-									</header>
-									<ul class="dates">
-										<li>
-											<span class="date">Dec <strong>29</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/theory-constrained-least-squares-linear-models/constrained-least-squares.html">Constrained Least Squares</a></h3>
-											<p><p>A theoretical approach to a constrained least squares problem.</p></p>
-										</li>
-										<li>
-											<span class="date">Dec <strong>14</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html">Hidden Markov Models</a></h3>
-											<p><p>A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm.</p></p>
-										</li>
-										<li>
-											<span class="date">Dec <strong>09</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hmms-viterbi-algorithm.html">HMMs: Viterbi Algorithm</a></h3>
-											<p><p>A overview of the viterbi algorithm for HMMs.</p></p>
-										</li>
-										<li>
-											<span class="date">Nov <strong>03</strong></span>
-											<h3><a href="https://seanammirati.github.io/category/bayesian-analysis/t test or not t test.html">To T-Test or Not to T-Test</a></h3>
-											<p><p>A more complex approach to the canonical t-test using bayesian methods and structure.</p></p>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-						<div class="row">
-							<div class="4u">
-								<section>
-									<header>
-										<h2>Blogroll</h2>
-									</header>
-									<ul class="divided">
-									</ul>
-								</section>
-							</div>
-							<div class="4u">
-								<section>
-									<header>
-										<h2>Categories</h2>
-									</header>
-									<ul class="divided">
-											<li><a href="https://seanammirati.github.io/category/bayesian-analysis">Bayesian Analysis</a></li>
-											<li><a href="https://seanammirati.github.io/category/projects">Projects</a></li>
-											<li><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain">R, hidden markov, markov models, markov chain</a></li>
-											<li><a href="https://seanammirati.github.io/category/statistics-beginner">Statistics, Beginner</a></li>
-									</ul>
-								</section>
-							</div>
-							<div class="4u">
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-								<section>
-									<header>
-										<h2>Contact</h2>
-									</header>
-									<ul class="social">
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
-			</div>
-		<script src="/theme/js/jquery.min.js"></script>
-		<script src="/theme/js/jquery.dropotron.js"></script>
-		<script src="/theme/js/config.js"></script>
-		<script src="/theme/js/skel.min.js"></script>
-		<script src="/theme/js/skel-panels.min.js"></script>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
-	</body>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-12-14T00:00:00-05:00">Dec 14, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="../../categories.html#r-hidden-markov-markov-models-markov-chain-ref">R, hidden markov, markov models, markov chain</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="../../tags/#forwards-backwards-ref">forwards-backwards
+                    <span>1</span>
+</a></li>
+                <li><a href="../../tags/#hmms-ref">HMMS
+                    <span>2</span>
+</a></li>
+                <li><a href="../../tags/#markov-chains-ref">markov chains
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="https://github.com/SeanAmmirati" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="https://www.linkedin.com/in/sean-ammirati-4795a4ba/" title="My LinkedIn Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-linkedin sidebar-social-links"></i></a>
+    <a href="https://www.kaggle.com/seanammirati" title="My Kaggle Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-kaggle sidebar-social-links"></i></a>
+    <a href="ammirati.sean@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Stats Works</span> - Making Statistics Work for You</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'statsworks';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementById('disqus-accordion-toggle');
+    var old_innerHTML = link.innerHTML;
+    $(link).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
 </html>

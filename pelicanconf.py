@@ -33,10 +33,10 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 ARTICLE_URL = 'category/{category}/{slug}.html'
 ARTICLE_SAVE_AS = 'category/{category}/{slug}.html'
 
-TAG_URL = '/tag/{slug}/'
-TAG_SAVE_AS = '/tag/{slug}/index.html'
-TAGS_URL = '/tags/'
-TAGS_SAVE_AS = '/tags/index.html'
+TAG_URL = 'tag/{slug}/'
+TAG_SAVE_AS = 'tag/{slug}/index.html'
+TAGS_URL = 'tags/'
+TAGS_SAVE_AS = 'tags/index.html'
 
 # Favicon
 STATIC_PATHS = ['images', 'extra/favicon.ico', 'figure']
@@ -72,7 +72,7 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = 'html5-dopetrope'
+THEME = '/home/seanammirati/dev/website/pelican-themes/elegant'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -94,4 +94,4 @@ DEFAULT_PAGINATION = 10
 DISQUS_SITENAME = "statsworks"
 
 DEFAULT_PAGINATION = False
-RELATIVE_URLS = False
+RELATIVE_URLS = True
