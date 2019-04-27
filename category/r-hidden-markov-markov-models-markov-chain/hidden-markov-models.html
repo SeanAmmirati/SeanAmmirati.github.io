@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="english">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Sean Ammirati" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="HMMS, markov chains, forwards-backwards, R, hidden markov, markov models, markov chain, " />
+
+<meta property="og:title" content="Hidden Markov Models  - Extensions "/>
+<meta property="og:url" content="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html" />
+<meta property="og:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm." />
+<meta property="og:site_name" content="Stats Works" />
+<meta property="og:article:author" content="Sean Ammirati" />
+<meta property="og:article:published_time" content="2018-12-14T00:00:00-05:00" />
+<meta name="twitter:title" content="Hidden Markov Models  - Extensions ">
+<meta name="twitter:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm.">
+
+        <title>Hidden Markov Models  - Extensions  · Stats Works
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
+        <link href="https://seanammirati.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Stats Works - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="https://seanammirati.github.io/"><span class=site-name>Stats Works</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="https://seanammirati.github.io">Home</a></li>
+                            <li ><a href="https://seanammirati.github.io/pages/about/">About This Website</a></li>
+                            <li ><a href="https://seanammirati.github.io/pages/topics/">Topics</a></li>
+                            <li ><a href="https://seanammirati.github.io/categories">Categories</a></li>
+                            <li ><a href="https://seanammirati.github.io/tags/">Tags</a></li>
+                            <li ><a href="https://seanammirati.github.io/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="https://seanammirati.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html"> Hidden Markov Models  <small> Extensions </small>  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In my previous project, I developed the reasoning behind Hidden Markov
+Models (HMM) and developed a way of determining the most likely sequence
+of states that resulted in an observed sequence of emissions using the
+Viterbi algorithm. This project will explore extensions to the Hidden
+Markov Model, such as the Forwards-Backwards algorithm and the
+Baum-Welch algorithm.</p>
+<p>Consider a discrete time, discrete state-space Hidden Markov chain with:</p>
+<ul>
+<li>$\pi_{t}$ : the state at time <em>t</em> (unknown in the HMM) of <em>n</em> possible
+states </li>
+<li>$\pi_{t} = 1,2,\ldots,n$</li>
+<li>$x_{\text{t}}$: the emission at time <em>t</em> of <em>m</em> possible emissions,</li>
+<li>$x_{\text{t}} = 1,2,\ldots,m$</li>
+<li>P(0) : initial probabilities of being in the states. </li>
+<li><strong><em>P</em></strong> : a <em>nxn</em> transition matrix of transitions between states,
+giving P($\pi_{t} = i\left| \pi_{t - 1} = j \right)$ for the ith row and
+jth column.</li>
+<li><strong><em>E</em></strong> : a <em>nxm</em> matrix containing
+P($x_{\text{t}} = j\ \left| \ \pi_{t} = i \right)$ in the ith row, jth
+column, the emission probabilities. Note that the row sums must sum to 1.</li>
+</ul>
+<p>Given a set of observed emissions, $x_{1,\ldots,\ T}$, the Viterbi
+algorithm gives us the most likely sequence of states,
+$\pi_{1,\ldots,\ T}$ that resulted in the observed emissions, given
+<strong><em>P</em></strong> and <strong><em>E.</em></strong></p>
+<p>Although this decoding algorithm is very useful, there may be other
+aspects of the HMM we are interested in. One such problem is, given a
+set of observed emissions $x_{1,\ldots,\ T}$, what is the probability of
+the observed emissions? This problem can be solved using the law of
+total probability, i.e.:</p>
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}}\left| \ \mathbf{\pi} \right)P(\mathbf{\pi})\ $$<p>where $\mathbf{\pi}$ refers to any vector of state sequences. This can
+be computationally intensive -- for many steps, this will involve
+summing over an exponentially large number of possible state sequences.
+Thus, an algorithmic approach will be useful to make this result
+practical to obtain for large <em>T.</em> This is a similar problem to the
+Viterbi algorithm, but not exactly the same. This can be solved using
+the <em>forward algorithm</em>, as described below. Note that we can also write
+the above as:</p>
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}},\mathbf{\pi})\ $$<p>Let's call $\alpha_{t}(\pi_{t})$ =
+$P\left( x_{1},\ \ldots,x_{t},\ \pi_{t} \right) = \ \sum_{\pi_{t - 1}}^{}{P(x_{1},\ \ldots,x_{T},\ \pi_{t},\pi_{t - 1})}$</p>
+<p>It follows that our desired probability of the sequence is equal to the
+sum over all states of the above quantity.</p>
+$$\alpha_{t}(\pi_{t}) = \ \sum_{\mathbf{\pi}_{t - 1}}^{}{P(x_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t},\ \pi_{t - 1})P(\pi_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$<p>But $x_{t}$ is conditionally independent of everything but
+$\pi_{t},\ $and $\pi_{t}$conditionally independent on everything but
+$\pi_{t - 1}$. So we can write this simply as:</p>
+$$\alpha_{t}(\pi_{t}) = \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$$$= \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})\alpha_{t - 1}(\pi_{t - 1})$$<p>It follows, then, that we can compute each $\alpha_{t}$ recursively.
+This will eliminate the need to look at the probability of all states.
+This has a computation time of $O(\text{nm}^{2})$ which is far faster
+than doing it for each possible sequence, which is$\ O(\text{nm}^{n})$.
+After computing this for each possible state at time T, we sum the
+probabilities to get the probability of the observed sequence. Note that
+$\alpha_{1}\left( \pi_{1} \right) = P(x_{1}|\pi_{1})\sum_{x_{0}}^{}{P(\pi_{1}|\pi_{0}})P(\pi_{0}) = \ \ P(x_{1}|\pi_{1})P(\pi_{1})$,
+where $P\left( \pi_{1} \right)$ is to be considered the initial
+probabilities of entering the chain, predefined by the problem.</p>
+<p>Consider the following example of a fair and biased coin, where:</p>
+<p>Initial probabilities are equal, .5 for fair and .5 for biased</p>
+$$\mathbf{P = \ }\begin{matrix}
+.9 &amp; .1 \\
+.05 &amp; .95 \\
+\end{matrix}$$$$\mathbf{E = \ }\begin{matrix}
+.5 &amp; .5 \\
+.25 &amp; .75 \\
+\end{matrix}$$<p>We observe the sequence HTHHTTHH and want to determine the probability
+of this sequence occurring given our HMM. First,</p>
+$$\alpha_{1}\left( \pi_{1} = F \right) = \ P\left( x_{1} \middle| \pi_{1} = F \right)P\left( \pi_{1} = F \right) = \left( 0.5 \right)\left( 0.5 \right) = \ .25$$$$\alpha_{1}\left( \pi_{1} = B \right) = P\left( x_{1} \middle| \pi_{1} = B \right)P\left( \pi_{1} = B \right) = \left( 0.25 \right)\left( 0.5 \right) = \ .135$$<p>So it follows that the probability of a head being observed, alone, is
+the sum of these partial probabilities, or .385. To determine the
+probability of the full sequence, we continue this recursively,
+considering the results of the function at the last time step.</p>
+<p>We can also simplify this using matrix multiplication. If we consider
+$\mathbf{\alpha}_{\mathbf{t}}$ as a <em>nx1</em> vector pertaining to each of
+the <em>n</em> states, we can calculate the following:</p>
+$${\mathbf{\alpha}_{\mathbf{t}}\mathbf{= \ E}}_{\mathbf{.,j}} x \mathbf{P'\alpha}_{\mathbf{t - 1}}$$<p>Where j refers to a row vector of the jth column pertaining to the
+observed value at time <em>t</em>. This can help to simplify the calculations.
+Here, x refers to component-wise multiplication. I have included a
+user-defined function to determine this probability recursively for the
+problem at hand:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">forwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span><span class="n">emissions</span><span class="p">,</span><span class="n">init</span><span class="p">){</span></span>
+<span class="code-line">  <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">init</span><span class="o">*</span><span class="n">emissions[</span><span class="p">,</span><span class="n">obs[1]]</span><span class="p">)</span></span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="p">)){</span></span>
+<span class="code-line">    <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span><span class="o">%*%</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">alphas[[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span><span class="n">obs[i</span><span class="m">-1</span><span class="n">]]</span><span class="o">*</span><span class="n">alphasum</span></span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Sequences:&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Final Probability&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nf">forwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)),</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">))</span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="code-line">[1] &#34;Sequences:&#34;</span>
+<span class="code-line">[[1]]</span>
+<span class="code-line">[1] 1</span>
+<span class="code-line"></span>
+<span class="code-line">[[2]]</span>
+<span class="code-line">[1] 0.250 0.125</span>
+<span class="code-line"></span>
+<span class="code-line">[[3]]</span>
+<span class="code-line">[1] 0.1187500 0.0609375</span>
+<span class="code-line"></span>
+<span class="code-line">[[4]]</span>
+<span class="code-line">[1] 0.05648438 0.08689453</span>
+<span class="code-line"></span>
+<span class="code-line">[[5]]</span>
+<span class="code-line">[1] 0.02976270 0.01450122</span>
+<span class="code-line"></span>
+<span class="code-line">[[6]]</span>
+<span class="code-line">[1] 0.014118274 0.007249905</span>
+<span class="code-line"></span>
+<span class="code-line">[[7]]</span>
+<span class="code-line">[1] 0.006715719 0.010331142</span>
+<span class="code-line"></span>
+<span class="code-line">[[8]]</span>
+<span class="code-line">[1] 0.003538630 0.005172367</span>
+<span class="code-line"></span>
+<span class="code-line">[[9]]</span>
+<span class="code-line">[1] 0.0018510021 0.0009050793</span>
+<span class="code-line"></span>
+<span class="code-line">[[10]]</span>
+<span class="code-line">[1] 0.0008782049 0.0004509265</span>
+<span class="code-line"></span>
+<span class="code-line">[1] &#34;Final Probability&#34;</span>
+<span class="code-line">[1] 0.002756081</span>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+0.00275608136978746
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This gives us our result -- there is about a .2% chance of this
+observation being output by this particular HMM. This can be useful for
+numerous applications: consider if one was testing against <em>n</em> possible
+HMMs. We could then find which HMM is the more likely fit by considering</p>
+<p>$\text{argmax}_{i}(P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right))$.
+Bayes' Rule tells us that:</p>
+$$P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \propto \ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right)P(\text{HMM}_{i})$$<p>If we consider our <em>n</em> models as equally likely, we can then determine
+which model is most probable given the observations simply by
+considering the likelihood in the fashion calculated above. That is,
+$\operatorname{}\left( P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \right) = \text{argmax}_{i}(\ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right))$.
+This relatively simple result and simple algorithm gives us a method of
+comparing and optimizing our fit. Also, since the probabilities here can
+become quite small, the fact that a logarithmic function is
+monotonically increasing means we can also compare the logarithms, in
+order to avoid machine zeros.</p>
+<p>The closely related, but not exactly equivalent, Forwards-Backwards
+algorithm attempts to find probability of a particular state of a
+<em>particular</em> time point given all of the observations, i.e. :</p>
+$$P({\pi_{k}|x}_{1},\ \ldots,x_{T})$$$$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = \ \frac{P\left( x_{k + 1},\ldots,x_{T}|{\pi_{k},x}_{1},\ \ldots,x_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)}{P\left( x_{k + 1},\ldots,x_{T} \right)}$$<p>$$\propto P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)$$</p>
+<p>This is due to the fact that $x_{k + 1},\ldots,x_{T}$ is conditionally
+independent of $x_{1},\ \ldots,x_{k}$ given $\pi_{k}$ and that
+$P\left( x_{k + 1},\ldots,x_{T} \right)$ is a multiplicative constant
+which does not change with a selection of $\pi_{k}$. This means we can
+normalize this probability at each point to ensure that
+$\sum_{}^{}{P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = 1}$.
+Notice that
+$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)\  \propto \ P\left( x_{1},\ \ldots,x_{k},\ \pi_{k} \right) = \ \alpha_{k}\mathbf{(}\pi_{k})$
+as described earlier.</p>
+<p>Notice that $P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)$ is a
+similar proposition, but backwards. That is, we can call
+$$b_{k}(\pi_{k})$$
+$$= \sum_{\pi_{k + 1}}^{}{P\left( \pi_{k + 1},x_{k + 1},\ldots,x_{T}|\pi_{k} \right)}$$ 
+$$= \sum_{\pi_{k + 1}}^{}{P\left( x_{k + 2},\ldots,x_{T}|{x_{k + 1},\pi}_{k + 1},\pi_{k} \right)P(x_{k + 1}|\pi_{k + 1},\pi_{k})P(\pi_{k + 1}|\pi_{k})}$$
+$$= \sum_{\pi_{k + 1}}^{}{P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$</p>
+<p>This is obtained using the chain rule and the conditional independencies
+of the HMM. Notice now that
+$P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right) = \ b_{k + 1}\left( \pi_{k + 1} \right)$
+and we can now see the recursive nature of this function. That is,</p>
+$$b_{k}\left( \pi_{k} \right) = \ \sum_{\pi_{k + 1}}^{}{b_{k + 1}\left( \pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$<p>We take $b_{T}\left( \pi_{T} \right) = 1$ for all states, as this can be
+considered the exit probability.</p>
+<p>Intuitively, this means that we are considering, for some intermediate
+time step, the probabilities of getting there from zero and the
+probabilities of "back tracking" from T. This gives us the total
+probability of an intermediate state based on our observations.</p>
+<p>The implementation is as follows:</p>
+<p>Compute the forward probabilities (by the previously stated algorithm)
+until time step <em>k.</em> For each step, normalize the results so that the
+probabilities sum to 1. Then, compute the backward probabilities from T
+to k. Normalize these at each step as well. Then, multiply the two
+results and normalize to get the probabilities of being in each state
+after <em>k</em> time steps.</p>
+<p>To calculate this, we may use the following formula:</p>
+$${\mathbf{b}_{\mathbf{t}}\mathbf{= \ P(E}}_{\mathbf{.,j}} x \mathbf{b}_{\mathbf{t + 1}}\mathbf{)}$$<p>Notice that this is similar to the formula from before for the forwards
+portion, but the multiplications are "flipped." Thus we can implement
+the Forward-Backwards algorithm as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">bkforwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">emissions</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="p">))</span></span>
+<span class="code-line">    <span class="n">betas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">trans</span><span class="p">)))</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">3</span><span class="o">:</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">alphas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span> <span class="o">*</span> <span class="n">alphasum</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">alphas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">betasum</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="n">]]</span> <span class="o">*</span> <span class="n">betas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span> <span class="o">%*%</span> <span class="n">betasum</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="n">betas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">betas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">    <span class="n">pointalph</span> <span class="o">&lt;-</span> <span class="n">alphas[</span><span class="nf">[</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
+<span class="code-line">    <span class="n">pointbet</span> <span class="o">&lt;-</span> <span class="n">betas[</span><span class="nf">[</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">forward</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">backward</span> <span class="o">=</span> <span class="n">betas</span><span class="p">,</span> <span class="n">probstates</span> <span class="o">=</span> <span class="n">pointalph</span> <span class="o">*</span> <span class="n">pointbet</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">pointalph</span> <span class="o">*</span> </span>
+<span class="code-line">        <span class="n">pointbet</span><span class="p">)))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nf">bkforwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">3</span><span class="p">,</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.1</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span> <span class="m">0.05</span><span class="p">)),</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> </span>
+<span class="code-line">    <span class="m">0.5</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.75</span><span class="p">)),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+	<dt>$forward</dt>
+		<dd><ol>
+	<li>1</li>
+	<li><ol class=list-inline>
+	<li>0.666666666666667</li>
+	<li>0.333333333333333</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.88</li>
+	<li>0.12</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.950682056663169</li>
+	<li>0.0493179433368311</li>
+</ol>
+</li>
+</ol>
+</dd>
+	<dt>$backward</dt>
+		<dd><ol>
+	<li><ol class=list-inline>
+	<li>1</li>
+	<li>1</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493506493506494</li>
+	<li>0.506493506493506</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493683851143735</li>
+	<li>0.506316148856265</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.50646857940524</li>
+	<li>0.49353142059476</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.505577910274165</li>
+	<li>0.494422089725835</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493357500634704</li>
+	<li>0.506642499365296</li>
+</ol>
+</li>
+</ol>
+</dd>
+	<dt>$probstates</dt>
+		<dd><ol class=list-inline>
+	<li>0.949421205954081</li>
+	<li>0.0505787940459189</li>
+</ol>
+</dd>
+</dl>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So, at the third time step, we are close to 95% certain that we were in
+the first state (Heads), given all of the observations.</p>
+<p>This all leads us to the Baum-Welch algorithm, which is a way of
+estimating parameters of a HMM given a sequence of emissions. Let
+$\gamma_{i}\left( t \right) = P\left( \pi_{t} \middle| \theta,x_{1},\ \ldots,x_{T} \right)$
+where $\theta$ is the parameters of the distribution (the transition
+matrix, the emission matrix and the initial probabilities.) Note that we
+have already calculated this in the previous exercise using the forwards
+backwards algorithm.</p>
+<p>Further, let
+$$\xi_{i,j}\left( t \right) = \ P\left( \pi_{t}\ ,\pi_{t + 1}\  \middle| \theta,x_{1},\ \ldots,x_{T} \right) = \frac{\alpha_{t}\left( \pi_{t} = i \right)\mathbf{P}_{\text{ij}}b_{t + 1}\left( \pi_{t + 1} = j \right)\mathbf{E}_{{j,x}_{t + 1}}}{\sum_{}^{}{\alpha_{t}\left( \pi_{t} = i \right)\mathbf{P}_{\text{ij}}b_{t + 1}\left( \pi_{t + 1} = j \right)\mathbf{E}_{{j,x}_{t + 1}}}}$$</p>
+<p>This represents the probability of entering state <em>i</em> from the left,
+going from state <em>i</em> to <em>j,</em> exiting state j from the right, and
+emitting the emission at the t+1 time step from state j. All of this
+culminates in the joint probability of two consecutive states.</p>
+<p>Then, using an initial set of parameters we can calculate these values
+and update our parameters to find a local maxima. Our updates are as
+follows:</p>
+<p>Initial probabilities = $\gamma_{i}\left( 1 \right)$. This is the
+expected frequency spent in state <em>i</em> at time 1.</p>
+<p>The new transition matrix, <strong>P'</strong>, will have entries:</p>
+$$\mathbf{P'}_{\text{ij}} = \frac{\sum_{t = 1}^{T - 1}{\ \xi_{i,j}\left( t \right)}\ }{\sum_{t = 1}^{T - 1}{\gamma_{i}\left( t \right)}}$$<p>This is the expected number of transitions from state <em>i</em> to <em>j</em>
+compared to the expected total number of transitions away from state <em>i</em>
+(including itself).</p>
+<p>The new emission matrix, <strong>E'</strong>, will have entries:</p>
+<p>$\mathbf{E'}_{\text{ij}} = \frac{\sum_{t = 1}^{T}1_{x_{t} = j}\gamma_{i}\left( t \right)}{\sum_{t = 1}^{T}{\gamma_{i}\left( t \right)}}$</p>
+<p>Where $1_{x_{t} = j}$ is an indicator function which is 1 if the
+emission was the jth emission and zero otherwise. This calculates the
+average amount of time an emission <em>j</em> was emitted in state <em>i</em> divided
+by the average amount of time it was in state <em>i</em> in general.</p>
+<p>We then iterate this process until we are within a threshold to
+determine the optimal parameters for the model given only an observed
+sequence.</p>
+<p>While I have not implemented this algorithm directly here, I have used
+the <em>HMM</em> package in R to determine this. Here is the output:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">library</span><span class="p">(</span><span class="n">HMM</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">chk</span> <span class="o">&lt;-</span> <span class="nf">initHMM</span><span class="p">(</span><span class="n">States</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">),</span><span class="n">Symbols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">),</span><span class="n">startProbs</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span></span>
+<span class="code-line">               <span class="n">transProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span> <span class="n">emissionProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)))</span></span>
+<span class="code-line"><span class="nf">baumWelch</span><span class="p">(</span><span class="n">chk</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">))</span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+	<dt>$hmm</dt>
+		<dd><dl>
+	<dt>$States</dt>
+		<dd><ol class=list-inline>
+	<li>'F'</li>
+	<li>'B'</li>
+</ol>
+</dd>
+	<dt>$Symbols</dt>
+		<dd><ol class=list-inline>
+	<li>'H'</li>
+	<li>'T'</li>
+</ol>
+</dd>
+	<dt>$startProbs</dt>
+		<dd><dl class=dl-horizontal>
+	<dt>F</dt>
+		<dd>0.5</dd>
+	<dt>B</dt>
+		<dd>0.5</dd>
+</dl>
+</dd>
+	<dt>$transProbs</dt>
+		<dd><table>
+<thead><tr><th></th><th scope=col>F</th><th scope=col>B</th></tr></thead>
+<tbody>
+	<tr><th scope=row>F</th><td>0.8356626   </td><td>1.643374e-01</td></tr>
+	<tr><th scope=row>B</th><td>1.0000000   </td><td>4.663436e-19</td></tr>
+</tbody>
+</table>
+</dd>
+	<dt>$emissionProbs</dt>
+		<dd><table>
+<thead><tr><th></th><th scope=col>H</th><th scope=col>T</th></tr></thead>
+<tbody>
+	<tr><th scope=row>F</th><td>0.530374    </td><td>4.696260e-01</td></tr>
+	<tr><th scope=row>B</th><td>1.000000    </td><td>8.442496e-29</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+	<dt>$difference</dt>
+		<dd><ol class=list-inline>
+	<li>0.508902752112227</li>
+	<li>0.240556572158092</li>
+	<li>0.175367150726267</li>
+	<li>0.125799629747644</li>
+	<li>0.0789866075573572</li>
+	<li>0.0430462501906644</li>
+	<li>0.0220242002384686</li>
+	<li>0.0120457248068965</li>
+	<li>0.00797054223724487</li>
+	<li>0.00648938284089056</li>
+	<li>0.00596923716449372</li>
+	<li>0.00573434947770014</li>
+	<li>0.00556884788402301</li>
+	<li>0.00541435766962771</li>
+	<li>0.00525534145586094</li>
+	<li>0.0050878669619669</li>
+	<li>0.00491154731418667</li>
+	<li>0.0047272548854208</li>
+	<li>0.00453636210810545</li>
+	<li>0.00434044024235019</li>
+	<li>0.00414111692008325</li>
+	<li>0.0039399973466488</li>
+	<li>0.00373861517021827</li>
+	<li>0.00353839967199841</li>
+	<li>0.00334065357605126</li>
+	<li>0.00314653876626508</li>
+	<li>0.00295706838232949</li>
+	<li>0.00277310422503745</li>
+	<li>0.00259535857201991</li>
+	<li>0.00242439957307494</li>
+	<li>0.00226065943795158</li>
+	<li>0.00210444467891964</li>
+	<li>0.00195594773481778</li>
+	<li>0.00181525938160172</li>
+	<li>0.00168238142175776</li>
+	<li>0.00155723923619973</li>
+	<li>0.00143969387155143</li>
+	<li>0.0013295534195225</li>
+	<li>0.00122658352013238</li>
+	<li>0.00113051688536663</li>
+	<li>0.00104106179381376</li>
+	<li>0.000957909549977724</li>
+	<li>0.000880740935187623</li>
+	<li>0.000809231701136347</li>
+	<li>0.000743057173680575</li>
+	<li>0.00068189604460203</li>
+	<li>0.000625433433944128</li>
+	<li>0.000573363306621804</li>
+	<li>0.000525390324947385</li>
+	<li>0.00048123121464055</li>
+	<li>0.000440615716505618</li>
+	<li>0.000403287189561262</li>
+	<li>0.000369002924884535</li>
+	<li>0.0003375342226381</li>
+	<li>0.000308666278318049</li>
+	<li>0.00028219791808662</li>
+	<li>0.000257941217349493</li>
+	<li>0.000235721031633014</li>
+	<li>0.000215374464079931</li>
+	<li>0.000196750289868947</li>
+	<li>0.000179708354205615</li>
+	<li>0.000164118957457245</li>
+	<li>0.000149862238244094</li>
+	<li>0.000136827563139715</li>
+	<li>0.000124912929580535</li>
+	<li>0.000114024387063381</li>
+	<li>0.000104075480274582</li>
+	<li>9.49867167999181e-05</li>
+	<li>8.66850610378905e-05</li>
+	<li>7.91034553396986e-05</li>
+	<li>7.21803686502851e-05</li>
+	<li>6.58593726685694e-05</li>
+	<li>6.00887450076778e-05</li>
+	<li>5.48210986672737e-05</li>
+	<li>5.00130368923791e-05</li>
+	<li>4.56248323759889e-05</li>
+	<li>4.16201296418831e-05</li>
+	<li>3.79656693828655e-05</li>
+	<li>3.46310335586279e-05</li>
+	<li>3.1588409960111e-05</li>
+	<li>2.88123750393403e-05</li>
+	<li>2.62796938294031e-05</li>
+	<li>2.39691357210852e-05</li>
+	<li>2.18613050690297e-05</li>
+	<li>1.99384854986017e-05</li>
+	<li>1.81844969456332e-05</li>
+	<li>1.65845644250734e-05</li>
+	<li>1.51251977163732e-05</li>
+	<li>1.37940810142869e-05</li>
+	<li>1.25799718653171e-05</li>
+	<li>1.14726085741031e-05</li>
+	<li>1.04626254579159e-05</li>
+	<li>9.54147526764379e-06</li>
+	<li>8.70135822614897e-06</li>
+	<li>7.93515712464892e-06</li>
+	<li>7.23637797002243e-06</li>
+	<li>6.59909573466095e-06</li>
+	<li>6.0179047717908e-06</li>
+	<li>5.48787350674592e-06</li>
+	<li>5.00450304905593e-06</li>
+</ol>
+</dd>
+</dl>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we see that the algorithm suggests changing the transition
+probabilities to almost never transition when in the Biased state, and
+to transition more frequently when in the fair state. It also suggests
+that the emission probabilities be heads nearly in all cases when it is
+biased. This is troublesome, since we knew (by our definition) that the
+emissions would be fair for the fair coin and biased otherwise. Still,
+this generalizes the problem and allows us to attempt to fit optimal
+HMMs to a given set of emissions.</p>
+<p>Using the Viterbi algorithm is known as "decoding" -- we are attempting
+to determine the most likely state sequence given a sequence of observed
+emissions. Determining the most likely state at a time step is known as
+"filtering" (when the step is the final step, <em>T)</em> or "smoothing" (for
+some intermediate step, <em>k</em>). This is what the forward-backward
+algorithm was used for. Attempting to determine the best fitting
+parameters is known as "training". This is the motivation of the
+Baum-Welch algorithm. Together, these three algorithms provide the basis
+for many applications of the HMM model.</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            <div>
+</div>
+
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html#disqus_thread",
+                id="disqus-accordion-toggle">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'statsworks';
+        var disqus_identifier = 'https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html';
+    var disqus_url = 'https://seanammirati.github.io/category/r-hidden-markov-markov-models-markov-chain/hidden-markov-models.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2018-12-14T00:00:00-05:00">Dec 14, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://seanammirati.github.io/categories.html#r-hidden-markov-markov-models-markov-chain-ref">R, hidden markov, markov models, markov chain</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://seanammirati.github.io/tags/#forwards-backwards-ref">forwards-backwards
+                    <span>1</span>
+</a></li>
+                <li><a href="https://seanammirati.github.io/tags/#hmms-ref">HMMS
+                    <span>2</span>
+</a></li>
+                <li><a href="https://seanammirati.github.io/tags/#markov-chains-ref">markov chains
+                    <span>2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="https://github.com/SeanAmmirati" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="https://www.linkedin.com/in/sean-ammirati-4795a4ba/" title="My LinkedIn Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-linkedin sidebar-social-links"></i></a>
+    <a href="https://www.kaggle.com/seanammirati" title="My Kaggle Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-kaggle sidebar-social-links"></i></a>
+    <a href="ammirati.sean@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">Stats Works</span> - Making Statistics Work for You</li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+    </ul>
+</div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'statsworks';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementById('disqus-accordion-toggle');
+    var old_innerHTML = link.innerHTML;
+    $(link).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : MIT -->
+</html>
