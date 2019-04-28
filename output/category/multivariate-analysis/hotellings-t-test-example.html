@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="t test, alternative methodologies, bayesian modelling, Bayesian Analysis, " />
+<meta name="keywords" content="hotellings, multivariate, t-test, Multivariate Analysis, " />
 
-<meta property="og:title" content="To T-Test or Not to T-Test  - A Bayesian Approach "/>
-<meta property="og:url" content="../../category/bayesian-analysis/t test or not t test.html" />
-<meta property="og:description" content="A more complex approach to the canonical t-test using bayesian methods and structure." />
+<meta property="og:title" content="Hotelling&#39;s T-Test Example "/>
+<meta property="og:url" content="../../category/multivariate-analysis/hotellings-t-test-example.html" />
+<meta property="og:description" content="An example of using the multivariate analogue of the t-test." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
-<meta property="og:article:published_time" content="2018-11-03T00:00:00-04:00" />
-<meta name="twitter:title" content="To T-Test or Not to T-Test  - A Bayesian Approach ">
-<meta name="twitter:description" content="A more complex approach to the canonical t-test using bayesian methods and structure.">
+<meta property="og:article:published_time" content="2018-11-18T00:00:00-05:00" />
+<meta name="twitter:title" content="Hotelling&#39;s T-Test Example ">
+<meta name="twitter:description" content="An example of using the multivariate analogue of the t-test.">
 
-        <title>To T-Test or Not to T-Test  - A Bayesian Approach  · Stats Works
+        <title>Hotelling&#39;s T-Test Example  · Stats Works
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -64,7 +64,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/bayesian-analysis/t test or not t test.html"> To T-Test or Not to T-Test  <small> A Bayesian Approach </small>  </a></h1>
+    <h1><a href="../../category/multivariate-analysis/hotellings-t-test-example.html"> Hotelling's T-Test Example  </a></h1>
     </header>
 </div>
 
@@ -1221,65 +1221,26 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here's an example of the Hotelling's MV T-test with responses and hypothesized means.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">test_equality_means</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">,</span> <span class="n">norm_vec2</span><span class="p">){</span></span>
-<span class="code-line">  <span class="n">sx</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">sy</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">xbar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">ybar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">n</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">m</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">source</span><span class="p">(</span><span class="s">&#39;./hotellings_functions.R&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">response_data</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">51</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="m">37</span><span class="p">,</span><span class="m">42</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="m">43</span><span class="p">,</span><span class="m">41</span><span class="p">,</span><span class="m">38</span><span class="p">,</span><span class="m">36</span><span class="p">,</span><span class="m">26</span><span class="p">,</span><span class="m">29</span><span class="p">,</span><span class="m">36</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">22</span><span class="p">,</span><span class="m">36</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">32</span><span class="p">,</span><span class="m">22</span><span class="p">,</span><span class="m">21</span><span class="p">,</span><span class="m">23</span><span class="p">,</span><span class="m">31</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">26</span><span class="p">,</span><span class="m">41</span><span class="p">,</span><span class="m">32</span><span class="p">,</span><span class="m">33</span><span class="p">,</span><span class="m">43</span><span class="p">,</span><span class="m">36</span><span class="p">,</span><span class="m">31</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="m">31</span><span class="p">,</span><span class="m">25</span><span class="p">,</span><span class="m">35</span><span class="p">,</span><span class="m">17</span><span class="p">,</span><span class="m">37</span><span class="p">,</span><span class="m">34</span><span class="p">,</span><span class="m">14</span><span class="p">,</span><span class="m">35</span><span class="p">,</span><span class="m">25</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="m">25</span><span class="p">,</span><span class="m">32</span><span class="p">,</span><span class="m">26</span><span class="p">,</span><span class="m">42</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="m">30</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="m">29</span><span class="p">,</span><span class="m">40</span><span class="p">,</span><span class="m">38</span><span class="p">,</span><span class="m">16</span><span class="p">,</span><span class="m">28</span><span class="p">,</span><span class="m">36</span><span class="p">,</span><span class="m">25</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">hypothesized_mean</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="m">25</span><span class="p">,</span><span class="m">40</span><span class="p">,</span><span class="m">25</span><span class="p">,</span><span class="m">30</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">response_data</span></span>
 <span class="code-line"></span>
-<span class="code-line">  <span class="n">tstat</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="m">1</span><span class="o">/</span><span class="n">n</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sx</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sy</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)))</span></span>
-<span class="code-line">  <span class="n">p_tstat</span> <span class="o">&lt;-</span> <span class="nf">pt</span><span class="p">(</span><span class="n">tstat</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">tstat</span> <span class="o">=</span> <span class="n">tstat</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p_tstat</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">simulatepostprob</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="n">nnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;n&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Snew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;S&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">knew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;k&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Bnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;B&#39;</span><span class="n">]</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">lst</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">obs</span> <span class="o">&lt;-</span> <span class="n">vec[i]</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">ninit</span> <span class="o">=</span> <span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Binit</span> <span class="o">=</span> <span class="n">Bnew</span></span>
-<span class="code-line">    <span class="n">Sinit</span> <span class="o">=</span> <span class="n">Snew</span></span>
-<span class="code-line">    <span class="n">kinit</span> <span class="o">=</span> <span class="n">knew</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">knew</span> <span class="o">=</span> <span class="n">kinit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">nnew</span> <span class="o">=</span> <span class="n">ninit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">Bnew</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">ninit</span><span class="o">*</span><span class="n">Binit</span> <span class="o">+</span> <span class="n">obs</span><span class="p">)</span><span class="o">/</span><span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Snew</span> <span class="o">&lt;-</span> <span class="n">Sinit</span> <span class="o">+</span> <span class="n">ninit</span><span class="o">*</span><span class="n">Binit^2</span> <span class="o">+</span> <span class="n">obs^2</span> <span class="o">-</span> <span class="n">nnew</span><span class="o">*</span><span class="n">Bnew^2</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nf">if </span><span class="p">(</span><span class="n">knew</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">    <span class="p">}</span><span class="n">else</span><span class="p">{</span></span>
-<span class="code-line">      <span class="c1">## We randomly sample a value for sigma|x first</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">knew</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">Snew</span><span class="o">/</span><span class="n">sampchi</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    <span class="c1">## Using sigma, we sample for mu|x, sigma.</span></span>
-<span class="code-line">    <span class="n">mu</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">obs</span> <span class="o">+</span> <span class="n">Bnew</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">nnew</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">lst[[i]]</span> <span class="o">&lt;-</span> <span class="n">mu</span></span>
-<span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">rpost</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="nf">replicate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">expr</span> <span class="o">=</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="nf">[length</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="n">]</span><span class="p">)</span></span>
-<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"><span class="nf">prob_null</span><span class="p">(</span><span class="n">response_data</span><span class="p">,</span> <span class="n">hypothesized_mean</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">find_discriminant</span><span class="p">(</span><span class="n">response_data</span><span class="p">,</span> <span class="n">hypothesized_mean</span><span class="p">)</span></span>
 </pre></div>
 
     </div>
@@ -1290,165 +1251,21 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Standard-T-Test">Standard T-Test<a class="anchor-link" href="#Standard-T-Test">&#182;</a></h1><p>Consider the t-test of equality of means. Using the standard procedure for a t-test:</p>
+<p>From this, because the p value is less than .05, we reject the hypothesis that this data comes from a normally distributed population with mean vector 30, 25, 40, 25, 30.
+The discriminant indicates that the third variable contributes most to the difference between the hypothesized and sample mean.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">vec1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">116</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">113</span><span class="p">,</span><span class="m">117</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">112</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">vec2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">108</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">105</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">106</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">111</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">t_test_res</span> <span class="o">=</span> <span class="nf">test_equality_means</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">t_test_res</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<dl>
-	<dt>$tstat</dt>
-		<dd>3.48432421316996</dd>
-	<dt>$prob</dt>
-		<dd>0.998676366290831</dd>
-</dl>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the t-test gives us a significant result -- the two means would have a difference smaller than the observed difference
-with probability <code>r t_test_res$prob</code>. We then would reject the null hypothesis with 95% confidence (or even 99% confidence.)</p>
-<h1 id="Bayesian-Approach">Bayesian Approach<a class="anchor-link" href="#Bayesian-Approach">&#182;</a></h1><p>Now let's try to solve this problem with our Bayesian hats! Assuming that we have a prior distribution of $\mu$ and $\sigma^2$ such that
-$x \mid \mu, \sigma^2 \sim N(\mu, \sigma^2)$ , we want the posterior $f(\mu \mid x_1, x_2, ..., x_n, \sigma^2)$ . Assuming a prior of $\mu \mid \sigma^2 \sim N(\beta, \frac{\sigma}{\sqrt{n}})$ and
-$\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n, S_0, k$  and update for each value of x.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec1</span><span class="p">)</span> <span class="o">-</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec2</span><span class="p">)</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>20</li>
-	<li>-0.503416712324565</li>
-	<li>1.45988251782074</li>
-	<li>17.6073011837844</li>
-	<li>7.22926620488519</li>
-	<li>9.24411515038176</li>
-	<li>8.35747543643981</li>
-	<li>15.4506594648444</li>
-	<li>8.61721035342939</li>
-	<li>6.22213384120991</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>By iterating for each observation, we arrive at a posterior distribution for $\mu \mid \sigma^2$ and $\frac{S}{\sigma^2}$. We then sample randomly from these theoretical distributions to
-sample from the posterior distributions. If we replicate this many times, we will be able to estimate the differences between the posterior distributions of the two vectors.</p>
-<p>Using uninformative prior gives similar results to frequentist t-test method</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec2</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-0.999
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can then use our prior information about the sample to produce a mixed, updated result. For instance, with prior parameters:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">prior_params</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="m">9</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="m">30</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">require</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">ex</span> <span class="o">&lt;-</span> <span class="nf">mvrnorm</span><span class="p">(</span><span class="m">11</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">hypothesized_mean</span><span class="p">,</span> <span class="n">Sigma</span> <span class="o">=</span> <span class="nf">cov</span><span class="p">(</span><span class="n">response_data</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">prob_null</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">hypothesized_mean</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">find_discriminant</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">hypothesized_mean</span><span class="p">)</span></span>
 </pre></div>
 
     </div>
@@ -1459,42 +1276,34 @@ sample from the posterior distributions. If we replicate this many times, we wil
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see our posterior:</p>
+<p>Now we see that a multivariate normal distribution sampled with mean equal to the hypothesized mean and Sigma equal to the covariance of the observed data provides unsignificant results -- as expected.</p>
+<p>Now, let's see the t-test for the equality of means, assuming an equal covariance matrix and sample sizes.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">differences</span> <span class="o">&lt;-</span> <span class="n">response_data</span> <span class="o">-</span> <span class="n">ex</span></span>
+<span class="code-line"><span class="nf">prob_null</span><span class="p">(</span><span class="n">differences</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">5</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">find_discriminant</span><span class="p">(</span><span class="n">differences</span><span class="p">,</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">5</span><span class="p">))</span></span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-0.999
 </div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see the expected result:  that the two samples produce significant results -- meaning that there is evidence to reject the null hypothesis that they come from a distribution with the same mean vector.</p>
 
 </div>
 </div>
-
 </div>
  
 
@@ -1537,7 +1346,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/bayesian-analysis/t test or not t test.html#disqus_thread",
+                href="../../category/multivariate-analysis/hotellings-t-test-example.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1548,8 +1357,8 @@ sample from the posterior distributions. If we replicate this many times, we wil
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/bayesian-analysis/t test or not t test.html';
-    var disqus_url = '../../category/bayesian-analysis/t test or not t test.html';
+        var disqus_identifier = '../../category/multivariate-analysis/hotellings-t-test-example.html';
+    var disqus_url = '../../category/multivariate-analysis/hotellings-t-test-example.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1572,18 +1381,18 @@ sample from the posterior distributions. If we replicate this many times, we wil
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-11-03T00:00:00-04:00">Nov 3, 2018</time>
+            <time itemprop="dateCreated" datetime="2018-11-18T00:00:00-05:00">Nov 18, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="../../categories.html#bayesian-analysis-ref">Bayesian Analysis</a>
+            <a class="category-link" href="../../categories.html#multivariate-analysis-ref">Multivariate Analysis</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#alternative-methodologies-ref">alternative methodologies
+                <li><a href="../../tags/#hotellings-ref">hotellings
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#bayesian-modelling-ref">bayesian modelling
+                <li><a href="../../tags/#multivariate-ref">multivariate
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#t-test-ref">t test
+                <li><a href="../../tags/#t-test-ref">t-test
                     <span>2</span>
 </a></li>
             </ul>

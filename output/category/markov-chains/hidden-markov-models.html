@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="t test, alternative methodologies, bayesian modelling, Bayesian Analysis, " />
+<meta name="keywords" content="HMMS, markov chains, forwards-backwards, Markov Chains, " />
 
-<meta property="og:title" content="To T-Test or Not to T-Test  - A Bayesian Approach "/>
-<meta property="og:url" content="../../category/bayesian-analysis/t test or not t test.html" />
-<meta property="og:description" content="A more complex approach to the canonical t-test using bayesian methods and structure." />
+<meta property="og:title" content="Hidden Markov Models  - Extensions "/>
+<meta property="og:url" content="../../category/markov-chains/hidden-markov-models.html" />
+<meta property="og:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
-<meta property="og:article:published_time" content="2018-11-03T00:00:00-04:00" />
-<meta name="twitter:title" content="To T-Test or Not to T-Test  - A Bayesian Approach ">
-<meta name="twitter:description" content="A more complex approach to the canonical t-test using bayesian methods and structure.">
+<meta property="og:article:published_time" content="2018-12-14T00:00:00-05:00" />
+<meta name="twitter:title" content="Hidden Markov Models  - Extensions ">
+<meta name="twitter:description" content="A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm.">
 
-        <title>To T-Test or Not to T-Test  - A Bayesian Approach  · Stats Works
+        <title>Hidden Markov Models  - Extensions  · Stats Works
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -64,7 +64,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/bayesian-analysis/t test or not t test.html"> To T-Test or Not to T-Test  <small> A Bayesian Approach </small>  </a></h1>
+    <h1><a href="../../category/markov-chains/hidden-markov-models.html"> Hidden Markov Models  <small> Extensions </small>  </a></h1>
     </header>
 </div>
 
@@ -1221,68 +1221,174 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In my previous project, I developed the reasoning behind Hidden Markov
+Models (HMM) and developed a way of determining the most likely sequence
+of states that resulted in an observed sequence of emissions using the
+Viterbi algorithm. This project will explore extensions to the Hidden
+Markov Model, such as the Forwards-Backwards algorithm and the
+Baum-Welch algorithm.</p>
+<p>Consider a discrete time, discrete state-space Hidden Markov chain with:</p>
+<ul>
+<li>$\pi_{t}$ : the state at time <em>t</em> (unknown in the HMM) of <em>n</em> possible
+states </li>
+<li>$\pi_{t} = 1,2,\ldots,n$</li>
+<li>$x_{\text{t}}$: the emission at time <em>t</em> of <em>m</em> possible emissions,</li>
+<li>$x_{\text{t}} = 1,2,\ldots,m$</li>
+<li>P(0) : initial probabilities of being in the states. </li>
+<li><strong><em>P</em></strong> : a <em>nxn</em> transition matrix of transitions between states,
+giving P($\pi_{t} = i\left| \pi_{t - 1} = j \right)$ for the ith row and
+jth column.</li>
+<li><strong><em>E</em></strong> : a <em>nxm</em> matrix containing
+P($x_{\text{t}} = j\ \left| \ \pi_{t} = i \right)$ in the ith row, jth
+column, the emission probabilities. Note that the row sums must sum to 1.</li>
+</ul>
+<p>Given a set of observed emissions, $x_{1,\ldots,\ T}$, the Viterbi
+algorithm gives us the most likely sequence of states,
+$\pi_{1,\ldots,\ T}$ that resulted in the observed emissions, given
+<strong><em>P</em></strong> and <strong><em>E.</em></strong></p>
+<p>Although this decoding algorithm is very useful, there may be other
+aspects of the HMM we are interested in. One such problem is, given a
+set of observed emissions $x_{1,\ldots,\ T}$, what is the probability of
+the observed emissions? This problem can be solved using the law of
+total probability, i.e.:</p>
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}}\left| \ \mathbf{\pi} \right)P(\mathbf{\pi})\ $$<p>where $\mathbf{\pi}$ refers to any vector of state sequences. This can
+be computationally intensive -- for many steps, this will involve
+summing over an exponentially large number of possible state sequences.
+Thus, an algorithmic approach will be useful to make this result
+practical to obtain for large <em>T.</em> This is a similar problem to the
+Viterbi algorithm, but not exactly the same. This can be solved using
+the <em>forward algorithm</em>, as described below. Note that we can also write
+the above as:</p>
+$$P\left( x_{1},\ \ldots,x_{T} \right) = \ \sum_{\mathbf{\pi}}^{}{P(x_{1},\ \ldots,x_{T}},\mathbf{\pi})\ $$<p>Let's call $\alpha_{t}(\pi_{t})$ =
+$P\left( x_{1},\ \ldots,x_{t},\ \pi_{t} \right) = \ \sum_{\pi_{t - 1}}^{}{P(x_{1},\ \ldots,x_{T},\ \pi_{t},\pi_{t - 1})}$</p>
+<p>It follows that our desired probability of the sequence is equal to the
+sum over all states of the above quantity.</p>
+$$\alpha_{t}(\pi_{t}) = \ \sum_{\mathbf{\pi}_{t - 1}}^{}{P(x_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t},\ \pi_{t - 1})P(\pi_{t}|x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$<p>But $x_{t}$ is conditionally independent of everything but
+$\pi_{t},\ $and $\pi_{t}$conditionally independent on everything but
+$\pi_{t - 1}$. So we can write this simply as:</p>
+$$\alpha_{t}(\pi_{t}) = \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})P(x_{1},\ \ldots,x_{t - 1},\ \pi_{t - 1})$$$$= \ P(x_{t}|\pi_{t})\sum_{\mathbf{\pi}_{t - 1}}^{}{P(\pi_{t}|\pi_{t - 1}})\alpha_{t - 1}(\pi_{t - 1})$$<p>It follows, then, that we can compute each $\alpha_{t}$ recursively.
+This will eliminate the need to look at the probability of all states.
+This has a computation time of $O(\text{nm}^{2})$ which is far faster
+than doing it for each possible sequence, which is$\ O(\text{nm}^{n})$.
+After computing this for each possible state at time T, we sum the
+probabilities to get the probability of the observed sequence. Note that
+$\alpha_{1}\left( \pi_{1} \right) = P(x_{1}|\pi_{1})\sum_{x_{0}}^{}{P(\pi_{1}|\pi_{0}})P(\pi_{0}) = \ \ P(x_{1}|\pi_{1})P(\pi_{1})$,
+where $P\left( \pi_{1} \right)$ is to be considered the initial
+probabilities of entering the chain, predefined by the problem.</p>
+<p>Consider the following example of a fair and biased coin, where:</p>
+<p>Initial probabilities are equal, .5 for fair and .5 for biased</p>
+$$\mathbf{P = \ }\begin{matrix}
+.9 &amp; .1 \\
+.05 &amp; .95 \\
+\end{matrix}$$$$\mathbf{E = \ }\begin{matrix}
+.5 &amp; .5 \\
+.25 &amp; .75 \\
+\end{matrix}$$<p>We observe the sequence HTHHTTHH and want to determine the probability
+of this sequence occurring given our HMM. First,</p>
+$$\alpha_{1}\left( \pi_{1} = F \right) = \ P\left( x_{1} \middle| \pi_{1} = F \right)P\left( \pi_{1} = F \right) = \left( 0.5 \right)\left( 0.5 \right) = \ .25$$$$\alpha_{1}\left( \pi_{1} = B \right) = P\left( x_{1} \middle| \pi_{1} = B \right)P\left( \pi_{1} = B \right) = \left( 0.25 \right)\left( 0.5 \right) = \ .135$$<p>So it follows that the probability of a head being observed, alone, is
+the sum of these partial probabilities, or .385. To determine the
+probability of the full sequence, we continue this recursively,
+considering the results of the function at the last time step.</p>
+<p>We can also simplify this using matrix multiplication. If we consider
+$\mathbf{\alpha}_{\mathbf{t}}$ as a <em>nx1</em> vector pertaining to each of
+the <em>n</em> states, we can calculate the following:</p>
+$${\mathbf{\alpha}_{\mathbf{t}}\mathbf{= \ E}}_{\mathbf{.,j}} x \mathbf{P'\alpha}_{\mathbf{t - 1}}$$<p>Where j refers to a row vector of the jth column pertaining to the
+observed value at time <em>t</em>. This can help to simplify the calculations.
+Here, x refers to component-wise multiplication. I have included a
+user-defined function to determine this probability recursively for the
+problem at hand:</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">test_equality_means</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">,</span> <span class="n">norm_vec2</span><span class="p">){</span></span>
-<span class="code-line">  <span class="n">sx</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">sy</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">xbar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">ybar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">n</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">m</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">tstat</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="m">1</span><span class="o">/</span><span class="n">n</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sx</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sy</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)))</span></span>
-<span class="code-line">  <span class="n">p_tstat</span> <span class="o">&lt;-</span> <span class="nf">pt</span><span class="p">(</span><span class="n">tstat</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">tstat</span> <span class="o">=</span> <span class="n">tstat</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p_tstat</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">simulatepostprob</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="n">nnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;n&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Snew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;S&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">knew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;k&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Bnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;B&#39;</span><span class="n">]</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">lst</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">obs</span> <span class="o">&lt;-</span> <span class="n">vec[i]</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">ninit</span> <span class="o">=</span> <span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Binit</span> <span class="o">=</span> <span class="n">Bnew</span></span>
-<span class="code-line">    <span class="n">Sinit</span> <span class="o">=</span> <span class="n">Snew</span></span>
-<span class="code-line">    <span class="n">kinit</span> <span class="o">=</span> <span class="n">knew</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">knew</span> <span class="o">=</span> <span class="n">kinit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">nnew</span> <span class="o">=</span> <span class="n">ninit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">Bnew</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">ninit</span><span class="o">*</span><span class="n">Binit</span> <span class="o">+</span> <span class="n">obs</span><span class="p">)</span><span class="o">/</span><span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Snew</span> <span class="o">&lt;-</span> <span class="n">Sinit</span> <span class="o">+</span> <span class="n">ninit</span><span class="o">*</span><span class="n">Binit^2</span> <span class="o">+</span> <span class="n">obs^2</span> <span class="o">-</span> <span class="n">nnew</span><span class="o">*</span><span class="n">Bnew^2</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nf">if </span><span class="p">(</span><span class="n">knew</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">    <span class="p">}</span><span class="n">else</span><span class="p">{</span></span>
-<span class="code-line">      <span class="c1">## We randomly sample a value for sigma|x first</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">knew</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">Snew</span><span class="o">/</span><span class="n">sampchi</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    <span class="c1">## Using sigma, we sample for mu|x, sigma.</span></span>
-<span class="code-line">    <span class="n">mu</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">obs</span> <span class="o">+</span> <span class="n">Bnew</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">nnew</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">lst[[i]]</span> <span class="o">&lt;-</span> <span class="n">mu</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">forwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span><span class="n">emissions</span><span class="p">,</span><span class="n">init</span><span class="p">){</span></span>
+<span class="code-line">  <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">init</span><span class="o">*</span><span class="n">emissions[</span><span class="p">,</span><span class="n">obs[1]]</span><span class="p">)</span></span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span><span class="p">)){</span></span>
+<span class="code-line">    <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span><span class="o">%*%</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">alphas[[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span><span class="n">obs[i</span><span class="m">-1</span><span class="n">]]</span><span class="o">*</span><span class="n">alphasum</span></span>
 <span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Sequences:&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Final Probability&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">print</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="m">+1</span><span class="n">]]</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">rpost</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="nf">replicate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">expr</span> <span class="o">=</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="nf">[length</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="n">]</span><span class="p">)</span></span>
-<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"><span class="nf">forwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span><span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)),</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">))</span></span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="code-line">[1] &#34;Sequences:&#34;</span>
+<span class="code-line">[[1]]</span>
+<span class="code-line">[1] 1</span>
+<span class="code-line"></span>
+<span class="code-line">[[2]]</span>
+<span class="code-line">[1] 0.250 0.125</span>
+<span class="code-line"></span>
+<span class="code-line">[[3]]</span>
+<span class="code-line">[1] 0.1187500 0.0609375</span>
+<span class="code-line"></span>
+<span class="code-line">[[4]]</span>
+<span class="code-line">[1] 0.05648438 0.08689453</span>
+<span class="code-line"></span>
+<span class="code-line">[[5]]</span>
+<span class="code-line">[1] 0.02976270 0.01450122</span>
+<span class="code-line"></span>
+<span class="code-line">[[6]]</span>
+<span class="code-line">[1] 0.014118274 0.007249905</span>
+<span class="code-line"></span>
+<span class="code-line">[[7]]</span>
+<span class="code-line">[1] 0.006715719 0.010331142</span>
+<span class="code-line"></span>
+<span class="code-line">[[8]]</span>
+<span class="code-line">[1] 0.003538630 0.005172367</span>
+<span class="code-line"></span>
+<span class="code-line">[[9]]</span>
+<span class="code-line">[1] 0.0018510021 0.0009050793</span>
+<span class="code-line"></span>
+<span class="code-line">[[10]]</span>
+<span class="code-line">[1] 0.0008782049 0.0004509265</span>
+<span class="code-line"></span>
+<span class="code-line">[1] &#34;Final Probability&#34;</span>
+<span class="code-line">[1] 0.002756081</span>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+0.00275608136978746
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1290,21 +1396,95 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Standard-T-Test">Standard T-Test<a class="anchor-link" href="#Standard-T-Test">&#182;</a></h1><p>Consider the t-test of equality of means. Using the standard procedure for a t-test:</p>
+<p>This gives us our result -- there is about a .2% chance of this
+observation being output by this particular HMM. This can be useful for
+numerous applications: consider if one was testing against <em>n</em> possible
+HMMs. We could then find which HMM is the more likely fit by considering</p>
+<p>$\text{argmax}_{i}(P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right))$.
+Bayes' Rule tells us that:</p>
+$$P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \propto \ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right)P(\text{HMM}_{i})$$<p>If we consider our <em>n</em> models as equally likely, we can then determine
+which model is most probable given the observations simply by
+considering the likelihood in the fashion calculated above. That is,
+$\operatorname{}\left( P\left( \text{HMM}_{i} \middle| x_{1},\ \ldots,x_{T} \right) \right) = \text{argmax}_{i}(\ P\left( x_{1},\ \ldots,x_{T} \middle| \text{HMM}_{i} \right))$.
+This relatively simple result and simple algorithm gives us a method of
+comparing and optimizing our fit. Also, since the probabilities here can
+become quite small, the fact that a logarithmic function is
+monotonically increasing means we can also compare the logarithms, in
+order to avoid machine zeros.</p>
+<p>The closely related, but not exactly equivalent, Forwards-Backwards
+algorithm attempts to find probability of a particular state of a
+<em>particular</em> time point given all of the observations, i.e. :</p>
+$$P({\pi_{k}|x}_{1},\ \ldots,x_{T})$$$$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = \ \frac{P\left( x_{k + 1},\ldots,x_{T}|{\pi_{k},x}_{1},\ \ldots,x_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)}{P\left( x_{k + 1},\ldots,x_{T} \right)}$$<p>$$\propto P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)$$</p>
+<p>This is due to the fact that $x_{k + 1},\ldots,x_{T}$ is conditionally
+independent of $x_{1},\ \ldots,x_{k}$ given $\pi_{k}$ and that
+$P\left( x_{k + 1},\ldots,x_{T} \right)$ is a multiplicative constant
+which does not change with a selection of $\pi_{k}$. This means we can
+normalize this probability at each point to ensure that
+$\sum_{}^{}{P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k,\ }x_{k + 1},\ldots,x_{T} \right) = 1}$.
+Notice that
+$P\left( {\pi_{k}|x}_{1},\ \ldots,x_{k} \right)\  \propto \ P\left( x_{1},\ \ldots,x_{k},\ \pi_{k} \right) = \ \alpha_{k}\mathbf{(}\pi_{k})$
+as described earlier.</p>
+<p>Notice that $P\left( x_{k + 1},\ldots,x_{T}|\pi_{k} \right)$ is a
+similar proposition, but backwards. That is, we can call
+$$b_{k}(\pi_{k})$$
+$$= \sum_{\pi_{k + 1}}^{}{P\left( \pi_{k + 1},x_{k + 1},\ldots,x_{T}|\pi_{k} \right)}$$ 
+$$= \sum_{\pi_{k + 1}}^{}{P\left( x_{k + 2},\ldots,x_{T}|{x_{k + 1},\pi}_{k + 1},\pi_{k} \right)P(x_{k + 1}|\pi_{k + 1},\pi_{k})P(\pi_{k + 1}|\pi_{k})}$$
+$$= \sum_{\pi_{k + 1}}^{}{P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$</p>
+<p>This is obtained using the chain rule and the conditional independencies
+of the HMM. Notice now that
+$P\left( x_{k + 2},\ldots,x_{T}|\pi_{k + 1} \right) = \ b_{k + 1}\left( \pi_{k + 1} \right)$
+and we can now see the recursive nature of this function. That is,</p>
+$$b_{k}\left( \pi_{k} \right) = \ \sum_{\pi_{k + 1}}^{}{b_{k + 1}\left( \pi_{k + 1} \right)P(x_{k + 1}|\pi_{k + 1})P(\pi_{k + 1}|\pi_{k})}$$<p>We take $b_{T}\left( \pi_{T} \right) = 1$ for all states, as this can be
+considered the exit probability.</p>
+<p>Intuitively, this means that we are considering, for some intermediate
+time step, the probabilities of getting there from zero and the
+probabilities of "back tracking" from T. This gives us the total
+probability of an intermediate state based on our observations.</p>
+<p>The implementation is as follows:</p>
+<p>Compute the forward probabilities (by the previously stated algorithm)
+until time step <em>k.</em> For each step, normalize the results so that the
+probabilities sum to 1. Then, compute the backward probabilities from T
+to k. Normalize these at each step as well. Then, multiply the two
+results and normalize to get the probabilities of being in each state
+after <em>k</em> time steps.</p>
+<p>To calculate this, we may use the following formula:</p>
+$${\mathbf{b}_{\mathbf{t}}\mathbf{= \ P(E}}_{\mathbf{.,j}} x \mathbf{b}_{\mathbf{t + 1}}\mathbf{)}$$<p>Notice that this is similar to the formula from before for the forwards
+portion, but the multiplications are "flipped." Thus we can implement
+the Forward-Backwards algorithm as follows:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">vec1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">116</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">113</span><span class="p">,</span><span class="m">117</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">112</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">vec2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">108</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">105</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">106</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">111</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">bkforwardalgor</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">emissions</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">alphas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">init</span> <span class="o">*</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[1]]</span><span class="p">))</span></span>
+<span class="code-line">    <span class="n">betas</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">trans</span><span class="p">)))</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">3</span><span class="o">:</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">alphasum</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">alphas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span> <span class="o">*</span> <span class="n">alphasum</span></span>
+<span class="code-line">        <span class="n">alphas[[i]]</span> <span class="o">&lt;-</span> <span class="n">alphas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line">        <span class="n">betasum</span> <span class="o">&lt;-</span> <span class="n">emissions[</span><span class="p">,</span> <span class="n">obs</span><span class="nf">[length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="m">2</span><span class="n">]]</span> <span class="o">*</span> <span class="n">betas[[i</span> <span class="o">-</span> <span class="m">1</span><span class="n">]]</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">trans</span> <span class="o">%*%</span> <span class="n">betasum</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">betas[[i]]</span> <span class="o">&lt;-</span> <span class="n">betas[[i]]</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">betas[[i]]</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">    <span class="n">pointalph</span> <span class="o">&lt;-</span> <span class="n">alphas[</span><span class="nf">[</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
+<span class="code-line">    <span class="n">pointbet</span> <span class="o">&lt;-</span> <span class="n">betas[</span><span class="nf">[</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="n">]]</span></span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">forward</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">backward</span> <span class="o">=</span> <span class="n">betas</span><span class="p">,</span> <span class="n">probstates</span> <span class="o">=</span> <span class="n">pointalph</span> <span class="o">*</span> <span class="n">pointbet</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">pointalph</span> <span class="o">*</span> </span>
+<span class="code-line">        <span class="n">pointbet</span><span class="p">)))</span></span>
+<span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">t_test_res</span> <span class="o">=</span> <span class="nf">test_equality_means</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">t_test_res</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nf">bkforwardalgor</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">3</span><span class="p">,</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.9</span><span class="p">,</span> <span class="m">0.1</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.95</span><span class="p">,</span> <span class="m">0.05</span><span class="p">)),</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> </span>
+<span class="code-line">    <span class="m">0.5</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.25</span><span class="p">,</span> <span class="m">0.75</span><span class="p">)),</span> <span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span></span>
 </pre></div>
 
     </div>
@@ -1323,10 +1503,66 @@ h6:hover .anchor-link {
 
 <div class="output_html rendered_html output_subarea ">
 <dl>
-	<dt>$tstat</dt>
-		<dd>3.48432421316996</dd>
-	<dt>$prob</dt>
-		<dd>0.998676366290831</dd>
+	<dt>$forward</dt>
+		<dd><ol>
+	<li>1</li>
+	<li><ol class=list-inline>
+	<li>0.666666666666667</li>
+	<li>0.333333333333333</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.88</li>
+	<li>0.12</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.950682056663169</li>
+	<li>0.0493179433368311</li>
+</ol>
+</li>
+</ol>
+</dd>
+	<dt>$backward</dt>
+		<dd><ol>
+	<li><ol class=list-inline>
+	<li>1</li>
+	<li>1</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493506493506494</li>
+	<li>0.506493506493506</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493683851143735</li>
+	<li>0.506316148856265</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.50646857940524</li>
+	<li>0.49353142059476</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.505577910274165</li>
+	<li>0.494422089725835</li>
+</ol>
+</li>
+	<li><ol class=list-inline>
+	<li>0.493357500634704</li>
+	<li>0.506642499365296</li>
+</ol>
+</li>
+</ol>
+</dd>
+	<dt>$probstates</dt>
+		<dd><ol class=list-inline>
+	<li>0.949421205954081</li>
+	<li>0.0505787940459189</li>
+</ol>
+</dd>
 </dl>
 
 </div>
@@ -1340,21 +1576,54 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the t-test gives us a significant result -- the two means would have a difference smaller than the observed difference
-with probability <code>r t_test_res$prob</code>. We then would reject the null hypothesis with 95% confidence (or even 99% confidence.)</p>
-<h1 id="Bayesian-Approach">Bayesian Approach<a class="anchor-link" href="#Bayesian-Approach">&#182;</a></h1><p>Now let's try to solve this problem with our Bayesian hats! Assuming that we have a prior distribution of $\mu$ and $\sigma^2$ such that
-$x \mid \mu, \sigma^2 \sim N(\mu, \sigma^2)$ , we want the posterior $f(\mu \mid x_1, x_2, ..., x_n, \sigma^2)$ . Assuming a prior of $\mu \mid \sigma^2 \sim N(\beta, \frac{\sigma}{\sqrt{n}})$ and
-$\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n, S_0, k$  and update for each value of x.</p>
+<p>So, at the third time step, we are close to 95% certain that we were in
+the first state (Heads), given all of the observations.</p>
+<p>This all leads us to the Baum-Welch algorithm, which is a way of
+estimating parameters of a HMM given a sequence of emissions. Let
+$\gamma_{i}\left( t \right) = P\left( \pi_{t} \middle| \theta,x_{1},\ \ldots,x_{T} \right)$
+where $\theta$ is the parameters of the distribution (the transition
+matrix, the emission matrix and the initial probabilities.) Note that we
+have already calculated this in the previous exercise using the forwards
+backwards algorithm.</p>
+<p>Further, let
+$$\xi_{i,j}\left( t \right) = \ P\left( \pi_{t}\ ,\pi_{t + 1}\  \middle| \theta,x_{1},\ \ldots,x_{T} \right) = \frac{\alpha_{t}\left( \pi_{t} = i \right)\mathbf{P}_{\text{ij}}b_{t + 1}\left( \pi_{t + 1} = j \right)\mathbf{E}_{{j,x}_{t + 1}}}{\sum_{}^{}{\alpha_{t}\left( \pi_{t} = i \right)\mathbf{P}_{\text{ij}}b_{t + 1}\left( \pi_{t + 1} = j \right)\mathbf{E}_{{j,x}_{t + 1}}}}$$</p>
+<p>This represents the probability of entering state <em>i</em> from the left,
+going from state <em>i</em> to <em>j,</em> exiting state j from the right, and
+emitting the emission at the t+1 time step from state j. All of this
+culminates in the joint probability of two consecutive states.</p>
+<p>Then, using an initial set of parameters we can calculate these values
+and update our parameters to find a local maxima. Our updates are as
+follows:</p>
+<p>Initial probabilities = $\gamma_{i}\left( 1 \right)$. This is the
+expected frequency spent in state <em>i</em> at time 1.</p>
+<p>The new transition matrix, <strong>P'</strong>, will have entries:</p>
+$$\mathbf{P'}_{\text{ij}} = \frac{\sum_{t = 1}^{T - 1}{\ \xi_{i,j}\left( t \right)}\ }{\sum_{t = 1}^{T - 1}{\gamma_{i}\left( t \right)}}$$<p>This is the expected number of transitions from state <em>i</em> to <em>j</em>
+compared to the expected total number of transitions away from state <em>i</em>
+(including itself).</p>
+<p>The new emission matrix, <strong>E'</strong>, will have entries:</p>
+<p>$\mathbf{E'}_{\text{ij}} = \frac{\sum_{t = 1}^{T}1_{x_{t} = j}\gamma_{i}\left( t \right)}{\sum_{t = 1}^{T}{\gamma_{i}\left( t \right)}}$</p>
+<p>Where $1_{x_{t} = j}$ is an indicator function which is 1 if the
+emission was the jth emission and zero otherwise. This calculates the
+average amount of time an emission <em>j</em> was emitted in state <em>i</em> divided
+by the average amount of time it was in state <em>i</em> in general.</p>
+<p>We then iterate this process until we are within a threshold to
+determine the optimal parameters for the model given only an observed
+sequence.</p>
+<p>While I have not implemented this algorithm directly here, I have used
+the <em>HMM</em> package in R to determine this. Here is the output:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec1</span><span class="p">)</span> <span class="o">-</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec2</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">library</span><span class="p">(</span><span class="n">HMM</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">chk</span> <span class="o">&lt;-</span> <span class="nf">initHMM</span><span class="p">(</span><span class="n">States</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="s">&quot;B&quot;</span><span class="p">),</span><span class="n">Symbols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">),</span><span class="n">startProbs</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span></span>
+<span class="code-line">               <span class="n">transProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.9</span><span class="p">,</span><span class="m">.1</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">)),</span> <span class="n">emissionProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.25</span><span class="p">,</span><span class="m">.75</span><span class="p">)))</span></span>
+<span class="code-line"><span class="nf">baumWelch</span><span class="p">(</span><span class="n">chk</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">))</span></span>
 </pre></div>
 
     </div>
@@ -1372,18 +1641,154 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 
 
 <div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>20</li>
-	<li>-0.503416712324565</li>
-	<li>1.45988251782074</li>
-	<li>17.6073011837844</li>
-	<li>7.22926620488519</li>
-	<li>9.24411515038176</li>
-	<li>8.35747543643981</li>
-	<li>15.4506594648444</li>
-	<li>8.61721035342939</li>
-	<li>6.22213384120991</li>
+<dl>
+	<dt>$hmm</dt>
+		<dd><dl>
+	<dt>$States</dt>
+		<dd><ol class=list-inline>
+	<li>'F'</li>
+	<li>'B'</li>
 </ol>
+</dd>
+	<dt>$Symbols</dt>
+		<dd><ol class=list-inline>
+	<li>'H'</li>
+	<li>'T'</li>
+</ol>
+</dd>
+	<dt>$startProbs</dt>
+		<dd><dl class=dl-horizontal>
+	<dt>F</dt>
+		<dd>0.5</dd>
+	<dt>B</dt>
+		<dd>0.5</dd>
+</dl>
+</dd>
+	<dt>$transProbs</dt>
+		<dd><table>
+<thead><tr><th></th><th scope=col>F</th><th scope=col>B</th></tr></thead>
+<tbody>
+	<tr><th scope=row>F</th><td>0.8356626   </td><td>1.643374e-01</td></tr>
+	<tr><th scope=row>B</th><td>1.0000000   </td><td>4.663436e-19</td></tr>
+</tbody>
+</table>
+</dd>
+	<dt>$emissionProbs</dt>
+		<dd><table>
+<thead><tr><th></th><th scope=col>H</th><th scope=col>T</th></tr></thead>
+<tbody>
+	<tr><th scope=row>F</th><td>0.530374    </td><td>4.696260e-01</td></tr>
+	<tr><th scope=row>B</th><td>1.000000    </td><td>8.442496e-29</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+	<dt>$difference</dt>
+		<dd><ol class=list-inline>
+	<li>0.508902752112227</li>
+	<li>0.240556572158092</li>
+	<li>0.175367150726267</li>
+	<li>0.125799629747644</li>
+	<li>0.0789866075573572</li>
+	<li>0.0430462501906644</li>
+	<li>0.0220242002384686</li>
+	<li>0.0120457248068965</li>
+	<li>0.00797054223724487</li>
+	<li>0.00648938284089056</li>
+	<li>0.00596923716449372</li>
+	<li>0.00573434947770014</li>
+	<li>0.00556884788402301</li>
+	<li>0.00541435766962771</li>
+	<li>0.00525534145586094</li>
+	<li>0.0050878669619669</li>
+	<li>0.00491154731418667</li>
+	<li>0.0047272548854208</li>
+	<li>0.00453636210810545</li>
+	<li>0.00434044024235019</li>
+	<li>0.00414111692008325</li>
+	<li>0.0039399973466488</li>
+	<li>0.00373861517021827</li>
+	<li>0.00353839967199841</li>
+	<li>0.00334065357605126</li>
+	<li>0.00314653876626508</li>
+	<li>0.00295706838232949</li>
+	<li>0.00277310422503745</li>
+	<li>0.00259535857201991</li>
+	<li>0.00242439957307494</li>
+	<li>0.00226065943795158</li>
+	<li>0.00210444467891964</li>
+	<li>0.00195594773481778</li>
+	<li>0.00181525938160172</li>
+	<li>0.00168238142175776</li>
+	<li>0.00155723923619973</li>
+	<li>0.00143969387155143</li>
+	<li>0.0013295534195225</li>
+	<li>0.00122658352013238</li>
+	<li>0.00113051688536663</li>
+	<li>0.00104106179381376</li>
+	<li>0.000957909549977724</li>
+	<li>0.000880740935187623</li>
+	<li>0.000809231701136347</li>
+	<li>0.000743057173680575</li>
+	<li>0.00068189604460203</li>
+	<li>0.000625433433944128</li>
+	<li>0.000573363306621804</li>
+	<li>0.000525390324947385</li>
+	<li>0.00048123121464055</li>
+	<li>0.000440615716505618</li>
+	<li>0.000403287189561262</li>
+	<li>0.000369002924884535</li>
+	<li>0.0003375342226381</li>
+	<li>0.000308666278318049</li>
+	<li>0.00028219791808662</li>
+	<li>0.000257941217349493</li>
+	<li>0.000235721031633014</li>
+	<li>0.000215374464079931</li>
+	<li>0.000196750289868947</li>
+	<li>0.000179708354205615</li>
+	<li>0.000164118957457245</li>
+	<li>0.000149862238244094</li>
+	<li>0.000136827563139715</li>
+	<li>0.000124912929580535</li>
+	<li>0.000114024387063381</li>
+	<li>0.000104075480274582</li>
+	<li>9.49867167999181e-05</li>
+	<li>8.66850610378905e-05</li>
+	<li>7.91034553396986e-05</li>
+	<li>7.21803686502851e-05</li>
+	<li>6.58593726685694e-05</li>
+	<li>6.00887450076778e-05</li>
+	<li>5.48210986672737e-05</li>
+	<li>5.00130368923791e-05</li>
+	<li>4.56248323759889e-05</li>
+	<li>4.16201296418831e-05</li>
+	<li>3.79656693828655e-05</li>
+	<li>3.46310335586279e-05</li>
+	<li>3.1588409960111e-05</li>
+	<li>2.88123750393403e-05</li>
+	<li>2.62796938294031e-05</li>
+	<li>2.39691357210852e-05</li>
+	<li>2.18613050690297e-05</li>
+	<li>1.99384854986017e-05</li>
+	<li>1.81844969456332e-05</li>
+	<li>1.65845644250734e-05</li>
+	<li>1.51251977163732e-05</li>
+	<li>1.37940810142869e-05</li>
+	<li>1.25799718653171e-05</li>
+	<li>1.14726085741031e-05</li>
+	<li>1.04626254579159e-05</li>
+	<li>9.54147526764379e-06</li>
+	<li>8.70135822614897e-06</li>
+	<li>7.93515712464892e-06</li>
+	<li>7.23637797002243e-06</li>
+	<li>6.59909573466095e-06</li>
+	<li>6.0179047717908e-06</li>
+	<li>5.48787350674592e-06</li>
+	<li>5.00450304905593e-06</li>
+</ol>
+</dd>
+</dl>
 
 </div>
 
@@ -1396,105 +1801,26 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By iterating for each observation, we arrive at a posterior distribution for $\mu \mid \sigma^2$ and $\frac{S}{\sigma^2}$. We then sample randomly from these theoretical distributions to
-sample from the posterior distributions. If we replicate this many times, we will be able to estimate the differences between the posterior distributions of the two vectors.</p>
-<p>Using uninformative prior gives similar results to frequentist t-test method</p>
+<p>Here, we see that the algorithm suggests changing the transition
+probabilities to almost never transition when in the Biased state, and
+to transition more frequently when in the fair state. It also suggests
+that the emission probabilities be heads nearly in all cases when it is
+biased. This is troublesome, since we knew (by our definition) that the
+emissions would be fair for the fair coin and biased otherwise. Still,
+this generalizes the problem and allows us to attempt to fit optimal
+HMMs to a given set of emissions.</p>
+<p>Using the Viterbi algorithm is known as "decoding" -- we are attempting
+to determine the most likely state sequence given a sequence of observed
+emissions. Determining the most likely state at a time step is known as
+"filtering" (when the step is the final step, <em>T)</em> or "smoothing" (for
+some intermediate step, <em>k</em>). This is what the forward-backward
+algorithm was used for. Attempting to determine the best fitting
+parameters is known as "training". This is the motivation of the
+Baum-Welch algorithm. Together, these three algorithms provide the basis
+for many applications of the HMM model.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec2</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-0.999
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can then use our prior information about the sample to produce a mixed, updated result. For instance, with prior parameters:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">prior_params</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="m">9</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="m">30</span><span class="p">)</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see our posterior:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-0.999
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
  
 
@@ -1537,7 +1863,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/bayesian-analysis/t test or not t test.html#disqus_thread",
+                href="../../category/markov-chains/hidden-markov-models.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1548,8 +1874,8 @@ sample from the posterior distributions. If we replicate this many times, we wil
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/bayesian-analysis/t test or not t test.html';
-    var disqus_url = '../../category/bayesian-analysis/t test or not t test.html';
+        var disqus_identifier = '../../category/markov-chains/hidden-markov-models.html';
+    var disqus_url = '../../category/markov-chains/hidden-markov-models.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1572,18 +1898,18 @@ sample from the posterior distributions. If we replicate this many times, we wil
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-11-03T00:00:00-04:00">Nov 3, 2018</time>
+            <time itemprop="dateCreated" datetime="2018-12-14T00:00:00-05:00">Dec 14, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="../../categories.html#bayesian-analysis-ref">Bayesian Analysis</a>
+            <a class="category-link" href="../../categories.html#markov-chains-ref">Markov Chains</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#alternative-methodologies-ref">alternative methodologies
+                <li><a href="../../tags/#forwards-backwards-ref">forwards-backwards
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#bayesian-modelling-ref">bayesian modelling
-                    <span>1</span>
+                <li><a href="../../tags/#hmms-ref">HMMS
+                    <span>2</span>
 </a></li>
-                <li><a href="../../tags/#t-test-ref">t test
+                <li><a href="../../tags/#markov-chains-ref">markov chains
                     <span>2</span>
 </a></li>
             </ul>

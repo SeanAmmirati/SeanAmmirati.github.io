@@ -9,18 +9,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="t test, alternative methodologies, bayesian modelling, Bayesian Analysis, " />
+<meta name="keywords" content="theory, constrained least squares, linear regression, Linear Models, " />
 
-<meta property="og:title" content="To T-Test or Not to T-Test  - A Bayesian Approach "/>
-<meta property="og:url" content="../../category/bayesian-analysis/t test or not t test.html" />
-<meta property="og:description" content="A more complex approach to the canonical t-test using bayesian methods and structure." />
+<meta property="og:title" content="Constrained Least Squares "/>
+<meta property="og:url" content="../../category/linear-models/constrained-least-squares.html" />
+<meta property="og:description" content="A theoretical approach to a constrained least squares problem." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
-<meta property="og:article:published_time" content="2018-11-03T00:00:00-04:00" />
-<meta name="twitter:title" content="To T-Test or Not to T-Test  - A Bayesian Approach ">
-<meta name="twitter:description" content="A more complex approach to the canonical t-test using bayesian methods and structure.">
+<meta property="og:article:published_time" content="2018-12-29T00:00:00-05:00" />
+<meta name="twitter:title" content="Constrained Least Squares ">
+<meta name="twitter:description" content="A theoretical approach to a constrained least squares problem.">
 
-        <title>To T-Test or Not to T-Test  - A Bayesian Approach  · Stats Works
+        <title>Constrained Least Squares  · Stats Works
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -64,7 +64,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/bayesian-analysis/t test or not t test.html"> To T-Test or Not to T-Test  <small> A Bayesian Approach </small>  </a></h1>
+    <h1><a href="../../category/linear-models/constrained-least-squares.html"> Constrained Least Squares  </a></h1>
     </header>
 </div>
 
@@ -1221,76 +1221,133 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">test_equality_means</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">,</span> <span class="n">norm_vec2</span><span class="p">){</span></span>
-<span class="code-line">  <span class="n">sx</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">sy</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">xbar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">ybar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">n</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">m</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">tstat</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="m">1</span><span class="o">/</span><span class="n">n</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sx</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sy</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)))</span></span>
-<span class="code-line">  <span class="n">p_tstat</span> <span class="o">&lt;-</span> <span class="nf">pt</span><span class="p">(</span><span class="n">tstat</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">tstat</span> <span class="o">=</span> <span class="n">tstat</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p_tstat</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">simulatepostprob</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="n">nnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;n&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Snew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;S&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">knew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;k&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Bnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;B&#39;</span><span class="n">]</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">lst</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">obs</span> <span class="o">&lt;-</span> <span class="n">vec[i]</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">ninit</span> <span class="o">=</span> <span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Binit</span> <span class="o">=</span> <span class="n">Bnew</span></span>
-<span class="code-line">    <span class="n">Sinit</span> <span class="o">=</span> <span class="n">Snew</span></span>
-<span class="code-line">    <span class="n">kinit</span> <span class="o">=</span> <span class="n">knew</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">knew</span> <span class="o">=</span> <span class="n">kinit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">nnew</span> <span class="o">=</span> <span class="n">ninit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">Bnew</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">ninit</span><span class="o">*</span><span class="n">Binit</span> <span class="o">+</span> <span class="n">obs</span><span class="p">)</span><span class="o">/</span><span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Snew</span> <span class="o">&lt;-</span> <span class="n">Sinit</span> <span class="o">+</span> <span class="n">ninit</span><span class="o">*</span><span class="n">Binit^2</span> <span class="o">+</span> <span class="n">obs^2</span> <span class="o">-</span> <span class="n">nnew</span><span class="o">*</span><span class="n">Bnew^2</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nf">if </span><span class="p">(</span><span class="n">knew</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">    <span class="p">}</span><span class="n">else</span><span class="p">{</span></span>
-<span class="code-line">      <span class="c1">## We randomly sample a value for sigma|x first</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">knew</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">Snew</span><span class="o">/</span><span class="n">sampchi</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    <span class="c1">## Using sigma, we sample for mu|x, sigma.</span></span>
-<span class="code-line">    <span class="n">mu</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">obs</span> <span class="o">+</span> <span class="n">Bnew</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">nnew</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">lst[[i]]</span> <span class="o">&lt;-</span> <span class="n">mu</span></span>
-<span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">rpost</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="nf">replicate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">expr</span> <span class="o">=</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="nf">[length</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="n">]</span><span class="p">)</span></span>
-<span class="code-line"><span class="p">}</span></span>
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Consider the following: We wish to constrain the parameters of a linear model to have certain properties, for example, that the last coefficient is equal to 1, or that the sum of the coefficients are equal to one. How can we estimate the Least Squares Estimates using these constraints?</p>
+<p>Thus is constrained least squares, and this article will explore the theoretical basis for choosing a selection of coefficients that will minimize the least squares given some linear constraints on the coefficients.</p>
 
-    </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Standard-T-Test">Standard T-Test<a class="anchor-link" href="#Standard-T-Test">&#182;</a></h1><p>Consider the t-test of equality of means. Using the standard procedure for a t-test:</p>
+<p><strong>Constrained Least Squares -- Coefficient Calculation and
+ Simulation</strong></p>
+<p>We want to maximize the likelihood equation of β. We know that Y in
+ this context is normally distributed with mean Xβ and variance σ^2^.
+ This means that the distribution of yi given X is as follows:</p>
+$$f_{Y}\left( \mathbf{y}_{i} \middle| X \right) = {(2\pi\sigma^{2})}^{- 1/2}e^{\frac{\mathbf{- (y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$<p>So the likelihood of β is therefore:</p>
+$$L\left( \beta,\sigma^{2} \middle| y,X \right) = \left( 2\pi\sigma^{2} \right)^{- \frac{N}{2}}e^{- \frac{\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}}{2\mathbf{\sigma}^{\mathbf{2}}}^{\mathbf{2}}}$$<p>Taking the natural logarithm gives us the log likelihood:</p>
+$$l\left( \beta,\sigma^{2} \middle| y,X \right) = - \frac{1}{2\sigma^{2}}\sum_{\mathbf{i}}^{\mathbf{N}}{{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta)}}^{\mathbf{2}}\mathbf{-}\frac{N}{2}\text{ln}\left( \sigma^{2} \right)\mathbf{+ C}}\mathbf{=} - \frac{1}{2\sigma^{2}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{ln}\left( \sigma^{2} \right)\mathbf{+ C}$$<p>Here, I have truncated the result to only those involving <strong>β</strong> and
+ $\sigma^{2}$, as we are only interested in maximizing with respect to
+ <strong>β</strong>. Note that I have transitioned $\sigma^{2}$ to a constant, as we
+ are assuming the errors are iid with constant variance $\sigma^{2}$.
+ Here, we obtain the same result as minimizing the least squares
+ estimator, so the MLE and the least squares estimators are the same.
+ If we were unconstrained, we would simply take the partial derivative
+ here with respect to <strong>β</strong> to estimate <strong>β</strong> using maximum likelihood.</p>
+<p>Since $\sigma^{2}$ is unconstrained, we can find the maximum
+ likelihood estimator directly and use this to maximize with respect to
+ <strong>β.</strong> To do this, we differentiate the above equation with respect to
+ σ. Doing so yields the normal estimate for $\sigma^{2}$:</p>
+$${\widehat{\sigma}}^{2} = - \frac{1}{N}\sum_{\mathbf{i}}^{\mathbf{N}}{\mathbf{(y}_{\mathbf{i}}\mathbf{-}\mathbf{x}_{\mathbf{i}}\mathbf{\beta}^{\mathbf{c}}\mathbf{)}}^{\mathbf{2}}\mathbf{=}\frac{\mathbf{1}}{\mathbf{N}}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)$$<p>Where $\mathbf{\beta}^{\mathbf{c}}$ is our new constrained estimates.
+Plugging this back into the log likelihood equation yields:</p>
+$$l\left( \mathbf{\beta}^{\mathbf{c}} \middle| \mathbf{y},X \right) = - \frac{1}{- \frac{2}{N}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( y - X\mathbf{\beta}^{\mathbf{c}} \right)}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \frac{N}{2}\text{ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$$$l\left( \beta \middle| y,X \right) = - \frac{N}{2} - \frac{N}{2}\text{ln}\left( \frac{1}{N}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) \right)\mathbf{+ C}$$<p>However, we want to maximize the above equation with the constraint
+ that: M<strong>β</strong> = d, where d is a known vector and M is an <em>r x p</em> matrix
+ of rank <em>r \&lt; p.</em> This is an equality constraint. We can use the
+ Lagrange multipliers to solve this maximization problem with such a
+ constraint.</p>
+<p>We can see that, since the natural logarithm is a monotonically
+ increasing function, and the division within the above logarithm is a
+ constant, and that all other terms do not involve B, maximizing the
+ above equation with respect to$\ \mathbf{\beta}^{\mathbf{c}}$ is
+ equivalent to minimizing:</p>
+$$f = \left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right)^{'}\left( \mathbf{y} - X\mathbf{\beta}^{\mathbf{c}} \right) - \mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$<p>Where $\mathbf{\lambda}$ is the Lagrange multiplier (and so f is the
+ Lagrange function). The Lagrange multiplier is especially useful in
+ this case, as we are trying to minimize the least square error with
+ some constraint on the parameters.</p>
+<p>Multiplying the error by the transpose gives:</p>
+$$\mathbf{f =}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{y}^{\mathbf{'}}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right) = \mathbf{=}\mathbf{y}^{\mathbf{'}}\mathbf{y -}\mathbf{2}{\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}\mathbf{y} + {\mathbf{\beta}^{\mathbf{c}}}^{\mathbf{'}}X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}\mathbf{\lambda}^{\mathbf{'}}\left( M\mathbf{\beta}^{\mathbf{c}}\ –\ d \right)$$<p>Now we take derivatives with respect to $\mathbf{\beta}^{\mathbf{c}}$
+ <strong>and</strong> $\mathbf{\lambda}$ <strong>to obtain </strong></p>
+$$\frac{\text{δf}}{\text{δB}}\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X\mathbf{\beta}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$$$\frac{\text{δf}}{\text{δλ}}\mathbf{=}M\mathbf{\beta}^{\mathbf{c}}\ –\ d$$<p>We can now set both of these equal to zero and solve this system of
+equations to find the appropriate MLE estimate of
+$\mathbf{\beta}^{\mathbf{c}}$<strong>.</strong> However, there is a few simplifying
+steps which can make the result more useable. The first is to get the
+expression in terms of the original least squares estimator. If we
+multiply the first equation above by M(${X^{'}X)}^{- 1}$, we obtain:</p>
+$$- \ 2M({X^{'}X)}^{- 1}X^{'}\mathbf{y}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$<p>The first term on the right is the familiar $\mathbf{\beta}$ from
+unconstrained OLS (I will denote this $\mathbf{\beta}^{\mathbf{u}}$).
+Substituting, we get</p>
+$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$$$- \ 2M\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}\ M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = 0$$$$M({X^{'}X)}^{- 1}M^{'}\mathbf{\lambda} = \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$$<p>Solving for lambda:</p>
+$$\mathbf{\lambda} = {(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack 2M{\widehat{\mathbf{\beta}}}^{\mathbf{c}} - \ 2M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack\mathbf{= 2}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>Plugging this back into the original equation and solving for
+${\widehat{\mathbf{\beta}}}^{\mathbf{c}}$<strong>,</strong></p>
+$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}M^{'}\mathbf{\lambda}$$$$0\mathbf{=} - 2X^{'}\mathbf{y}\mathbf{+}2X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{-}{2(M}^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack)}$$$$X^{'}X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}X^{'}\mathbf{y}\mathbf{+}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{= (}{{X^{'}X)}^{- 1}X}^{'}\mathbf{y}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>This is the desired result, the maximum likelihood estimator given the
+constraint M$\mathbf{\beta =}d$.</p>
+<p>Now, we return to the first part of the problem.</p>
+$$\beta_{p} = 0$$<p>Is equivalent to the following constraint. <strong>α</strong>$\mathbf{'\beta = 0}$
+where <strong>α</strong> is a vector of zeros in all but the last row, which is a 1.
+So,</p>
+<p>$\mathbf{\alpha} = \left( 0,\ 0,\ 0,\ 0,\ldots\ 1 \right)^{'}$</p>
+<p>Plugging it into the derived result, we get:</p>
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ \mathbf{\alpha}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$<p>Since $\mathbf{\alpha}^{\mathbf{- 1}}\mathbf{= \alpha}$ in this case, we
+know that
+$\mathbf{\alpha}^{'}{(\mathbf{\alpha}^{'}({X^{'}X)}^{- 1}\mathbf{\alpha})}^{- 1} = \mathbf{\alpha}^{'}\left( \mathbf{\alpha}^{'}\left( X^{'}X \right)\mathbf{\alpha} \right) = {X^{'}X}_{p,p}$
+which is a scalar that is the bottom right element of the X'X matrix. So
+we can simplify this to:</p>
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}{X^{'}X}_{p,p}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\mathbf{\rbrack}$$<p>Since ${X^{'}X}_{p,p}\lbrack 1 - \ {\beta^{u}}_{p}\mathbf{\rbrack}$ is a
+constant:</p>
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{-}{X^{'}X}_{p,p}(\left\lbrack \ {\beta^{u}}_{p} \right\rbrack\mathbf{)}{{(X}^{'}X)}^{- 1}$$<p>So, if we compute the unconstrained
+${\widehat{\mathbf{\beta}}}^{\mathbf{u}}$ and ${{(X}^{'}X)}^{- 1}$, we
+can solve directly for the constrained $\mathbf{\text{β.}}$</p>
+<p>Now, for the second part of part a), this is equivalent to M being a
+vector of 1s, lets call it ϕ. Then</p>
+<p>ϕ = (1,1,1,1,...,1)' and d = 1.</p>
+<p>Plugging it into the derived result, we get:</p>
+$${\widehat{\mathbf{\beta}}}^{\mathbf{c}}\mathbf{=}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}\phi^{'}{(\phi^{'}({X^{'}X)}^{- 1}\phi)}^{- 1}\lbrack 1 - \text{ϕ}\mathbf{'}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\mathbf{\rbrack}$$<p>The residual sum of squares is defined as:</p>
+<p>$RSS = \ {(\mathbf{y -}\widehat{\mathbf{y}})}^{'}(\mathbf{y -}\widehat{\mathbf{y}})$</p>
+<p>In this case,
+$\widehat{\mathbf{y}} = X{\widehat{\mathbf{\beta}}}^{\mathbf{c}}$<strong>=</strong>
+X<strong>(</strong>$\mathbf{\beta}^{\mathbf{u}}\mathbf{+}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}$])$\mathbf{=}\mathbf{\ }X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$</p>
+<p>So it follows that
+$\left( \mathbf{y -}\widehat{\mathbf{y}_{\mathbf{c}}} \right) = \mathbf{y} - \ X\mathbf{\beta}^{\mathbf{u}}\mathbf{+}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$=</p>
+$$\ \mathbf{\varepsilon +}\text{X}{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$$<p>where $\mathbf{\varepsilon}$ is the error in the unconstrained case. So</p>
+<p>RSSc -- RSS
+=$\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack'{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack)$</p>
+<p>Each of the errors are normally distributed with mean 0 and variance
+sigma squared. This implies that:</p>
+<p>$(\mathbf{y} - \check{\mathbf{y}})\ \mathbf{I}\frac{1}{\sigma}\sim\text{MVN}(0,I)$,
+iid. $\ $</p>
+<p>Where the estimator is the estimator from the restrained equation. We
+can write the sum of squares of the above as:</p>
+$$\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}(\mathbf{I}\frac{1}{\sigma^{2}})\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)^{\mathbf{'}}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)\mathbf{+ 2(}\check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}}\mathbf{)'}\left( \mathbf{I}\frac{\mathbf{1}}{\mathbf{\sigma}^{\mathbf{2}}} \right)\mathbf{(y -}\check{\mathbf{y}}\mathbf{)}$$<p>Where$\ {\check{y}}_{i}\ $is the estimator of the unconstrained model.
+To show this, we remove the identical identity matrices and see that:</p>
+$$\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} + \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) =$$$$\left( \mathbf{y} - \check{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) + 2(\mathbf{y} - \check{\mathbf{y}})'\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$<p>Now,</p>
+$$\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \widehat{\mathbf{y}} - \left( \mathbf{y} - \check{\mathbf{y}} \right) \right) = \left( \ \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right)$$<p>which we know from the above is
+$(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\lbrack d - \text{M}{\widehat{\mathbf{\beta}}}^{\mathbf{u}}\rbrack$)'</p>
+<p>Rewriting, we have:</p>
+$$\left( \mathbf{y} - \check{\mathbf{y}} \right)'\left( \left( \mathbf{y} - \widehat{\mathbf{y}} \right) - \mathbf{\varepsilon} \right) = \mathbf{\varepsilon}'(X{{(X}^{'}X)}^{- 1}M^{'}{(M({X^{'}X)}^{- 1}M^{'})}^{- 1}\left\lbrack d - \ M{\widehat{\mathbf{\beta}}}^{\mathbf{u}} \right\rbrack)$$<p>Using the fact that $\mathbf{\varepsilon'X = 0}$<strong>,</strong> we can remove this
+to obtain.</p>
+$${\left( \mathbf{y} - \widehat{\mathbf{y}} \right)^{'}\left( \mathbf{y} - \widehat{\mathbf{y}} \right) = \left( \mathbf{y} - \check{\mathbf{y}} \right)}^{'}\left( \mathbf{y} - \check{\mathbf{y}} \right) + \ \left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)^{'}\left( \check{\mathbf{y}} - \widehat{\mathbf{y}} \right)$$<p>Thus the original standardized normal variable can be represented as a
+sum of Q1, and Q2 where:</p>
+<p>Q1 =
+$\left( \mathbf{y -}\check{\mathbf{y}} \right)^{\mathbf{'}}\left( \mathbf{y -}\check{\mathbf{y}} \right)$</p>
+<p>Q2 =
+$\left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)^{\mathbf{'}}\left( \check{\mathbf{y}}\mathbf{-}\widehat{\mathbf{y}} \right)
+$</p>
+<p>Q1 is the sum of squared errors for the unconstrained model, and
+therefore has rank $n - p$. Q2 has rank <em>p -- r ,</em> as it is the
+differences between the two estimators. Thus rank(Q1) + rank (Q2) =
+<em>n-r,</em> which is the rank of the errors of the constrained model, since
+r\&lt;p. Thus by Cochran's Theorum, the two are independently distributed.</p>
+<p>I have also produced simulations to prove that this is the case. I
+create three normal random variables, two of which are related to the
+others linearly and randomly. I compute the beta unconstrained, and then
+use this to compute the beta constrained. I then produce the errors for
+the constrained beta, and check the correlations in 100 samples of 100
+each. The mean correlation is very close to zero, which is the expected
+result. This is included below.</p>
 
 </div>
 </div>
@@ -1300,61 +1357,36 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">vec1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">116</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">113</span><span class="p">,</span><span class="m">117</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">112</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">vec2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">108</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">105</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">106</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">111</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">const</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">unconst</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line"><span class="n">correl</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">t_test_res</span> <span class="o">=</span> <span class="nf">test_equality_means</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">t_test_res</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<dl>
-	<dt>$tstat</dt>
-		<dd>3.48432421316996</dd>
-	<dt>$prob</dt>
-		<dd>0.998676366290831</dd>
-</dl>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the t-test gives us a significant result -- the two means would have a difference smaller than the observed difference
-with probability <code>r t_test_res$prob</code>. We then would reject the null hypothesis with 95% confidence (or even 99% confidence.)</p>
-<h1 id="Bayesian-Approach">Bayesian Approach<a class="anchor-link" href="#Bayesian-Approach">&#182;</a></h1><p>Now let's try to solve this problem with our Bayesian hats! Assuming that we have a prior distribution of $\mu$ and $\sigma^2$ such that
-$x \mid \mu, \sigma^2 \sim N(\mu, \sigma^2)$ , we want the posterior $f(\mu \mid x_1, x_2, ..., x_n, \sigma^2)$ . Assuming a prior of $\mu \mid \sigma^2 \sim N(\beta, \frac{\sigma}{\sqrt{n}})$ and
-$\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n, S_0, k$  and update for each value of x.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec1</span><span class="p">)</span> <span class="o">-</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec2</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nf">for </span><span class="p">(</span><span class="n">j</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">x1</span> <span class="o">&lt;-</span> <span class="n">y</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">x2</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.01</span><span class="p">)</span> <span class="o">-</span> <span class="m">.3</span><span class="o">*</span><span class="n">y</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="n">Xmat</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">data2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">mod.sim.1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">y</span><span class="o">~</span><span class="n">x1</span><span class="o">+</span><span class="n">x2</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">data2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">constraint</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">data2</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">d</span> <span class="o">=</span> <span class="m">1</span></span>
+<span class="code-line">    <span class="n">M</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">mod.sim.1</span></span>
+<span class="code-line">    <span class="n">BetaUnconstr</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">mod.sim.1</span><span class="p">)</span><span class="o">$</span><span class="n">coef[</span><span class="p">,</span><span class="m">1</span><span class="n">]</span></span>
+<span class="code-line">    <span class="n">b</span> <span class="o">&lt;-</span> <span class="n">d</span> <span class="o">-</span> <span class="nf">t</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">BetaUnconstr</span></span>
+<span class="code-line">    <span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">Xmat</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">Xmat</span></span>
+<span class="code-line">    <span class="n">c</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">%*%</span> <span class="nf">solve</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">M</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">const[i]</span>  <span class="o">&lt;-</span>  <span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">b</span></span>
+<span class="code-line">    <span class="n">unconst[i]</span>  <span class="o">&lt;-</span>  <span class="nf">sum</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">mod.sim.1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">  <span class="n">correl[j]</span>  <span class="o">&lt;-</span>  <span class="nf">cor</span><span class="p">(</span><span class="n">const</span><span class="p">,</span><span class="n">unconst</span><span class="p">)</span></span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line"><span class="n">correl</span></span>
+<span class="code-line"><span class="nf">mean</span><span class="p">(</span><span class="n">correl</span><span class="p">)</span></span>
 </pre></div>
 
     </div>
@@ -1373,52 +1405,112 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 
 <div class="output_html rendered_html output_subarea ">
 <ol class=list-inline>
-	<li>20</li>
-	<li>-0.503416712324565</li>
-	<li>1.45988251782074</li>
-	<li>17.6073011837844</li>
-	<li>7.22926620488519</li>
-	<li>9.24411515038176</li>
-	<li>8.35747543643981</li>
-	<li>15.4506594648444</li>
-	<li>8.61721035342939</li>
-	<li>6.22213384120991</li>
+	<li>-0.0531688267764585</li>
+	<li>-0.114464495425658</li>
+	<li>0.030905848126332</li>
+	<li>-0.0804090923830123</li>
+	<li>-0.0282214216966975</li>
+	<li>0.194785864859665</li>
+	<li>0.0830930039710045</li>
+	<li>0.0724914248601695</li>
+	<li>0.0829089181916613</li>
+	<li>0.0288906516772889</li>
+	<li>0.0279474715925631</li>
+	<li>-0.0533135707611509</li>
+	<li>0.0658332419742044</li>
+	<li>-0.0799946756911054</li>
+	<li>-0.0941441499229167</li>
+	<li>-0.024909668515204</li>
+	<li>0.0714084573952652</li>
+	<li>-0.0455394491591305</li>
+	<li>0.166193108785476</li>
+	<li>-0.077429232110221</li>
+	<li>-0.128495293842719</li>
+	<li>-0.0786313087721033</li>
+	<li>-0.135204615732129</li>
+	<li>0.00402444738581924</li>
+	<li>-0.210414921426846</li>
+	<li>-0.0466002337555276</li>
+	<li>-0.0744914482523485</li>
+	<li>0.0253724403628865</li>
+	<li>-0.144593000144071</li>
+	<li>-0.0558067022331745</li>
+	<li>0.0941802108323231</li>
+	<li>-0.0326002696533416</li>
+	<li>0.1191407256456</li>
+	<li>0.0742989188901125</li>
+	<li>0.0498008210293263</li>
+	<li>0.02980912239177</li>
+	<li>-0.132207185159464</li>
+	<li>-0.154762140608869</li>
+	<li>-0.0311445812733598</li>
+	<li>0.0213674326991292</li>
+	<li>-0.0563900846752629</li>
+	<li>0.113499475702925</li>
+	<li>-0.125719333220632</li>
+	<li>0.0434611514397736</li>
+	<li>0.202868180728299</li>
+	<li>-0.113919008868015</li>
+	<li>-0.0382369212754716</li>
+	<li>0.0491389841646633</li>
+	<li>-0.0198221517858243</li>
+	<li>0.0175352131496739</li>
+	<li>0.0264657952051942</li>
+	<li>0.119278436715872</li>
+	<li>-0.218521793800235</li>
+	<li>0.0159366944834975</li>
+	<li>0.194276086012615</li>
+	<li>-0.121180977909389</li>
+	<li>-0.165054100432551</li>
+	<li>-0.0651733446635078</li>
+	<li>-0.07680468077657</li>
+	<li>-0.0503302517530004</li>
+	<li>0.00823376132659068</li>
+	<li>0.00388666785680694</li>
+	<li>-0.00915532185917745</li>
+	<li>-0.0930607404292774</li>
+	<li>-0.171362738860478</li>
+	<li>-0.0310668331585724</li>
+	<li>-0.0210004347148357</li>
+	<li>0.0549900820264029</li>
+	<li>-0.0468877624516252</li>
+	<li>0.0868626310356565</li>
+	<li>0.0532565684252016</li>
+	<li>-0.168838788927617</li>
+	<li>0.0339257077316963</li>
+	<li>0.0762184886512164</li>
+	<li>-0.0890754231460831</li>
+	<li>-0.0647727147695691</li>
+	<li>-0.0889513202649563</li>
+	<li>0.000667073625725037</li>
+	<li>0.0509714346818621</li>
+	<li>-0.0940193584932185</li>
+	<li>-0.0839669876254321</li>
+	<li>0.106982624440368</li>
+	<li>0.145030507757848</li>
+	<li>-0.0757386310783636</li>
+	<li>0.161739345883223</li>
+	<li>0.214585243128979</li>
+	<li>-0.0764856927072532</li>
+	<li>0.0477290142665558</li>
+	<li>0.0126102486334496</li>
+	<li>-0.0741476392314046</li>
+	<li>-0.0725679361079652</li>
+	<li>-0.0807334358109478</li>
+	<li>0.0186774645788979</li>
+	<li>0.0234449247050084</li>
+	<li>0.0176989561150896</li>
+	<li>0.0516204767156866</li>
+	<li>0.120367846574953</li>
+	<li>0.0233333600272549</li>
+	<li>-0.00113490805336294</li>
+	<li>0.118557812809982</li>
 </ol>
 
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>By iterating for each observation, we arrive at a posterior distribution for $\mu \mid \sigma^2$ and $\frac{S}{\sigma^2}$. We then sample randomly from these theoretical distributions to
-sample from the posterior distributions. If we replicate this many times, we will be able to estimate the differences between the posterior distributions of the two vectors.</p>
-<p>Using uninformative prior gives similar results to frequentist t-test method</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec2</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
 <div class="output_area">
 
     <div class="prompt"></div>
@@ -1426,68 +1518,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
 
 
 <div class="output_html rendered_html output_subarea ">
-0.999
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can then use our prior information about the sample to produce a mixed, updated result. For instance, with prior parameters:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">prior_params</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="m">9</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="m">30</span><span class="p">)</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see our posterior:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-0.999
+-0.00814363230874542
 </div>
 
 </div>
@@ -1537,7 +1568,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/bayesian-analysis/t test or not t test.html#disqus_thread",
+                href="../../category/linear-models/constrained-least-squares.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1548,8 +1579,8 @@ sample from the posterior distributions. If we replicate this many times, we wil
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/bayesian-analysis/t test or not t test.html';
-    var disqus_url = '../../category/bayesian-analysis/t test or not t test.html';
+        var disqus_identifier = '../../category/linear-models/constrained-least-squares.html';
+    var disqus_url = '../../category/linear-models/constrained-least-squares.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1572,19 +1603,19 @@ sample from the posterior distributions. If we replicate this many times, we wil
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-11-03T00:00:00-04:00">Nov 3, 2018</time>
+            <time itemprop="dateCreated" datetime="2018-12-29T00:00:00-05:00">Dec 29, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="../../categories.html#bayesian-analysis-ref">Bayesian Analysis</a>
+            <a class="category-link" href="../../categories.html#linear-models-ref">Linear Models</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#alternative-methodologies-ref">alternative methodologies
+                <li><a href="../../tags/#constrained-least-squares-ref">constrained least squares
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#bayesian-modelling-ref">bayesian modelling
+                <li><a href="../../tags/#linear-regression-ref">linear regression
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#t-test-ref">t test
-                    <span>2</span>
+                <li><a href="../../tags/#theory-ref">theory
+                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
