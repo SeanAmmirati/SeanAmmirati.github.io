@@ -1,7 +1,7 @@
 title: HMMs: Viterbi Algorithm
 author: Sean Ammirati
 date: 2018-12-09
-category: R, hidden markov, markov models, markov chain
+category: Markov Chains
 tags: HMMS, markov chains, viterbi
 status: published
 summary: A overview of the viterbi algorithm for HMMs.
