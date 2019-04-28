@@ -52,14 +52,16 @@ PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = ['ipynb.markup', 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.include_code', 'liquid_tags.notebook',
-           'rmd_reader']
+           'rmd_reader', 'neighbors', 'tipue_search']
+
+DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'authors', 'archives', 'search']
+
 MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
-    },
-    'output_format': 'html5'
+    }
 }
 # Jupyter Notebook
 IGNORE_FILES = ['.ipynb_checkpoints']
@@ -73,6 +75,21 @@ TIMEZONE = 'America/New_York'
 DEFAULT_LANG = 'English'
 
 THEME = '/home/seanammirati/dev/website/pelican-themes/elegant'
+
+
+#Elegant Toggles
+LANDING_PAGE_ABOUT = {
+        'title': ' Stats Works',
+        'details': 'Sean Ammirati, the creator of Stats Works is a Data Scientist from NYC. He enjoys musing over statistical problems and analytical puzzles.'
+        }
+USE_SHORTCUT_ICONS = True
+AUTHORS = {
+    u'Sean Ammirati': {
+        u'blurb': """ creator of Stats Works. They can be reached on Github, Twitter and email.""",
+        u'url': 'https://seanammirati.github.io/pages/about'
+    },
+    }
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -84,7 +101,6 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (
           ('GitHub', 'https://github.com/SeanAmmirati'),
           ('LinkedIn', 'https://www.linkedin.com/in/sean-ammirati-4795a4ba/'),
-          ('Kaggle', 'https://www.kaggle.com/seanammirati'),
           ('Email', SIDEBAR_EMAIL)
           )
 
