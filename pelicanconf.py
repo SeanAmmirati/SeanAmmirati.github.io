@@ -74,18 +74,18 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = '/home/seanammirati/dev/website/pelican-themes/elegant'
+THEME = 'pelican-themes/elegant'
 
 
 #Elegant Toggles
 LANDING_PAGE_ABOUT = {
-        'title': ' Stats Works',
+        'title': 'A website for statistics, machine learning and programming',
         'details': 'Sean Ammirati, the creator of Stats Works is a Data Scientist from NYC. He enjoys musing over statistical problems and analytical puzzles.'
         }
 USE_SHORTCUT_ICONS = True
 AUTHORS = {
     u'Sean Ammirati': {
-        u'blurb': """ creator of Stats Works. They can be reached on Github, Twitter and email.""",
+        u'blurb': """ creator of Stats Works. He can be reached on Github, LinkedIn and email.""",
         u'url': 'https://seanammirati.github.io/pages/about'
     },
     }

@@ -1,5 +1,12 @@
 /* Base */
 /* #push.height = -#content-sans-footer.margin-bottom = #footer.margin-top + ul.footer-content */
+
+@font-face {
+    font-family: simplifica;
+    src: url('fonts/simplifica_typeface-webfont.woff');
+  }
+
+
 body,
 html {
     height: 100%;
@@ -38,7 +45,8 @@ hr {
 
 /* site title */
 .site-name {
-    font-family: 'Monaco', 'Inconsolata', 'Andale Mono', 'Lucida Console', 'Bitstream Vera Sans Mono', 'Courier New', Courier, Monospace;
+    font-family: simplifica;
+    font-size: 1.35em;
 }
 /* Top navigation menu */
 .top-menu li a {
@@ -255,7 +263,7 @@ article div.article-content ul:not(.articles-timeline) a:hover {
 }
 .page-header {
     border-bottom: 1px solid #8f8686;
-    color: #5353c6;
+    color:#683e8ed6;
     margin: 10px 10px 20px;
     padding: 5px;
 }
