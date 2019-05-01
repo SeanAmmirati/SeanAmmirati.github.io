@@ -1,6 +1,14 @@
 <!DOCTYPE html>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
+
 <html lang="english">
     <head>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +20,7 @@
 <meta name="keywords" content="factor analysis, abstract, feature reduction, Projects, " />
 
 <meta property="og:title" content="Factor Analysis "/>
-<meta property="og:url" content="../../category/projects/Factor Analysis.html" />
+<meta property="og:url" content="https://seanammirati.github.io/category/projects/Factor Analysis.html" />
 <meta property="og:description" content="A project detailing the methodology and use of Factor Analysis on a psychological survey." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
@@ -24,21 +32,22 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
-        <link rel="shortcut icon" href="../../theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link rel="apple-touch-icon" href="../../theme/images/apple-touch-icon.png"  type="image/png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="../../theme/images/apple-touch-icon-57x57.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="../../theme/images/apple-touch-icon-72x72.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="76x76" href="../../theme/images/apple-touch-icon-76x76.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="../../theme/images/apple-touch-icon-114x114.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="../../theme/images/apple-touch-icon-120x120.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="../../theme/images/apple-touch-icon-144x144.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="https://seanammirati.github.io/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="https://seanammirati.github.io/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="https://seanammirati.github.io/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="https://seanammirati.github.io/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="https://seanammirati.github.io/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="https://seanammirati.github.io/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="https://seanammirati.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Stats Works - Full Atom Feed" />
 
 
 
@@ -53,15 +62,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
+                    <a class="brand" href="https://seanammirati.github.io/"><span class=site-name>Stats Works</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="../..">Home</a></li>
-                            <li ><a href="../../pages/about/">About This Website</a></li>
-                            <li ><a href="../../categories">Categories</a></li>
-                            <li ><a href="../../tags/">Tags</a></li>
-                            <li ><a href="../../archives">Archives</a></li>
-                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="https://seanammirati.github.io">Home</a></li>
+                            <li ><a href="https://seanammirati.github.io/pages/about/">About This Website</a></li>
+                            <li ><a href="https://seanammirati.github.io/categories">Categories</a></li>
+                            <li ><a href="https://seanammirati.github.io/tags/">Tags</a></li>
+                            <li ><a href="https://seanammirati.github.io/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="https://seanammirati.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -74,7 +83,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/projects/Factor Analysis.html"> Factor Analysis  </a></h1>
+    <h1><a href="https://seanammirati.github.io/category/projects/Factor Analysis.html"> Factor Analysis  </a></h1>
     </header>
 </div>
 
@@ -87,9 +96,124 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -168,12 +292,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -186,27 +318,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -402,7 +546,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -412,11 +558,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -664,6 +823,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -702,7 +864,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -824,6 +986,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -840,16 +1006,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -865,6 +1039,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -915,8 +1094,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1055,16 +1241,14 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><em>Note: All of the code associated with this project can be found on my GitHub repository located <a href="https://github.com/SeanAmmirati/stats-works/blob/master/projects/Factor%20Analysis%20-%20Case%20Study/factor_analysis.R">here</a>.</em></p>
 <p>What are the core factors of human personality?</p>
@@ -1089,16 +1273,14 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Factor analysis is similar to <strong>principal components analysis</strong> in that we are working only with a single group of variables (in this case, the response) and we wish to in some way reduce the number of variables in order to simplify our data. This gives us a sense of what the underlying nature of the data is, and how it is organized.</p>
 <p>In factor analysis, we wish to reduce the redundancy of the variables by limiting them to a smaller number of <strong>factors</strong> which can adequately explain the variation in the full set of variables.</p>
@@ -1119,8 +1301,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
@@ -1128,37 +1309,33 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="The-Model">The Model<a class="anchor-link" href="#The-Model">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Our model is constructed as follows: For each observation vector of $p$ variables, we have</p>
-<p>$$
+$$
 y_1 - \mu_1 = \lambda_{1 1}f_1 + \lambda_{1 2}f_2 + ... + \lambda_{1 m}f_m + \epsilon_1 \\
 y_2 - \mu_2 = \lambda_{2 1}f_1 + \lambda_{2 2}f_2 + ... + \lambda_{2 m}f_m + \epsilon_2 \\
 ... \\
 y_p - \mu_p = \lambda_{p 1}f_1 + \lambda_{p 2}f_2 + ... + \lambda_{p m}f_m + \epsilon_p
-$$</p>
-<p>On the left side of the equations, $y_1, ..., y_p$ are the variables in the dataset, and $\mu_1, ..., \mu_p$ are the corresponding means of these variables. We do this in order to center the variables.</p>
+$$<p>On the left side of the equations, $y_1, ..., y_p$ are the variables in the dataset, and $\mu_1, ..., \mu_p$ are the corresponding means of these variables. We do this in order to center the variables.</p>
 <p>On the right side of the equations,  $\lambda_{i j}$ are the <strong>loadings</strong> for the $ith$ variable and $jth$ factor, $f_1, f_2, ..., f_m$ are the $m$ factors, and $\epsilon_1, \epsilon_2, ..., \epsilon_p$ are the $p$ error terms associated with each variable.</p>
 <p>Our goal in doing factor analysis is to find some $m &lt;&lt; p$ such that the factors specified above are appropriate for the $p$ variables of interest.</p>
 <p>In doing this, we are defining the original $p$ variables into a linear combination of $m$ factors. The $f$s in the above model are the $m$ factors themselves, while the lambdas are the loadings, which serve as weights for each factor for each of the $p$ variables.</p>
 <p>While this may seem similar to a more typical <strong>multiple regression model</strong>, there are key differences.</p>
 <p>Perhaps the most important thing to note here is that the $fs$ are unobserved random variables, not fixed effects like in multiple regression. Factor analysis only represents one observation vector, while multiple regression represents all of the observations simultaneously -- in this way, factor analysis is looking more to <em>individual</em> variation as opposed to <em>aggregate</em> or population level aggregation.</p>
 <p>Our model can be written more simply in matrix notation as:</p>
-<p>$$
+$$
 \begin{equation}
 \vec{y} - \vec{\mu} = \Lambda\vec{f} + \vec{\epsilon}
 \end{equation}
-$$
-where
+$$<p>where
 $$
 \vec{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_p \end{bmatrix} \\
 \vec{\mu} = \begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_p \end{bmatrix} \\
@@ -1204,8 +1381,7 @@ where $h_i^2 = \lambda_{i 1}^2 + \lambda_{i 2}^2 + ... + \lambda_{i m}^2$ and $\
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
@@ -1213,16 +1389,14 @@ where $h_i^2 = \lambda_{i 1}^2 + \lambda_{i 2}^2 + ... + \lambda_{i m}^2$ and $\
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Data">Data<a class="anchor-link" href="#Data">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The dataset I will be using to illustrate the benefits and limitations of factor analysis is collected data from an online personality questionnaire. The link can be found <a href="http://personality-testing.info/_rawdata/AS+SC+AD+DO.zip">here</a>.</p>
 <p>In this study, 1,005 participants were prompted with 40 statements to rate on a scale of one to five. This scale is used frequently and is known as the likert scale. It ranges from 1 (strongly disagree) to 5 (strongly agree). The data was partitioned into four sections, with every ten statements designed to be related to some attributes of the population; in particular, it was looking for their assertiveness, social confidence, adventurousness, and dominance. The questions were designed to discover the prevalence of these attributes through the responses to the statements in the survey.</p>
@@ -1245,8 +1419,7 @@ and</li>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
@@ -1254,8 +1427,7 @@ and</li>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h1>
 </div>
@@ -1266,20 +1438,20 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kn">require</span><span class="p">(</span>psych<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">require</span><span class="p">(</span><span class="n">psych</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">tmp <span class="o">&lt;-</span> <span class="kp">tempfile</span><span class="p">()</span></span>
-<span class="code-line">download.file<span class="p">(</span><span class="s">&quot;http://personality-testing.info/_rawdata/AS+SC+AD+DO.zip&quot;</span><span class="p">,</span> tmp<span class="p">)</span></span>
-<span class="code-line">data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kp">unz</span><span class="p">(</span>tmp<span class="p">,</span> <span class="s">&#39;AS+SC+AD+DO/data.csv&#39;</span><span class="p">))</span></span>
-<span class="code-line"><span class="kp">unlink</span><span class="p">(</span>tmp<span class="p">)</span></span>
+<span class="code-line"><span class="n">tmp</span> <span class="o">&lt;-</span> <span class="nf">tempfile</span><span class="p">()</span></span>
+<span class="code-line"><span class="nf">download.file</span><span class="p">(</span><span class="s">&quot;http://personality-testing.info/_rawdata/AS+SC+AD+DO.zip&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="nf">unz</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="s">&#39;AS+SC+AD+DO/data.csv&#39;</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">unlink</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">data <span class="o">&lt;-</span> data<span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">40</span><span class="p">]</span></span>
-<span class="code-line"><span class="kp">head</span><span class="p">(</span>data<span class="p">)</span></span>
+<span class="code-line"><span class="n">data</span> <span class="o">&lt;-</span> <span class="n">data[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">40</span><span class="n">]</span></span>
+<span class="code-line"><span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">R <span class="o">&lt;-</span> cor<span class="p">(</span>data<span class="p">)</span></span>
+<span class="code-line"><span class="n">R</span> <span class="o">&lt;-</span> <span class="nf">cor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1289,10 +1461,10 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">head</span><span class="p">(</span>R<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">head</span><span class="p">(</span><span class="n">R</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1302,7 +1474,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1325,7 +1497,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1351,8 +1523,7 @@ and</li>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I begin by importing the dataset and only using the variables pertaining to the questions. The next step is to find the correlation matrix. This is the preferred matrix to work with, as it makes many of the computations easier to do (as compared with the covariance matrix itself). We can see immediately that this is a covariance matrix, as there are ones in the diagonal. However, it does not appear to have particularly strong or easily discernible groups of correlations between the variables, which implies that factor analysis may not perform as well as we had hoped.</p>
 <p>I did not produce the entire matrix, as it is a 40x40 matrix. Instead, I use the head function to display the first six rows of the matrix.</p>
@@ -1362,16 +1533,14 @@ and</li>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Selecting-$m$">Selecting $m$<a class="anchor-link" href="#Selecting-$m$">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As mentioned before, it often is not clear how many factors, $m$, we should use in the factor analysis. In this example, it would be preferable to use four, as that is how the data is designed. However, as we will see, four factors are not sufficient to separate the variables.</p>
 <p>In order to perform factor analysis, we must find the correlation matrix of the dataset. This makes many of the calculations quite simple.</p>
@@ -1385,17 +1554,16 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>R <span class="o">&lt;-</span> cor<span class="p">(</span>data<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">R</span> <span class="o">&lt;-</span> <span class="nf">cor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Once we have the correlation matrix, the eigenvalues will tell us the optimal number of ways to reduce the features.</p>
 
@@ -1407,10 +1575,10 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">eigen</span><span class="p">(</span>R<span class="p">)</span><span class="o">$</span>values</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">eigen</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">$</span><span class="n">values</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1420,7 +1588,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1477,8 +1645,7 @@ and</li>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There are numerous methods to select the number of eigenvectors/eigenvalues we want to include. Each eigenvalue represents the proportion of variance explained by that eigenvector (a linear combination of the variables). We want to select eigenvectors/values such that we can explain a good deal of the variance with a smaller number of linear combinations of the features.</p>
 <p>The first method involves choosing an arbitrary threshold. In this example, at 19 latent variables (that is, reducing the forty variables nearly in half) we have acheieved a threshold of variance explained greater than 60%.</p>
@@ -1491,10 +1658,10 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">sum</span><span class="p">(</span><span class="kp">eigen</span><span class="p">(</span>R<span class="p">)</span><span class="o">$</span>values<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">19</span><span class="p">])</span><span class="o">/</span><span class="m">40</span> <span class="c1">##choose 19</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">eigen</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">$</span><span class="n">values[1</span><span class="o">:</span><span class="m">19</span><span class="n">]</span><span class="p">)</span><span class="o">/</span><span class="m">40</span> <span class="c1">##choose 19</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1504,7 +1671,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1519,8 +1686,7 @@ and</li>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Another method is to select eigenvectors such that each corresponding eigenvalue is greater than one. This means that the eigenvector of variables contributes more to the variance of the features than any single feature alone. Using this method, we come up with 8 linear combinations.</p>
 
@@ -1532,10 +1698,10 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">sum</span><span class="p">(</span><span class="kp">eigen</span><span class="p">(</span>R<span class="p">)</span><span class="o">$</span>values <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="c1">##choose 8</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">eigen</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">$</span><span class="n">values</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="c1">##choose 8</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1545,7 +1711,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1560,8 +1726,7 @@ and</li>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The final methodology is using a scree plot and determining where the eigenvalues level off. This is at 9 linear combinations of the features.</p>
 
@@ -1573,11 +1738,11 @@ and</li>
 <div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>scree<span class="p">(</span>R<span class="p">)</span><span class="c1">##choose 9</span></span>
-<span class="code-line">fa.parallel<span class="p">(</span>data<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">scree</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="c1">##choose 9</span></span>
+<span class="code-line"><span class="nf">fa.parallel</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1587,7 +1752,7 @@ and</li>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1774,7 +1939,7 @@ EBIgQEiAACEBAoQECBASIEBIgAAhAQKEBAgQEiDw/3Sx1D9KE1dEAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1785,7 +1950,7 @@ EBIgQEiAACEBAoQECBASIEBIgAAhAQKEBAgQEiDw/3Sx1D9KE1dEAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2076,8 +2241,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Three different methods were explored to determine the amount of factors, $m$, to use. Unfortunately, it seems right from the beginning that four factors will not be enough to adequately describe the variables. The three methods provide very different numbers â€“ 19, 8 and 9. I will use 9, as it appears to be a middle ground between the two, and the scree plot does flatten out significantly. Also, we do not wish to use nearly half of the number of variables as factors! Even 9 factors is quite high.</p>
 <p>This is where factor analysis and principle component analysis begin to differ. In PCA, we simply use the eigenvectors of the correlation matrix as variables, or 'principle components'. This does not account for the noise in the principle components themselves -- it is not trying to find any signal here.</p>
@@ -2088,8 +2252,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Principal-Components-Method">Principal Components Method<a class="anchor-link" href="#Principal-Components-Method">&#182;</a></h3>
 </div>
@@ -2100,12 +2263,12 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>eigenvectors <span class="o">&lt;-</span> <span class="kp">eigen</span><span class="p">(</span>R<span class="p">)</span><span class="o">$</span>vectors<span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">]</span></span>
-<span class="code-line">loadings <span class="o">&lt;-</span> eigenvectors <span class="o">%*%</span> <span class="p">(</span><span class="kp">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>nrow <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kp">eigen</span><span class="p">(</span>R<span class="p">)</span><span class="o">$</span>values<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">])</span><span class="o">^</span><span class="m">.5</span><span class="p">)</span></span>
-<span class="code-line">loadings</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">eigenvectors</span> <span class="o">&lt;-</span> <span class="nf">eigen</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">$</span><span class="n">vectors[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span></span>
+<span class="code-line"><span class="n">loadings</span> <span class="o">&lt;-</span> <span class="n">eigenvectors</span> <span class="o">%*%</span> <span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nf">eigen</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">$</span><span class="n">values[1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">)</span><span class="n">^.5</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">loadings</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2115,7 +2278,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2174,8 +2337,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We first determine the loadings by multiplying the first $m$ eigenvectors (in this case, 9) by the square roots of their corresponding eigenvalues. This produces the above matrix, a unsightly $40x9$ matrix. Each column corresponds to a different loading.</p>
 <p>To determine the communalities and specific variances of the variables, we can square the entries in each of the rows of the loadings matrix. This will give us the $h^2_i$ vector, from which we can also determine the specific variances.</p>
@@ -2188,14 +2350,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>hisq <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>loadings<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="o">^</span><span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="kp">sum</span><span class="p">)</span></span>
-<span class="code-line">psi <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">40</span><span class="p">)</span> <span class="o">-</span> hisq</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">hisq</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="nf">apply</span><span class="p">(</span><span class="n">loadings</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x^2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="n">sum</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">psi</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">40</span><span class="p">)</span> <span class="o">-</span> <span class="n">hisq</span></span>
 <span class="code-line"></span>
-<span class="code-line">hisq</span>
-<span class="code-line">psi</span>
+<span class="code-line"><span class="n">hisq</span></span>
+<span class="code-line"><span class="n">psi</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2205,7 +2367,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2259,7 +2421,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2316,8 +2478,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The above are the communalities and the specific variances of each of the variables.</p>
 <p>To determine the amount of the total variance of which each loading contributes, we can divide the eigenvalues of $R$ by the number of variables, $p = 40$.</p>
@@ -2327,16 +2488,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Rotating-the-Loadings">Rotating the Loadings<a class="anchor-link" href="#Rotating-the-Loadings">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Because we have $m = 9$, I will use the varimax rotations from the psych package to rotate the loadings we have above. This will make it easier to see which variables correspond to the factors.</p>
 
@@ -2349,10 +2508,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="c1">## varimax includes a print method which makes the loading distributions easier to see.</span></span>
-<span class="code-line">loadingsrot <span class="o">&lt;-</span> <span class="kp">print</span><span class="p">(</span>varimax<span class="p">(</span>loadings<span class="p">)</span><span class="o">$</span>loadings<span class="p">,</span>cutoff <span class="o">=</span> <span class="m">.3</span><span class="p">,</span>sort <span class="o">=</span> <span class="bp">T</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">loadingsrot</span> <span class="o">&lt;-</span> <span class="nf">print</span><span class="p">(</span><span class="nf">varimax</span><span class="p">(</span><span class="n">loadings</span><span class="p">)</span><span class="o">$</span><span class="n">loadings</span><span class="p">,</span><span class="n">cutoff</span> <span class="o">=</span> <span class="m">.3</span><span class="p">,</span><span class="n">sort</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2362,7 +2521,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -2423,8 +2582,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see from the above that the factors do not separate so easily. The values of the loadings below .3 have been omitted to make it clearer what the underling relationships are. Although they do not separate cleanly into the four theorized factors, we can see that the first factor, for instance, largely is between the first and tenth variables (which was assertiveness), the second factor between the 30th and 40th variables (which was dominance). Similarly, the fifth factor is between the 20th and 30th variables (social confidence) and the third and factor is largely between the 30th and 40th variables (adventurousness). However, the split is not so simple as we assumed before the analysis, as the other factors show relationships between variables which are not in the same groups.</p>
 <p>The second function simply sorts the variables by factor, so we can get a better sense of how they separate. We can see that towards the top there are larger values for the loading matrix, which indicates a stronger association with the factor. We can also see that the 6th-9th factors also have some large values, which means that their correlations cannot be ignored. This suggests that the initial separation into only four factors may have been overly simplistic.</p>
@@ -2433,16 +2591,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Principle-Factors-Method">Principle Factors Method<a class="anchor-link" href="#Principle-Factors-Method">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the previous method, we had ignored the structure of the specific variances. Now, using the principal factors method, we will take the $\Phi$ matrix into account.</p>
 <p>We first make an initial estimate of the $h_i$s, and use this to account for the specific variances. Below I create a diagonal matrix which has the specific variances in each of the diagonal elements. We will then subtract this matrix from the covariance matrix, and use the new matrix to compute our loadings.</p>
@@ -2455,12 +2611,12 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>hinit <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="m">1</span><span class="o">/</span><span class="kp">diag</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span>R<span class="p">))</span></span>
-<span class="code-line">psiint <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> hinit</span>
-<span class="code-line">hinit</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">hinit</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="m">1</span><span class="o">/</span><span class="nf">diag</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">R</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">psiint</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="n">hinit</span></span>
+<span class="code-line"><span class="n">hinit</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2470,7 +2626,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2571,10 +2727,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>psiint</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">psiint</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2584,7 +2740,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2685,10 +2841,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">head</span><span class="p">(</span><span class="kp">diag</span><span class="p">(</span>psiint<span class="p">,</span>nrow <span class="o">=</span> <span class="m">40</span><span class="p">))</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">head</span><span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="n">psiint</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">40</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2698,7 +2854,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2727,12 +2883,12 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[119]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>New <span class="o">&lt;-</span> R <span class="o">-</span> <span class="kp">diag</span><span class="p">(</span>psiint<span class="p">,</span>nrow <span class="o">=</span> <span class="m">40</span><span class="p">)</span></span>
-<span class="code-line">eigs <span class="o">&lt;-</span> <span class="kp">eigen</span><span class="p">(</span>New<span class="p">)</span></span>
-<span class="code-line">eigs</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">New</span> <span class="o">&lt;-</span> <span class="n">R</span> <span class="o">-</span> <span class="nf">diag</span><span class="p">(</span><span class="n">psiint</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">eigs</span> <span class="o">&lt;-</span> <span class="nf">eigen</span><span class="p">(</span><span class="n">New</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">eigs</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2742,7 +2898,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -3097,8 +3253,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will then use this new matrix to compute our eigenvalues and vectors, and subsequently create our new loadings matrix. In a similar way, we will determine the specific variances and communalities, and then rotate the loadings matrix.</p>
 
@@ -3110,14 +3265,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>eigenvectors2 <span class="o">&lt;-</span> <span class="kp">eigen</span><span class="p">(</span>New<span class="p">)</span><span class="o">$</span>vectors<span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">]</span></span>
-<span class="code-line">loadings2 <span class="o">&lt;-</span> eigenvectors2 <span class="o">%*%</span> <span class="p">(</span><span class="kp">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>nrow <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kp">eigen</span><span class="p">(</span>New<span class="p">)</span><span class="o">$</span>values<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">])</span><span class="o">^</span><span class="m">.5</span><span class="p">)</span></span>
-<span class="code-line">hisq2 <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>loadings2<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="o">^</span><span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="kp">sum</span><span class="p">)</span></span>
-<span class="code-line">psi <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">40</span><span class="p">)</span> <span class="o">-</span> hisq</span>
-<span class="code-line">loadings2rot <span class="o">&lt;-</span> <span class="kp">print</span><span class="p">(</span>varimax<span class="p">(</span>loadings2<span class="p">)</span><span class="o">$</span>loadings<span class="p">,</span>cutoff <span class="o">=</span> <span class="m">.35</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">eigenvectors2</span> <span class="o">&lt;-</span> <span class="nf">eigen</span><span class="p">(</span><span class="n">New</span><span class="p">)</span><span class="o">$</span><span class="n">vectors[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span></span>
+<span class="code-line"><span class="n">loadings2</span> <span class="o">&lt;-</span> <span class="n">eigenvectors2</span> <span class="o">%*%</span> <span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nf">eigen</span><span class="p">(</span><span class="n">New</span><span class="p">)</span><span class="o">$</span><span class="n">values[1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">)</span><span class="n">^.5</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">hisq2</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="nf">apply</span><span class="p">(</span><span class="n">loadings2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x^2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="n">sum</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">psi</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">40</span><span class="p">)</span> <span class="o">-</span> <span class="n">hisq</span></span>
+<span class="code-line"><span class="n">loadings2rot</span> <span class="o">&lt;-</span> <span class="nf">print</span><span class="p">(</span><span class="nf">varimax</span><span class="p">(</span><span class="n">loadings2</span><span class="p">)</span><span class="o">$</span><span class="n">loadings</span><span class="p">,</span><span class="n">cutoff</span> <span class="o">=</span> <span class="m">.35</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3127,7 +3282,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -3188,8 +3343,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see a similar pattern to that of the principal component method above. The variance is not as well explained using this method, but when we perform the next step (using iterations of the above method), it will become a better representation of the data. Again, we can see similar relationships between the first five factors and the variables, but it is not all encompassing.</p>
 
@@ -3197,16 +3351,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Principal-Factors-Method">Principal Factors Method<a class="anchor-link" href="#Principal-Factors-Method">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We will now use a similar method to above, but iterate it each time and update it with the new initial squared loadings. That is, when we calculate the new $h^2_i$ values, we do the iterate until it converges. For completeness, I perform the process 100 times below.</p>
 
@@ -3218,18 +3370,18 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>hinit2 <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="m">1</span><span class="o">/</span><span class="kp">diag</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span>R<span class="p">))</span></span>
-<span class="code-line"><span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  New2 <span class="o">&lt;-</span> R <span class="o">-</span> <span class="kp">diag</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> hinit2<span class="p">),</span>nrow <span class="o">=</span> <span class="m">40</span><span class="p">)</span></span>
-<span class="code-line">  eigenvectors3 <span class="o">&lt;-</span> <span class="kp">eigen</span><span class="p">(</span>New2<span class="p">)</span><span class="o">$</span>vectors<span class="p">[,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">]</span></span>
-<span class="code-line">  loadings3 <span class="o">&lt;-</span> eigenvectors3 <span class="o">%*%</span> <span class="p">(</span><span class="kp">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>nrow <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="kp">eigen</span><span class="p">(</span>New2<span class="p">)</span><span class="o">$</span>values<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="p">])</span><span class="o">^</span><span class="m">.5</span><span class="p">)</span></span>
-<span class="code-line">  hinit2 <span class="o">&lt;-</span> <span class="kp">apply</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>loadings3<span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="o">^</span><span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="kp">sum</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">hinit2</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="m">1</span><span class="o">/</span><span class="nf">diag</span><span class="p">(</span><span class="nf">solve</span><span class="p">(</span><span class="n">R</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">New2</span> <span class="o">&lt;-</span> <span class="n">R</span> <span class="o">-</span> <span class="nf">diag</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="n">hinit2</span><span class="p">),</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">eigenvectors3</span> <span class="o">&lt;-</span> <span class="nf">eigen</span><span class="p">(</span><span class="n">New2</span><span class="p">)</span><span class="o">$</span><span class="n">vectors[</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span></span>
+<span class="code-line">  <span class="n">loadings3</span> <span class="o">&lt;-</span> <span class="n">eigenvectors3</span> <span class="o">%*%</span> <span class="p">(</span><span class="nf">diag</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">nrow</span> <span class="o">=</span> <span class="m">9</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nf">eigen</span><span class="p">(</span><span class="n">New2</span><span class="p">)</span><span class="o">$</span><span class="n">values[1</span><span class="o">:</span><span class="m">9</span><span class="n">]</span><span class="p">)</span><span class="n">^.5</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">hinit2</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="nf">apply</span><span class="p">(</span><span class="n">loadings3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x^2</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="n">sum</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
-<span class="code-line">hisq3 <span class="o">=</span> hinit2</span>
-<span class="code-line">loadings3</span>
+<span class="code-line"><span class="n">hisq3</span> <span class="o">=</span> <span class="n">hinit2</span></span>
+<span class="code-line"><span class="n">loadings3</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3239,7 +3391,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -3302,10 +3454,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">print</span><span class="p">(</span>hisq3<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">print</span><span class="p">(</span><span class="n">hisq3</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3315,7 +3467,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -3338,10 +3490,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>loadings3rot <span class="o">&lt;-</span> <span class="kp">print</span><span class="p">(</span>varimax<span class="p">(</span>loadings3<span class="p">)</span><span class="o">$</span>loadings<span class="p">,</span> cutoff<span class="o">=</span><span class="m">.3</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">loadings3rot</span> <span class="o">&lt;-</span> <span class="nf">print</span><span class="p">(</span><span class="nf">varimax</span><span class="p">(</span><span class="n">loadings3</span><span class="p">)</span><span class="o">$</span><span class="n">loadings</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="m">.3</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3351,7 +3503,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -3412,8 +3564,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Again, we can see a similar pattern to the two above methods. The iterated method also created loadings which are closer to the principal component method. There are a few differences; for instance, in the iterated method we see that the third variable is part of both the 1st and 2nd factor, which wasnâ€™t present in the principal component method nor the principal factor method. Still, the analysis from before holds: much of the expected separation is contained in the factors (or some combination of them), but there are other correlations which those four factors cannot account for.</p>
 <p>I will use the rotated matrix above to make some considerations about the level of effectiveness of the analysis. We know that the main goal of factor analysis is to acquire factors for which each variable can be loaded into only one factor. If we can do this, we have essentially reached our goal â€“ we have separated the variables completely into a smaller number of factors which accounts for the covariates between them.</p>
@@ -3423,16 +3574,14 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Some-Considerations">Some Considerations<a class="anchor-link" href="#Some-Considerations">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In an ideal situation, we would use a very small value of $m$ relative to the amount of variables $p$. Although $m = 9$ performed decently well, it is quite a large number of factors. Even with nine factors, we see that the factor analysis was only able to account for around 60% of the covariation of the original variables. A fundamental issue with factor analysis is that the correlation matrix $R$ contains both structure and error, and factor analysis is not able to separate the two. Thus, the original assumptions of no relationships between the errors and the factors are too optimistic, as this rarely happens in practice.</p>
 <p>As a result, the loadings above are quite difficult to interpret. It is difficult to say what the exact factors are in plain English. Here, we can see some of the difficulty in working with factor analysis in practice â€“ it is often questioned if these factors truly exist.</p>
@@ -3441,8 +3590,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conclusions-and-Relation-to-Psychological-Tests">Conclusions and Relation to Psychological Tests<a class="anchor-link" href="#Conclusions-and-Relation-to-Psychological-Tests">&#182;</a></h1>
 </div>
@@ -3453,10 +3601,10 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 <div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>loadings</span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">loadings</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3466,7 +3614,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -3525,8 +3673,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We know that the original variables were constructed considering four groups (assertiveness, social confidence, adventurousness, and dominance). These were the intended characteristics that the statements were testing for. Above, we can see how factors 1-5 capture a lot of the variables in each set. So, we could say that factor 1 represents assertiveness, factor 2 represents dominance, factor 3 and 4 represent adventurousness, and factor 5 represents social confidence.</p>
 <p>However, this would not be so accurate, as there are other factors to consider as well. We can see that factors 6-9 have members from all the different groups. This suggests that the relationship between the variables was not so simple as we once thought. Additionally, variable 10 failed to have a loading greater than .3 into any of the factors, which suggests that even 9 factors are inadequate to capture the variation in the data.</p>
@@ -3580,7 +3727,7 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/projects/Factor Analysis.html#disqus_thread",
+                href="https://seanammirati.github.io/category/projects/Factor Analysis.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -3591,8 +3738,8 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/projects/Factor Analysis.html';
-    var disqus_url = '../../category/projects/Factor Analysis.html';
+        var disqus_identifier = 'https://seanammirati.github.io/category/projects/Factor Analysis.html';
+    var disqus_url = 'https://seanammirati.github.io/category/projects/Factor Analysis.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -3614,8 +3761,8 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="../../category/beginner-statistics/sumstatsmeasuresofspread.html" title="Previous: Summary Statistics Part 2: Measures of Spread">Summary Statistics Part 2: Measures of Spread</a></li>
-                <li class="next-article"><a href="../../category/bayesian-analysis/Approaches to Contingency Tables.html" title="Next: Approaches to Contingency Tables - A Bayesian Approach">Approaches to Contingency Tables <small>A Bayesian Approach</small></a> »</li>
+                <li class="previous-article">« <a href="https://seanammirati.github.io/category/beginner-statistics/sumstatsmeasuresofspread.html" title="Previous: Summary Statistics Part 2: Measures of Spread">Summary Statistics Part 2: Measures of Spread</a></li>
+                <li class="next-article"><a href="https://seanammirati.github.io/category/bayesian-analysis/Approaches to Contingency Tables.html" title="Next: Approaches to Contingency Tables - A Bayesian Approach">Approaches to Contingency Tables <small>A Bayesian Approach</small></a> »</li>
             </ul>
             </nav>
             </aside>
@@ -3625,16 +3772,16 @@ QCQAARAJQABEAhDgf4fZtVhPvk/aAAAAAElFTkSuQmCC"
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2018-09-16T00:00:00-04:00">Sep 16, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="../../categories.html#projects-ref">Projects</a>
+            <a class="category-link" href="https://seanammirati.github.io/categories.html#projects-ref">Projects</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#abstract-ref">abstract
+                <li><a href="https://seanammirati.github.io/tags/#abstract-ref">abstract
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#factor-analysis-ref">factor analysis
+                <li><a href="https://seanammirati.github.io/tags/#factor-analysis-ref">factor analysis
                     <span>1</span>
 </a></li>
-                <li><a href="../../tags/#feature-reduction-ref">feature reduction
+                <li><a href="https://seanammirati.github.io/tags/#feature-reduction-ref">feature reduction
                     <span>1</span>
 </a></li>
             </ul>

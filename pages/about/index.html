@@ -1,6 +1,14 @@
 <!DOCTYPE html>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
+
 <html lang="english">
     <head>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +19,7 @@
 
 
 <meta property="og:title" content="About This Website "/>
-<meta property="og:url" content="../../pages/about/" />
+<meta property="og:url" content="https://seanammirati.github.io/pages/about/" />
 <meta property="og:description" content="About this website and me" />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
@@ -23,21 +31,22 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
-        <link rel="shortcut icon" href="../../theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link rel="apple-touch-icon" href="../../theme/images/apple-touch-icon.png"  type="image/png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="../../theme/images/apple-touch-icon-57x57.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="../../theme/images/apple-touch-icon-72x72.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="76x76" href="../../theme/images/apple-touch-icon-76x76.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="../../theme/images/apple-touch-icon-114x114.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="../../theme/images/apple-touch-icon-120x120.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="../../theme/images/apple-touch-icon-144x144.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="https://seanammirati.github.io/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="https://seanammirati.github.io/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="https://seanammirati.github.io/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="https://seanammirati.github.io/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="https://seanammirati.github.io/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="https://seanammirati.github.io/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="https://seanammirati.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Stats Works - Full Atom Feed" />
 
 
 
@@ -52,15 +61,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
+                    <a class="brand" href="https://seanammirati.github.io/"><span class=site-name>Stats Works</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="../..">Home</a></li>
-                            <li  class="active"><a href="../../pages/about/">About This Website</a></li>
-                            <li ><a href="../../categories">Categories</a></li>
-                            <li ><a href="../../tags/">Tags</a></li>
-                            <li ><a href="../../archives">Archives</a></li>
-                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="https://seanammirati.github.io">Home</a></li>
+                            <li  class="active"><a href="https://seanammirati.github.io/pages/about/">About This Website</a></li>
+                            <li ><a href="https://seanammirati.github.io/categories">Categories</a></li>
+                            <li ><a href="https://seanammirati.github.io/tags/">Tags</a></li>
+                            <li ><a href="https://seanammirati.github.io/archives">Archives</a></li>
+                            <li><form class="navbar-search" action="https://seanammirati.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -73,7 +82,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../pages/about/"> About This Website  </a></h1>
+    <h1><a href="https://seanammirati.github.io/pages/about/"> About This Website  </a></h1>
     </header>
 </div>
 
@@ -93,7 +102,7 @@ as well as demystify some of the more complex topics in the dicipline. Sean has 
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../pages/about/#disqus_thread",
+                href="https://seanammirati.github.io/pages/about/#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -104,8 +113,8 @@ as well as demystify some of the more complex topics in the dicipline. Sean has 
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../pages/about/';
-    var disqus_url = '../../pages/about/';
+        var disqus_identifier = 'https://seanammirati.github.io/pages/about/';
+    var disqus_url = 'https://seanammirati.github.io/pages/about/';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
