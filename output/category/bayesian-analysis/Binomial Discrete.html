@@ -95,9 +95,124 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -176,12 +291,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -194,27 +317,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -410,7 +545,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -420,11 +557,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -672,6 +822,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -710,7 +863,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -832,6 +985,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -848,16 +1005,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -873,6 +1038,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -923,8 +1093,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1069,85 +1246,84 @@ h6:hover .anchor-link {
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="c1">## Finds posterior distribution of observed values assuming that k follows a binomial distribution. p is discrete in this case.</span></span>
 <span class="code-line"></span>
-<span class="code-line">numerator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span> n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line"><span class="n">numerator</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## finds the numerator -- ie P(k|p)P(p)</span></span>
 <span class="code-line">  <span class="c1">## k (integer) : the total number of observed successes.</span></span>
 <span class="code-line">  <span class="c1">## n (integer) : the total number of observed trials.</span></span>
 <span class="code-line">  <span class="c1">## posprobs (vector): possible p values associated with the random variable k.</span></span>
 <span class="code-line">  <span class="c1">## probsofprobs (vector): this is our prior, mapping a probability to each possible probability</span></span>
 <span class="code-line"></span>
-<span class="code-line">  <span class="kr">function</span><span class="p">(</span>p<span class="p">){</span></span>
+<span class="code-line">  <span class="nf">function</span><span class="p">(</span><span class="n">p</span><span class="p">){</span></span>
 <span class="code-line">    <span class="c1">## For a particular p, this will find the posterior probability of p given observed values. This is a function generator -- given</span></span>
 <span class="code-line">    <span class="c1">## values of k and n, we can then find the probability of any particular p.</span></span>
-<span class="code-line">    x <span class="o">&lt;-</span> posprobs<span class="p">[</span>p<span class="p">]</span></span>
-<span class="code-line">    px <span class="o">&lt;-</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line">    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">posprobs[p]</span></span>
+<span class="code-line">    <span class="n">px</span> <span class="o">&lt;-</span> <span class="n">probsofprobs[p]</span></span>
 <span class="code-line"></span>
-<span class="code-line">    res <span class="o">&lt;-</span> <span class="p">(</span>x<span class="o">^</span>k<span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> x<span class="p">)</span><span class="o">^</span><span class="p">(</span>n<span class="o">-</span>k<span class="p">))</span><span class="o">*</span>px</span>
-<span class="code-line">    <span class="kr">return</span><span class="p">(</span>res<span class="p">)</span></span>
+<span class="code-line">    <span class="n">res</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">x^k</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="nf">^</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">px</span></span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">denominator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line"><span class="n">denominator</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the denominator, the multiplicative constant. Same for all values of p. P(k)</span></span>
-<span class="code-line">  <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span> numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)))</span></span>
+<span class="code-line">  <span class="nf">sum</span><span class="p">(</span><span class="nf">sapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">posprobs</span><span class="p">),</span><span class="n">FUN</span><span class="o">=</span> <span class="nf">numerator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">probabilityfinder <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line"><span class="n">probabilityfinder</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the posterior probability of a particular p value.</span></span>
-<span class="code-line">  numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)(</span>p<span class="p">)</span><span class="o">/</span>denominator<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<span class="code-line">  <span class="nf">numerator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)(</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="nf">denominator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">posterior <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">){</span></span>
+<span class="code-line"><span class="n">posterior</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the posterior probability mass function of the p values.</span></span>
-<span class="code-line">  <span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>p<span class="p">)</span> probabilityfinder<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">))</span></span>
+<span class="code-line">  <span class="nf">sapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">posprobs</span><span class="p">),</span><span class="n">FUN</span><span class="o">=</span><span class="nf">function</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="nf">probabilityfinder</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">log_transf_numerator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line"><span class="n">log_transf_numerator</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## finds the numerator -- ie P(k|p)P(p), using log transform to avoid machine zeros</span></span>
 <span class="code-line">  <span class="c1">## k (integer) : the total number of observed successes.</span></span>
 <span class="code-line">  <span class="c1">## n (integer) : the total number of observed trials.</span></span>
 <span class="code-line">  <span class="c1">## posprobs (vector): possible p values associated with the random variable k.</span></span>
 <span class="code-line">  <span class="c1">## probsofprobs (vector): this is our prior, mapping a probability to each possible probability</span></span>
-<span class="code-line">  <span class="kr">function</span><span class="p">(</span>p<span class="p">){</span></span>
+<span class="code-line">  <span class="nf">function</span><span class="p">(</span><span class="n">p</span><span class="p">){</span></span>
 <span class="code-line">    <span class="c1">## For a particular p, this will find the posterior probability of p given observed values. This is a function generator -- given</span></span>
 <span class="code-line">    <span class="c1">## values of k and n, we can then find the probability of any particular p.</span></span>
 <span class="code-line"></span>
-<span class="code-line">    x <span class="o">&lt;-</span> posprobs<span class="p">[</span>p<span class="p">]</span></span>
-<span class="code-line">    px <span class="o">&lt;-</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
+<span class="code-line">    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">posprobs[p]</span></span>
+<span class="code-line">    <span class="n">px</span> <span class="o">&lt;-</span> <span class="n">probsofprobs[p]</span></span>
 <span class="code-line"></span>
-<span class="code-line">    mx <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>posprobs<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>pr<span class="p">)</span> k<span class="o">*</span><span class="kp">log</span><span class="p">(</span>pr<span class="p">)</span> <span class="o">+</span> <span class="p">(</span>n <span class="o">-</span> k<span class="p">)</span><span class="o">*</span><span class="kp">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> pr<span class="p">)))</span></span>
+<span class="code-line">    <span class="n">mx</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="nf">sapply</span><span class="p">(</span><span class="n">posprobs</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span> <span class="n">k</span><span class="o">*</span><span class="nf">log</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="nf">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="n">pr</span><span class="p">)))</span></span>
 <span class="code-line"></span>
-<span class="code-line">    res <span class="o">&lt;-</span> <span class="kp">exp</span><span class="p">(</span>k<span class="o">*</span><span class="kp">log</span><span class="p">(</span>x<span class="p">)</span> <span class="o">+</span> <span class="p">(</span>n <span class="o">-</span> k<span class="p">)</span><span class="o">*</span><span class="kp">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> x<span class="p">)</span> <span class="o">-</span> mx<span class="p">)</span> <span class="o">*</span> probsofprobs<span class="p">[</span>p<span class="p">]</span></span>
-<span class="code-line">    <span class="kr">return</span><span class="p">(</span>res<span class="p">)</span></span>
+<span class="code-line">    <span class="n">res</span> <span class="o">&lt;-</span> <span class="nf">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="nf">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="nf">log</span><span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)</span> <span class="o">*</span> <span class="n">probsofprobs[p]</span></span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">log_transf_denominator <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line"><span class="n">log_transf_denominator</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the denominator, the multiplicative constant, using log transform for machine zeros. Same for all values of p. P(k)</span></span>
 <span class="code-line"></span>
-<span class="code-line">  <span class="kp">sum</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span> log_transf_numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)))</span></span>
+<span class="code-line">  <span class="nf">sum</span><span class="p">(</span><span class="nf">sapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">posprobs</span><span class="p">),</span><span class="n">FUN</span><span class="o">=</span> <span class="nf">log_transf_numerator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">)))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">log_transf_probabilitydist <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>p<span class="p">){</span></span>
+<span class="code-line"><span class="n">log_transf_probabilitydist</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the posterior probability of a particular p value using log transform.</span></span>
-<span class="code-line">  log_transf_numerator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)(</span>p<span class="p">)</span><span class="o">/</span>log_transf_denominator<span class="p">(</span>k<span class="p">,</span>n<span class="p">)</span></span>
+<span class="code-line">  <span class="nf">log_transf_numerator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">)(</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="nf">log_transf_denominator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">log_transf_posterior <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>n<span class="p">){</span></span>
+<span class="code-line"><span class="n">log_transf_posterior</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## Finds the posterior probability mass function of the p values using log transform</span></span>
 <span class="code-line"></span>
-<span class="code-line">  <span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">),</span>FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> log_transf_probabilitydist<span class="p">(</span>k<span class="p">,</span>n<span class="p">,</span>x<span class="p">))</span></span>
+<span class="code-line">  <span class="nf">sapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">posprobs</span><span class="p">),</span><span class="n">FUN</span><span class="o">=</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nf">log_transf_probabilitydist</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Example----Thunderstorms">Example -- Thunderstorms<a class="anchor-link" href="#Example----Thunderstorms">&#182;</a></h1><p>Example: consider if we observed 11 events -- as an example, the number of thunderstorms in a month. We want to estimate the probability of a thunderstorm
 given the new data. Assuming weather each day is independent (which is a simplifying assumption), we can assume that the number of thunderstorms in n days can be modeled by
@@ -1162,15 +1338,15 @@ posterior of the probabilities after observing the 11 thunderstorms as follows:<
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.05</span><span class="p">,</span><span class="m">.15</span><span class="p">,</span><span class="m">.25</span><span class="p">,</span><span class="m">.35</span><span class="p">,</span><span class="m">.45</span><span class="p">,</span><span class="m">.55</span><span class="p">,</span><span class="m">.65</span><span class="p">,</span><span class="m">.75</span><span class="p">,</span><span class="m">.85</span><span class="p">,</span><span class="m">.95</span><span class="p">)</span></span>
-<span class="code-line">probsofprobs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">.07</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.07</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">)</span></span>
-<span class="code-line"><span class="kp">length</span><span class="p">(</span>posprobs<span class="p">)</span> <span class="o">==</span> <span class="kp">length</span><span class="p">(</span>probsofprobs<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">posprobs</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">.05</span><span class="p">,</span><span class="m">.15</span><span class="p">,</span><span class="m">.25</span><span class="p">,</span><span class="m">.35</span><span class="p">,</span><span class="m">.45</span><span class="p">,</span><span class="m">.55</span><span class="p">,</span><span class="m">.65</span><span class="p">,</span><span class="m">.75</span><span class="p">,</span><span class="m">.85</span><span class="p">,</span><span class="m">.95</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">probsofprobs</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">.07</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.26</span><span class="p">,</span><span class="m">.13</span><span class="p">,</span><span class="m">.07</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">,</span><span class="m">.02</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">length</span><span class="p">(</span><span class="n">posprobs</span><span class="p">)</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="n">probsofprobs</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">pos <span class="o">&lt;-</span> posterior<span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="m">27</span><span class="p">,</span>posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
-<span class="code-line">pos</span>
+<span class="code-line"><span class="n">pos</span> <span class="o">&lt;-</span> <span class="nf">posterior</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="m">27</span><span class="p">,</span><span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">pos</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1180,7 +1356,7 @@ posterior of the probabilities after observing the 11 thunderstorms as follows:<
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1192,7 +1368,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1219,8 +1395,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So we now believe with <code>r round(pos[which.max(pos)],2)</code>  probability that the actual p value is <code>r posprobs[which.max(pos)]</code>. This means the data supports the assumption of <code>r posprobs[which.max(pos)]</code> chance of thunderstorms a day, given our prior beliefs and the independence of events.</p>
 <h1 id="Behaviors-for-different-n-and-k.">Behaviors for different n and k.<a class="anchor-link" href="#Behaviors-for-different-n-and-k.">&#182;</a></h1>
@@ -1232,12 +1407,12 @@ TRUE
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>n <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">150</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">300</span><span class="p">,</span><span class="m">500</span><span class="p">)</span></span>
-<span class="code-line">k <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>n<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="kp">seq</span><span class="p">(</span>n<span class="o">/</span><span class="m">10</span><span class="p">,</span>n<span class="p">,</span>n<span class="o">/</span><span class="m">10</span><span class="p">))</span></span>
-<span class="code-line"><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> <span class="kp">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>j<span class="p">)</span> posterior<span class="p">(</span>k<span class="p">[[</span>i<span class="p">]][</span>j<span class="p">],</span>n<span class="p">[</span>i<span class="p">],</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)))</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="m">150</span><span class="p">,</span><span class="m">200</span><span class="p">,</span><span class="m">300</span><span class="p">,</span><span class="m">500</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">k</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="nf">seq</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="m">10</span><span class="p">))</span></span>
+<span class="code-line"><span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">,</span><span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">k[[i]][j]</span><span class="p">,</span><span class="n">n[i]</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1247,7 +1422,7 @@ TRUE
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1369,8 +1544,7 @@ TRUE
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Each list represents n = 10,50,100,150,200,300,500, and each column represents possible ks from n/10 to n.
 We see what is expected with Bayesian probabilities -- as n increases, our confidence in probabilities becomes stronger -- we get values that are nearly 1 for the observations
@@ -1385,10 +1559,10 @@ For small values of n, we see the opposite -- it is highly skewed by our prior, 
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">posterior</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1398,7 +1572,7 @@ For small values of n, we see the opposite -- it is highly skewed by our prior, 
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1425,8 +1599,7 @@ For small values of n, we see the opposite -- it is highly skewed by our prior, 
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Notice that we have many machine zeros for large n. This interferes with our calculations, and gives us NaNs for the calculations.
 The following uses a log transformation to avoid machine zeros:</p>
@@ -1439,11 +1612,11 @@ The following uses a log transformation to avoid machine zeros:</p>
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> posprobs<span class="p">,</span> probsofprobs<span class="p">)</span></span>
-<span class="code-line">log_transf_posterior<span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">posterior</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">,</span> <span class="n">posprobs</span><span class="p">,</span> <span class="n">probsofprobs</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">log_transf_posterior</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="m">2000</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1453,7 +1626,7 @@ The following uses a log transformation to avoid machine zeros:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1477,7 +1650,7 @@ The following uses a log transformation to avoid machine zeros:</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1499,6 +1672,19 @@ The following uses a log transformation to avoid machine zeros:</p>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span></span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

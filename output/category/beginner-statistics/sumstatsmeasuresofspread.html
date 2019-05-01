@@ -95,9 +95,124 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -176,12 +291,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -194,27 +317,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -410,7 +545,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -420,11 +557,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -672,6 +822,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -710,7 +863,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -832,6 +985,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -848,16 +1005,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -873,6 +1038,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -923,8 +1093,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1063,16 +1240,14 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Measures-of-Spread">Measures of Spread<a class="anchor-link" href="#Measures-of-Spread">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last post on <a href="sumstatscentraltendency.html">central tendency</a>, we discussed the basics of what a statistic and a population is as well as the common measures of central tendency, the <b>mean</b>, <b>median</b> and <b>mode</b>. In this post, we will dive deeper into how to describe sample and population data using <b> Measures of Spread. </b></p>
 
@@ -1080,8 +1255,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When we talked about central tendency, we discussed the idea behind the "average" observation in a pool of data. When it comes to describing a dataset, the central tendency is a great place to start -- it gives us a sense of the location of our data. For instance, if we had the weight of a variety of individuals, we can get a sense of what a "typical" weight might be using measures of central tendency.</p>
 
@@ -1089,16 +1263,14 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Alien-Brains">Alien Brains<a class="anchor-link" href="#Alien-Brains">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Imagine you are an observer who knows nothing about a particular subject. Let's say this subject is the number of neurons in a sample of aliens' brains. Or, you know, something.</p>
 <p>Based on this information alone, an ordinary, human observer would have absolutely no sense of where to begin. That is, we have absolutely no <b>prior</b> information about aliens' brains. Let's say the sample of neurons in 100 aliens found in the first UFO crashing ever known to man look something like this:</p>
@@ -1119,7 +1291,7 @@ h6:hover .anchor-link {
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1129,7 +1301,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1166,7 +1338,7 @@ h6:hover .anchor-link {
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">alien_neurons</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="mi">424242</span><span class="p">,</span> <span class="o">.</span><span class="mi">0042</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1189,7 +1361,7 @@ h6:hover .anchor-link {
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1199,7 +1371,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1257,8 +1429,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Woah! These values are in the hundreds of millions! Well actually, the human brain has over 100,000,000,000 neurons! So, this alien is not the most sophisticated in terms of neurons.</p>
 <p>Is there a way to see this, the <b> location, </b> more quantitatively? Your answer should be ... yes! Using the techniques we learned last time, we can find the mean and median of this distribution. To spare the agony of performing this arithmetic on such huge numbers, we can use pandas to find these values.</p>
@@ -1276,7 +1447,7 @@ if (outputEl) {{
 <span class="code-line"><span class="s1">Median of Alien Neurons: </span><span class="si">{}</span><span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alien_mean</span><span class="p">,</span> <span class="n">alien_median</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1286,7 +1457,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1301,8 +1472,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This means that the mean of this sample is 100,584,186.03 and the median is 100,592,749. These values are quite "close", which is expected because we see that the distribution is somewhat symmetric.</p>
 <p>But... wait a minute! How are we certain that these two values are "close"? We can look at our histogram to see if this assertion is correct.</p>
@@ -1318,7 +1488,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">alien_mean</span> <span class="o">-</span> <span class="n">alien_median</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1328,7 +1498,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -1389,7 +1559,7 @@ if (outputEl) {{
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1399,7 +1569,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1457,8 +1627,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Well, they look pretty close. However, this is far too hand-wavy of an answer. In determining the "closeness" of these two statistics, we would like to have an objective measure relative to scale. The actual difference is around {{alien_mean - alien_median}}! With just that information alone, we would likely not say that the two are "close".</p>
 <p>If the difference between what you got in a paycheck was \$8,563 less than what you expected, you would definitely be upset! The more we think about it, relative differences like these are reliant of the &lt;b&gt; scale &lt;/b&gt; of the numbers we're talking about. 8,000 stars may be astronomically small compared to the total number of stars, but \$8,000 is significant to most people!</p>
@@ -1480,7 +1649,7 @@ if (outputEl) {{
 <span class="code-line">    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">log_norm_mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">log_norm_sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1531,7 +1700,7 @@ if (outputEl) {{
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1541,7 +1710,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1599,8 +1768,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><i> As a sidenote, the way this distribution was simulated was using the fact that we want a relative difference in the mean and median in the population to be equal to 4,692, but on a completely different scale. This was using the lognormal distribution, which is a skewed distribution, so it works well for this purpose! </i></p>
 
@@ -1615,7 +1783,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sim</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">sim</span><span class="o">.</span><span class="n">median</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1625,7 +1793,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[54]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -1641,8 +1809,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now clearly see that the absolute differences in the mean and median (and in fact, <b> any </b> of the observations) is not sufficient to describe their "closeness" to one another. We have an idea of the location, but we need a sense of scale.</p>
 
@@ -1650,16 +1817,14 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Why-does-spread-matter?">Why does spread matter?<a class="anchor-link" href="#Why-does-spread-matter?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can already see why the measures of central tendency are insufficient to give us an idea of what a distribution looks like. To investigate further, suppose we know only that the mean of some observations is 100. What else can we say?</p>
 <p>Well, not much. Consider the two distributions below. Both populations have mean 100, and we sample 100 values from them. The resulting samples have means very close to one another (and to 100), but they are quite different from one another.</p>
@@ -1690,7 +1855,7 @@ if (outputEl) {{
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1700,7 +1865,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1765,7 +1930,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ex_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1775,7 +1940,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[56]:</div>
 
 
 
@@ -1798,7 +1963,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">ex_2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1808,7 +1973,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[57]:</div>
 
 
 
@@ -1824,8 +1989,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now see how the <b> spread </b> of these distributions are quite different. How can we measure spread?</p>
 
@@ -1833,21 +1997,19 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Range">Range<a class="anchor-link" href="#Range">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The simplest measure of spread is known as the <b> range</b>. This is the largest value in the sample subtracted from the smallest value in the sample. This can give us an idea of where the possible values of the sample lay. That is:</p>
-<p>$$
+$$
 \bar{S}_{range} = x_{max} - x_{min}
-$$</p>
+$$<p></p>
 <p>For instance, in our alien example, we have:</p>
 
 </div>
@@ -1865,7 +2027,7 @@ $$</p>
 <span class="code-line"><span class="s1">Range: </span><span class="si">{}</span><span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_alien_neurons</span><span class="p">,</span> <span class="n">min_alien_neurons</span><span class="p">,</span> <span class="n">rng</span><span class="p">))</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1875,7 +2037,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1891,8 +2053,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From this, we know the difference between the largest and smallest values. To see how the original difference compares to this, we can look at the <b> ratio</b> of the difference and the range.</p>
 
@@ -1907,7 +2068,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">alien_mean</span> <span class="o">-</span> <span class="n">alien_median</span><span class="p">)</span> <span class="o">/</span> <span class="n">rng</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1917,7 +2078,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[59]:</div>
 
 
 
@@ -1933,8 +2094,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we can get a sense of how "close" the median and mean are. This ratio is necessarily between 0 and 1, with 0 representing the same point, and 1 representing the largest difference in the sample (that is $x_1 - x_2 = x_{range}$).</p>
 
@@ -1942,8 +2102,7 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Although simple, the range suffers from some problems in that it only can measure the differences between the largest and smallest points. It is therefore as variable as those points. Suppose we had a dataset that looked like the following: 0, 50, 50, 50, 90, 95, 100. Then, the mean is:</p>
 
@@ -1959,7 +2118,7 @@ $$</p>
 <span class="code-line"><span class="n">example_ds</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1969,7 +2128,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[60]:</div>
 
 
 
@@ -1992,7 +2151,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">example_ds</span><span class="o">.</span><span class="n">median</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2002,7 +2161,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[61]:</div>
+    <div class="prompt output_prompt">Out[61]:</div>
 
 
 
@@ -2018,8 +2177,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Using the ratio calculation as before, we would calculate:</p>
 
@@ -2035,7 +2193,7 @@ $$</p>
 <span class="code-line">    <span class="n">example_ds</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">example_ds</span><span class="o">.</span><span class="n">min</span><span class="p">())</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2045,7 +2203,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[62]:</div>
+    <div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -2104,7 +2262,7 @@ $$</p>
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2114,7 +2272,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2172,8 +2330,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's do something crazy -- let's change the last value of the series to 1 million, and see what happens to the "ratio" of the difference between the median and mean to the range.</p>
 
@@ -2188,7 +2345,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">example_ds</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="mi">100</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2201,7 +2358,7 @@ if (outputEl) {{
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">example_ds</span><span class="o">.</span><span class="n">median</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2211,7 +2368,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[65]:</div>
 
 
 
@@ -2235,7 +2392,7 @@ if (outputEl) {{
 <span class="code-line">    <span class="n">example_ds</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">example_ds</span><span class="o">.</span><span class="n">min</span><span class="p">())</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2245,7 +2402,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt output_prompt">Out[66]:</div>
 
 
 
@@ -2304,7 +2461,7 @@ if (outputEl) {{
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2314,7 +2471,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2372,8 +2529,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Huh. Here, the mean and median are very far apart -- and the mean is quite a bit off from the "average" person, as only one observation pushed it up into the thousands. This is, again, due to the lack of <b> robustness</b> of the mean. However, our ratio measure does not seem to think there is much of a difference between the difference in this case and in the previous case.</p>
 <p>We would expect that our most extreme values in the sample may be more variable then values closer to the center. In this case, we can take ranges of specific <b> quartiles</b>, as discussed in the previous post, to determine variability.</p>
@@ -2382,23 +2538,20 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Interquartile-range">Interquartile range<a class="anchor-link" href="#Interquartile-range">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In a similar way, we can define a range between any two percentiles of the data. In this case, the range is a specific case of this, where we take the 0th and 100th percentile of the data. As discussed earlier, this may be quite variant -- these are the most extreme values of our distribution.</p>
 <p>Suppose instead we took the difference between the 25th and 75th percentiles, or the 1st and 3rd quantiles. It would follow that this measure would be more <b> robust</b> then the max-min range. This is known as the <b> inter-quartile range </b> and is (unsurprisingly) robust to outliers. That is, we can say that the interquartile range in a finite sample is:</p>
-<p>$$
-\tilde{S}_{IQR} = Q_x(.75) - Q_x(.25)
 $$
-Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds data which is the above $p%$ of the data. Arithmetically, we can determine this by finding the medians of the values above and below the median. Most software packages contain functions which can determine this automatically. In the case of the alien brains, we have:</p>
+\tilde{S}_{IQR} = Q_x(.75) - Q_x(.25)
+$$<p>Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds data which is the above $p%$ of the data. Arithmetically, we can determine this by finding the medians of the values above and below the median. Most software packages contain functions which can determine this automatically. In the case of the alien brains, we have:</p>
 
 </div>
 </div>
@@ -2412,7 +2565,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 <span class="code-line"><span class="n">iqr</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2422,7 +2575,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[68]:</div>
+    <div class="prompt output_prompt">Out[68]:</div>
 
 
 
@@ -2438,8 +2591,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This represents how distant the closest two points which account for 50% of the data are. In other words, we have determined a measure of how far away things are. Taking a similar ratio, we can determine how distant two points are. For example:</p>
 
@@ -2454,7 +2606,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">alien_mean</span> <span class="o">-</span> <span class="n">alien_median</span><span class="p">)</span> <span class="o">/</span> <span class="n">iqr</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2464,7 +2616,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[69]:</div>
+    <div class="prompt output_prompt">Out[69]:</div>
 
 
 
@@ -2480,8 +2632,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This value has a range between 0 and infinity. In general, each <b> "unit" </b> of this ratio measures how far away the two points are <b> relative to the center 50% of the data</b>. A small value indicates that two points are relatively "close", while a large value (&gt;1) indicates they are "distant" relative to the center 50%. For more information on this robust measure of spread, see <a href="https://en.wikipedia.org/wiki/Interquartile_range">here</a></p>
 
@@ -2489,16 +2640,14 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Boxplots">Boxplots<a class="anchor-link" href="#Boxplots">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Using the information we have learned about the measures of spread and measures of central tendency, we can now culminate it together into a plot called a <b>box and whisker plot.</b> This plot shows the median, the inter-quartile range, and the total range in one figure. This can give us a good "overview" of what the data looks like in terms of quantiles.</p>
 
@@ -2514,7 +2663,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">([</span><span class="n">data</span><span class="p">])</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2524,7 +2673,7 @@ Where $Q_x(p)$ is the <b>quantile</b> function, i.e. the function that finds dat
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2582,8 +2731,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The center line represents the median, the two lines surrounding in the 25th and 75th quartiles, respectively, and the endpoints (and whiskers) represent the minimum and maximum. To compare to the non-symmetric simulated plot we discussed before, we can see large differences between the two:</p>
 
@@ -2599,7 +2747,7 @@ if (outputEl) {{
 <span class="code-line"><span class="n">plt</span><span class="o">.</span><span class="n">iplot</span><span class="p">([</span><span class="n">data</span><span class="p">])</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2609,7 +2757,7 @@ if (outputEl) {{
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2667,8 +2815,7 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see now how much of the inferences about spread can be understood through the use of quantiles and differences between them. These measures are quite robust, but suffer in the sense of efficiency. In a manner equivalent to the median and mean, these measures of variability do not take into account every data point, as the mean does, but only considers the quantiles. The next measure of spread, and the most common historically and in practice, is the <b> variance </b> which is defined in terms of the mean instead of in terms of quantiles. But first, we will discuss the <b> degrees of freedom </b> implicit in the mean.</p>
 
@@ -2676,16 +2823,14 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Freedom----the-dream,-and-the-degree-to-which-we-have-it">Freedom -- the dream, and the degree to which we have it<a class="anchor-link" href="#Freedom----the-dream,-and-the-degree-to-which-we-have-it">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is at this point that we should discuss <b>degrees of freedom </b>, before jumping into variance. Degrees of freedom are a concept which many struggle with in elementary statistics, and is often glossed over in respect to statistics courses. I believe that understanding the degrees of freedom are essential in understanding how randomness ties into statistical treatment of data. It is for this reason that I have included this here. If this feels too math heavy, feel free to disregard it -- it is not necessary to understand, but helpful. If you're fond of mathematics, read on.</p>
 
@@ -2693,8 +2838,7 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Consider it this way. Let's say I told you we have 100 points. How many degrees of freedom do these points have? When I ask this, I essentially am asking the question <b> how many different ways can these points vary? </b></p>
 <p>Well, we only know that there are 100 points -- we know nothing of how these points are distributed. Therefore, they can conceivably be <i> any </i> 100 points, since we have no <b> prior </b> information.</p>
@@ -2705,24 +2849,21 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's consider an example. Imagine we pick some random numbers out of a hat and get the following: 9, 8, 2, 42, 100, -2. Suppose there is only one paper left in the hat and I told you that I, an omniscient observer, know that the mean of all the values in the hat is 1000. What is the final value?</p>
 <p>Well, we know that</p>
-<p>$$ 
+$$ 
 \bar{X}_{mean} = \frac{\sum_{1}^{n} x_i}{n} = \frac{\sum_{1}^{n - 1}}{n} + \frac{x_n}{n}
-$$</p>
-<p>So, it follows that:
+$$<p>So, it follows that:
 $$
 x_n = n\bar{X}_{mean}  - \sum_{1}^{n-1} x_i
 $$ 
 This is only using elementary algebra. In our case, the final value is</p>
-<p>$$ 
+$$ 
 7 \bar{X}_{mean} - \sum_{1}^{6} x_i\\
 7 \times 1000 - (9 + 8 + 2 + 42 + 100 - 2)
-$$</p>
-<p>This is:</p>
+$$<p>This is:</p>
 
 </div>
 </div>
@@ -2737,7 +2878,7 @@ $$</p>
 <span class="code-line"><span class="n">last_value</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2747,7 +2888,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[72]:</div>
 
 
 
@@ -2763,8 +2904,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To confirm that this is correct, lets see what the mean looks like.</p>
 
@@ -2779,7 +2919,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">points_picked</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">last_value</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2789,7 +2929,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[73]:</div>
+    <div class="prompt output_prompt">Out[73]:</div>
 
 
 
@@ -2805,8 +2945,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But we could do this for any mean! Suppose the mean was instead -1000. Then</p>
 
@@ -2822,7 +2961,7 @@ $$</p>
 <span class="code-line"><span class="n">last_value</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2832,7 +2971,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[74]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
@@ -2855,7 +2994,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">points_picked</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">last_value</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2865,7 +3004,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[75]:</div>
 
 
 
@@ -2881,17 +3020,15 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This describes what the mean tells us about the data -- if we know the mean, one of the data points essentially becomes redundant.</p>
 <p>Now, suppose I wanted to create my own hat game, where I wanted the mean to be 42. How could I do this?</p>
 <p>There are infinitely many sets of numbers I could choose that have a mean of 42. However, they all have the constraint that <b> if we were to remove one value, we could reconstruct it in the way above </b>! That is, the final value is not <b> random </b> but <b> determined </b>. This means that we have n - 1 degrees of freedom -- or that the dimensionality of our random vector is now n -1.</p>
 <p>Then, I could randomly select n - 1 numbers, and select the final number deterministically such that</p>
-<p>$$ 
+$$ 
 x_7 = 7 \times 42 - \sum_{1}^{6} x_i
-$$</p>
-<p>This will ensure that my mean is always 42. In fact, there is no such other number I could choose that has a mean of 42.</p>
+$$<p>This will ensure that my mean is always 42. In fact, there is no such other number I could choose that has a mean of 42.</p>
 <p>Conversely, the number I select will uniquely determine the mean. So the mean has one degree of freedom -- it can be determined entirely from one number, if the other numbers are known.</p>
 <p>This becomes important because the more degrees of freedom we have, the more we allow random variation to play a part in our estimates. Although randomness may seem bad, in fact having more degrees of freedom can be a good thing, as is the case in linear regression -- a topic for a different day.</p>
 
@@ -2899,8 +3036,7 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, we have</p>
 
@@ -2918,7 +3054,7 @@ $$</p>
 <span class="code-line">    <span class="k">return</span> <span class="n">n_final</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2931,7 +3067,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">find_point_from_mean</span><span class="p">(</span><span class="n">points_picked</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2941,7 +3077,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -2957,53 +3093,46 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Freedom-isn't-free">Freedom isn't free<a class="anchor-link" href="#Freedom-isn't-free">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's tackle the first case -- we have 100 points with a mean of 100. How many different ways can we select these 100 points?</p>
 <p>Consider the following: knowing only the mean of the distribution, we can select any n - 1 points, in this case 99, arbitrarily and completely at random, and then select the final point such that:</p>
-<p>$$ 
+$$ 
 x_{final} = n\bar{X}_{mean} - \sum_{i=1}^{n-1} x_i
-$$
-In this case, this is 
+$$<p>In this case, this is 
 $$
 x_{final} = 10,000 - \sum_{i=1}^{99} x_i
 $$</p>
 <p>Taken another way, we can say the following:</p>
 <p>Knowing the mean, we can calculate:</p>
-<p>$$
+$$
 \tilde{x}_i = x_i - \bar{X}_{mean}\\
 \forall x_i \in S
-$$</p>
-<p>Only n -1 of these values are allowed to vary -- once we know n-1 of them, the last is determined by the calculation of the mean. In general, we have that the degrees of freedom can be decomposed as follows:</p>
-<p>$$
+$$<p>Only n -1 of these values are allowed to vary -- once we know n-1 of them, the last is determined by the calculation of the mean. In general, we have that the degrees of freedom can be decomposed as follows:</p>
+$$
   \begin{bmatrix}x_1 \\ x_2 \\ ... \\ x_n\end{bmatrix} =   \begin{bmatrix}\bar{X}_{mean} \\ \bar{X}_{mean}\\ ... \\ \bar{X}_{mean}\end{bmatrix} + \begin{bmatrix} x_1 - \bar{X}_{mean} \\ x_2 - \bar{X}_{mean}\\ ... \\ x_n - \bar{X}_{mean}\end{bmatrix} 
-$$</p>
-<p>Note that this is in vector notation, but it makes the results easier to see. The vector on the left, our <b> data points </b> $x_1, x_2, ..., x_n$ have n degrees of freedom -- given no additional information, they are free to vary randomly. The first vector on the right, the vector of means, has 1 degree of freedom -- if we do not know it, it can vary in one dimension. That means it can be any single number.</p>
+$$<p>Note that this is in vector notation, but it makes the results easier to see. The vector on the left, our <b> data points </b> $x_1, x_2, ..., x_n$ have n degrees of freedom -- given no additional information, they are free to vary randomly. The first vector on the right, the vector of means, has 1 degree of freedom -- if we do not know it, it can vary in one dimension. That means it can be any single number.</p>
 <p>The final vector on the right now has n - 1 degrees of freedom (the degrees of freedom of the original vector minus the degrees of freedom of the mean). This means that given a mean, our data points can vary with dimension n - 1. The final dimension is then a <b> linear combination </b> of the other data points.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Variance">Variance<a class="anchor-link" href="#Variance">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But how does this have any connection to the spread of a dataset? Happy you asked!</p>
 <p>One way we can consider spread is: how far away are the observations from the mean? In order to do this, we could take the <b>differences</b> between each point and the mean. This would look something like this:</p>
@@ -3020,7 +3149,7 @@ $$</p>
 <span class="code-line"><span class="n">x_differences</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3030,7 +3159,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[78]:</div>
+    <div class="prompt output_prompt">Out[78]:</div>
 
 
 
@@ -3107,8 +3236,7 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This will give us differences for each of the points. It would be nicer to have one number to measure the variability of the data, so we can take the average of these values:</p>
 
@@ -3123,7 +3251,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">x_differences</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -3133,7 +3261,7 @@ $$</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -3149,18 +3277,16 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Hm. This value is very close to zero. This is actually expected, simply because of the <b>definition of the arithmetic mean</b>. Consider the following:</p>
-<p>$$ 
+$$ 
 \bar{X}_{mean} = \frac{\sum_{i=1}^{n} x_i}{n}\\
 \sum_{i=1}^{n}(x_i - \bar{X}_{mean}) =\\
 \sum_{i=1}^{n}x_i - n\bar{X}_{mean} = \\
 \sum_{i=1}^{n}x_i - n\frac{\sum_{i=1}^{n} x_i}{n} =\\
 0
-$$</p>
-<p>Intuitively, the mean is the value which is in the "center" of the distribution, in the sense that the differences above the mean are equal to the differences below the mean. The mean is specifically selected such that this sum will equal to zero.</p>
+$$<p>Intuitively, the mean is the value which is in the "center" of the distribution, in the sense that the differences above the mean are equal to the differences below the mean. The mean is specifically selected such that this sum will equal to zero.</p>
 <p>But in our case, we are not very happy with this. We are not as concerned with the sign of the distance from the mean, but how far away it is. We are not interested in the <b> direction</b> but the <b> magnitude</b>. For example, if the mean is 2 and we have two points around it, 1 and 3, we would say that they are equally distanced from the mean -- the sign of the difference (-1 and 1) does not matter.</p>
 <p>How can we eliminate the sign? Mathematically, there are two general approaches to this -- we can take the <b> absolute value</b> or we can take the <b>squares</b>. The absolute value preserves the exact magnitude, while squaring does not.</p>
 <p>Why might we want to take the squares? Squaring the distance values will essentially put more weight on values which are far from the mean, and less on those close. In this sense, we get a <b>penalization</b> in the case of extreme values -- extreme values will make our variance larger than "common" values. Additionally, historically the squares have been used because they are analytically "nicer" -- they are smooth functions for which we can take the derivative, while the absolute value is not. In the computing age, this has become less of an issue as numerical approaches to optimization problems have taken hold, but I digress.</p>
@@ -3169,28 +3295,24 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Since the squared version is used the most in statistical literature, we will define this first. We can define the <b> sum of squares</b> as the following:</p>
-<p>$$ 
+$$ 
 SS = \sum_{i=1}^{n}(x_i - \bar{X}_{mean})^2
-$$</p>
-<p>This gives us a sense of the <b>total amount of squared deviations from the mean.</b> This is a measure of spread.</p>
+$$<p>This gives us a sense of the <b>total amount of squared deviations from the mean.</b> This is a measure of spread.</p>
 <p>It may be useful to get an average of these values, i.e. the "typical" squared deviation from the mean. This is known as the mean squared deviation from the mean, or the <b> variance</b>.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the case of a <b>known population mean</b>, we can calculate this variance directly from our sample. In this case, all of our values are allowed to vary freely -- they are not reliant on this known population mean. So we can take the mean as follows:</p>
-<p>$$
+$$
 \hat\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \mu)^2
-$$</p>
-<p>Of course, this would not happen often in practice. But since the mean was known, our values are not linearly computable directly from it -- in this sense, they can be any values.</p>
+$$<p>Of course, this would not happen often in practice. But since the mean was known, our values are not linearly computable directly from it -- in this sense, they can be any values.</p>
 <p>If we do not, however, we must make a correction known as the <b> Bessel's correction </b>. The <b> sample variance </b> is the variance which takes this into account, as follows:
 $$
 \hat{s}^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{X}_{mean})^2
