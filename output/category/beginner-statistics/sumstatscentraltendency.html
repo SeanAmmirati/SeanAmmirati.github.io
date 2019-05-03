@@ -95,124 +95,9 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
-/* The color values are a mix of
-   http://www.xcolors.net/dl/baskerville-ivorylight and
-   http://www.xcolors.net/dl/euphrasia */
-.ansi-black-fg {
-  color: #3E424D;
-}
-.ansi-black-bg {
-  background-color: #3E424D;
-}
-.ansi-black-intense-fg {
-  color: #282C36;
-}
-.ansi-black-intense-bg {
-  background-color: #282C36;
-}
-.ansi-red-fg {
-  color: #E75C58;
-}
-.ansi-red-bg {
-  background-color: #E75C58;
-}
-.ansi-red-intense-fg {
-  color: #B22B31;
-}
-.ansi-red-intense-bg {
-  background-color: #B22B31;
-}
-.ansi-green-fg {
-  color: #00A250;
-}
-.ansi-green-bg {
-  background-color: #00A250;
-}
-.ansi-green-intense-fg {
-  color: #007427;
-}
-.ansi-green-intense-bg {
-  background-color: #007427;
-}
-.ansi-yellow-fg {
-  color: #DDB62B;
-}
-.ansi-yellow-bg {
-  background-color: #DDB62B;
-}
-.ansi-yellow-intense-fg {
-  color: #B27D12;
-}
-.ansi-yellow-intense-bg {
-  background-color: #B27D12;
-}
-.ansi-blue-fg {
-  color: #208FFB;
-}
-.ansi-blue-bg {
-  background-color: #208FFB;
-}
-.ansi-blue-intense-fg {
-  color: #0065CA;
-}
-.ansi-blue-intense-bg {
-  background-color: #0065CA;
-}
-.ansi-magenta-fg {
-  color: #D160C4;
-}
-.ansi-magenta-bg {
-  background-color: #D160C4;
-}
-.ansi-magenta-intense-fg {
-  color: #A03196;
-}
-.ansi-magenta-intense-bg {
-  background-color: #A03196;
-}
-.ansi-cyan-fg {
-  color: #60C6C8;
-}
-.ansi-cyan-bg {
-  background-color: #60C6C8;
-}
-.ansi-cyan-intense-fg {
-  color: #258F8F;
-}
-.ansi-cyan-intense-bg {
-  background-color: #258F8F;
-}
-.ansi-white-fg {
-  color: #C5C1B4;
-}
-.ansi-white-bg {
-  background-color: #C5C1B4;
-}
-.ansi-white-intense-fg {
-  color: #A1A6B2;
-}
-.ansi-white-intense-bg {
-  background-color: #A1A6B2;
-}
-.ansi-default-inverse-fg {
-  color: #FFFFFF;
-}
-.ansi-default-inverse-bg {
-  background-color: #000000;
-}
-.ansi-bold {
-  font-weight: bold;
-}
-.ansi-underline {
-  text-decoration: underline;
-}
-/* The following styles are deprecated an will be removed in a future version */
+/* CSS font colors for translated ANSI colors. */
 .ansibold {
   font-weight: bold;
-}
-.ansi-inverse {
-  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -291,20 +176,12 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  position: relative;
-  overflow: visible;
-}
-div.cell:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: transparent;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
 }
 div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -317,39 +194,27 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected,
-div.cell.selected.jupyter-soft-selected {
+div.cell.selected {
   border-color: #ababab;
-}
-div.cell.selected:before,
-div.cell.selected.jupyter-soft-selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #42A5F5;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
 }
 @media print {
-  div.cell.selected,
-  div.cell.selected.jupyter-soft-selected {
+  div.cell.selected {
     border-color: transparent;
   }
 }
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-}
-.edit_mode div.cell.selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -545,9 +410,7 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  /* Note that this should set vertical padding only, since CodeMirror assumes
-       that horizontal padding will be set on CodeMirror pre */
-  padding: 0.4em 0;
+  padding: 0.4em;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -557,24 +420,11 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
-    use .CodeMirror-lines for vertical */
-  padding: 0 0.4em;
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
   border: 0;
   border-radius: 0;
-}
-.CodeMirror-cursor {
-  border-left: 1.4px solid black;
-}
-@media screen and (min-width: 2138px) and (max-width: 4319px) {
-  .CodeMirror-cursor {
-    border-left: 2px solid black;
-  }
-}
-@media screen and (min-width: 4320px) {
-  .CodeMirror-cursor {
-    border-left: 4px solid black;
-  }
 }
 /*
 
@@ -822,9 +672,6 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
-div.output_area .mglyph > img {
-  max-width: none;
-}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -863,7 +710,7 @@ div.output_area .mglyph > img {
 }
 div.output_area pre {
   margin: 0;
-  padding: 1px 0 1px 0;
+  padding: 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -985,10 +832,6 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
-.rendered_html ul:not(.list-inline),
-.rendered_html ol:not(.list-inline) {
-  padding-left: 2em;
-}
 
 
 
@@ -1005,24 +848,16 @@ div.output_unrecognized a:hover {
 }
 
 
-
-
-
 .rendered_html pre,
-
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
+.rendered_html td,
 
-.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
+
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -1038,11 +873,6 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
-
-.rendered_html * + .alert {
-  margin-top: 1em;
-}
-[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1093,15 +923,8 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
-.text_cell.rendered .rendered_html tr,
-.text_cell.rendered .rendered_html th,
-.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
-}
-.text_cell .dropzone .input_area {
-  border: 2px dashed #bababa;
-  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1240,14 +1063,16 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Summary-Statistics-(and-what-they-mean)">Summary Statistics (and what they mean)<a class="anchor-link" href="#Summary-Statistics-(and-what-they-mean)">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Welcome! In this (very first) post, we are going to be going over a few basic statistical concepts involving summary statistics and how we can use them. This is a great place to start for getting some idea on how statistics can work for you!</p>
 
@@ -1255,7 +1080,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Statistics courses usually start with a discussion of summary statistics, and for good reason. Summary statistics are the essential building blocks of statistics. When we talk about expectation, or prediction, we are actually talking about a summary statistic -- in many cases, and algorithms, the mean. For the most part, summary statistics can give us a good idea of the underlying distribution and, in some cases, are <b> sufficient </b> in describing a set of data points for a particular algorithm.</p>
 
@@ -1263,14 +1089,16 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Don't-Be-Another-Statistic">Don't Be Another Statistic<a class="anchor-link" href="#Don't-Be-Another-Statistic">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The first question that will come up immediately when discussing this is what exactly a statistic is. In everyday language many people use statistic to mean a way of summarizing data into a single data point. When people say things like "You are not just a statistic!", what they are generally referring to is how statistics are <b> aggregates </b> of data. That is, statistics cannot capture all of the truth, but only an average.</p>
 
@@ -1278,7 +1106,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So is it fair to say that statistics are purporting to be cold-hard facts gathered from data? Not exactly. Statistics are gathered from sample data, and are often used as an estimation of the population. In statistician speak, a <b> population </b> is the theoretical overarching group that we wish to infer about. For instance, the population can be men living in the United States, all of the atoms in the universe, or the set of all possible combinations of people into couples. A <b> sample </b> is a subset of the population, a smaller group derived from it.</p>
 
@@ -1286,7 +1115,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We use statistics derived from the sample to make inferences about the population, but by definition these are not exact -- they depend on the sample that we choose. Almost surely, if we were to choose another sample we would come up with a different statistic. Therefore, a statistician would not take a summary statistic to be the hard, cold "truth", but a signal, or estimation, of the "cold hard truth."</p>
 
@@ -1294,14 +1124,16 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Statistics-vs-Statistic">Statistics vs Statistic<a class="anchor-link" href="#Statistics-vs-Statistic">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Unfortunately, much of the confusion about the nature of a <b> statistic </b> has to do with the field known as <b> statistics.</b> Confusing, but true. Statistics is generally what people are referring to when they talk about the hand-wavy idea -- "gathering insights from data." But this treats data as though it is a fixed, constant thing. This couldn't be further from the case! This is exactly what makes statistics such an interesting field -- statistics deals with random variation. Statistics isn't used for cases of absolute certainty, like many of the sciences do, but revels in the uncertainty of real life. Indeed, nearly everything has random variation involved in it, and therefore nearly everything is in the scope of statistics. The way we can quantify uncertainty is by using the theories of <b> probability.</b> But that is for another post!</p>
 
@@ -1309,7 +1141,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, we do not say that a statistic is the "ground truth" but a description of <b> sample data. </b> This sample statistic is then used to estimate the &lt;/b&gt; population parameters.&lt;/b&gt; This comes from the initial distinction that many people make -- samples themselves are not a representation of the ground truth. When a statistic is used as a statement about the population, we call this statistic an <b> estimator </b> of the population parameter.</p>
 
@@ -1317,7 +1150,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In fact, population parameters are not nearly as interesting as sample statistics. A population parameter is not probabilistic at all -- if it is obtainable, then it will be a single value with no variation. Sample statistics, however, do vary, and sometimes considerably based on how the data is sampled and how large the sample is.</p>
 
@@ -1325,7 +1159,8 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Throughout this exercise, I am going to be using some code to give examples of how these things work. I will only be displaying code that I believe is helpful for the task at hand, and I will create a future article describing how this code is written using python. In this post, which I will be calling a "framework" post, I will only be describing how these things work. Then, in a "application" post, I will show how to write code to solve these problems with real-world data.</p>
 
@@ -1333,14 +1168,16 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Class-Grades">Class Grades<a class="anchor-link" href="#Class-Grades">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, onto an example. Suppose we have a class of 7th graders who had gotten the following grades on the previous exam: 95, 80, 50, 80, 100, 94.</p>
 <p>Let's start with the situation where this is the entire class. In this case, we are dealing with the <b>population.</b> That means, if we take the common 'statistics', we will not have a statistic at all but a <b> parameter. </b> This distinction makes it clear that we are not estimating anything, but are looking at the "cold, hard truth." The population is then "the grades of 7th graders on math test last week."</p>
@@ -1362,7 +1199,7 @@ h6:hover .anchor-link {
 <span class="code-line"><span class="o">%</span><span class="k">matplotlib</span> inline</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1383,7 +1220,7 @@ h6:hover .anchor-link {
 <span class="code-line"><span class="n">class_grades</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1393,7 +1230,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -1415,14 +1252,16 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Central-Tendency">Central Tendency<a class="anchor-link" href="#Central-Tendency">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Given a set of data points, where do we start? A good start is determining the <b> central tendency </b> or what we often call the <b> average. </b> Here, I use the word <b> average </b> as a general case of central tendency -- we want to know what the average student in this class looks like. All of the following examples assumes that we have some <b> finite </b> sample of a <b> finite </b> population, but can be extended in the more general case.</p>
 
@@ -1430,30 +1269,35 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Arithmetic-Mean">Arithmetic Mean<a class="anchor-link" href="#Arithmetic-Mean">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One common example of an average is the arithmetic mean. We are all familiar with this from our schooling days:</p>
-\begin{equation}
+<p>\begin{equation}
 \bar{X}_{mean} = \frac{ \sum_{i=0}^{n} x_{i} }{n} 
-\end{equation}
+\end{equation}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here, we say that we sum over all of the possible values, and divide by the total number. We can see the results on our simple dataset above:</p>
-$$
+<p>$$
 95 + 80 + 50 + 80 + 100 + 94 = 499 = T \\
 \bar{x} = \frac{T}{6} = 83.166
-$$
+$$</p>
+
 </div>
 </div>
 </div>
@@ -1466,7 +1310,7 @@ $$
 <span class="code-line"><span class="n">mean</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1476,7 +1320,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -1492,14 +1336,16 @@ $$
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Median">Median<a class="anchor-link" href="#Median">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Another measure of central tendency is the median. The <b> median </b> is the value which half of the data is smaller and half is larger than. If there is an even number of points, we take the average of the two closest to the "center" of the ranked numbers.</p>
 
@@ -1507,26 +1353,31 @@ $$
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For example, we first list the points from smallest to largest:</p>
-$$ 
+<p>$$ 
 50, 80, 80, 94, 95, 100
-$$<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
-$$ 
+$$</p>
+<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
+<p>$$ 
 50, 80, 80, 94, 95, 100\\
     80, 80, 94, 95\\
         80, 94\\
-$$<p>Now that we have two values (since 6 = n is even), we take an average of these values. That is:</p>
-$$
+$$</p>
+<p>Now that we have two values (since 6 = n is even), we take an average of these values. That is:</p>
+<p>$$
 \frac{(80 + 94)}{2} = 87
-$$<p>Note that we can also express this as follows:</p>
+$$</p>
+<p>Note that we can also express this as follows:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rank the $X_i$ from smallest to largest, where $i = 1, ..., n$. 
 Define $X^{(i)}$ as the $i$th <b>order statistic</b>, where $i$ is the rank in this list.</p>
@@ -1543,7 +1394,8 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Then, $n$ in this case is 6, which is even. So we take the average of the 3rd and 4th order statistic, 80 and 94. This is the same result we had derived earlier.</p>
 
@@ -1559,7 +1411,7 @@ $$</p>
 <span class="code-line"><span class="n">median</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1569,7 +1421,7 @@ $$</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -1585,14 +1437,16 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Mode">Mode<a class="anchor-link" href="#Mode">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Finally there is the mode. The mode is simply the most likely value, or the most recurring value. Thus there can be multiple modes if there are two values which are equally likely and are the most recurring in the dataset.</p>
 <p>We can summarize this by looking at the frequencies of each data point. For convenience, I have done this using pandas.</p>
@@ -1608,7 +1462,7 @@ $$</p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">class_grades</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1618,7 +1472,7 @@ $$</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1639,7 +1493,8 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Because 80 occurs twice, it is the mode.</p>
 
@@ -1655,7 +1510,7 @@ $$</p>
 <span class="code-line"><span class="n">mode</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1665,7 +1520,7 @@ $$</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -1682,7 +1537,8 @@ $$</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For all unique values $u_j$ of $x_i$ in the sample, let $f(u_j) = \sum_{x_i} 1, \forall x_i = u_j$</p>
 <p>Then, $f(u_j)$ is the <b> frequency </b> of unique value $u_j$. Then:
@@ -1695,14 +1551,16 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Other-Measures-of-Central-Tendency">Other Measures of Central Tendency<a class="anchor-link" href="#Other-Measures-of-Central-Tendency">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>These are all of the canonical measures of central tendency that you have likely heard about before. However, there are others as well such as those listed <a href="https://en.wikipedia.org/wiki/Central_tendency">here</a>. Check them out -- they're pretty interesting! For fun, I will show some examples below.</p>
 
@@ -1710,14 +1568,16 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Trimean">Trimean<a class="anchor-link" href="#Trimean">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The trimean is the <b> weighted </b> arithmetic mean of the median and two <b> quartiles.</b> That's a lot to unpack, so let me explain.</p>
 
@@ -1725,7 +1585,8 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By weighted, we mean that the observations are multiplied by some set of constants that place a magnitude on a particular observation. Higher weighted variables are considered more "important" to the calculation. Instead of dividing by the sample size, we divide instead by the <b> sum of the weights </b>.</p>
 
@@ -1733,7 +1594,8 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Another way of looking at this is that each observation is considered to have a probability of occurring, $\frac{w_i}{\sum_{i}w_i}$. Then, the weighted average is a generalization of the arithmetic average explained before, where the arithmetic average weighs each value equally, i.e, $w_i = c$ for all $i$. Then we arrive at the same formula we saw in equation (1).</p>
 
@@ -1741,7 +1603,8 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A <b> quartile </b> is the point that is greater then some multiple of 25% of the data. If there is no such discrete number, we take a weighted average to determine its value. It is called a quartile because it separates the data into four segments. The first quartile is the data point which is greater than 25% of the data, the second is the median (50% of the data), the third is for 75% of the data, and the forth quartile is also the maximum, greater than all of the data. Interestingly, this is often not considered a quartile, but by the same logic it can be considered one.</p>
 
@@ -1749,15 +1612,18 @@ $$</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The trimean is then defined as:</p>
-$$
+<p>$$
 TM = \frac{Q_1 + 2M + Q_3}{4}
-$$<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
-$$ 
+$$</p>
+<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
+<p>$$ 
 MH = \frac{Q_1 + Q_3}{2} 
-$$<p>This is calculated below:</p>
+$$</p>
+<p>This is calculated below:</p>
 
 </div>
 </div>
@@ -1777,7 +1643,7 @@ $$<p>This is calculated below:</p>
 <span class="code-line"><span class="n">TM</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1787,7 +1653,7 @@ $$<p>This is calculated below:</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -1803,7 +1669,8 @@ $$<p>This is calculated below:</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In practice, it turns out that this estimator is a remarkably <b> efficient </b> estimator of the population, meaning it can accurately estimate the population mean if calculated on a sample with relatively fewer points than other estimators. For a symmetric distribution like the <b> normal </b> distribution, it is the most efficient as compared with the median, and other L-3 estimators. See <a href="https://en.wikipedia.org/wiki/Trimean">here</a> for more information. It is also is more robust than the mean, which will be discussed further below.</p>
 
@@ -1811,14 +1678,16 @@ $$<p>This is calculated below:</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Winsorized-Mean">Winsorized Mean<a class="anchor-link" href="#Winsorized-Mean">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This will be a good segue into the next section, which examines the most appropriate method of central tendency to use. The Winsorized Mean attempts to mitigate the effect of outliers -- values that are very far from what we would call the "average" value. If this doesn't make sense yet, don't worry. I'll be discussing it further later in the section on robustness. For now, we will just examine what this will look like.</p>
 
@@ -1826,16 +1695,19 @@ $$<p>This is calculated below:</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the Winsorized mean, we will take the most extreme values of our sample and replace them with the most extreme remaining values. In this case, this is 50 and 100. So, our new, adjusted, sample to calculate the central tendency is:</p>
-$$
+<p>$$
 \tilde{S} = {80, 80, 80, 94, 95, 95}
-$$<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
-$$ 
+$$</p>
+<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
+<p>$$ 
 \frac{ \sum_i \tilde{s}_{i} }{n},\\
 \forall \tilde{s}_i \in \tilde{S}
-$$<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
+$$</p>
+<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
 <p>In general, we can take the largest and smallest p% of data and replace it with the most extreme values within this range. This value is arbitrary, but is often taken to be 10 to 25% of the ends replaced. In this example, we take the top and bottom 10%, which trims the most extreme values on both sides.</p>
 
 </div>
@@ -1872,7 +1744,7 @@ $$<p>If you don't understand the notation, don't worry. We're just taking an ave
 <span class="code-line"><span class="n">wm</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1882,7 +1754,7 @@ $$<p>If you don't understand the notation, don't worry. We're just taking an ave
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -1898,13 +1770,15 @@ $$<p>If you don't understand the notation, don't worry. We're just taking an ave
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But wait! How can you just replace values like that!</p>
 <p>I know, it seems dishonest. The idea is that these values are extremely unlikely. In the case of 6 people, this is probably not the case. But imagine we had the following values:</p>
-$$
+<p>$$
 0, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 96, 100
-$$
+$$</p>
+
 </div>
 </div>
 </div>
@@ -1919,7 +1793,7 @@ $$
 <span class="code-line"><span class="n">ex_outliers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1929,7 +1803,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -1945,7 +1819,8 @@ $$
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But, would we say that the average student received a grade of 92? This seems like an underestimation. Naively, if we choose the Winsorized mean, we would get the following:</p>
 
@@ -1960,7 +1835,7 @@ $$
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">winsorized_mean</span><span class="p">(</span><span class="n">ex_outliers</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1970,7 +1845,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -1986,7 +1861,8 @@ $$
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This seems like a more accurate representation of the data. In the cases of outliers, one must be careful to examine the distribution of the data well before naively using one measure of central tendency, as the results may be very misleading.</p>
 
@@ -1994,14 +1870,16 @@ $$
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Which-to-choose?">Which to choose?<a class="anchor-link" href="#Which-to-choose?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is not always clear, as we saw above for the Windsorized mean. If we look at a histogram of the values, we can get a sense of the <b> shape </b> of the distribution. It turns out that the shape can help us determine which measure of central tendency best describes the distribution.</p>
 
@@ -2023,7 +1901,7 @@ $$
 <span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2033,7 +1911,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -2046,7 +1924,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -2064,7 +1942,8 @@ $$
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All of these represent central tendency. To see this more easily, let's consider it on a larger dataset.</p>
 
@@ -2082,7 +1961,7 @@ $$
 <span class="code-line"><span class="n">random_var</span> <span class="o">=</span> <span class="n">random_var</span><span class="o">.</span><span class="n">floordiv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2092,7 +1971,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -2121,7 +2000,7 @@ $$
 <span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2131,7 +2010,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[13]:</div>
 
 
 
@@ -2144,7 +2023,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -2162,7 +2041,8 @@ $$
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that this is a skewed distribution -- in particular it is <b> left skewed </b>.</p>
 <p>A majority of the students did well on the exam, but there were some who did particularly poorly, with some extreme values on the far left. In this case, where there are many extreme values, the mean is not a good "average" -- it is dragged down by the very small values in the tail. We can see this as the mean is close to 70, but it appears that the "average" student did better than this.</p>
@@ -2172,7 +2052,8 @@ $$
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, as a rule of thumb, for a <b> unimodal </b> distribution (meaning there is only one mode), it is often but not always the case that:</p>
 <p>Let $\bar{X}_{median}$ be the median of a distribution and $\bar{X}_{mean}$ be the arithmetic mean. Then:</p>
@@ -2200,7 +2081,7 @@ X is <b> left skewed </b></p>
 <span class="code-line"><span class="n">plot</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2210,7 +2091,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[14]:</div>
 
 
 
@@ -2223,7 +2104,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -2241,7 +2122,8 @@ X is <b> left skewed </b></p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, since the median is a more robust measure, if we are given a sample and wish to estimate the behavior of the population and we believe that the skewed values are <b> anomalies </b>, the median is a better "guess" of the central tendency.</p>
 
@@ -2249,7 +2131,8 @@ X is <b> left skewed </b></p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Interestingly, the two "non-typical" central tendency estimators, the Windsorized mean and the Trimean, lay between the mean and the median. The Windsorized mean and Trimean are both more robust then the mean, meaning they are less sensitive to extreme values. This is directly dealt with in the Windsorized mean and is implicit in the Trimean in a method similar to taking the median.</p>
 
@@ -2257,7 +2140,8 @@ X is <b> left skewed </b></p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Notice also that the median and mean tell us different things about the data. The mean uses all of the information available, and each data point contributes equally to the evaluation of it. On the other hand, the median "cuts away" all of the data not at the 50% mark. In this way, the median can be seen as an extreme version of the Windsorized Mean where we cut out the bottom 49% and 51%. In this case, we are seeing a trade-off between <b> robustness </b> which is the variability of the estimator under anomalies and varying sample distributions, and <b> power </b> (or <b>efficiency</b>), which can determine a more stable solution with less data assuming certain assumptions are met. For instance, if we know that the population distribution follows some "known" distribution, it can often be shown that the mean is a <b> sufficient, unbiased </b> estimator of the true population mean. In the case of the normal distribution, it is the most efficient estimator of the population mean, while the median is relatively inefficient. This means that the median will require more data to obtain the same level of accuracy as the mean.</p>
 
@@ -2265,7 +2149,8 @@ X is <b> left skewed </b></p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To sum it all up -- the mean is often the most <b> efficient </b> estimator in certain simplifying conditions, but is not <b> robust.</b> On the other hand, the median is <b> robust </b>, but not as <b> efficient.</b></p>
 
@@ -2273,14 +2158,16 @@ X is <b> left skewed </b></p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Samples-of-samples-of-samples,-oh-my!">Samples of samples of samples, oh my!<a class="anchor-link" href="#Samples-of-samples-of-samples,-oh-my!">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Why do we care about these measures of central tendency? Well, let's take a look at how they function in terms of predicting a population parameter.</p>
 <p>Suppose, as we talked about before, the <b> population </b> in a simplistic example is 95, 80, 50, 80, 100, 94. Let's consider all possible samples of 3 of this data.</p>
@@ -2298,7 +2185,7 @@ X is <b> left skewed </b></p>
 <span class="code-line"><span class="nb">list</span><span class="p">(</span><span class="n">possible_samples</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2308,7 +2195,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -2343,7 +2230,8 @@ X is <b> left skewed </b></p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We remember from before that the population mean is 83.16666. This is a population parameter -- it is not a statistic. However, suppose we sampled randomly from this population and retrieved the sample data:  80, 94, 80. Then our <b> estimate </b> of the population mean would be 84.6. Remember when I said that the statistic is never the "cold hard" truth? Here is a direct example.</p>
 
@@ -2351,7 +2239,8 @@ X is <b> left skewed </b></p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>However, there are some nice properties of this. Consider the means and medians of all the samples:</p>
 
@@ -2373,7 +2262,7 @@ X is <b> left skewed </b></p>
 <span class="code-line"><span class="n">sample_results</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2383,7 +2272,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -2586,7 +2475,8 @@ X is <b> left skewed </b></p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that both the mean and the median vary around the true population mean for each sample. This is the <b> sampling distribution of the sample mean. </b> This is what has a distribution and can vary! Remember, our population parameter is fixed, but the variation implicit in <i> each sample </i> is what controls the distribution here. Since this too is a distribution, we can examine statistics about it.</p>
 
@@ -2602,7 +2492,7 @@ X is <b> left skewed </b></p>
 <span class="code-line"><span class="n">sample_results</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2612,7 +2502,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -2637,7 +2527,7 @@ X is <b> left skewed </b></p>
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">mean</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2647,7 +2537,7 @@ X is <b> left skewed </b></p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -2663,7 +2553,8 @@ X is <b> left skewed </b></p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Hmm, that seems odd. It turns out that the expectation, or arithmetic mean, of the sampling distribution of the sample mean is equal to the true population mean! 
 This property actually follows directly from the definition of the arithmetic mean.</p>
@@ -2686,9 +2577,10 @@ $$
 =\frac{\sum_{s=1}^{M} \sum_j x_{j, s}}{kM}
 $$
 Each value of the population will appear in ${N}\choose{k}$ - ${N-1}\choose{k}$ = $M - \frac{M(N-k)}{N}$ samples. We can say this because it is the total number of possible samples ${N}\choose{k}$ minus the total number of samples of size $k$ which do not contain observation $j$, ${N-1}\choose{k}$. So then we have:</p>
-$$
+<p>$$
 \frac{M - \frac{M(N-k)}{N}}{kM} \sum_i x_i
-$$<p>Expanding the left hand side: 
+$$
+Expanding the left hand side: 
 $$
 \frac{M - \frac{M(N-k)}{N}}{kM}
 = \frac{1}{k} - \frac{N-k}{kN}
@@ -2706,7 +2598,8 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We've seemed to disregard the median in this case. Why is this? Well, the median is <b> not </b> an unbiased estimator of the population mean. However, we see that the case changes quite a bit when we take the medians!</p>
 
@@ -2721,7 +2614,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">sample_results</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2731,7 +2624,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[19]:</div>
 
 
 
@@ -2756,7 +2649,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 <div class=" highlight hl-ipython3"><pre><span class="code-line"><span></span><span class="n">median</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2766,7 +2659,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -2782,7 +2675,8 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this case we see that both the mean and the median are equal to the population values. What gives?! Well, it turns out that the sample median is a <b> median unbiased estimator </b> of the population median. This one is a bit tougher to prove, so I will leave it for now. Perhaps we can get back to it when we discuss probability density functions, as it requires some use of this.</p>
 
@@ -2790,7 +2684,8 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>What about the mean? Why is the mean a median unbiased estimator of the population mean? The reason is because of the Central Limit Theorum, but this is something that will take some time to discuss! However, because the sampling distribution of the sample mean will tend to a normal distribution relatively quickly, it also becomes symmetric quickly. In this case, the median converges towards the mean. That is why we see that the mean in this case is again equal to the median. We can look at a histogram to see the details:</p>
 
@@ -2806,7 +2701,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 <span class="code-line"><span class="n">sample_results</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -2816,7 +2711,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+<div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -2829,7 +2724,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -2847,14 +2742,16 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this first post, we went over what a statistic is and the distinction between a <b> sample </b> and a <b> population.</b> We also discussed measures of central tendencies and their relation to sampling distributions.</p>
 <p>In the next post, we will be discussing the <a href="./Measures of Spread">Measures of Spread</a> which will shed light further on the sampling distribution of the sample mean. Hope you enjoyed!</p>

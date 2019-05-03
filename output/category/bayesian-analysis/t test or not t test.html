@@ -95,124 +95,9 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
-/* The color values are a mix of
-   http://www.xcolors.net/dl/baskerville-ivorylight and
-   http://www.xcolors.net/dl/euphrasia */
-.ansi-black-fg {
-  color: #3E424D;
-}
-.ansi-black-bg {
-  background-color: #3E424D;
-}
-.ansi-black-intense-fg {
-  color: #282C36;
-}
-.ansi-black-intense-bg {
-  background-color: #282C36;
-}
-.ansi-red-fg {
-  color: #E75C58;
-}
-.ansi-red-bg {
-  background-color: #E75C58;
-}
-.ansi-red-intense-fg {
-  color: #B22B31;
-}
-.ansi-red-intense-bg {
-  background-color: #B22B31;
-}
-.ansi-green-fg {
-  color: #00A250;
-}
-.ansi-green-bg {
-  background-color: #00A250;
-}
-.ansi-green-intense-fg {
-  color: #007427;
-}
-.ansi-green-intense-bg {
-  background-color: #007427;
-}
-.ansi-yellow-fg {
-  color: #DDB62B;
-}
-.ansi-yellow-bg {
-  background-color: #DDB62B;
-}
-.ansi-yellow-intense-fg {
-  color: #B27D12;
-}
-.ansi-yellow-intense-bg {
-  background-color: #B27D12;
-}
-.ansi-blue-fg {
-  color: #208FFB;
-}
-.ansi-blue-bg {
-  background-color: #208FFB;
-}
-.ansi-blue-intense-fg {
-  color: #0065CA;
-}
-.ansi-blue-intense-bg {
-  background-color: #0065CA;
-}
-.ansi-magenta-fg {
-  color: #D160C4;
-}
-.ansi-magenta-bg {
-  background-color: #D160C4;
-}
-.ansi-magenta-intense-fg {
-  color: #A03196;
-}
-.ansi-magenta-intense-bg {
-  background-color: #A03196;
-}
-.ansi-cyan-fg {
-  color: #60C6C8;
-}
-.ansi-cyan-bg {
-  background-color: #60C6C8;
-}
-.ansi-cyan-intense-fg {
-  color: #258F8F;
-}
-.ansi-cyan-intense-bg {
-  background-color: #258F8F;
-}
-.ansi-white-fg {
-  color: #C5C1B4;
-}
-.ansi-white-bg {
-  background-color: #C5C1B4;
-}
-.ansi-white-intense-fg {
-  color: #A1A6B2;
-}
-.ansi-white-intense-bg {
-  background-color: #A1A6B2;
-}
-.ansi-default-inverse-fg {
-  color: #FFFFFF;
-}
-.ansi-default-inverse-bg {
-  background-color: #000000;
-}
-.ansi-bold {
-  font-weight: bold;
-}
-.ansi-underline {
-  text-decoration: underline;
-}
-/* The following styles are deprecated an will be removed in a future version */
+/* CSS font colors for translated ANSI colors. */
 .ansibold {
   font-weight: bold;
-}
-.ansi-inverse {
-  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -291,20 +176,12 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  position: relative;
-  overflow: visible;
-}
-div.cell:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: transparent;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
 }
 div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -317,39 +194,27 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected,
-div.cell.selected.jupyter-soft-selected {
+div.cell.selected {
   border-color: #ababab;
-}
-div.cell.selected:before,
-div.cell.selected.jupyter-soft-selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #42A5F5;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
 }
 @media print {
-  div.cell.selected,
-  div.cell.selected.jupyter-soft-selected {
+  div.cell.selected {
     border-color: transparent;
   }
 }
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-}
-.edit_mode div.cell.selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -545,9 +410,7 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  /* Note that this should set vertical padding only, since CodeMirror assumes
-       that horizontal padding will be set on CodeMirror pre */
-  padding: 0.4em 0;
+  padding: 0.4em;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -557,24 +420,11 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
-    use .CodeMirror-lines for vertical */
-  padding: 0 0.4em;
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
   border: 0;
   border-radius: 0;
-}
-.CodeMirror-cursor {
-  border-left: 1.4px solid black;
-}
-@media screen and (min-width: 2138px) and (max-width: 4319px) {
-  .CodeMirror-cursor {
-    border-left: 2px solid black;
-  }
-}
-@media screen and (min-width: 4320px) {
-  .CodeMirror-cursor {
-    border-left: 4px solid black;
-  }
 }
 /*
 
@@ -822,9 +672,6 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
-div.output_area .mglyph > img {
-  max-width: none;
-}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -863,7 +710,7 @@ div.output_area .mglyph > img {
 }
 div.output_area pre {
   margin: 0;
-  padding: 1px 0 1px 0;
+  padding: 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -985,10 +832,6 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
-.rendered_html ul:not(.list-inline),
-.rendered_html ol:not(.list-inline) {
-  padding-left: 2em;
-}
 
 
 
@@ -1005,24 +848,16 @@ div.output_unrecognized a:hover {
 }
 
 
-
-
-
 .rendered_html pre,
-
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
+.rendered_html td,
 
-.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
+
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -1038,11 +873,6 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
-
-.rendered_html * + .alert {
-  margin-top: 1em;
-}
-[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1093,15 +923,8 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
-.text_cell.rendered .rendered_html tr,
-.text_cell.rendered .rendered_html th,
-.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
-}
-.text_cell .dropzone .input_area {
-  border: 2px dashed #bababa;
-  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1239,74 +1062,17 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">test_equality_means</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">,</span> <span class="n">norm_vec2</span><span class="p">){</span></span>
-<span class="code-line">  <span class="n">sx</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">sy</span> <span class="o">&lt;-</span> <span class="nf">var</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">xbar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">ybar</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">n</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="n">m</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">norm_vec2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">tstat</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">ybar</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="m">1</span><span class="o">/</span><span class="n">n</span> <span class="o">+</span> <span class="m">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sx</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">sy</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)))</span></span>
-<span class="code-line">  <span class="n">p_tstat</span> <span class="o">&lt;-</span> <span class="nf">pt</span><span class="p">(</span><span class="n">tstat</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">tstat</span> <span class="o">=</span> <span class="n">tstat</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">p_tstat</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">simulatepostprob</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="n">nnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;n&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Snew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;S&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">knew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;k&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">Bnew</span> <span class="o">=</span> <span class="n">prior_params[</span><span class="s">&#39;B&#39;</span><span class="n">]</span></span>
-<span class="code-line"></span>
-<span class="code-line">  <span class="n">lst</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span> <span class="p">{</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">obs</span> <span class="o">&lt;-</span> <span class="n">vec[i]</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">ninit</span> <span class="o">=</span> <span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Binit</span> <span class="o">=</span> <span class="n">Bnew</span></span>
-<span class="code-line">    <span class="n">Sinit</span> <span class="o">=</span> <span class="n">Snew</span></span>
-<span class="code-line">    <span class="n">kinit</span> <span class="o">=</span> <span class="n">knew</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">knew</span> <span class="o">=</span> <span class="n">kinit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">nnew</span> <span class="o">=</span> <span class="n">ninit</span> <span class="o">+</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="n">Bnew</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">ninit</span><span class="o">*</span><span class="n">Binit</span> <span class="o">+</span> <span class="n">obs</span><span class="p">)</span><span class="o">/</span><span class="n">nnew</span></span>
-<span class="code-line">    <span class="n">Snew</span> <span class="o">&lt;-</span> <span class="n">Sinit</span> <span class="o">+</span> <span class="n">ninit</span><span class="o">*</span><span class="n">Binit^2</span> <span class="o">+</span> <span class="n">obs^2</span> <span class="o">-</span> <span class="n">nnew</span><span class="o">*</span><span class="n">Bnew^2</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="nf">if </span><span class="p">(</span><span class="n">knew</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="m">0</span></span>
-<span class="code-line">    <span class="p">}</span><span class="n">else</span><span class="p">{</span></span>
-<span class="code-line">      <span class="c1">## We randomly sample a value for sigma|x first</span></span>
-<span class="code-line">      <span class="n">sampchi</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">knew</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
-<span class="code-line">      <span class="n">sigma</span> <span class="o">&lt;-</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">Snew</span><span class="o">/</span><span class="n">sampchi</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    <span class="c1">## Using sigma, we sample for mu|x, sigma.</span></span>
-<span class="code-line">    <span class="n">mu</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">obs</span> <span class="o">+</span> <span class="n">Bnew</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">nnew</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">lst[[i]]</span> <span class="o">&lt;-</span> <span class="n">mu</span></span>
-<span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">rpost</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">vec</span><span class="p">,</span> <span class="n">prior_params</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="m">-1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
-<span class="code-line">  <span class="nf">replicate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">expr</span> <span class="o">=</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="nf">[length</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="n">]</span><span class="p">)</span></span>
-<span class="code-line"><span class="p">}</span></span>
-</pre></div>
-
-    </div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="An-Exploration-of-Using-Bayesian-Principles-to-Generalize-the-T-Test-Procedure">An Exploration of Using Bayesian Principles to Generalize the T-Test Procedure<a class="anchor-link" href="#An-Exploration-of-Using-Bayesian-Principles-to-Generalize-the-T-Test-Procedure">&#182;</a></h1>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Standard-T-Test">Standard T-Test<a class="anchor-link" href="#Standard-T-Test">&#182;</a></h1><p>Consider the t-test of equality of means. Using the standard procedure for a t-test:</p>
 
@@ -1315,17 +1081,42 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>test_equality_means <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>norm_vec1<span class="p">,</span> norm_vec2<span class="p">){</span></span>
+<span class="code-line">  sx <span class="o">&lt;-</span> var<span class="p">(</span>norm_vec1<span class="p">)</span></span>
+<span class="code-line">  sy <span class="o">&lt;-</span> var<span class="p">(</span>norm_vec2<span class="p">)</span></span>
+<span class="code-line">  xbar <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>norm_vec1<span class="p">)</span></span>
+<span class="code-line">  ybar <span class="o">&lt;-</span> <span class="kp">mean</span><span class="p">(</span>norm_vec2<span class="p">)</span></span>
+<span class="code-line">  n <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>norm_vec1<span class="p">)</span></span>
+<span class="code-line">  m <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>norm_vec2<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">  tstat <span class="o">&lt;-</span> <span class="p">(</span>xbar <span class="o">-</span> ybar<span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kp">sqrt</span><span class="p">((</span><span class="m">1</span><span class="o">/</span>n <span class="o">+</span> <span class="m">1</span><span class="o">/</span>m<span class="p">)</span><span class="o">*</span><span class="p">((</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span>sx <span class="o">+</span> <span class="p">(</span>m <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span>sy<span class="p">)</span><span class="o">/</span><span class="p">(</span>n <span class="o">+</span> m <span class="o">-</span> <span class="m">2</span><span class="p">)))</span></span>
+<span class="code-line">  p_tstat <span class="o">&lt;-</span> pt<span class="p">(</span>tstat<span class="p">,</span>n <span class="o">+</span> m <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>tstat <span class="o">=</span> tstat<span class="p">,</span> prob <span class="o">=</span> p_tstat<span class="p">))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">vec1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">116</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">113</span><span class="p">,</span><span class="m">117</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">112</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">vec2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">108</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">105</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">106</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">111</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>vec1 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">116</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">113</span><span class="p">,</span><span class="m">117</span><span class="p">,</span><span class="m">114</span><span class="p">,</span><span class="m">112</span><span class="p">)</span></span>
+<span class="code-line">vec2 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">108</span><span class="p">,</span><span class="m">110</span><span class="p">,</span><span class="m">105</span><span class="p">,</span><span class="m">107</span><span class="p">,</span><span class="m">106</span><span class="p">,</span><span class="m">111</span><span class="p">,</span><span class="m">111</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">t_test_res</span> <span class="o">=</span> <span class="nf">test_equality_means</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">t_test_res</span></span>
+<span class="code-line">t_test_res <span class="o">=</span> test_equality_means<span class="p">(</span>vec1<span class="p">,</span> vec2<span class="p">)</span></span>
+<span class="code-line">t_test_res</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1335,7 +1126,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -1356,7 +1147,8 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see that the t-test gives us a significant result -- the two means would have a difference smaller than the observed difference
 with probability <code>r t_test_res$prob</code>. We then would reject the null hypothesis with 95% confidence (or even 99% confidence.)</p>
@@ -1369,13 +1161,64 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>simulatepostprob <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>vec<span class="p">,</span> prior_params<span class="o">=</span><span class="kt">c</span><span class="p">(</span>n <span class="o">=</span> <span class="m">0</span><span class="p">,</span>S <span class="o">=</span> <span class="m">0</span><span class="p">,</span>k <span class="o">=</span> <span class="m">-1</span><span class="p">,</span>B <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
+<span class="code-line">  nnew <span class="o">=</span> prior_params<span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">]</span></span>
+<span class="code-line">  Snew <span class="o">=</span> prior_params<span class="p">[</span><span class="s">&#39;S&#39;</span><span class="p">]</span></span>
+<span class="code-line">  knew <span class="o">=</span> prior_params<span class="p">[</span><span class="s">&#39;k&#39;</span><span class="p">]</span></span>
+<span class="code-line">  Bnew <span class="o">=</span> prior_params<span class="p">[</span><span class="s">&#39;B&#39;</span><span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">  lst <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
+<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>vec<span class="p">))</span> <span class="p">{</span></span>
+<span class="code-line"></span>
+<span class="code-line">    obs <span class="o">&lt;-</span> vec<span class="p">[</span>i<span class="p">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">    ninit <span class="o">=</span> nnew</span>
+<span class="code-line">    Binit <span class="o">=</span> Bnew</span>
+<span class="code-line">    Sinit <span class="o">=</span> Snew</span>
+<span class="code-line">    kinit <span class="o">=</span> knew</span>
+<span class="code-line"></span>
+<span class="code-line">    knew <span class="o">=</span> kinit <span class="o">+</span> <span class="m">1</span></span>
+<span class="code-line">    nnew <span class="o">=</span> ninit <span class="o">+</span> <span class="m">1</span></span>
+<span class="code-line">    Bnew <span class="o">&lt;-</span> <span class="p">(</span>ninit<span class="o">*</span>Binit <span class="o">+</span> obs<span class="p">)</span><span class="o">/</span>nnew</span>
+<span class="code-line">    Snew <span class="o">&lt;-</span> Sinit <span class="o">+</span> ninit<span class="o">*</span>Binit<span class="o">^</span><span class="m">2</span> <span class="o">+</span> obs<span class="o">^</span><span class="m">2</span> <span class="o">-</span> nnew<span class="o">*</span>Bnew<span class="o">^</span><span class="m">2</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="kr">if</span> <span class="p">(</span>knew <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">      sampchi <span class="o">&lt;-</span> <span class="m">0</span></span>
+<span class="code-line">      sigma <span class="o">&lt;-</span> <span class="m">0</span></span>
+<span class="code-line">    <span class="p">}</span><span class="kp">else</span><span class="p">{</span></span>
+<span class="code-line">      <span class="c1">## We randomly sample a value for sigma|x first</span></span>
+<span class="code-line">      sampchi <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">(</span>rnorm<span class="p">(</span>knew<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">      sigma <span class="o">&lt;-</span> <span class="kp">sqrt</span><span class="p">(</span>Snew<span class="o">/</span>sampchi<span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span></span>
+<span class="code-line">    <span class="c1">## Using sigma, we sample for mu|x, sigma.</span></span>
+<span class="code-line">    mu <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">1</span><span class="p">,</span>obs <span class="o">+</span> Bnew<span class="p">,</span> sigma <span class="o">/</span> <span class="kp">sqrt</span><span class="p">(</span>nnew<span class="p">))</span></span>
+<span class="code-line">    lst<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> mu</span>
+<span class="code-line">  <span class="p">}</span></span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span>lst<span class="p">))</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">rpost <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">,</span>vec<span class="p">,</span> prior_params<span class="o">=</span><span class="kt">c</span><span class="p">(</span>n <span class="o">=</span> <span class="m">0</span><span class="p">,</span>S <span class="o">=</span> <span class="m">0</span><span class="p">,</span>k <span class="o">=</span> <span class="m">-1</span><span class="p">,</span>B <span class="o">=</span> <span class="m">0</span><span class="p">)){</span></span>
+<span class="code-line">  <span class="kp">replicate</span><span class="p">(</span>n<span class="p">,</span>expr <span class="o">=</span> simulatepostprob<span class="p">(</span>vec<span class="p">)[</span><span class="kp">length</span><span class="p">(</span>vec<span class="p">)])</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec1</span><span class="p">)</span> <span class="o">-</span> <span class="nf">simulatepostprob</span><span class="p">(</span><span class="n">vec</span> <span class="o">=</span> <span class="n">vec2</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>simulatepostprob<span class="p">(</span>vec <span class="o">=</span> vec1<span class="p">)</span> <span class="o">-</span> simulatepostprob<span class="p">(</span>vec <span class="o">=</span> vec2<span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1385,7 +1228,7 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -1412,7 +1255,8 @@ $\frac{S}{\sigma^2} \sim \chi^2(k)$, we start with prior parameters $\beta_0, n,
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By iterating for each observation, we arrive at a posterior distribution for $\mu \mid \sigma^2$ and $\frac{S}{\sigma^2}$. We then sample randomly from these theoretical distributions to
 sample from the posterior distributions. If we replicate this many times, we will be able to estimate the differences between the posterior distributions of the two vectors.</p>
@@ -1426,10 +1270,10 @@ sample from the posterior distributions. If we replicate this many times, we wil
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="n">vec2</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">sum</span><span class="p">(</span>rpost<span class="p">(</span><span class="m">1000</span><span class="p">,</span>vec1<span class="p">)</span> <span class="o">&gt;</span> rpost<span class="p">(</span><span class="m">1000</span><span class="p">,</span>vec2<span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1439,7 +1283,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -1454,7 +1298,8 @@ sample from the posterior distributions. If we replicate this many times, we wil
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can then use our prior information about the sample to produce a mixed, updated result. For instance, with prior parameters:</p>
 
@@ -1466,16 +1311,17 @@ sample from the posterior distributions. If we replicate this many times, we wil
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">prior_params</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="m">9</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="m">30</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>prior_params <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>n<span class="o">=</span><span class="m">10</span><span class="p">,</span> S<span class="o">=</span><span class="m">2</span><span class="p">,</span> k<span class="o">=</span><span class="m">9</span><span class="p">,</span> B<span class="o">=</span><span class="m">30</span><span class="p">)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can see our posterior:</p>
 
@@ -1487,10 +1333,10 @@ sample from the posterior distributions. If we replicate this many times, we wil
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">sum</span><span class="p">(</span><span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">rpost</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">prior_params</span><span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kp">sum</span><span class="p">(</span>rpost<span class="p">(</span><span class="m">1000</span><span class="p">,</span> vec1<span class="p">,</span> prior_params<span class="p">)</span> <span class="o">&gt;</span> rpost<span class="p">(</span><span class="m">1000</span><span class="p">,</span> vec2<span class="p">,</span> prior_params<span class="p">))</span><span class="o">/</span><span class="m">1000</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1500,7 +1346,7 @@ sample from the posterior distributions. If we replicate this many times, we wil
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
