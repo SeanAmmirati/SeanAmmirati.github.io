@@ -17,18 +17,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="theory, constrained least squares, linear regression, Linear Models, " />
+<meta name="keywords" content="theory, marathon, generalized linear models, gamma distribution, link function, linear regression, Linear Models, " />
 
-<meta property="og:title" content="Constrained Least Squares "/>
-<meta property="og:url" content="../../category/linear-models/constrained-least-squares.html" />
-<meta property="og:description" content="A theoretical approach to a constrained least squares problem." />
+<meta property="og:title" content="Generalized Linear Models Toy Exercise "/>
+<meta property="og:url" content="../../category/linear-models/generalized-linear-models-toy-exercise.html" />
+<meta property="og:description" content="A look at the results of marathon runners with various distributions in a GLM." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
-<meta property="og:article:published_time" content="2018-12-29T00:00:00-05:00" />
-<meta name="twitter:title" content="Constrained Least Squares ">
-<meta name="twitter:description" content="A theoretical approach to a constrained least squares problem.">
+<meta property="og:article:published_time" content="2019-02-07T00:00:00-05:00" />
+<meta name="twitter:title" content="Generalized Linear Models Toy Exercise ">
+<meta name="twitter:description" content="A look at the results of marathon runners with various distributions in a GLM.">
 
-        <title>Constrained Least Squares  · Stats Works
+        <title>Generalized Linear Models Toy Exercise  · Stats Works
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/linear-models/constrained-least-squares.html"> Constrained Least Squares  </a></h1>
+    <h1><a href="../../category/linear-models/generalized-linear-models-toy-exercise.html"> Generalized Linear Models Toy Exercise  </a></h1>
     </header>
 </div>
 
@@ -1066,207 +1066,30 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Consider the following: We wish to constrain the parameters of a linear model to have certain properties, for example, that the last coefficient is equal to 1, or that the sum of the coefficients are equal to one. How can we estimate the Least Squares Estimates using these constraints?</p>
-<p>Thus is constrained least squares, and this article will explore the theoretical basis for choosing a selection of coefficients that will minimize the least squares given some linear constraints on the coefficients.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Constrained Least Squares -- Coefficient Calculation and
- Simulation</strong></p>
-<p>We want to maximize the likelihood equation of $\vec{\beta}$. We know that $\vec{y}$ in
- this context is normally distributed with mean $\mathbf{X}\vec{\beta}$ and variance $\sigma^2$.
- This means that the distribution of $y_i$ given a vector of values $\vec{x_i}$ is as follows:</p>
-<p>$$f_{Y}\left( y_i \middle|\ \vec{x}_i \right) = {(2\pi\sigma^{2})}^{- 1/2}e^{\frac{- (y_i-\vec{x}_i \vec{\beta})}{2\sigma^{2}}^{2}}$$</p>
-<p>So the likelihood of $\vec{\beta}$ is therefore:</p>
-<p>$$
-L(\vec{\beta}, \sigma^{2} | \vec{y}, \mathbf{X}) = ( 2\pi\sigma^{2})^{- \frac{N}{2}}e^{- \frac{\sum_{i}^{N}{(y_{i}-\vec{x}_{i} \vec{\beta})}}{2\sigma^{2}}^{2}}
-$$</p>
-<p>Taking the natural logarithm gives us the log likelihood:</p>
-<p>$$l\left( \vec{\beta},\sigma^{2} \middle| y,\mathbf{X} \right) = - \frac{1}{2\sigma^{2}}\sum_{i}^{N}{{(y_{i}-\vec{x}_{i}\vec{\beta})}^{2}-\frac{N}{2}\ln\left( \sigma^{2} \right)+ C}= - \frac{1}{2\sigma^{2}}\left( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} \right) - \frac{N}{2}\ln\left( \sigma^{2} \right)+ C$$</p>
-<p>Here, I have truncated the result to only those involving <strong>$\vec{\beta}$</strong> and
- $\sigma^{2}$, as we are only interested in maximizing with respect to
- <strong>$\vec{\beta}$</strong>. Note that I have transitioned $\sigma^{2}$ to a constant, as we
- are assuming the errors are iid with constant variance $\sigma^{2}$.
- Here, we obtain the same result as minimizing the least squares
- estimator, so the MLE and the least squares estimators are the same.
- If we were unconstrained, we would simply take the partial derivative
- here with respect to <strong>$\vec{\beta}$</strong> to estimate <strong>$\vec{\beta}$</strong> using maximum likelihood.</p>
-<p>Since $\sigma^{2}$ is unconstrained, we can find the maximum
- likelihood estimator directly and use this to maximize with respect to
- <strong>$\vec{\beta}$.</strong> To do this, we differentiate the above equation with respect to
- $\sigma^2$. Doing so yields the normal estimate for $\sigma^{2}$:</p>
-<p>$${\widehat{\sigma}}^{2} = - \frac{1}{N}\sum_{i}^{N}{(y_{i}-x_{i}\vec{\beta}^{c})}^{2}=\frac{1}{N}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)$$</p>
-<p>Where $\vec{\beta}^{c}$ is our new constrained estimates.
-Plugging this back into the log likelihood equation yields:</p>
-<p>$$
-l(\vec{\beta}^{c} | \vec{y},\mathbf{\mathbf{X}}) = - \frac{N}{2}[{(\vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})}^{\intercal}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} )]^{-1} ( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})^{\intercal}  \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c}) - \frac{N}{2}\ln( \frac{1}{N}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})^{\intercal}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c}))+ C
-$$</p>
-<p>$$l\left( \vec{\beta} \middle| \vec{y},\mathbf{X} \right) = - \frac{N}{2} - \frac{N}{2}\ln\left( \frac{1}{N}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) \right)+ C$$</p>
-<p>However, we want to maximize the above equation with the constraint
- that: M$\vec{\beta}$ = $\vec{d}$, where d is a known vector and M is an <em>r x p</em> matrix
- of rank $r &lt; p$. This is an equality constraint. We can use the
- Lagrange multipliers to solve this maximization problem with such a
- constraint.</p>
-<p>We can see that, since the natural logarithm is a monotonically
- increasing function, and the division within the above logarithm is a
- constant, and that all other terms do not involve $\beta$, maximizing the
- above equation with respect to$\ \vec{\beta}^{c}$ is
- equivalent to minimizing:</p>
-<p>$$f = \left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) - \vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right)$$</p>
-<p>Where $\vec{\lambda}$ is the Lagrange multiplier (and so $f$ is the
- Lagrange function). The Lagrange multiplier is especially useful in
- this case, as we are trying to minimize the least square error with
- some constraint on the parameters.</p>
-<p>Multiplying the error by the transpose gives:</p>
-<p>$$f =\vec{y}^{\intercal}\vec{y} -\vec{y}^{\intercal}\mathbf{X}\vec{\beta}^{c}-{{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\vec{y} + {{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-\vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right) = =\vec{y}^{\intercal}\vec{y} -2{{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\vec{y} + {{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-\vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right)$$</p>
-<p>Now we take derivatives with respect to $\vec{\beta}^{c}$ and $\vec{\lambda}$ to obtain</p>
-<p>$$\frac{\partial{f}}{\partial{B}}= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-M^{\intercal}\vec{\lambda}$$</p>
-<p>$$\frac{\partial{f}}{\partial{\lambda}}=M\vec{\beta}^{c}\ –\ \vec{d}$$</p>
-<p>We can now set both of these equal to zero and solve this system of
-equations to find the appropriate MLE estimate of
-$\vec{\beta}^{c}$<strong>.</strong> However, there is a few simplifying
-steps which can make the result more useable. The first is to get the
-expression in terms of the original least squares estimator. If we
-multiply the first equation above by M(${\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}$, we obtain:</p>
-<p>$$- \ 2M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\mathbf{X}^{\intercal}\vec{y}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>The first term on the right is the familiar $\vec{\beta}$ from
-unconstrained OLS (I will denote this $\vec{\beta}^{u}$).
-Substituting, we get</p>
-<p>$$- \ 2M\vec{\beta}^{u}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>$$- \ 2M\vec{\beta}^{u}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>$$M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = \ 2M{\widehat{\beta}}^{c} - \ 2M{\widehat{\beta}}^{u}$$</p>
-<p>Solving for lambda:</p>
-<p>$$\vec{\lambda} = {(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\left\lbrack 2M{\widehat{\beta}}^{c} - \ 2M{\widehat{\beta}}^{u} \right\rbrack= 2{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>Plugging this back into the original equation and solving for
-${\widehat{\beta}}^{c}$,</p>
-<p>$$0= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}-M^{\intercal}\vec{\lambda}$$</p>
-<p>$$0= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}-{2(M}^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack)$$</p>
-<p>$$\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}=\mathbf{X}^{\intercal}\vec{y}+M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}= ({{\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\mathbf{X}}^{\intercal}\vec{y}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}=\vec{\beta}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>This is the desired result, the maximum likelihood estimator given the
-constraint M$\vec{\beta} =d$.</p>
-<p>Now, let's look at an example.</p>
-<p>$$\vec{\beta}_{p} = 0$$</p>
-<p>Is equivalent to the following constraint. $\vec{\alpha}^{\intercal}\vec{\beta} = 0$
-where $\vec{\alpha}$ is a vector of zeros in all but the last row, which is a 1.
-So,</p>
-<p>$$\vec{\alpha} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}$$</p>
-<p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1}\lbrack - \ \vec{\alpha}'{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\rbrack$$</p>
-<p>Since $\vec{\alpha}^{- 1}= \vec{\alpha}$ in this case, we
-know that
-$\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1} = \vec{\alpha}^{\intercal}\left( \vec{\alpha}^{\intercal}\left(\mathbf{\mathbf{X}}^{\intercal}\mathbf{X} \right)\vec{\alpha} \right) = {\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}$
-which is a scalar that is the bottom right element of the $\mathbf{\mathbf{X}}^{\intercal}\mathbf{X}$ matrix. So
-we can simplify this to:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}{\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\rbrack$$</p>
-<p>Since ${\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}\lbrack 1 - \ {\beta^{u}}_{p}\rbrack$ is a
-constant:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}-{\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}(\left\lbrack \ {\beta^{u}}_{p} \right\rbrack){{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}$$</p>
-<p>So, if we compute the unconstrained
-${\widehat{\beta}}^{u}$ and ${{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}$, we
-can solve directly for the constrained $\vec{\beta}$.</p>
-<p>Now, for the second part of part a), this is equivalent to M being a
-vector of 1s, lets call it ϕ. Then $d=1$ and</p>
-<p>$$ \vec{\phi} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ \vdots \\ 1 \end{bmatrix}$$</p>
-<p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\phi}^{\intercal}{(\vec{\phi}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\phi})}^{- 1}\lbrack 1 - \vec{\phi}'{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>The residual sum of squares is defined as:</p>
-<p>$$\text{RSS} = \ {(\vec{y} -\widehat{y})}^{\intercal}(\vec{y} -\widehat{y})$$</p>
-<p>In this case,
-$$
-\widehat{y} =\mathbf{\mathbf{X}}{\widehat{\beta}}^{c} = \vec{\beta}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}) =\mathbf{\mathbf{X}}\vec{\beta}^{u}+\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack
-$$</p>
-<p>So it follows that
-$$
-\left(\vec{y}-\widehat{y_{c}} \right) =\vec{y}- \mathbf{\mathbf{X}}\vec{\beta}^{u}+\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack =\vec{\varepsilon} +\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack
-$$</p>
-<p>where $\vec{\varepsilon}$ is the error in the unconstrained case. So</p>
-<p>$$\text{RSS}_c - \text{RSS} =\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack)$$</p>
-<p>Each of the errors are normally distributed with mean 0 and variance
-sigma squared. This implies that:</p>
-<p>$$
-(y - \check{y})\ I\frac{1}{\sigma}\sim\text{MVN}(0,I) \text{, i.i.d} 
-$$</p>
-<p>Where the estimator is the estimator from the restrained equation. We
-can write the sum of squares of the above as:</p>
-<p>$$\left(\vec{y}- \widehat{y} \right)^{\intercal}(I\frac{1}{\sigma^{2}})\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} \right)^{\intercal}(I\frac{1}{\sigma^{2}})\left(\vec{y}- \check{y} \right) + \ \left( \check{y}-\widehat{y} \right)^{\intercal}\left( I\frac{1}{\sigma^{2}} \right)\left( \check{y}-\widehat{y} \right)+ 2(\check{y}-\widehat{y})'\left( I\frac{1}{\sigma^{2}} \right)(y -\check{y})$$</p>
-<p>Where$\ {\check{y}}_{i}\ $is the estimator of the unconstrained model.
-To show this, we remove the identical identity matrices and see that:</p>
-<p>$$\left(\vec{y}- \widehat{y} \right)^{\intercal}\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} + \check{y} - \widehat{y} \right)^{\intercal}\left(\vec{y}- \check{y} + \check{y} - \widehat{y} \right) = \left(\vec{y}- \check{y} \right)^{\intercal}\left(\vec{y}- \check{y} \right) + \ \left( \check{y} - \widehat{y} \right)^{\intercal}\left( \check{y} - \widehat{y} \right) + 2(y - \check{y})'\left( \check{y} - \widehat{y} \right)$$</p>
-<p>Now,</p>
-<p>$$\left( \check{y} - \widehat{y} \right) = \left(\vec{y}- \widehat{y} - \left(\vec{y}- \check{y} \right) \right) = \left( \ \left(\vec{y}- \widehat{y} \right) - \vec{\varepsilon} \right)$$</p>
-<p>which we know from the above is
-$(\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$)'</p>
-<p>Rewriting, we have:</p>
-<p>$$\left(\vec{y}- \check{y} \right)'\left( \left(\vec{y}- \widehat{y} \right) - \vec{\varepsilon} \right) = \vec{\varepsilon}'(\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\left\lbrack \vec{d} - \ M{\widehat{\beta}}^{u} \right\rbrack)$$</p>
-<p>Using the fact that $\vec{\varepsilon}^{\intercal}\mathbf{X} = 0$<strong>,</strong> we can remove this
-to obtain.</p>
-<p>$${\left(\vec{y}- \widehat{y} \right)^{\intercal}\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} \right)}^{\intercal}\left(\vec{y}- \check{y} \right) + \ \left( \check{y} - \widehat{y} \right)^{\intercal}\left( \check{y} - \widehat{y} \right)$$</p>
-<p>Thus the original standardized normal variable can be represented as a
-sum of $Q_1$, and $Q_2$ where:</p>
-<p>$$Q_1 =
-\left(\vec{y}-\check{y} \right)^{\intercal}\left(\vec{y}-\check{y} \right)$$</p>
-<p>$$Q_2 =
-\left( \check{y}-\widehat{y} \right)^{\intercal}\left( \check{y}-\widehat{y} \right)
-$$</p>
-<p>$Q_1$ is the sum of squared errors for the unconstrained model, and
-therefore has rank $n - p$. $Q_2$ has rank $p - r$, as it is the
-differences between the two estimators. Thus rank($Q_1$) + rank ($Q_2$) =
-$n-r$ which is the rank of the errors of the constrained model, since
-$r&lt;p$. Thus by Cochran's Theorem, the two are independently distributed.</p>
-<p>I have also produced simulations to prove that this is the case. I
-create three normal random variables, two of which are related to the
-others linearly and randomly. I compute the beta unconstrained, and then
-use this to compute the beta constrained. I then produce the errors for
-the constrained beta, and check the correlations in 100 samples of 100
-each. The mean correlation is very close to zero, which is the expected
-result. This is included below.</p>
+<p>Here I consider the marathon runners listed in the <a href="https://en.wikipedia.org/wiki/List_of_world_records_in_masters_athletics">https://en.wikipedia.org/wiki/List_of_world_records_in_masters_athletics</a> wikipedia page.</p>
+<p>I consider various generalized linear models (GLMS) with different families, and consider the properties of the inverse-gamma.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>const <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
-<span class="code-line">unconst <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
-<span class="code-line">correl <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>timesm <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">123.98</span><span class="p">,</span><span class="m">128.633</span><span class="p">,</span><span class="m">134.266</span><span class="p">,</span><span class="m">139.484</span><span class="p">,</span><span class="m">139.533</span><span class="p">,</span><span class="m">156.5</span><span class="p">,</span><span class="m">161.95</span><span class="p">,</span><span class="m">174.8</span><span class="p">,</span><span class="m">184.9</span><span class="p">,</span><span class="m">195.9</span><span class="p">,</span><span class="m">236.567</span><span class="p">,</span><span class="m">340.017</span><span class="p">,</span><span class="m">505.283</span><span class="p">)</span></span>
+<span class="code-line">timesf <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">139.316</span><span class="p">,</span><span class="m">144.893</span><span class="p">,</span><span class="m">149.00</span><span class="p">,</span><span class="m">151.083</span><span class="p">,</span><span class="m">170.55</span><span class="p">,</span><span class="m">181.5</span><span class="p">,</span><span class="m">192.95</span><span class="p">,</span><span class="m">215.483</span><span class="p">,</span><span class="m">233.7</span><span class="p">,</span><span class="m">252.733</span><span class="p">,</span><span class="m">314.433</span><span class="p">,</span><span class="m">533.133</span><span class="p">)</span></span>
+<span class="code-line">agem <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">35</span><span class="p">,</span><span class="m">40</span><span class="p">,</span><span class="m">45</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">55</span><span class="p">,</span><span class="m">60</span><span class="p">,</span><span class="m">65</span><span class="p">,</span><span class="m">70</span><span class="p">,</span><span class="m">75</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">90</span><span class="p">,</span><span class="m">100</span><span class="p">)</span></span>
+<span class="code-line">agef <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">35</span><span class="p">,</span><span class="m">40</span><span class="p">,</span><span class="m">45</span><span class="p">,</span><span class="m">50</span><span class="p">,</span><span class="m">55</span><span class="p">,</span><span class="m">60</span><span class="p">,</span><span class="m">65</span><span class="p">,</span><span class="m">70</span><span class="p">,</span><span class="m">75</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">85</span><span class="p">,</span><span class="m">90</span><span class="p">)</span></span>
 <span class="code-line"></span>
+<span class="code-line">agemsq <span class="o">&lt;-</span> agem<span class="o">^</span><span class="m">2</span></span>
 <span class="code-line"></span>
+<span class="code-line">time <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>timesf<span class="p">,</span>timesm<span class="p">)</span></span>
+<span class="code-line">age <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>agef<span class="p">,</span>agem<span class="p">)</span></span>
+<span class="code-line">gender <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">),</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">13</span><span class="p">))</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    y <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span></span>
-<span class="code-line">    x1 <span class="o">&lt;-</span> y <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.2</span><span class="p">)</span></span>
-<span class="code-line">    x2 <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.01</span><span class="p">)</span> <span class="o">-</span> <span class="m">.3</span><span class="o">*</span>y</span>
-<span class="code-line"></span>
-<span class="code-line">    Xmat <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">length</span><span class="p">(</span>x1<span class="p">)),</span>x1<span class="p">,</span>x2<span class="p">),</span>ncol <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
-<span class="code-line">    data2 <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>y<span class="p">,</span>x1<span class="p">,</span>x2<span class="p">)</span></span>
-<span class="code-line">    mod.sim.1 <span class="o">&lt;-</span> lm<span class="p">(</span>y<span class="o">~</span>x1<span class="o">+</span>x2<span class="p">,</span>data <span class="o">=</span> data2<span class="p">)</span></span>
-<span class="code-line">    constraint <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>nrow <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>data2<span class="p">),</span>ncol <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">    d <span class="o">=</span> <span class="m">1</span></span>
-<span class="code-line">    M <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span>ncol <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">    mod.sim.1</span>
-<span class="code-line">    BetaUnconstr <span class="o">&lt;-</span> <span class="kp">summary</span><span class="p">(</span>mod.sim.1<span class="p">)</span><span class="o">$</span>coef<span class="p">[,</span><span class="m">1</span><span class="p">]</span></span>
-<span class="code-line">    b <span class="o">&lt;-</span> d <span class="o">-</span> <span class="kp">t</span><span class="p">(</span>M<span class="p">)</span> <span class="o">%*%</span> BetaUnconstr</span>
-<span class="code-line">    a <span class="o">&lt;-</span> <span class="kp">t</span><span class="p">(</span>Xmat<span class="p">)</span> <span class="o">%*%</span> Xmat</span>
-<span class="code-line">    <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>M<span class="p">)</span> <span class="o">%*%</span> <span class="kp">solve</span><span class="p">(</span>a<span class="p">)</span> <span class="o">%*%</span> M<span class="p">)</span></span>
-<span class="code-line">    const<span class="p">[</span>i<span class="p">]</span>  <span class="o">&lt;-</span>  b<span class="o">*</span><span class="kt">c</span><span class="o">*</span>b</span>
-<span class="code-line">    unconst<span class="p">[</span>i<span class="p">]</span>  <span class="o">&lt;-</span>  <span class="kp">sum</span><span class="p">(</span>resid<span class="p">(</span>mod.sim.1<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">  correl<span class="p">[</span>j<span class="p">]</span>  <span class="o">&lt;-</span>  cor<span class="p">(</span>const<span class="p">,</span>unconst<span class="p">)</span></span>
-<span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">correl</span>
-<span class="code-line"><span class="kp">mean</span><span class="p">(</span>correl<span class="p">)</span></span>
+<span class="code-line">marathon <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>time<span class="p">,</span>age<span class="p">,</span>gender<span class="p">)</span></span>
+<span class="code-line"><span class="kp">head</span><span class="p">(</span>marathon<span class="p">)</span></span>
 </pre></div>
 
 </div>
@@ -1284,108 +1107,410 @@ result. This is included below.</p>
 
 
 <div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>-0.0531688267764585</li>
-	<li>-0.114464495425658</li>
-	<li>0.030905848126332</li>
-	<li>-0.0804090923830123</li>
-	<li>-0.0282214216966975</li>
-	<li>0.194785864859665</li>
-	<li>0.0830930039710045</li>
-	<li>0.0724914248601695</li>
-	<li>0.0829089181916613</li>
-	<li>0.0288906516772889</li>
-	<li>0.0279474715925631</li>
-	<li>-0.0533135707611509</li>
-	<li>0.0658332419742044</li>
-	<li>-0.0799946756911054</li>
-	<li>-0.0941441499229167</li>
-	<li>-0.024909668515204</li>
-	<li>0.0714084573952652</li>
-	<li>-0.0455394491591305</li>
-	<li>0.166193108785476</li>
-	<li>-0.077429232110221</li>
-	<li>-0.128495293842719</li>
-	<li>-0.0786313087721033</li>
-	<li>-0.135204615732129</li>
-	<li>0.00402444738581924</li>
-	<li>-0.210414921426846</li>
-	<li>-0.0466002337555276</li>
-	<li>-0.0744914482523485</li>
-	<li>0.0253724403628865</li>
-	<li>-0.144593000144071</li>
-	<li>-0.0558067022331745</li>
-	<li>0.0941802108323231</li>
-	<li>-0.0326002696533416</li>
-	<li>0.1191407256456</li>
-	<li>0.0742989188901125</li>
-	<li>0.0498008210293263</li>
-	<li>0.02980912239177</li>
-	<li>-0.132207185159464</li>
-	<li>-0.154762140608869</li>
-	<li>-0.0311445812733598</li>
-	<li>0.0213674326991292</li>
-	<li>-0.0563900846752629</li>
-	<li>0.113499475702925</li>
-	<li>-0.125719333220632</li>
-	<li>0.0434611514397736</li>
-	<li>0.202868180728299</li>
-	<li>-0.113919008868015</li>
-	<li>-0.0382369212754716</li>
-	<li>0.0491389841646633</li>
-	<li>-0.0198221517858243</li>
-	<li>0.0175352131496739</li>
-	<li>0.0264657952051942</li>
-	<li>0.119278436715872</li>
-	<li>-0.218521793800235</li>
-	<li>0.0159366944834975</li>
-	<li>0.194276086012615</li>
-	<li>-0.121180977909389</li>
-	<li>-0.165054100432551</li>
-	<li>-0.0651733446635078</li>
-	<li>-0.07680468077657</li>
-	<li>-0.0503302517530004</li>
-	<li>0.00823376132659068</li>
-	<li>0.00388666785680694</li>
-	<li>-0.00915532185917745</li>
-	<li>-0.0930607404292774</li>
-	<li>-0.171362738860478</li>
-	<li>-0.0310668331585724</li>
-	<li>-0.0210004347148357</li>
-	<li>0.0549900820264029</li>
-	<li>-0.0468877624516252</li>
-	<li>0.0868626310356565</li>
-	<li>0.0532565684252016</li>
-	<li>-0.168838788927617</li>
-	<li>0.0339257077316963</li>
-	<li>0.0762184886512164</li>
-	<li>-0.0890754231460831</li>
-	<li>-0.0647727147695691</li>
-	<li>-0.0889513202649563</li>
-	<li>0.000667073625725037</li>
-	<li>0.0509714346818621</li>
-	<li>-0.0940193584932185</li>
-	<li>-0.0839669876254321</li>
-	<li>0.106982624440368</li>
-	<li>0.145030507757848</li>
-	<li>-0.0757386310783636</li>
-	<li>0.161739345883223</li>
-	<li>0.214585243128979</li>
-	<li>-0.0764856927072532</li>
-	<li>0.0477290142665558</li>
-	<li>0.0126102486334496</li>
-	<li>-0.0741476392314046</li>
-	<li>-0.0725679361079652</li>
-	<li>-0.0807334358109478</li>
-	<li>0.0186774645788979</li>
-	<li>0.0234449247050084</li>
-	<li>0.0176989561150896</li>
-	<li>0.0516204767156866</li>
-	<li>0.120367846574953</li>
-	<li>0.0233333600272549</li>
-	<li>-0.00113490805336294</li>
-	<li>0.118557812809982</li>
-</ol>
+<table>
+<thead><tr><th scope=col>time</th><th scope=col>age</th><th scope=col>gender</th></tr></thead>
+<tbody>
+	<tr><td>139.316</td><td>35     </td><td>1      </td></tr>
+	<tr><td>144.893</td><td>40     </td><td>1      </td></tr>
+	<tr><td>149.000</td><td>45     </td><td>1      </td></tr>
+	<tr><td>151.083</td><td>50     </td><td>1      </td></tr>
+	<tr><td>170.550</td><td>55     </td><td>1      </td></tr>
+	<tr><td>181.500</td><td>60     </td><td>1      </td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, I defined the variables. I found the times (in seconds) and recorded these for both males and females. I contained all of the data in a single dataset.</p>
+<h1 id="Linear-Regression-(Normal-response)">Linear Regression (Normal response)<a class="anchor-link" href="#Linear-Regression-(Normal-response)">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>lin1 <span class="o">&lt;-</span> lm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="p">,</span>data<span class="o">=</span>marathon<span class="p">)</span></span>
+<span class="code-line">lin2 <span class="o">&lt;-</span> lm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="o">+</span>agemsq<span class="p">,</span>data<span class="o">=</span>marathon<span class="p">)</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>lin1<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>lin2<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">lm(formula = timesm ~ agem, data = marathon)</span>
+<span class="code-line"></span>
+<span class="code-line">Residuals:</span>
+<span class="code-line">   Min     1Q Median     3Q    Max </span>
+<span class="code-line">-70.80 -47.41 -15.95  28.83 149.61 </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">            Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept)  -89.203     62.054  -1.438  0.17841    </span>
+<span class="code-line">agem           4.449      0.910   4.889  0.00048 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">Residual standard error: 63.52 on 11 degrees of freedom</span>
+<span class="code-line">Multiple R-squared:  0.6848,	Adjusted R-squared:  0.6562 </span>
+<span class="code-line">F-statistic:  23.9 on 1 and 11 DF,  p-value: 0.0004801</span>
+</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">lm(formula = timesm ~ agem + agemsq, data = marathon)</span>
+<span class="code-line"></span>
+<span class="code-line">Residuals:</span>
+<span class="code-line">    Min      1Q  Median      3Q     Max </span>
+<span class="code-line">-47.811 -15.503   5.468  19.742  40.354 </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept) 498.57207   98.79145   5.047 0.000502 ***</span>
+<span class="code-line">agem        -14.89307    3.13305  -4.754 0.000776 ***</span>
+<span class="code-line">agemsq        0.14557    0.02335   6.233 9.72e-05 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">Residual standard error: 30.14 on 10 degrees of freedom</span>
+<span class="code-line">Multiple R-squared:  0.9355,	Adjusted R-squared:  0.9226 </span>
+<span class="code-line">F-statistic: 72.49 on 2 and 10 DF,  p-value: 1.118e-06</span>
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Based on the summary, it appears that the quadratic term is quite important, it increases the R-squared significantly. So there does appear to be a quadratic effect of age on the time (or at the very least, a non-linear one).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>lin3 <span class="o">&lt;-</span> lm<span class="p">(</span>time<span class="o">~</span>age<span class="o">+</span>gender<span class="p">)</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>lin3<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">lm(formula = time ~ age + gender)</span>
+<span class="code-line"></span>
+<span class="code-line">Residuals:</span>
+<span class="code-line">   Min     1Q Median     3Q    Max </span>
+<span class="code-line">-74.18 -42.85 -14.10  26.96 181.20 </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept) -104.3254    48.9768  -2.130   0.0446 *  </span>
+<span class="code-line">age            4.6801     0.6979   6.706 9.68e-07 ***</span>
+<span class="code-line">gender        35.0534    25.7576   1.361   0.1873    </span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">Residual standard error: 64.15 on 22 degrees of freedom</span>
+<span class="code-line">Multiple R-squared:  0.6749,	Adjusted R-squared:  0.6454 </span>
+<span class="code-line">F-statistic: 22.84 on 2 and 22 DF,  p-value: 4.285e-06</span>
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, the model shows that gender has some part in determining the time (in seconds) of completion, but it is not significant. If the coefficient is correct, it means that, holding age constant, a man will have 35.0534 faster time (or a woman will take 35.0534 additional seconds) to finish the race.</p>
+<p>Comparing the intercepts in the models shows a pretty large difference in the predictions. The reason why the male-only intercept is different from the intercept in the second model is because the second model is not considering the interaction of age and gender. When you account for this in the model, the intercepts will be the same. The gender coefficient in the model assumes that you are holding everything else constant, that is, the difference between a 35 year old male and female, for instance. When you consider the interaction term as well, this problem is eliminated.</p>
+<h1 id="Using-a-gamma-distribution-on-response">Using a gamma distribution on response<a class="anchor-link" href="#Using-a-gamma-distribution-on-response">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>gammalin1 <span class="o">&lt;-</span> glm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="p">,</span>family<span class="o">=</span><span class="s">&quot;Gamma&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>gammalin1<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">glm(formula = timesm ~ agem, family = &#34;Gamma&#34;)</span>
+<span class="code-line"></span>
+<span class="code-line">Deviance Residuals: </span>
+<span class="code-line">      Min         1Q     Median         3Q        Max  </span>
+<span class="code-line">-0.169540  -0.067254   0.001897   0.092610   0.116811  </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept)  1.275e-02  5.748e-04   22.17 1.76e-10 ***</span>
+<span class="code-line">agem        -1.057e-04  6.839e-06  -15.46 8.30e-09 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">(Dispersion parameter for Gamma family taken to be 0.009790868)</span>
+<span class="code-line"></span>
+<span class="code-line">    Null deviance: 2.42365  on 12  degrees of freedom</span>
+<span class="code-line">Residual deviance: 0.10997  on 11  degrees of freedom</span>
+<span class="code-line">AIC: 116.42</span>
+<span class="code-line"></span>
+<span class="code-line">Number of Fisher Scoring iterations: 4</span>
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The link function here is the canonical link function for the Gamma distribution, which is the inverse (1/$\mu$). All variables come up as significant.</p>
+<p>The model can be written as follows
+    $Y = X\beta + \epsilon$ where Y follows a Gamma distribution with link function g(E(Y)) = 1/$\mu$</p>
+<h1 id="Inverse-Gaussian-distribution">Inverse-Gaussian distribution<a class="anchor-link" href="#Inverse-Gaussian-distribution">&#182;</a></h1><p>The exponential family has the following form:
+$$
+f(y,\theta ,\phi ) = e^{\frac{y \theta - b(\theta )}{a(\phi )} + c(y, \phi)}
+$$
+The inverse-Gaussian distribution is defined as:
+$$
+f(y) = \exp (-\frac{\lambda (y - \mu )^2)}{2\mu ^2y} - \frac{1}{2} \log (\frac{2\pi y^3}{\lambda}))
+$$
+$$
+f(y) = \exp (-\frac{\lambda (y^2 - 2y\mu + \mu ^2)}{2\mu ^2y} - \frac{1}{2} \log (\frac{2\pi y^3}{\lambda}))
+$$
+$$
+f(y) = \exp (\lambda [-\frac{y}{2\mu ^2} + \frac{1}{\mu}] - \frac{\lambda }{2y} - \frac {1}{2}\log(\frac {2\pi y^3}{\lambda}))
+$$
+$$
+f(y) = \exp (\frac {[-\frac{y}{2\mu ^2} + \frac{1}{\mu}]}{\frac {1}{\lambda}} - \frac{\lambda }{2y} - \frac {1}{2}\log(\frac {2\pi y^3}{\lambda}))
+$$</p>
+<p>This is in the exponential form, that is, $$\theta = - \frac {1} {2 \mu ^2}$$ 
+$$a(\phi) = \frac {1}{\lambda} = { \phi}$$ 
+$$b(\theta) = - \frac {1}{\mu} = -\sqrt{2 \theta}$$
+$$c(y,\theta) = - \frac{\lambda}{2y} - \frac{1}{2}\log(\frac{2\pi y^3}{\lambda}) = - \frac{1}{y\phi} - \frac{1}{2}\log(2\pi \phi y^3)$$</p>
+<p>$b'(\theta) = {\sqrt {\frac{2}{\theta }}} = \mu$   , which is $\text{E}(Y)$. The canonical link function is $g(\text{E}(Y))$ = $\theta$. So, the canonical link is proportional to  $\frac {1}{\mu ^2}$, which is equivalent to $X\beta$. The model is then
+$Y = X\beta + \epsilon$ where Y follows a inverse Gaussian distribution with link function $g(\text{E}(Y))$ = 1/$\mu ^2$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>invgauslin1  <span class="o">&lt;-</span>  glm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="p">,</span>family<span class="o">=</span><span class="s">&quot;inverse.gaussian&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>invgauslin1<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">glm(formula = timesm ~ agem, family = &#34;inverse.gaussian&#34;)</span>
+<span class="code-line"></span>
+<span class="code-line">Deviance Residuals: </span>
+<span class="code-line">       Min          1Q      Median          3Q         Max  </span>
+<span class="code-line">-0.0048497  -0.0023005  -0.0000681   0.0005923   0.0123111  </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept)  9.958e-05  3.892e-06   25.59 3.75e-11 ***</span>
+<span class="code-line">agem        -9.617e-07  4.179e-08  -23.01 1.18e-10 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">(Dispersion parameter for inverse.gaussian family taken to be 2.180685e-05)</span>
+<span class="code-line"></span>
+<span class="code-line">    Null deviance: 0.01111018  on 12  degrees of freedom</span>
+<span class="code-line">Residual deviance: 0.00020857  on 11  degrees of freedom</span>
+<span class="code-line">AIC: 102.69</span>
+<span class="code-line"></span>
+<span class="code-line">Number of Fisher Scoring iterations: 4</span>
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Both are quite difficult to interpret by themselves, as the response variables are transformed via the link function. The predictions for the gamma are as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>predict<span class="p">(</span>gammalin1<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">pred1 <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span>predict<span class="p">(</span>gammalin1<span class="p">)</span></span>
+<span class="code-line">pred2 <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">((</span><span class="m">2</span><span class="o">*</span>predict<span class="p">(</span>invgauslin1<span class="p">)))</span><span class="o">^</span><span class="m">.5</span></span>
+<span class="code-line">pred3 <span class="o">&lt;-</span> predict<span class="p">(</span>lin1<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>pred1<span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>pred2<span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>pred3<span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>predict<span class="p">(</span>lin2<span class="p">)</span><span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl class=dl-horizontal>
+	<dt>1</dt>
+		<dd>0.00904503120484234</dd>
+	<dt>2</dt>
+		<dd>0.00851640593952094</dd>
+	<dt>3</dt>
+		<dd>0.00798778067419954</dd>
+	<dt>4</dt>
+		<dd>0.00745915540887814</dd>
+	<dt>5</dt>
+		<dd>0.00693053014355673</dd>
+	<dt>6</dt>
+		<dd>0.00640190487823533</dd>
+	<dt>7</dt>
+		<dd>0.00587327961291393</dd>
+	<dt>8</dt>
+		<dd>0.00534465434759253</dd>
+	<dt>9</dt>
+		<dd>0.00481602908227112</dd>
+	<dt>10</dt>
+		<dd>0.00428740381694972</dd>
+	<dt>11</dt>
+		<dd>0.00375877855162832</dd>
+	<dt>12</dt>
+		<dd>0.00323015328630692</dd>
+	<dt>13</dt>
+		<dd>0.00217290275566411</dd>
+</dl>
 
 </div>
 
@@ -1398,7 +1523,258 @@ result. This is included below.</p>
 
 
 <div class="output_html rendered_html output_subarea ">
--0.00814363230874542
+6398.61022699515
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+59423.3823177025
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+44389.3243635469
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+9086.8812639335
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, we can see the sum squared error of the transformed predictions from the models. We can see that the model using the gamma distribution does an exceptional job at predicting the response variable, time. It is better than both the linear and quadratic simple linear regression models. The inverse-gaussian, however, fails to predict the response as well as the others.</p>
+<p>Below, I do the same thing, except using the identity function. This produces more easily interpretable coefficients, but they are less efficient at predicting the model. That is, when we take the sum of squares, the identity links are less successful at determining the response.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>gammalin2 <span class="o">&lt;-</span> glm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="p">,</span>family<span class="o">=</span><span class="s">&quot;Gamma&quot;</span><span class="p">(</span>link<span class="o">=</span><span class="s">&quot;identity&quot;</span><span class="p">))</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>gammalin2<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">invgauslin2 <span class="o">&lt;-</span> glm<span class="p">(</span>timesm<span class="o">~</span>agem<span class="p">,</span>family<span class="o">=</span><span class="s">&quot;inverse.gaussian&quot;</span><span class="p">(</span>link<span class="o">=</span><span class="kp">identity</span><span class="p">))</span></span>
+<span class="code-line"><span class="kp">summary</span><span class="p">(</span>invgauslin2<span class="p">)</span></span>
+<span class="code-line">predict<span class="p">(</span>gammalin2<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">predict<span class="p">(</span>invgauslin2<span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>predict<span class="p">(</span>gammalin2<span class="p">)</span><span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="kp">sum</span><span class="p">((</span>predict<span class="p">(</span>invgauslin2<span class="p">)</span><span class="o">-</span>timesm<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">glm(formula = timesm ~ agem, family = Gamma(link = &#34;identity&#34;))</span>
+<span class="code-line"></span>
+<span class="code-line">Deviance Residuals: </span>
+<span class="code-line">     Min        1Q    Median        3Q       Max  </span>
+<span class="code-line">-0.21209  -0.18853  -0.09241   0.08858   0.54268  </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">            Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept)  -8.3100    38.5463  -0.216 0.833256    </span>
+<span class="code-line">agem          3.1548     0.6898   4.574 0.000799 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">(Dispersion parameter for Gamma family taken to be 0.06523248)</span>
+<span class="code-line"></span>
+<span class="code-line">    Null deviance: 2.42365  on 12  degrees of freedom</span>
+<span class="code-line">Residual deviance: 0.60806  on 11  degrees of freedom</span>
+<span class="code-line">AIC: 138.73</span>
+<span class="code-line"></span>
+<span class="code-line">Number of Fisher Scoring iterations: 9</span>
+</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="code-line"></span>
+<span class="code-line">Call:</span>
+<span class="code-line">glm(formula = timesm ~ agem, family = inverse.gaussian(link = identity))</span>
+<span class="code-line"></span>
+<span class="code-line">Deviance Residuals: </span>
+<span class="code-line">      Min         1Q     Median         3Q        Max  </span>
+<span class="code-line">-0.012827  -0.011721  -0.006183   0.004403   0.032956  </span>
+<span class="code-line"></span>
+<span class="code-line">Coefficients:</span>
+<span class="code-line">            Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="code-line">(Intercept)  10.6841    32.6336   0.327 0.749516    </span>
+<span class="code-line">agem          2.7958     0.6252   4.472 0.000944 ***</span>
+<span class="code-line">---</span>
+<span class="code-line">Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="code-line"></span>
+<span class="code-line">(Dispersion parameter for inverse.gaussian family taken to be 0.000289055)</span>
+<span class="code-line"></span>
+<span class="code-line">    Null deviance: 0.0111102  on 12  degrees of freedom</span>
+<span class="code-line">Residual deviance: 0.0024039  on 11  degrees of freedom</span>
+<span class="code-line">AIC: 134.47</span>
+<span class="code-line"></span>
+<span class="code-line">Number of Fisher Scoring iterations: 10</span>
+</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl class=dl-horizontal>
+	<dt>1</dt>
+		<dd>102.10716967927</dd>
+	<dt>2</dt>
+		<dd>117.881054509177</dd>
+	<dt>3</dt>
+		<dd>133.654939339083</dd>
+	<dt>4</dt>
+		<dd>149.428824168989</dd>
+	<dt>5</dt>
+		<dd>165.202708998895</dd>
+	<dt>6</dt>
+		<dd>180.976593828801</dd>
+	<dt>7</dt>
+		<dd>196.750478658707</dd>
+	<dt>8</dt>
+		<dd>212.524363488613</dd>
+	<dt>9</dt>
+		<dd>228.29824831852</dd>
+	<dt>10</dt>
+		<dd>244.072133148426</dd>
+	<dt>11</dt>
+		<dd>259.846017978332</dd>
+	<dt>12</dt>
+		<dd>275.619902808238</dd>
+	<dt>13</dt>
+		<dd>307.16767246805</dd>
+</dl>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl class=dl-horizontal>
+	<dt>1</dt>
+		<dd>108.535713328251</dd>
+	<dt>2</dt>
+		<dd>122.514520425568</dd>
+	<dt>3</dt>
+		<dd>136.493327522885</dd>
+	<dt>4</dt>
+		<dd>150.472134620202</dd>
+	<dt>5</dt>
+		<dd>164.450941717519</dd>
+	<dt>6</dt>
+		<dd>178.429748814837</dd>
+	<dt>7</dt>
+		<dd>192.408555912154</dd>
+	<dt>8</dt>
+		<dd>206.387363009471</dd>
+	<dt>9</dt>
+		<dd>220.366170106788</dd>
+	<dt>10</dt>
+		<dd>234.344977204105</dd>
+	<dt>11</dt>
+		<dd>248.323784301422</dd>
+	<dt>12</dt>
+		<dd>262.302591398739</dd>
+	<dt>13</dt>
+		<dd>290.260205593373</dd>
+</dl>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+52728.0806590427
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+58577.3835961494
 </div>
 
 </div>
@@ -1450,7 +1826,7 @@ result. This is included below.</p>
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/linear-models/constrained-least-squares.html#disqus_thread",
+                href="../../category/linear-models/generalized-linear-models-toy-exercise.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1461,8 +1837,8 @@ result. This is included below.</p>
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/linear-models/constrained-least-squares.html';
-    var disqus_url = '../../category/linear-models/constrained-least-squares.html';
+        var disqus_identifier = '../../category/linear-models/generalized-linear-models-toy-exercise.html';
+    var disqus_url = '../../category/linear-models/generalized-linear-models-toy-exercise.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1484,8 +1860,7 @@ result. This is included below.</p>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="../../category/markov-chains/hidden-markov-models.html" title="Previous: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a></li>
-                <li class="next-article"><a href="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html" title="Next: Heteroskedacity with Weighted Least Squares">Heteroskedacity with Weighted Least Squares</a> »</li>
+                <li class="previous-article">« <a href="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html" title="Previous: Heteroskedacity with Weighted Least Squares">Heteroskedacity with Weighted Least Squares</a></li>
             </ul>
             </nav>
             </aside>
@@ -1493,16 +1868,25 @@ result. This is included below.</p>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-12-29T00:00:00-05:00">Dec 29, 2018</time>
+            <time itemprop="dateCreated" datetime="2019-02-07T00:00:00-05:00">Feb 7, 2019</time>
             <h4>Category</h4>
             <a class="category-link" href="../../categories.html#linear-models-ref">Linear Models</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#constrained-least-squares-ref">constrained least squares
+                <li><a href="../../tags/#gamma-distribution-ref">gamma distribution
+                    <span>1</span>
+</a></li>
+                <li><a href="../../tags/#generalized-linear-models-ref">generalized linear models
                     <span>1</span>
 </a></li>
                 <li><a href="../../tags/#linear-regression-ref">linear regression
                     <span>3</span>
+</a></li>
+                <li><a href="../../tags/#link-function-ref">link function
+                    <span>1</span>
+</a></li>
+                <li><a href="../../tags/#marathon-ref">marathon
+                    <span>1</span>
 </a></li>
                 <li><a href="../../tags/#theory-ref">theory
                     <span>3</span>

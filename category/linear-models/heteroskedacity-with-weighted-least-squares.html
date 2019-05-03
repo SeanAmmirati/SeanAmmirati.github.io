@@ -17,18 +17,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="theory, constrained least squares, linear regression, Linear Models, " />
+<meta name="keywords" content="theory, weighted least squares, linear regression, heteroskedacity, Linear Models, " />
 
-<meta property="og:title" content="Constrained Least Squares "/>
-<meta property="og:url" content="../../category/linear-models/constrained-least-squares.html" />
-<meta property="og:description" content="A theoretical approach to a constrained least squares problem." />
+<meta property="og:title" content="Heteroskedacity with Weighted Least Squares "/>
+<meta property="og:url" content="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html" />
+<meta property="og:description" content="A theoretical approach to the problem of heteroskedacity with WLS." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
-<meta property="og:article:published_time" content="2018-12-29T00:00:00-05:00" />
-<meta name="twitter:title" content="Constrained Least Squares ">
-<meta name="twitter:description" content="A theoretical approach to a constrained least squares problem.">
+<meta property="og:article:published_time" content="2019-01-24T00:00:00-05:00" />
+<meta name="twitter:title" content="Heteroskedacity with Weighted Least Squares ">
+<meta name="twitter:description" content="A theoretical approach to the problem of heteroskedacity with WLS.">
 
-        <title>Constrained Least Squares  · Stats Works
+        <title>Heteroskedacity with Weighted Least Squares  · Stats Works
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="../../category/linear-models/constrained-least-squares.html"> Constrained Least Squares  </a></h1>
+    <h1><a href="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html"> Heteroskedacity with Weighted Least Squares  </a></h1>
     </header>
 </div>
 
@@ -1066,8 +1066,144 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Consider the following: We wish to constrain the parameters of a linear model to have certain properties, for example, that the last coefficient is equal to 1, or that the sum of the coefficients are equal to one. How can we estimate the Least Squares Estimates using these constraints?</p>
-<p>Thus is constrained least squares, and this article will explore the theoretical basis for choosing a selection of coefficients that will minimize the least squares given some linear constraints on the coefficients.</p>
+<p><strong>An Approach to Solving Heteroskedacity when the Variance is a Multiplicative Constant</strong></p>
+<p>One of the most widely known assumptions of linear regression is <strong>homoskedacity</strong>, that is that the variance of the errors are constant for all of the values (they do not depend on the particular observation). Weighted least squares is a way of dealing with this problem. We will detail the intuition and reasoning behind why this is the case.</p>
+<p>Consider a scale that measures two objects. For each object, we have
+some randomized error. Consider the weights of two objects, first alone
+and then together.</p>
+<p>That is, consider the following model:</p>
+<p>$$
+y_{1} = \alpha_{1} + \varepsilon_{1}
+$$
+$$
+y_{2} = \alpha_{2} + \varepsilon_{2}
+$$
+$$
+y_{3} = \alpha_{1} + \alpha_{2}\  + \ \varepsilon_{3}
+$$</p>
+<p>This is like a regression model, in that we can solve for the alphas
+(the true weights) by the method of least squares.</p>
+<p>$${\mathbf{y = X\alpha + \ \varepsilon}
+}
+$$</p>
+<p>$$\mathbf{X}^{\mathbf{T}}\mathbf{X} = \begin{bmatrix}
+2 &amp; 1 \\
+1 &amp; 2 \\
+\end{bmatrix}$$</p>
+<p>$$
+{(\mathbf{X}^{\mathbf{T}}\mathbf{X)}}^{- 1} = \frac{1}{3} 
+\begin{bmatrix}
+2 &amp; - 1 \\
+-1 &amp; 2 \\
+\end{bmatrix}
+$$</p>
+<p>$$
+{(\mathbf{X}^{\mathbf{T}}\mathbf{X)})}^{- 1}\mathbf{X}^{\mathbf{T}}=\frac{1}{3}
+\begin{bmatrix}
+2 &amp; -1 &amp; 1 \\
+-1 &amp; 2 &amp; 1 \\
+\end{bmatrix}
+$$</p>
+<p>$$
+\widehat{\mathbf{\alpha}} = \frac{1}{3}\begin{bmatrix}
+2y_{1} - y_{2} + y_{3} \\
+-y_{1} + 2y_{2} + y_{3} \\
+\end{bmatrix}
+$$</p>
+<p>Now consider that the random element is not equally variant for the two
+objects -- that is, that for both weights combined there is some
+multiplicative factor on the error $&gt; 1$. That is, 
+$$
+\begin{bmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3} \\
+\end{bmatrix} =
+\mathbf{MVN}(0, \Sigma) \quad \text{where } \Sigma = \begin{bmatrix}
+\sigma^{2} &amp; 0 &amp; 0 \\
+0 &amp; \sigma^{2} &amp; 0 \\
+0 &amp; 0 &amp; {k^{2}\sigma}^{2} \\
+\end{bmatrix}
+$$</p>
+<p>Note that this violates the least squares
+assumptions. One method to fix this issue is to transform the variables
+so they have equal variance, since $k$ is a numeric value $&gt; 0$.</p>
+<p>Note that we can transform the third variable as follows:</p>
+<p>$$\frac{y_{3}}{k} = \frac{\alpha_{1}}{k} + \frac{\alpha_{2}}{k}\  + \ \frac{\varepsilon_{3}}{k}$$</p>
+<p>Now, $\frac{\varepsilon_{3}}{k}$ has variance $\sigma^{2}$.</p>
+<p>Let 
+$$\mathbf{y}^{\mathbf{*}} = \begin{bmatrix}
+y_{1} \\
+y_{2} \\
+y_{3}/k \\
+\end{bmatrix} $$</p>
+<p>$$
+\mathbf{X}^{\mathbf{*}} = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1 \\
+1/k &amp; 1/k \\
+\end{bmatrix}
+$$
+$$
+\mathbf{\alpha}^{\mathbf{*}} = \begin{bmatrix}
+\alpha_{1} \\
+\alpha_{2} \\
+\end{bmatrix}
+$$
+$$
+\mathbf{\varepsilon}^{\mathbf{*}} = \begin{bmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3}/k \\
+\end{bmatrix}
+$$</p>
+<p>Then we can solve as in the case of OLS:</p>
+<p>$${{\widehat{\mathbf{\alpha}}}^{*} = \left( {\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}} \right)^{- 1}{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{y}^{\mathbf{*}}
+}{{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}}\mathbf{= \ }\begin{bmatrix}
+\frac{k^{2} + 1}{k^{2}} &amp; \frac{1}{k^{2}} \\
+\frac{1}{k^{2}} &amp; \frac{k^{2} + 1}{k^{2}} \\
+\end{bmatrix}}$$</p>
+<p>$$\left( {\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}} \right)^{- 1} = \frac{k^{4}}{k^{4} + 2k^{2}}\ \begin{bmatrix}
+\frac{k^{2} + 1}{k^{2}} &amp; \frac{- 1}{k^{2}} \\
+\frac{- 1}{k^{2}} &amp; \frac{k^{2} + 1}{k^{2}} \\
+\end{bmatrix}$$</p>
+<p>$$\left( {\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}} \right)^{- 1}{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{=}\frac{k^{4}}{k^{4} + 2k^{2}}\begin{bmatrix}
+\frac{k^{2} + 1}{k^{2}} &amp; \frac{- 1}{k^{2}} &amp; \frac{1}{k} \\
+\frac{- 1}{k^{2}} &amp; \frac{k^{2} + 1}{k^{2}} &amp; \frac{1}{k} \\
+\end{bmatrix}$$</p>
+<p>$${\widehat{\mathbf{\alpha}}}^{*}\mathbf{=}\frac{k^{4}}{k^{4} + 2k^{2}}\mathbf{\ }\begin{bmatrix}
+\frac{k^{2} + 1}{k^{2}}y_{1} - \frac{y_{2}}{k^{2}} + \frac{y_{3}}{k^{2}} \\
+\frac{{- y}_{1}}{k^{2}} + \frac{k^{2} + 1}{k^{2}}y_{2} + \frac{y_{3}}{k^{2}} \\
+\end{bmatrix}$$</p>
+<p>$${\widehat{\mathbf{\alpha}}}^{*}\mathbf{=}\frac{k^{2}}{k^{4} + 2k^{2}}\mathbf{\ }\begin{bmatrix}
+\mathbf{(}k^{2} + 1)y_{1} - y_{2} + y_{3} \\
+\mathbf{-}y_{1}\mathbf{+ (}k^{2} + 1)y_{2} + y_{3} \\
+\end{bmatrix}$$</p>
+<p>However, this is not a general solution. Consider instead the following:</p>
+<p>$$\begin{bmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3} \\
+\end{bmatrix}\mathbf{\ \sim\ MVN(0, \Sigma)\ \ } \quad \text{where } \Sigma = \begin{bmatrix}
+{a^{2}\sigma}^{2} &amp; 0 &amp; 0 \\
+0 &amp; b^{2}\sigma^{2} &amp; 0 \\
+0 &amp; 0 &amp; {c^{2}\sigma}^{2} \\
+\end{bmatrix}$$</p>
+<p>We could attempt to perform the same procedure, that is, divide $y_{1}$
+by $a^{2}$, $y_{2}$ by $b^{2}$ and so on. However, this is arduous, and
+it would be convenient to use a matrix of weights to solve this.</p>
+<p>Let <strong>W</strong> be a matrix of the reciprocals of these constants. Using the
+same procedure as above, we can express $\mathbf{y}^{\mathbf{*}}$ as
+$\mathbf{W}^{\mathbf{1/2}}\mathbf{\ }\mathbf{y}$ and
+$\mathbf{X}^{\mathbf{*}}$ as $\mathbf{W}^{\mathbf{1/2}}\mathbf{X}$
+Then our result is:</p>
+<p>$${\widehat{\mathbf{\alpha}}}^{*} = \left( {\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}} \right)^{- 1}{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{y}^{\mathbf{*}}$$</p>
+<p>$${\widehat{\mathbf{\alpha}}}^{*} = \left( \mathbf{X}^{\mathbf{T}}\mathbf{\text{WX}} \right)^{- 1}\mathbf{X}^{\mathbf{T}}\mathbf{W}\mathbf{y}^{\mathbf{*}}$$</p>
+<p>We can see that if <strong>W</strong> = $\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; {1/k}^{2} \\
+\end{bmatrix}\mathbf{\ }$ we get the same result as earlier.</p>
 
 </div>
 </div>
@@ -1076,197 +1212,38 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Constrained Least Squares -- Coefficient Calculation and
- Simulation</strong></p>
-<p>We want to maximize the likelihood equation of $\vec{\beta}$. We know that $\vec{y}$ in
- this context is normally distributed with mean $\mathbf{X}\vec{\beta}$ and variance $\sigma^2$.
- This means that the distribution of $y_i$ given a vector of values $\vec{x_i}$ is as follows:</p>
-<p>$$f_{Y}\left( y_i \middle|\ \vec{x}_i \right) = {(2\pi\sigma^{2})}^{- 1/2}e^{\frac{- (y_i-\vec{x}_i \vec{\beta})}{2\sigma^{2}}^{2}}$$</p>
-<p>So the likelihood of $\vec{\beta}$ is therefore:</p>
-<p>$$
-L(\vec{\beta}, \sigma^{2} | \vec{y}, \mathbf{X}) = ( 2\pi\sigma^{2})^{- \frac{N}{2}}e^{- \frac{\sum_{i}^{N}{(y_{i}-\vec{x}_{i} \vec{\beta})}}{2\sigma^{2}}^{2}}
-$$</p>
-<p>Taking the natural logarithm gives us the log likelihood:</p>
-<p>$$l\left( \vec{\beta},\sigma^{2} \middle| y,\mathbf{X} \right) = - \frac{1}{2\sigma^{2}}\sum_{i}^{N}{{(y_{i}-\vec{x}_{i}\vec{\beta})}^{2}-\frac{N}{2}\ln\left( \sigma^{2} \right)+ C}= - \frac{1}{2\sigma^{2}}\left( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} \right) - \frac{N}{2}\ln\left( \sigma^{2} \right)+ C$$</p>
-<p>Here, I have truncated the result to only those involving <strong>$\vec{\beta}$</strong> and
- $\sigma^{2}$, as we are only interested in maximizing with respect to
- <strong>$\vec{\beta}$</strong>. Note that I have transitioned $\sigma^{2}$ to a constant, as we
- are assuming the errors are iid with constant variance $\sigma^{2}$.
- Here, we obtain the same result as minimizing the least squares
- estimator, so the MLE and the least squares estimators are the same.
- If we were unconstrained, we would simply take the partial derivative
- here with respect to <strong>$\vec{\beta}$</strong> to estimate <strong>$\vec{\beta}$</strong> using maximum likelihood.</p>
-<p>Since $\sigma^{2}$ is unconstrained, we can find the maximum
- likelihood estimator directly and use this to maximize with respect to
- <strong>$\vec{\beta}$.</strong> To do this, we differentiate the above equation with respect to
- $\sigma^2$. Doing so yields the normal estimate for $\sigma^{2}$:</p>
-<p>$${\widehat{\sigma}}^{2} = - \frac{1}{N}\sum_{i}^{N}{(y_{i}-x_{i}\vec{\beta}^{c})}^{2}=\frac{1}{N}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)$$</p>
-<p>Where $\vec{\beta}^{c}$ is our new constrained estimates.
-Plugging this back into the log likelihood equation yields:</p>
-<p>$$
-l(\vec{\beta}^{c} | \vec{y},\mathbf{\mathbf{X}}) = - \frac{N}{2}[{(\vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})}^{\intercal}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c} )]^{-1} ( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})^{\intercal}  \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c}) - \frac{N}{2}\ln( \frac{1}{N}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c})^{\intercal}( \vec{y} - \mathbf{\mathbf{X}}\vec{\beta}^{c}))+ C
-$$</p>
-<p>$$l\left( \vec{\beta} \middle| \vec{y},\mathbf{X} \right) = - \frac{N}{2} - \frac{N}{2}\ln\left( \frac{1}{N}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) \right)+ C$$</p>
-<p>However, we want to maximize the above equation with the constraint
- that: M$\vec{\beta}$ = $\vec{d}$, where d is a known vector and M is an <em>r x p</em> matrix
- of rank $r &lt; p$. This is an equality constraint. We can use the
- Lagrange multipliers to solve this maximization problem with such a
- constraint.</p>
-<p>We can see that, since the natural logarithm is a monotonically
- increasing function, and the division within the above logarithm is a
- constant, and that all other terms do not involve $\beta$, maximizing the
- above equation with respect to$\ \vec{\beta}^{c}$ is
- equivalent to minimizing:</p>
-<p>$$f = \left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) - \vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right)$$</p>
-<p>Where $\vec{\lambda}$ is the Lagrange multiplier (and so $f$ is the
- Lagrange function). The Lagrange multiplier is especially useful in
- this case, as we are trying to minimize the least square error with
- some constraint on the parameters.</p>
-<p>Multiplying the error by the transpose gives:</p>
-<p>$$f =\vec{y}^{\intercal}\vec{y} -\vec{y}^{\intercal}\mathbf{X}\vec{\beta}^{c}-{{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\vec{y} + {{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-\vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right) = =\vec{y}^{\intercal}\vec{y} -2{{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\vec{y} + {{\vec{\beta}^{c}}}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-\vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right)$$</p>
-<p>Now we take derivatives with respect to $\vec{\beta}^{c}$ and $\vec{\lambda}$ to obtain</p>
-<p>$$\frac{\partial{f}}{\partial{B}}= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}\vec{\beta}^{c}-M^{\intercal}\vec{\lambda}$$</p>
-<p>$$\frac{\partial{f}}{\partial{\lambda}}=M\vec{\beta}^{c}\ –\ \vec{d}$$</p>
-<p>We can now set both of these equal to zero and solve this system of
-equations to find the appropriate MLE estimate of
-$\vec{\beta}^{c}$<strong>.</strong> However, there is a few simplifying
-steps which can make the result more useable. The first is to get the
-expression in terms of the original least squares estimator. If we
-multiply the first equation above by M(${\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}$, we obtain:</p>
-<p>$$- \ 2M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\mathbf{X}^{\intercal}\vec{y}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>The first term on the right is the familiar $\vec{\beta}$ from
-unconstrained OLS (I will denote this $\vec{\beta}^{u}$).
-Substituting, we get</p>
-<p>$$- \ 2M\vec{\beta}^{u}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>$$- \ 2M\vec{\beta}^{u}+\ 2M{\widehat{\beta}}^{c}-\ M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = 0$$</p>
-<p>$$M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}\vec{\lambda} = \ 2M{\widehat{\beta}}^{c} - \ 2M{\widehat{\beta}}^{u}$$</p>
-<p>Solving for lambda:</p>
-<p>$$\vec{\lambda} = {(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\left\lbrack 2M{\widehat{\beta}}^{c} - \ 2M{\widehat{\beta}}^{u} \right\rbrack= 2{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>Plugging this back into the original equation and solving for
-${\widehat{\beta}}^{c}$,</p>
-<p>$$0= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}-M^{\intercal}\vec{\lambda}$$</p>
-<p>$$0= - 2\mathbf{X}^{\intercal}\vec{y}+2\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}-{2(M}^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack)$$</p>
-<p>$$\mathbf{X}^{\intercal}\mathbf{X}{\widehat{\beta}}^{c}=\mathbf{X}^{\intercal}\vec{y}+M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}= ({{\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\mathbf{X}}^{\intercal}\vec{y}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}=\vec{\beta}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>This is the desired result, the maximum likelihood estimator given the
-constraint M$\vec{\beta} =d$.</p>
-<p>Now, let's look at an example.</p>
-<p>$$\vec{\beta}_{p} = 0$$</p>
-<p>Is equivalent to the following constraint. $\vec{\alpha}^{\intercal}\vec{\beta} = 0$
-where $\vec{\alpha}$ is a vector of zeros in all but the last row, which is a 1.
-So,</p>
-<p>$$\vec{\alpha} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}$$</p>
-<p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1}\lbrack - \ \vec{\alpha}'{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\rbrack$$</p>
-<p>Since $\vec{\alpha}^{- 1}= \vec{\alpha}$ in this case, we
-know that
-$\vec{\alpha}^{\intercal}{(\vec{\alpha}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\alpha})}^{- 1} = \vec{\alpha}^{\intercal}\left( \vec{\alpha}^{\intercal}\left(\mathbf{\mathbf{X}}^{\intercal}\mathbf{X} \right)\vec{\alpha} \right) = {\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}$
-which is a scalar that is the bottom right element of the $\mathbf{\mathbf{X}}^{\intercal}\mathbf{X}$ matrix. So
-we can simplify this to:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}{\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}\lbrack - \ {{\widehat{\beta}}^{u}}_{p}\rbrack$$</p>
-<p>Since ${\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}\lbrack 1 - \ {\beta^{u}}_{p}\rbrack$ is a
-constant:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}-{\mathbf{X}^{\intercal}\mathbf{X}}_{p,p}(\left\lbrack \ {\beta^{u}}_{p} \right\rbrack){{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}$$</p>
-<p>So, if we compute the unconstrained
-${\widehat{\beta}}^{u}$ and ${{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}$, we
-can solve directly for the constrained $\vec{\beta}$.</p>
-<p>Now, for the second part of part a), this is equivalent to M being a
-vector of 1s, lets call it ϕ. Then $d=1$ and</p>
-<p>$$ \vec{\phi} = \begin{bmatrix} 1 \\ 1 \\ 1 \\ \vdots \\ 1 \end{bmatrix}$$</p>
-<p>Plugging it into the derived result, we get:</p>
-<p>$${\widehat{\beta}}^{c}={\widehat{\beta}}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}\vec{\phi}^{\intercal}{(\vec{\phi}^{\intercal}({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}\vec{\phi})}^{- 1}\lbrack 1 - \vec{\phi}'{\widehat{\beta}}^{u}\rbrack$$</p>
-<p>The residual sum of squares is defined as:</p>
-<p>$$\text{RSS} = \ {(\vec{y} -\widehat{y})}^{\intercal}(\vec{y} -\widehat{y})$$</p>
-<p>In this case,
-$$
-\widehat{y} =\mathbf{\mathbf{X}}{\widehat{\beta}}^{c} = \vec{\beta}^{u}+{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}) =\mathbf{\mathbf{X}}\vec{\beta}^{u}+\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack
-$$</p>
-<p>So it follows that
-$$
-\left(\vec{y}-\widehat{y_{c}} \right) =\vec{y}- \mathbf{\mathbf{X}}\vec{\beta}^{u}+\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack =\vec{\varepsilon} +\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack
-$$</p>
-<p>where $\vec{\varepsilon}$ is the error in the unconstrained case. So</p>
-<p>$$\text{RSS}_c - \text{RSS} =\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack)$$</p>
-<p>Each of the errors are normally distributed with mean 0 and variance
-sigma squared. This implies that:</p>
-<p>$$
-(y - \check{y})\ I\frac{1}{\sigma}\sim\text{MVN}(0,I) \text{, i.i.d} 
-$$</p>
-<p>Where the estimator is the estimator from the restrained equation. We
-can write the sum of squares of the above as:</p>
-<p>$$\left(\vec{y}- \widehat{y} \right)^{\intercal}(I\frac{1}{\sigma^{2}})\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} \right)^{\intercal}(I\frac{1}{\sigma^{2}})\left(\vec{y}- \check{y} \right) + \ \left( \check{y}-\widehat{y} \right)^{\intercal}\left( I\frac{1}{\sigma^{2}} \right)\left( \check{y}-\widehat{y} \right)+ 2(\check{y}-\widehat{y})'\left( I\frac{1}{\sigma^{2}} \right)(y -\check{y})$$</p>
-<p>Where$\ {\check{y}}_{i}\ $is the estimator of the unconstrained model.
-To show this, we remove the identical identity matrices and see that:</p>
-<p>$$\left(\vec{y}- \widehat{y} \right)^{\intercal}\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} + \check{y} - \widehat{y} \right)^{\intercal}\left(\vec{y}- \check{y} + \check{y} - \widehat{y} \right) = \left(\vec{y}- \check{y} \right)^{\intercal}\left(\vec{y}- \check{y} \right) + \ \left( \check{y} - \widehat{y} \right)^{\intercal}\left( \check{y} - \widehat{y} \right) + 2(y - \check{y})'\left( \check{y} - \widehat{y} \right)$$</p>
-<p>Now,</p>
-<p>$$\left( \check{y} - \widehat{y} \right) = \left(\vec{y}- \widehat{y} - \left(\vec{y}- \check{y} \right) \right) = \left( \ \left(\vec{y}- \widehat{y} \right) - \vec{\varepsilon} \right)$$</p>
-<p>which we know from the above is
-$(\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\lbrack \vec{d} - \text{M}{\widehat{\beta}}^{u}\rbrack$)'</p>
-<p>Rewriting, we have:</p>
-<p>$$\left(\vec{y}- \check{y} \right)'\left( \left(\vec{y}- \widehat{y} \right) - \vec{\varepsilon} \right) = \vec{\varepsilon}'(\mathbf{X}{{(\mathbf{X}}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal}{(M({\mathbf{X}^{\intercal}\mathbf{X})}^{- 1}M^{\intercal})}^{- 1}\left\lbrack \vec{d} - \ M{\widehat{\beta}}^{u} \right\rbrack)$$</p>
-<p>Using the fact that $\vec{\varepsilon}^{\intercal}\mathbf{X} = 0$<strong>,</strong> we can remove this
-to obtain.</p>
-<p>$${\left(\vec{y}- \widehat{y} \right)^{\intercal}\left(\vec{y}- \widehat{y} \right) = \left(\vec{y}- \check{y} \right)}^{\intercal}\left(\vec{y}- \check{y} \right) + \ \left( \check{y} - \widehat{y} \right)^{\intercal}\left( \check{y} - \widehat{y} \right)$$</p>
-<p>Thus the original standardized normal variable can be represented as a
-sum of $Q_1$, and $Q_2$ where:</p>
-<p>$$Q_1 =
-\left(\vec{y}-\check{y} \right)^{\intercal}\left(\vec{y}-\check{y} \right)$$</p>
-<p>$$Q_2 =
-\left( \check{y}-\widehat{y} \right)^{\intercal}\left( \check{y}-\widehat{y} \right)
-$$</p>
-<p>$Q_1$ is the sum of squared errors for the unconstrained model, and
-therefore has rank $n - p$. $Q_2$ has rank $p - r$, as it is the
-differences between the two estimators. Thus rank($Q_1$) + rank ($Q_2$) =
-$n-r$ which is the rank of the errors of the constrained model, since
-$r&lt;p$. Thus by Cochran's Theorem, the two are independently distributed.</p>
-<p>I have also produced simulations to prove that this is the case. I
-create three normal random variables, two of which are related to the
-others linearly and randomly. I compute the beta unconstrained, and then
-use this to compute the beta constrained. I then produce the errors for
-the constrained beta, and check the correlations in 100 samples of 100
-each. The mean correlation is very close to zero, which is the expected
-result. This is included below.</p>
-
+<h1 id="Code-Implementation">Code Implementation<a class="anchor-link" href="#Code-Implementation">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>const <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
-<span class="code-line">unconst <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
-<span class="code-line">correl <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>ols_preds <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> y<span class="p">)</span> <span class="p">{</span> </span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> y<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    y <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">)</span></span>
-<span class="code-line">    x1 <span class="o">&lt;-</span> y <span class="o">+</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.2</span><span class="p">)</span></span>
-<span class="code-line">    x2 <span class="o">&lt;-</span> rnorm<span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">.01</span><span class="p">)</span> <span class="o">-</span> <span class="m">.3</span><span class="o">*</span>y</span>
-<span class="code-line"></span>
-<span class="code-line">    Xmat <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">length</span><span class="p">(</span>x1<span class="p">)),</span>x1<span class="p">,</span>x2<span class="p">),</span>ncol <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
-<span class="code-line">    data2 <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>y<span class="p">,</span>x1<span class="p">,</span>x2<span class="p">)</span></span>
-<span class="code-line">    mod.sim.1 <span class="o">&lt;-</span> lm<span class="p">(</span>y<span class="o">~</span>x1<span class="o">+</span>x2<span class="p">,</span>data <span class="o">=</span> data2<span class="p">)</span></span>
-<span class="code-line">    constraint <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span>nrow <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>data2<span class="p">),</span>ncol <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">    d <span class="o">=</span> <span class="m">1</span></span>
-<span class="code-line">    M <span class="o">=</span> <span class="kt">matrix</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),</span>ncol <span class="o">=</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">    mod.sim.1</span>
-<span class="code-line">    BetaUnconstr <span class="o">&lt;-</span> <span class="kp">summary</span><span class="p">(</span>mod.sim.1<span class="p">)</span><span class="o">$</span>coef<span class="p">[,</span><span class="m">1</span><span class="p">]</span></span>
-<span class="code-line">    b <span class="o">&lt;-</span> d <span class="o">-</span> <span class="kp">t</span><span class="p">(</span>M<span class="p">)</span> <span class="o">%*%</span> BetaUnconstr</span>
-<span class="code-line">    a <span class="o">&lt;-</span> <span class="kp">t</span><span class="p">(</span>Xmat<span class="p">)</span> <span class="o">%*%</span> Xmat</span>
-<span class="code-line">    <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>M<span class="p">)</span> <span class="o">%*%</span> <span class="kp">solve</span><span class="p">(</span>a<span class="p">)</span> <span class="o">%*%</span> M<span class="p">)</span></span>
-<span class="code-line">    const<span class="p">[</span>i<span class="p">]</span>  <span class="o">&lt;-</span>  b<span class="o">*</span><span class="kt">c</span><span class="o">*</span>b</span>
-<span class="code-line">    unconst<span class="p">[</span>i<span class="p">]</span>  <span class="o">&lt;-</span>  <span class="kp">sum</span><span class="p">(</span>resid<span class="p">(</span>mod.sim.1<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">  correl<span class="p">[</span>j<span class="p">]</span>  <span class="o">&lt;-</span>  cor<span class="p">(</span>const<span class="p">,</span>unconst<span class="p">)</span></span>
-<span class="code-line">  <span class="p">}</span></span>
-<span class="code-line">correl</span>
-<span class="code-line"><span class="kp">mean</span><span class="p">(</span>correl<span class="p">)</span></span>
+<span class="code-line">weighted_ols_preds <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> y<span class="p">,</span> W<span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> W <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> W <span class="o">%*%</span> y<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">41</span><span class="p">,</span><span class="m">53</span><span class="p">,</span><span class="m">97</span><span class="p">)</span></span>
+<span class="code-line">X <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span>nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">%*%</span> y</span>
 </pre></div>
 
 </div>
@@ -1284,108 +1261,114 @@ result. This is included below.</p>
 
 
 <div class="output_html rendered_html output_subarea ">
-<ol class=list-inline>
-	<li>-0.0531688267764585</li>
-	<li>-0.114464495425658</li>
-	<li>0.030905848126332</li>
-	<li>-0.0804090923830123</li>
-	<li>-0.0282214216966975</li>
-	<li>0.194785864859665</li>
-	<li>0.0830930039710045</li>
-	<li>0.0724914248601695</li>
-	<li>0.0829089181916613</li>
-	<li>0.0288906516772889</li>
-	<li>0.0279474715925631</li>
-	<li>-0.0533135707611509</li>
-	<li>0.0658332419742044</li>
-	<li>-0.0799946756911054</li>
-	<li>-0.0941441499229167</li>
-	<li>-0.024909668515204</li>
-	<li>0.0714084573952652</li>
-	<li>-0.0455394491591305</li>
-	<li>0.166193108785476</li>
-	<li>-0.077429232110221</li>
-	<li>-0.128495293842719</li>
-	<li>-0.0786313087721033</li>
-	<li>-0.135204615732129</li>
-	<li>0.00402444738581924</li>
-	<li>-0.210414921426846</li>
-	<li>-0.0466002337555276</li>
-	<li>-0.0744914482523485</li>
-	<li>0.0253724403628865</li>
-	<li>-0.144593000144071</li>
-	<li>-0.0558067022331745</li>
-	<li>0.0941802108323231</li>
-	<li>-0.0326002696533416</li>
-	<li>0.1191407256456</li>
-	<li>0.0742989188901125</li>
-	<li>0.0498008210293263</li>
-	<li>0.02980912239177</li>
-	<li>-0.132207185159464</li>
-	<li>-0.154762140608869</li>
-	<li>-0.0311445812733598</li>
-	<li>0.0213674326991292</li>
-	<li>-0.0563900846752629</li>
-	<li>0.113499475702925</li>
-	<li>-0.125719333220632</li>
-	<li>0.0434611514397736</li>
-	<li>0.202868180728299</li>
-	<li>-0.113919008868015</li>
-	<li>-0.0382369212754716</li>
-	<li>0.0491389841646633</li>
-	<li>-0.0198221517858243</li>
-	<li>0.0175352131496739</li>
-	<li>0.0264657952051942</li>
-	<li>0.119278436715872</li>
-	<li>-0.218521793800235</li>
-	<li>0.0159366944834975</li>
-	<li>0.194276086012615</li>
-	<li>-0.121180977909389</li>
-	<li>-0.165054100432551</li>
-	<li>-0.0651733446635078</li>
-	<li>-0.07680468077657</li>
-	<li>-0.0503302517530004</li>
-	<li>0.00823376132659068</li>
-	<li>0.00388666785680694</li>
-	<li>-0.00915532185917745</li>
-	<li>-0.0930607404292774</li>
-	<li>-0.171362738860478</li>
-	<li>-0.0310668331585724</li>
-	<li>-0.0210004347148357</li>
-	<li>0.0549900820264029</li>
-	<li>-0.0468877624516252</li>
-	<li>0.0868626310356565</li>
-	<li>0.0532565684252016</li>
-	<li>-0.168838788927617</li>
-	<li>0.0339257077316963</li>
-	<li>0.0762184886512164</li>
-	<li>-0.0890754231460831</li>
-	<li>-0.0647727147695691</li>
-	<li>-0.0889513202649563</li>
-	<li>0.000667073625725037</li>
-	<li>0.0509714346818621</li>
-	<li>-0.0940193584932185</li>
-	<li>-0.0839669876254321</li>
-	<li>0.106982624440368</li>
-	<li>0.145030507757848</li>
-	<li>-0.0757386310783636</li>
-	<li>0.161739345883223</li>
-	<li>0.214585243128979</li>
-	<li>-0.0764856927072532</li>
-	<li>0.0477290142665558</li>
-	<li>0.0126102486334496</li>
-	<li>-0.0741476392314046</li>
-	<li>-0.0725679361079652</li>
-	<li>-0.0807334358109478</li>
-	<li>0.0186774645788979</li>
-	<li>0.0234449247050084</li>
-	<li>0.0176989561150896</li>
-	<li>0.0516204767156866</li>
-	<li>0.120367846574953</li>
-	<li>0.0233333600272549</li>
-	<li>-0.00113490805336294</li>
-	<li>0.118557812809982</li>
-</ol>
+<table>
+<tbody>
+	<tr><td>42</td></tr>
+	<tr><td>54</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This calculates the predictions in the first case.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>k <span class="o">&lt;-</span> <span class="m">1.25</span></span>
+<span class="code-line">ystar <span class="o">&lt;-</span> y</span>
+<span class="code-line">ystar<span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="o">/</span>k</span>
+<span class="code-line">xstar <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="o">/</span>k<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">/</span>k<span class="p">),</span>nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>xstar<span class="p">)</span> <span class="o">%*%</span> xstar<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>xstar<span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">%*%</span> ystar</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>41.84211</td></tr>
+	<tr><td>53.84211</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This calculates the predictions in the second case</p>
+<p>Using the functions we get the same results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>ols_preds<span class="p">(</span>X<span class="p">,</span>y<span class="p">)</span></span>
+<span class="code-line">W <span class="o">&lt;-</span> <span class="kp">diag</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="o">/</span>k<span class="o">^</span><span class="m">2</span><span class="p">))</span></span>
+<span class="code-line">weighted_ols_preds<span class="p">(</span>X<span class="p">,</span> y<span class="p">,</span> W<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>42</td></tr>
+	<tr><td>54</td></tr>
+</tbody>
+</table>
 
 </div>
 
@@ -1398,7 +1381,13 @@ result. This is included below.</p>
 
 
 <div class="output_html rendered_html output_subarea ">
--0.00814363230874542
+<table>
+<tbody>
+	<tr><td>41.84211</td></tr>
+	<tr><td>53.84211</td></tr>
+</tbody>
+</table>
+
 </div>
 
 </div>
@@ -1450,7 +1439,7 @@ result. This is included below.</p>
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="../../category/linear-models/constrained-least-squares.html#disqus_thread",
+                href="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1461,8 +1450,8 @@ result. This is included below.</p>
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = '../../category/linear-models/constrained-least-squares.html';
-    var disqus_url = '../../category/linear-models/constrained-least-squares.html';
+        var disqus_identifier = '../../category/linear-models/heteroskedacity-with-weighted-least-squares.html';
+    var disqus_url = '../../category/linear-models/heteroskedacity-with-weighted-least-squares.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1484,8 +1473,8 @@ result. This is included below.</p>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="../../category/markov-chains/hidden-markov-models.html" title="Previous: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a></li>
-                <li class="next-article"><a href="../../category/linear-models/heteroskedacity-with-weighted-least-squares.html" title="Next: Heteroskedacity with Weighted Least Squares">Heteroskedacity with Weighted Least Squares</a> »</li>
+                <li class="previous-article">« <a href="../../category/linear-models/constrained-least-squares.html" title="Previous: Constrained Least Squares">Constrained Least Squares</a></li>
+                <li class="next-article"><a href="../../category/linear-models/generalized-linear-models-toy-exercise.html" title="Next: Generalized Linear Models Toy Exercise">Generalized Linear Models Toy Exercise</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -1493,12 +1482,12 @@ result. This is included below.</p>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2018-12-29T00:00:00-05:00">Dec 29, 2018</time>
+            <time itemprop="dateCreated" datetime="2019-01-24T00:00:00-05:00">Jan 24, 2019</time>
             <h4>Category</h4>
             <a class="category-link" href="../../categories.html#linear-models-ref">Linear Models</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="../../tags/#constrained-least-squares-ref">constrained least squares
+                <li><a href="../../tags/#heteroskedacity-ref">heteroskedacity
                     <span>1</span>
 </a></li>
                 <li><a href="../../tags/#linear-regression-ref">linear regression
@@ -1506,6 +1495,9 @@ result. This is included below.</p>
 </a></li>
                 <li><a href="../../tags/#theory-ref">theory
                     <span>3</span>
+</a></li>
+                <li><a href="../../tags/#weighted-least-squares-ref">weighted least squares
+                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
