@@ -1067,7 +1067,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>An Approach to Solving Heteroskedacity when the Variance is a Multiplicative Constant</strong></p>
-<p>One of the most widely known assumptions of linear regression is <strong>homoskedacity</strong>, that is that the errors are constant for all of the values (they do not depend on the particular observation.) Weighted least squares is a way of dealing with this problem. We will detail the intuition and reasoning behind why this is the case.</p>
+<p>One of the most widely known assumptions of linear regression is <strong>homoskedacity</strong>, that is that the variance of the errors are constant for all of the values (they do not depend on the particular observation). Weighted least squares is a way of dealing with this problem. We will detail the intuition and reasoning behind why this is the case.</p>
 <p>Consider a scale that measures two objects. For each object, we have
 some randomized error. Consider the weights of two objects, first alone
 and then together.</p>
@@ -1086,64 +1086,78 @@ $$</p>
 <p>$${\mathbf{y = X\alpha + \ \varepsilon}
 }
 $$</p>
-<p>$$\mathbf{X}^{\mathbf{T}}\mathbf{X = \ }\begin{bmatrix}
+<p>$$\mathbf{X}^{\mathbf{T}}\mathbf{X} = \begin{bmatrix}
 2 &amp; 1 \\
 1 &amp; 2 \\
 \end{bmatrix}$$</p>
-<p>$${(\mathbf{X}^{\mathbf{T}}\mathbf{X)}}^{- 1} = \frac{1}{3}\ \begin{bmatrix}
-2 &amp; - 1 \</p>
-<ul>
-<li>1 &amp; 2 \
-\end{bmatrix}$$</li>
-</ul>
-<p>$${(\mathbf{X}^{\mathbf{T}}\mathbf{X)}}^{- 1}\mathbf{X}^{\mathbf{T}}\mathbf{=}\frac{1}{3}\mathbf{\ }\begin{bmatrix}
-2 &amp; - 1 &amp; 1 \</p>
-<ul>
-<li>1 &amp; 2 &amp; 1 \
-\end{bmatrix}$$</li>
-</ul>
-<p>$$\widehat{\mathbf{\alpha}} = \frac{1}{3}\begin{bmatrix}
+<p>$$
+{(\mathbf{X}^{\mathbf{T}}\mathbf{X)}}^{- 1} = \frac{1}{3} 
+\begin{bmatrix}
+2 &amp; - 1 \\
+-1 &amp; 2 \\
+\end{bmatrix}
+$$</p>
+<p>$$
+{(\mathbf{X}^{\mathbf{T}}\mathbf{X)})}^{- 1}\mathbf{X}^{\mathbf{T}}=\frac{1}{3}
+\begin{bmatrix}
+2 &amp; -1 &amp; 1 \\
+-1 &amp; 2 &amp; 1 \\
+\end{bmatrix}
+$$</p>
+<p>$$
+\widehat{\mathbf{\alpha}} = \frac{1}{3}\begin{bmatrix}
 2y_{1} - y_{2} + y_{3} \\
-\mathbf{-}y_{1} + 2y_{2} + y_{3} \\
-\end{bmatrix}$$</p>
+-y_{1} + 2y_{2} + y_{3} \\
+\end{bmatrix}
+$$</p>
 <p>Now consider that the random element is not equally variant for the two
 objects -- that is, that for both weights combined there is some
 multiplicative factor on the error $&gt; 1$. That is, 
 $$
 \begin{bmatrix}
-\varepsilon<em>{1} \
-\varepsilon</em>{2} \
-\varepsilon_{3} \</p>
-<h1 id="\end{bmatrix}">\end{bmatrix}<a class="anchor-link" href="#\end{bmatrix}">&#182;</a></h1><p>\mathbf{MVN}(0, \Sigma) \quad \text{where } \Sigma = \ \ \begin{bmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3} \\
+\end{bmatrix} =
+\mathbf{MVN}(0, \Sigma) \quad \text{where } \Sigma = \begin{bmatrix}
 \sigma^{2} &amp; 0 &amp; 0 \\
 0 &amp; \sigma^{2} &amp; 0 \\
 0 &amp; 0 &amp; {k^{2}\sigma}^{2} \\
-\end{bmatrix}$$</p>
+\end{bmatrix}
+$$</p>
 <p>Note that this violates the least squares
 assumptions. One method to fix this issue is to transform the variables
 so they have equal variance, since $k$ is a numeric value $&gt; 0$.</p>
 <p>Note that we can transform the third variable as follows:</p>
 <p>$$\frac{y_{3}}{k} = \frac{\alpha_{1}}{k} + \frac{\alpha_{2}}{k}\  + \ \frac{\varepsilon_{3}}{k}$$</p>
 <p>Now, $\frac{\varepsilon_{3}}{k}$ has variance $\sigma^{2}$.</p>
-<p>Let $$\mathbf{y}^{\mathbf{*}} = \left\lbrack \ \begin{matrix}
+<p>Let 
+$$\mathbf{y}^{\mathbf{*}} = \begin{bmatrix}
 y_{1} \\
 y_{2} \\
 y_{3}/k \\
-\end{matrix} \right\rbrack$$ , 
-$$\mathbf{X}^{\mathbf{*}} = \begin{bmatrix}
+\end{bmatrix} $$</p>
+<p>$$
+\mathbf{X}^{\mathbf{*}} = \begin{bmatrix}
 1 &amp; 0 \\
 0 &amp; 1 \\
 1/k &amp; 1/k \\
-\end{bmatrix}$$ ,
-$$\mathbf{\alpha}^{\mathbf{*}}\mathbf{=}\left\lbrack \mathbf{\ }\begin{matrix}
+\end{bmatrix}
+$$
+$$
+\mathbf{\alpha}^{\mathbf{*}} = \begin{bmatrix}
 \alpha_{1} \\
 \alpha_{2} \\
-\end{matrix} \right\rbrack$$ and
-$$\mathbf{\varepsilon}^{\mathbf{*}}\mathbf{=}\begin{bmatrix}
+\end{bmatrix}
+$$
+$$
+\mathbf{\varepsilon}^{\mathbf{*}} = \begin{bmatrix}
 \varepsilon_{1} \\
 \varepsilon_{2} \\
 \varepsilon_{3}/k \\
-\end{bmatrix}$$</p>
+\end{bmatrix}
+$$</p>
+<p>Then we can solve as in the case of OLS:</p>
 <p>$${{\widehat{\mathbf{\alpha}}}^{*} = \left( {\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}} \right)^{- 1}{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{y}^{\mathbf{*}}
 }{{\mathbf{X}^{\mathbf{*}}}^{\mathbf{T}}\mathbf{X}^{\mathbf{*}}\mathbf{= \ }\begin{bmatrix}
 \frac{k^{2} + 1}{k^{2}} &amp; \frac{1}{k^{2}} \\
@@ -1193,6 +1207,194 @@ Then our result is:</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Code-Implementation">Code Implementation<a class="anchor-link" href="#Code-Implementation">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>ols_preds <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> y<span class="p">)</span> <span class="p">{</span> </span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> y<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line">weighted_ols_preds <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>X<span class="p">,</span> y<span class="p">,</span> W<span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> W <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> W <span class="o">%*%</span> y<span class="p">)</span></span>
+<span class="code-line"><span class="p">}</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>y <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">41</span><span class="p">,</span><span class="m">53</span><span class="p">,</span><span class="m">97</span><span class="p">)</span></span>
+<span class="code-line">X <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span>nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>X<span class="p">)</span> <span class="o">%*%</span> X<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>X<span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">%*%</span> y</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>42</td></tr>
+	<tr><td>54</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This calculates the predictions in the first case.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>k <span class="o">&lt;-</span> <span class="m">1.25</span></span>
+<span class="code-line">ystar <span class="o">&lt;-</span> y</span>
+<span class="code-line">ystar<span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> y<span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="o">/</span>k</span>
+<span class="code-line">xstar <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="o">/</span>k<span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">/</span>k<span class="p">),</span>nrow <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>xstar<span class="p">)</span> <span class="o">%*%</span> xstar<span class="p">)</span> <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>xstar<span class="p">)</span></span>
+<span class="code-line">alphahat <span class="o">%*%</span> ystar</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>41.84211</td></tr>
+	<tr><td>53.84211</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This calculates the predictions in the second case</p>
+<p>Using the functions we get the same results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>ols_preds<span class="p">(</span>X<span class="p">,</span>y<span class="p">)</span></span>
+<span class="code-line">W <span class="o">&lt;-</span> <span class="kp">diag</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="o">/</span>k<span class="o">^</span><span class="m">2</span><span class="p">))</span></span>
+<span class="code-line">weighted_ols_preds<span class="p">(</span>X<span class="p">,</span> y<span class="p">,</span> W<span class="p">)</span></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>42</td></tr>
+	<tr><td>54</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>41.84211</td></tr>
+	<tr><td>53.84211</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
  
 
