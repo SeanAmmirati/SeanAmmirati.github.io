@@ -1108,17 +1108,17 @@ l(\vec{\beta}^{c} | \vec{y},\mathbf{\mathbf{X}}) = - \frac{N}{2}[{(\vec{y} - \ma
 $$</p>
 <p>$$l\left( \vec{\beta} \middle| \vec{y},\mathbf{X} \right) = - \frac{N}{2} - \frac{N}{2}\ln\left( \frac{1}{N}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left( \vec{y} -\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) \right)+ C$$</p>
 <p>However, we want to maximize the above equation with the constraint
- that: M<strong>$\vec{\beta}$</strong> = d, where d is a known vector and M is an <em>r x p</em> matrix
- of rank <em>r \&lt; p.</em> This is an equality constraint. We can use the
+ that: M$\vec{\beta}$ = $\vec{d}$, where d is a known vector and M is an <em>r x p</em> matrix
+ of rank $r &lt; p$. This is an equality constraint. We can use the
  Lagrange multipliers to solve this maximization problem with such a
  constraint.</p>
 <p>We can see that, since the natural logarithm is a monotonically
  increasing function, and the division within the above logarithm is a
- constant, and that all other terms do not involve B, maximizing the
+ constant, and that all other terms do not involve $\beta$, maximizing the
  above equation with respect to$\ \vec{\beta}^{c}$ is
  equivalent to minimizing:</p>
 <p>$$f = \left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right)^{\intercal}\left(\vec{y}-\mathbf{\mathbf{X}}\vec{\beta}^{c} \right) - \vec{\lambda}^{\intercal}\left( M\vec{\beta}^{c}\ –\ \vec{d} \right)$$</p>
-<p>Where $\vec{\lambda}$ is the Lagrange multiplier (and so f is the
+<p>Where $\vec{\lambda}$ is the Lagrange multiplier (and so $f$ is the
  Lagrange function). The Lagrange multiplier is especially useful in
  this case, as we are trying to minimize the least square error with
  some constraint on the parameters.</p>
