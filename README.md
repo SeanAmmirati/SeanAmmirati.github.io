@@ -14,4 +14,4 @@ and run the following command in the root directory of the repo
 
 This will run a local version of the website at localhost:8000. 
 
-The website is also available at [seanammirati.github.io](seanammirati.github.io). 
+The website is also available at [seanammirati.github.io](https://seanammirati.github.io). 
