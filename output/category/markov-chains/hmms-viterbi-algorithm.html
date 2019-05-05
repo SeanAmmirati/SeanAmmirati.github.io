@@ -20,7 +20,7 @@
 <meta name="keywords" content="HMMS, markov chains, viterbi, Markov Chains, " />
 
 <meta property="og:title" content="HMMs: Viterbi Algorithm "/>
-<meta property="og:url" content="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html" />
+<meta property="og:url" content="../../category/markov-chains/hmms-viterbi-algorithm.html" />
 <meta property="og:description" content="A overview of the viterbi algorithm for HMMs." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
@@ -32,22 +32,21 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
-        <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link rel="apple-touch-icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon.png"  type="image/png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="https://seanammirati.github.io/theme/images/apple-touch-icon-57x57.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="https://seanammirati.github.io/theme/images/apple-touch-icon-72x72.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="76x76" href="https://seanammirati.github.io/theme/images/apple-touch-icon-76x76.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="https://seanammirati.github.io/theme/images/apple-touch-icon-114x114.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="https://seanammirati.github.io/theme/images/apple-touch-icon-120x120.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="https://seanammirati.github.io/theme/images/apple-touch-icon-144x144.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link href="https://seanammirati.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Stats Works - Full Atom Feed" />
+        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="../../theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="../../theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="../../theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="../../theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="../../theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="../../theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="../../theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="../../theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
 
 
 
@@ -62,15 +61,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="https://seanammirati.github.io/"><span class=site-name>Stats Works</span></a>
+                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="https://seanammirati.github.io">Home</a></li>
-                            <li ><a href="https://seanammirati.github.io/pages/about/">About This Website</a></li>
-                            <li ><a href="https://seanammirati.github.io/categories">Categories</a></li>
-                            <li ><a href="https://seanammirati.github.io/tags/">Tags</a></li>
-                            <li ><a href="https://seanammirati.github.io/archives">Archives</a></li>
-                            <li><form class="navbar-search" action="https://seanammirati.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="../..">Home</a></li>
+                            <li ><a href="../../pages/about/">About This Website</a></li>
+                            <li ><a href="../../categories">Categories</a></li>
+                            <li ><a href="../../tags/">Tags</a></li>
+                            <li ><a href="../../archives">Archives</a></li>
+                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -83,7 +82,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html"> HMMs: Viterbi Algorithm  </a></h1>
+    <h1><a href="../../category/markov-chains/hmms-viterbi-algorithm.html"> HMMs: Viterbi Algorithm  </a></h1>
     </header>
 </div>
 
@@ -1585,7 +1584,7 @@ The goal is then to find the most likely sequence of fair and loaded die given t
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html#disqus_thread",
+                href="../../category/markov-chains/hmms-viterbi-algorithm.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1596,8 +1595,8 @@ The goal is then to find the most likely sequence of fair and loaded die given t
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = 'https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html';
-    var disqus_url = 'https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html';
+        var disqus_identifier = '../../category/markov-chains/hmms-viterbi-algorithm.html';
+    var disqus_url = '../../category/markov-chains/hmms-viterbi-algorithm.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1619,8 +1618,8 @@ The goal is then to find the most likely sequence of fair and loaded die given t
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="https://seanammirati.github.io/category/multivariate-analysis/hotellings-t-test-example.html" title="Previous: Hotelling&#39;s T-Test Example">Hotelling's T-Test Example</a></li>
-                <li class="next-article"><a href="https://seanammirati.github.io/category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
+                <li class="previous-article">« <a href="../../category/multivariate-analysis/hotellings-t-test-example.html" title="Previous: Hotelling&#39;s T-Test Example">Hotelling's T-Test Example</a></li>
+                <li class="next-article"><a href="../../category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
             </ul>
             </nav>
             </aside>
@@ -1630,16 +1629,16 @@ The goal is then to find the most likely sequence of fair and loaded die given t
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2018-12-09T00:00:00-05:00">Dec 9, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://seanammirati.github.io/categories.html#markov-chains-ref">Markov Chains</a>
+            <a class="category-link" href="../../categories.html#markov-chains-ref">Markov Chains</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://seanammirati.github.io/tags/#hmms-ref">HMMS
+                <li><a href="../../tags/#hmms-ref">HMMS
                     <span>2</span>
 </a></li>
-                <li><a href="https://seanammirati.github.io/tags/#markov-chains-ref">markov chains
+                <li><a href="../../tags/#markov-chains-ref">markov chains
                     <span>2</span>
 </a></li>
-                <li><a href="https://seanammirati.github.io/tags/#viterbi-ref">viterbi
+                <li><a href="../../tags/#viterbi-ref">viterbi
                     <span>1</span>
 </a></li>
             </ul>
