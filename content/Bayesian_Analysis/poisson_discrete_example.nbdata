@@ -1,8 +1,0 @@
-title: Bayesian Analysis: Poisson Discrete
-author: Sean Ammirati
-category: Bayesian Analysis
-slug: Poisson Discrete
-date: 2018/10/26
-tags: Poisson, discrete, bayesian methodology 
-summary: A simple example showing how one can use bayesian statistics with a poisson discrete prior.  
-status: Published

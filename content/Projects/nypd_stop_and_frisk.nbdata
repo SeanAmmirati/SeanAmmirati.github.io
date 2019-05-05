@@ -1,8 +1,0 @@
-title: NYPD Stop and Frisk 
-author: Sean Ammirati
-category: Projects
-slug: nypd_stop_frisk
-tags: knn, random forest, logistic regression, bagging, tree-methods, New York 
-date: 2016/12/04
-summary: An analysis of NYPD Stop and Frisk policy using publically available data for 2015. Uses various statistical learning methods to predict whether someone is arrested after a stop or not.  
-status: Published

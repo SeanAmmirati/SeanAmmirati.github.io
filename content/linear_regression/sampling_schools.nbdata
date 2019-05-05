@@ -1,8 +1,0 @@
-title: Determining Sampling Schemes for Hierarchies
-subtitle: A Simulated Approach using R
-author: Sean Ammirati
-date: 2018-10-23
-category: Linear Models
-tags: theory, mixed models, general estimating equations, linear regression, sampling schemes
-status: published
-summary: An investigation of various sampling schemes using HLMs (Hierarchical Linear Models)
