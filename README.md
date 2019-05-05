@@ -6,6 +6,7 @@ A blog powered by Pelican that shows projects from my stats-works repository as 
 To host this locally, clone the master branch, and install pelican:
 
 `git clone https://github.com/SeanAmmirati/SeanAmmirati.github.io.git`
+
 `pip install pelican`
 
 and run the following command in the root directory of the repo 
