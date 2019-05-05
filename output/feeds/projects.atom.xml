@@ -1240,9 +1240,7 @@ $$&lt;p&gt;On the left side of the equations, $y_1, ..., y_p$ are the variables 
 &lt;p&gt;Perhaps the most important thing to note here is that the $fs$ are unobserved random variables, not fixed effects like in multiple regression. Factor analysis only represents one observation vector, while multiple regression represents all of the observations simultaneously -- in this way, factor analysis is looking more to &lt;em&gt;individual&lt;/em&gt; variation as opposed to &lt;em&gt;aggregate&lt;/em&gt; or population level aggregation.&lt;/p&gt;
 &lt;p&gt;Our model can be written more simply in matrix notation as:&lt;/p&gt;
 $$
-\begin{equation}
 \vec{y} - \vec{\mu} = \Lambda\vec{f} + \vec{\epsilon}
-\end{equation}
 $$&lt;p&gt;where
 $$
 \vec{y} = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_p \end{bmatrix} \\

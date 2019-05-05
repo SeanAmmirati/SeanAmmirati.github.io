@@ -1,0 +1,8 @@
+title: Mixed Models vs GEE 
+subtitle: Comparing the Two Hierarchical Models 
+author: Sean Ammirati
+date: 2018-01-04
+category: Linear Models
+tags: theory, generalized linear models, mixed models, generalized mixed models, general estimating equations, linear regression
+status: published
+summary: A look at the differences between Mixed Models and GEEs and when they may be more appropriate. 
