@@ -58,7 +58,31 @@
             {% if article.prev_article or article.next_article %}
             <aside>
             <nav>
-            <ul class="articles-timeline">
+            {% if article.prev_article_in_category or article.next_article_in_category %}
+                <h3> Articles in {{article.category}}</h3>
+            {% endif %}
+                <ul class="articles-timeline">
+                {% if article.prev_article_in_category %}
+                    {% set p_cat_title = article.prev_article_in_category.title|striptags|e %}
+                    {% set pv_cat_title = article.prev_article_in_category.title|striptags %}
+                    {%if article.prev_article_in_category.subtitle %}
+                        {% set pv_cat_title = pv_cat_title + ' ' +  '<small>' + article.prev_article_in_category.subtitle|striptags + '</small>' %}
+                        {% set p_cat_title = p_cat_title + ' - ' + article.prev_article_in_category.subtitle|e %}
+                    {% endif %}
+                <li class="previous-article">« <a href="{{ SITEURL }}/{{ article.prev_article_in_category.url }}" title="Previous: {{ p_cat_title }}">{{ pv_cat_title }}</a></li>
+                {% endif %}
+                {% if article.next_article_in_category %}
+                    {% set n_cat_title = article.next_article_in_category.title|striptags|e %}
+                    {% set nv_cat_title = article.next_article_in_category.title|striptags %}
+                    {%if article.next_article_in_category.subtitle %}
+                        {% set nv_cat_title = nv_cat_title + ' ' +  '<small>' + article.next_article_in_category.subtitle|striptags + '</small>' %}
+                        {% set n_cat_title = n_cat_title + ' - ' + article.next_article_in_category.subtitle|e %}
+                    {% endif %}
+                <li class="next-article"> <a href="{{ SITEURL }}/{{ article.next_article_in_category.url }}" title="Next: {{ n_cat_title }}">{{ nv_cat_title }}</a> »</li>
+                {% endif %}
+            </ul>
+            <h3> All Articles</h3>
+            <ul class='articles-timeline'>
                 {% if article.prev_article %}
                     {% set ptitle = article.prev_article.title|striptags|e %}
                     {% set pv_title = article.prev_article.title|striptags %}
@@ -77,6 +101,7 @@
                     {% endif %}
                 <li class="next-article"><a href="{{ SITEURL }}/{{ article.next_article.url }}" title="Next: {{ ntitle }}">{{ nv_title }}</a> »</li>
                 {% endif %}
+
             </ul>
             </nav>
             </aside>
