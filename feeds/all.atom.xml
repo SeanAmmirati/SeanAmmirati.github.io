@@ -28902,7 +28902,7 @@ h6:hover .anchor-link {
 &lt;p&gt;This is an example using 'fake' data for the difference between lmer (which assumes a constant (independent) covariance matrix for the error terms)
 and geepack (general estimating equations, which can handle an unknown convariance structure))&lt;/p&gt;
 &lt;p&gt;This example highlights the power of using a GEE model over a HLM model when the covariance structure differs at different levels of the data. 
-The GEE model can be seen as a population estimating model -- i.e., it is preferable when we are trying to make inferences about the population rather than the individuals in the sample.&lt;/p&gt;
+The GEE model can be seen as a population estimating model -- i.e., it is preferable when we are trying to make inferences about the population rather than the individuals in the sample. We do not explicitly parametrize over the groups -- instead, we assign some covariance structure between members of each group and find the marginal distribution.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -29143,9 +29143,7 @@ more specifically a Random Intercept model. This is highlighted by the following
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;However, this assumes that the covariance structure of the errors at each level are independent. This assumption is too simplifying -- 
-it is likely that the variables are correlated across individuals (for instance, it appears that the clubs are for particular age ranges). GEEs are robust to this: if we give it some 
-covariance structure that is not independence, it will be more consistent asymptotically than the HLM. This is illustrated by using the 
-GEE below.&lt;/p&gt;
+it is likely that the variables are correlated across individuals (for instance, it appears that the clubs are for particular age ranges). To account for this, we could add more random effects to the model (which would subsequently break the data down into even smaller groups), or we could use a GEE to forgo the subject-level estimations and estimate on the populations, assuming some covariance structure between groups.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -29247,10 +29245,8 @@ GEE below.&lt;/p&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The main shift in inference here is from likelihood models (which are generally prefered) to a semi-parametric model that depends only on the
-first two moments. GEEs are better estimators of a population-level variance -- they cannot account for individual differences as well as a HLM 
-could. In this example, however, we see that the GEE finds the log(age) value significant where the previous model had not. Depending on the 
-goal of the analysis, the GEE will produce better estimates asymptotically at the cost of sample-level inference. In this case, it seems clear that 
-the GEE is the better alternative, as the covariance structure differs significantly from independence.&lt;/p&gt;
+first two moments. GEEs are better estimators of a population-level variance -- they cannot account for individual differences explicitly, as a GLMM could. In this example, however, we see that the GEE finds the log(age) value significant where the previous model had not. Depending on the 
+goal of the analysis, the GEE will produce better estimates asymptotically at the cost of sample-level inference.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
