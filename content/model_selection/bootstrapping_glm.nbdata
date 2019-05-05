@@ -1,0 +1,8 @@
+title: Bootstrapping Exercise 
+subtitle: An example using the GLM parameters
+author: Sean Ammirati
+date: 2018-03-29
+category: Model Validation
+tags: bootstrapping, parameters, glm, generalized linear models, linear regression 
+status: published
+summary: A simple example of bootstrapping glm coefficents
