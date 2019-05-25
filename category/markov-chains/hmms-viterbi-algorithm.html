@@ -20,7 +20,7 @@
 <meta name="keywords" content="HMMS, markov chains, viterbi, Markov Chains, " />
 
 <meta property="og:title" content="HMMs: Viterbi Algorithm "/>
-<meta property="og:url" content="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html" />
+<meta property="og:url" content="../../category/markov-chains/hmms-viterbi-algorithm.html" />
 <meta property="og:description" content="A overview of the viterbi algorithm for HMMs." />
 <meta property="og:site_name" content="Stats Works" />
 <meta property="og:article:author" content="Sean Ammirati" />
@@ -32,22 +32,21 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
-        <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link rel="apple-touch-icon" href="https://seanammirati.github.io/theme/images/apple-touch-icon.png"  type="image/png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="https://seanammirati.github.io/theme/images/apple-touch-icon-57x57.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="https://seanammirati.github.io/theme/images/apple-touch-icon-72x72.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="76x76" href="https://seanammirati.github.io/theme/images/apple-touch-icon-76x76.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="https://seanammirati.github.io/theme/images/apple-touch-icon-114x114.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="https://seanammirati.github.io/theme/images/apple-touch-icon-120x120.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="https://seanammirati.github.io/theme/images/apple-touch-icon-144x144.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="https://seanammirati.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
-        <link href="https://seanammirati.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Stats Works - Full Atom Feed" />
+        <link rel="stylesheet" type="text/css" href="../../theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/admonition.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="../../theme/css/custom.css" media="screen">
+        <link rel="shortcut icon" href="../../theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="../../theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="../../theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="../../theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="../../theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="../../theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="../../theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="../../theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="../../theme/images/apple-touch-icon-152x152.png" type="image/png" />
 
 
 
@@ -62,15 +61,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="https://seanammirati.github.io/"><span class=site-name>Stats Works</span></a>
+                    <a class="brand" href="../../"><span class=site-name>Stats Works</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="https://seanammirati.github.io">Home</a></li>
-                            <li ><a href="https://seanammirati.github.io/pages/about/">About This Website</a></li>
-                            <li ><a href="https://seanammirati.github.io/categories">Categories</a></li>
-                            <li ><a href="https://seanammirati.github.io/tags/">Tags</a></li>
-                            <li ><a href="https://seanammirati.github.io/archives">Archives</a></li>
-                            <li><form class="navbar-search" action="https://seanammirati.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="../..">Home</a></li>
+                            <li ><a href="../../pages/about/">About This Website</a></li>
+                            <li ><a href="../../categories">Categories</a></li>
+                            <li ><a href="../../tags/">Tags</a></li>
+                            <li ><a href="../../archives">Archives</a></li>
+                            <li><form class="navbar-search" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -83,7 +82,7 @@
 <article itemscope>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html"> HMMs: Viterbi Algorithm  </a></h1>
+    <h1><a href="../../category/markov-chains/hmms-viterbi-algorithm.html"> HMMs: Viterbi Algorithm  </a></h1>
     </header>
 </div>
 
@@ -96,124 +95,9 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI escape sequences */
-/* The color values are a mix of
-   http://www.xcolors.net/dl/baskerville-ivorylight and
-   http://www.xcolors.net/dl/euphrasia */
-.ansi-black-fg {
-  color: #3E424D;
-}
-.ansi-black-bg {
-  background-color: #3E424D;
-}
-.ansi-black-intense-fg {
-  color: #282C36;
-}
-.ansi-black-intense-bg {
-  background-color: #282C36;
-}
-.ansi-red-fg {
-  color: #E75C58;
-}
-.ansi-red-bg {
-  background-color: #E75C58;
-}
-.ansi-red-intense-fg {
-  color: #B22B31;
-}
-.ansi-red-intense-bg {
-  background-color: #B22B31;
-}
-.ansi-green-fg {
-  color: #00A250;
-}
-.ansi-green-bg {
-  background-color: #00A250;
-}
-.ansi-green-intense-fg {
-  color: #007427;
-}
-.ansi-green-intense-bg {
-  background-color: #007427;
-}
-.ansi-yellow-fg {
-  color: #DDB62B;
-}
-.ansi-yellow-bg {
-  background-color: #DDB62B;
-}
-.ansi-yellow-intense-fg {
-  color: #B27D12;
-}
-.ansi-yellow-intense-bg {
-  background-color: #B27D12;
-}
-.ansi-blue-fg {
-  color: #208FFB;
-}
-.ansi-blue-bg {
-  background-color: #208FFB;
-}
-.ansi-blue-intense-fg {
-  color: #0065CA;
-}
-.ansi-blue-intense-bg {
-  background-color: #0065CA;
-}
-.ansi-magenta-fg {
-  color: #D160C4;
-}
-.ansi-magenta-bg {
-  background-color: #D160C4;
-}
-.ansi-magenta-intense-fg {
-  color: #A03196;
-}
-.ansi-magenta-intense-bg {
-  background-color: #A03196;
-}
-.ansi-cyan-fg {
-  color: #60C6C8;
-}
-.ansi-cyan-bg {
-  background-color: #60C6C8;
-}
-.ansi-cyan-intense-fg {
-  color: #258F8F;
-}
-.ansi-cyan-intense-bg {
-  background-color: #258F8F;
-}
-.ansi-white-fg {
-  color: #C5C1B4;
-}
-.ansi-white-bg {
-  background-color: #C5C1B4;
-}
-.ansi-white-intense-fg {
-  color: #A1A6B2;
-}
-.ansi-white-intense-bg {
-  background-color: #A1A6B2;
-}
-.ansi-default-inverse-fg {
-  color: #FFFFFF;
-}
-.ansi-default-inverse-bg {
-  background-color: #000000;
-}
-.ansi-bold {
-  font-weight: bold;
-}
-.ansi-underline {
-  text-decoration: underline;
-}
-/* The following styles are deprecated an will be removed in a future version */
+/* CSS font colors for translated ANSI colors. */
 .ansibold {
   font-weight: bold;
-}
-.ansi-inverse {
-  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -292,20 +176,12 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  position: relative;
-  overflow: visible;
-}
-div.cell:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: transparent;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
 }
 div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -318,39 +194,27 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected,
-div.cell.selected.jupyter-soft-selected {
+div.cell.selected {
   border-color: #ababab;
-}
-div.cell.selected:before,
-div.cell.selected.jupyter-soft-selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #42A5F5;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
 }
 @media print {
-  div.cell.selected,
-  div.cell.selected.jupyter-soft-selected {
+  div.cell.selected {
     border-color: transparent;
   }
 }
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-}
-.edit_mode div.cell.selected:before {
-  position: absolute;
-  display: block;
-  top: -1px;
-  left: -1px;
-  width: 5px;
-  height: calc(100% +  2px);
-  content: '';
-  background: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -546,9 +410,7 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  /* Note that this should set vertical padding only, since CodeMirror assumes
-       that horizontal padding will be set on CodeMirror pre */
-  padding: 0.4em 0;
+  padding: 0.4em;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -558,24 +420,11 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
-    use .CodeMirror-lines for vertical */
-  padding: 0 0.4em;
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
   border: 0;
   border-radius: 0;
-}
-.CodeMirror-cursor {
-  border-left: 1.4px solid black;
-}
-@media screen and (min-width: 2138px) and (max-width: 4319px) {
-  .CodeMirror-cursor {
-    border-left: 2px solid black;
-  }
-}
-@media screen and (min-width: 4320px) {
-  .CodeMirror-cursor {
-    border-left: 4px solid black;
-  }
 }
 /*
 
@@ -823,9 +672,6 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
-div.output_area .mglyph > img {
-  max-width: none;
-}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -864,7 +710,7 @@ div.output_area .mglyph > img {
 }
 div.output_area pre {
   margin: 0;
-  padding: 1px 0 1px 0;
+  padding: 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -986,10 +832,6 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
-.rendered_html ul:not(.list-inline),
-.rendered_html ol:not(.list-inline) {
-  padding-left: 2em;
-}
 
 
 
@@ -1006,24 +848,16 @@ div.output_unrecognized a:hover {
 }
 
 
-
-
-
 .rendered_html pre,
-
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
+.rendered_html td,
 
-.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
+
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -1039,11 +873,6 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
-
-.rendered_html * + .alert {
-  margin-top: 1em;
-}
-[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1094,15 +923,8 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
-.text_cell.rendered .rendered_html tr,
-.text_cell.rendered .rendered_html th,
-.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
-}
-.text_cell .dropzone .input_area {
-  border: 2px dashed #bababa;
-  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1241,7 +1063,8 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This investigates HMMs (Hidden Markov Models) with two possible states and six possible emissions using the viterbi algorithm.</p>
 <p>Given a Markov process with two states (state 1 and state 2) and an arbitrary number of possible observed emissions , with transition probabilities
@@ -1260,9 +1083,9 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">viterbialgorithm</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">initprobstates</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span> </span>
-<span class="code-line">                             <span class="n">probvectorstate1</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)),</span> <span class="n">probvectorstate2</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="m">5</span><span class="p">),</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">),</span> </span>
-<span class="code-line">                             <span class="n">Ps1s2</span> <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span> <span class="n">Ps2s1</span> <span class="o">=</span> <span class="m">.1</span><span class="p">){</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>viterbialgorithm <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>values<span class="p">,</span> initprobstates <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span> </span>
+<span class="code-line">                             probvectorstate1 <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)),</span> probvectorstate2 <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="m">5</span><span class="p">),</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">),</span> </span>
+<span class="code-line">                             Ps1s2 <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span> Ps2s1 <span class="o">=</span> <span class="m">.1</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1">## values (vector): a series of observed values of two emissions.</span></span>
 <span class="code-line">  <span class="c1">## initprobstates (vector, len 2): the probabilities of entering the system in either state. (assuming .5, .5 is the least informative)</span></span>
 <span class="code-line">  <span class="c1">## probvectorstate1 (vector): the emission probabilities of the first state.</span></span>
@@ -1271,64 +1094,64 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 <span class="code-line">  <span class="c1">## Ps2s1 (numeric): probability of entering state 1 from state 2. </span></span>
 <span class="code-line">  </span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">iterations</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></span>
+<span class="code-line">  iterations <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>values<span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">initprobstate1</span> <span class="o">=</span> <span class="n">initprobstates[1]</span></span>
-<span class="code-line">  <span class="n">initprobstate2</span> <span class="o">=</span> <span class="n">initprobstates[2]</span></span>
+<span class="code-line">  initprobstate1 <span class="o">=</span> initprobstates<span class="p">[</span><span class="m">1</span><span class="p">]</span></span>
+<span class="code-line">  initprobstate2 <span class="o">=</span> initprobstates<span class="p">[</span><span class="m">2</span><span class="p">]</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">P11</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="n">Ps1s2</span></span>
-<span class="code-line">  <span class="n">P22</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="n">Ps2s1</span></span>
+<span class="code-line">  P11 <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> Ps1s2</span>
+<span class="code-line">  P22 <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> Ps2s1</span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="nf">if </span><span class="p">(</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    <span class="nf">stop</span><span class="p">(</span><span class="s">&quot;Length of vector must be a positive integer.&quot;</span><span class="p">)</span></span>
+<span class="code-line">  <span class="kr">if</span> <span class="p">(</span>iterations <span class="o">&lt;</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;Length of vector must be a positive integer.&quot;</span><span class="p">)</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line">  </span>
 <span class="code-line">  <span class="c1"># Initializes the ret list for the first sequence. </span></span>
-<span class="code-line">  <span class="n">ret</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">s0</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span><span class="n">s1</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="n">st</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">prevst</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">))</span></span>
+<span class="code-line">  ret <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>s0 <span class="o">=</span> <span class="m">0</span><span class="p">,</span>s1 <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> s2 <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> st <span class="o">=</span> <span class="m">0</span><span class="p">,</span> prevst <span class="o">=</span> <span class="kc">NA</span><span class="p">))</span></span>
 <span class="code-line">  </span>
 <span class="code-line">  <span class="c1">## Creates the transition matrix. </span></span>
-<span class="code-line">  <span class="n">transmatrix</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="n">initprobstate1</span><span class="p">,</span><span class="n">P11</span><span class="p">,</span><span class="n">Ps2s1</span><span class="p">,</span><span class="n">initprobstate2</span><span class="p">,</span><span class="n">Ps1s2</span><span class="p">,</span><span class="n">P22</span><span class="p">),</span><span class="n">ncol</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
+<span class="code-line">  transmatrix <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span>initprobstate1<span class="p">,</span>P11<span class="p">,</span>Ps2s1<span class="p">,</span>initprobstate2<span class="p">,</span>Ps1s2<span class="p">,</span>P22<span class="p">),</span>ncol <span class="o">=</span> <span class="m">3</span><span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">maxfun</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">potentialstate</span><span class="p">,</span> <span class="n">prevvector</span><span class="p">){</span></span>
+<span class="code-line">  maxfun <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>potentialstate<span class="p">,</span> prevvector<span class="p">){</span></span>
 <span class="code-line">    <span class="c1">## potentialstate (integer): integer referring to the potential state (1 or 2)</span></span>
 <span class="code-line">    <span class="c1">## prevvector (vector): previous probability of states. </span></span>
 <span class="code-line">    </span>
-<span class="code-line">    <span class="n">trans</span> <span class="o">&lt;-</span> <span class="n">transmatrix[</span><span class="p">,</span> <span class="n">potentialstate</span> <span class="o">+</span> <span class="m">1</span><span class="n">]</span></span>
-<span class="code-line">    <span class="n">mx</span> <span class="o">&lt;-</span> <span class="nf">max</span><span class="p">(</span><span class="n">prevvector[1</span><span class="o">:</span><span class="m">3</span><span class="n">]</span> <span class="o">+</span> <span class="nf">log</span><span class="p">(</span><span class="n">trans</span><span class="p">))</span></span>
-<span class="code-line">    <span class="n">prevst</span> <span class="o">&lt;-</span> <span class="nf">which.max</span><span class="p">(</span><span class="n">prevvector[1</span><span class="o">:</span><span class="m">3</span><span class="n">]</span> <span class="o">+</span> <span class="nf">log</span><span class="p">(</span><span class="n">trans</span><span class="p">))</span> <span class="o">-</span> <span class="m">1</span></span>
-<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">val</span> <span class="o">=</span> <span class="n">mx</span><span class="p">,</span><span class="n">state</span> <span class="o">=</span> <span class="n">prevst</span><span class="p">))</span></span>
+<span class="code-line">    trans <span class="o">&lt;-</span> transmatrix<span class="p">[,</span> potentialstate <span class="o">+</span> <span class="m">1</span><span class="p">]</span></span>
+<span class="code-line">    mx <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span>prevvector<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span> <span class="o">+</span> <span class="kp">log</span><span class="p">(</span>trans<span class="p">))</span></span>
+<span class="code-line">    prevst <span class="o">&lt;-</span> <span class="kp">which.max</span><span class="p">(</span>prevvector<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span> <span class="o">+</span> <span class="kp">log</span><span class="p">(</span>trans<span class="p">))</span> <span class="o">-</span> <span class="m">1</span></span>
+<span class="code-line">    <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>val <span class="o">=</span> mx<span class="p">,</span>state <span class="o">=</span> prevst<span class="p">))</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">iterations</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    <span class="n">maxst1</span> <span class="o">&lt;-</span> <span class="nf">maxfun</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">ret[[i]]</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">maxst2</span> <span class="o">&lt;-</span> <span class="nf">maxfun</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">ret[[i]]</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">ekst1</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">probvectorstate1[values[i]]</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">ekst2</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">probvectorstate2[values[i]]</span><span class="p">)</span></span>
+<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>iterations<span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    maxst1 <span class="o">&lt;-</span> maxfun<span class="p">(</span><span class="m">1</span><span class="p">,</span>ret<span class="p">[[</span>i<span class="p">]])</span></span>
+<span class="code-line">    maxst2 <span class="o">&lt;-</span> maxfun<span class="p">(</span><span class="m">2</span><span class="p">,</span>ret<span class="p">[[</span>i<span class="p">]])</span></span>
+<span class="code-line">    ekst1 <span class="o">&lt;-</span> <span class="kp">log</span><span class="p">(</span>probvectorstate1<span class="p">[</span>values<span class="p">[</span>i<span class="p">]])</span></span>
+<span class="code-line">    ekst2 <span class="o">&lt;-</span> <span class="kp">log</span><span class="p">(</span>probvectorstate2<span class="p">[</span>values<span class="p">[</span>i<span class="p">]])</span></span>
 <span class="code-line">    </span>
-<span class="code-line">    <span class="n">V1</span> <span class="o">&lt;-</span> <span class="n">maxst1[[</span><span class="s">&#39;val&#39;</span><span class="n">]]</span> <span class="o">+</span> <span class="n">ekst1</span></span>
-<span class="code-line">    <span class="n">V2</span> <span class="o">&lt;-</span> <span class="n">maxst2[[</span><span class="s">&#39;val&#39;</span><span class="n">]]</span> <span class="o">+</span> <span class="n">ekst2</span></span>
+<span class="code-line">    V1 <span class="o">&lt;-</span> maxst1<span class="p">[[</span><span class="s">&#39;val&#39;</span><span class="p">]]</span> <span class="o">+</span> ekst1</span>
+<span class="code-line">    V2 <span class="o">&lt;-</span> maxst2<span class="p">[[</span><span class="s">&#39;val&#39;</span><span class="p">]]</span> <span class="o">+</span> ekst2</span>
 <span class="code-line">    </span>
 <span class="code-line">    </span>
-<span class="code-line">    <span class="n">end</span> <span class="o">&lt;-</span> <span class="nf">which.max</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">))</span> </span>
-<span class="code-line">    <span class="n">ret[[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">s0</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">V1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">V2</span><span class="p">,</span> <span class="n">st</span> <span class="o">=</span> <span class="n">end</span><span class="p">,</span> <span class="n">prevst</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">maxst1[[</span><span class="s">&#39;state&#39;</span><span class="n">]]</span><span class="p">,</span><span class="n">maxst2[[</span><span class="s">&#39;state&#39;</span><span class="n">]]</span><span class="p">))</span></span>
+<span class="code-line">    end <span class="o">&lt;-</span> <span class="kp">which.max</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>V1<span class="p">,</span>V2<span class="p">))</span> </span>
+<span class="code-line">    ret<span class="p">[[</span>i <span class="o">+</span> <span class="m">1</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>s0 <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span><span class="p">,</span> s1 <span class="o">=</span> V1<span class="p">,</span> s2 <span class="o">=</span> V2<span class="p">,</span> st <span class="o">=</span> end<span class="p">,</span> prevst <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>maxst1<span class="p">[[</span><span class="s">&#39;state&#39;</span><span class="p">]],</span>maxst2<span class="p">[[</span><span class="s">&#39;state&#39;</span><span class="p">]]))</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">finalstate</span> <span class="o">&lt;-</span> <span class="n">ret[[iterations</span> <span class="o">+</span> <span class="m">1</span><span class="n">]][</span><span class="s">&#39;st&#39;</span><span class="n">]</span></span>
-<span class="code-line">  <span class="n">path</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">iterations</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span></span>
-<span class="code-line">  <span class="n">path[iterations</span> <span class="o">+</span> <span class="m">1</span><span class="n">]</span> <span class="o">&lt;-</span> <span class="n">finalstate</span></span>
+<span class="code-line">  finalstate <span class="o">&lt;-</span> ret<span class="p">[[</span>iterations <span class="o">+</span> <span class="m">1</span><span class="p">]][</span><span class="s">&#39;st&#39;</span><span class="p">]</span></span>
+<span class="code-line">  path <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>iterations <span class="o">+</span> <span class="m">1</span><span class="p">))</span></span>
+<span class="code-line">  path<span class="p">[</span>iterations <span class="o">+</span> <span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> finalstate</span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="nf">in </span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span><span class="o">:</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    <span class="n">path[i]</span> <span class="o">&lt;-</span> <span class="n">ret[[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]][5</span><span class="o">:</span><span class="m">6</span><span class="n">][path[i</span> <span class="o">+</span> <span class="m">1</span><span class="n">]]</span></span>
+<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="p">(</span>iterations<span class="p">)</span><span class="o">:</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    path<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> ret<span class="p">[[</span>i <span class="o">+</span> <span class="m">1</span><span class="p">]][</span><span class="m">5</span><span class="o">:</span><span class="m">6</span><span class="p">][</span>path<span class="p">[</span>i <span class="o">+</span> <span class="m">1</span><span class="p">]]</span></span>
 <span class="code-line">  <span class="p">}</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="n">res</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">ret[</span><span class="m">-1</span><span class="n">]</span><span class="p">)</span></span>
-<span class="code-line">  <span class="nf">colnames</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></span>
+<span class="code-line">  res <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>ret<span class="p">[</span><span class="m">-1</span><span class="p">])</span></span>
+<span class="code-line">  <span class="kp">colnames</span><span class="p">(</span>res<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>values<span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">steps</span> <span class="o">=</span> <span class="n">res</span><span class="p">,</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">))</span></span>
+<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>steps <span class="o">=</span> res<span class="p">,</span>path <span class="o">=</span> path<span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1338,7 +1161,7 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">observed</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span>observed <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span></span>
 <span class="code-line">              <span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span></span>
 <span class="code-line">              <span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">,</span></span>
 <span class="code-line">              <span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">3</span><span class="p">,</span></span>
@@ -1347,12 +1170,12 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 <span class="code-line">              <span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span></span>
 <span class="code-line">              <span class="m">6</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line"><span class="n">results</span> <span class="o">&lt;-</span> <span class="nf">viterbialgorithm</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">resultswords</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fair&quot;</span><span class="p">,</span><span class="s">&quot;Loaded&quot;</span><span class="p">)</span><span class="n">[results</span><span class="o">$</span><span class="n">path]</span></span>
-<span class="code-line"><span class="n">resultswords</span></span>
+<span class="code-line">results <span class="o">&lt;-</span> viterbialgorithm<span class="p">(</span>observed<span class="p">)</span></span>
+<span class="code-line">resultswords <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Fair&quot;</span><span class="p">,</span><span class="s">&quot;Loaded&quot;</span><span class="p">)[</span>results<span class="o">$</span>path<span class="p">]</span></span>
+<span class="code-line">resultswords</span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1362,7 +1185,7 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -1438,7 +1261,8 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So this tells us that given the observed die rolls, the most likely sequence of states is as shown above.</p>
 <p>This did not have to be done manually -- we can use the HMM package to do this. It will serve as a check.</p>
@@ -1451,13 +1275,13 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="nf">require</span><span class="p">(</span><span class="n">HMM</span><span class="p">)</span></span>
-<span class="code-line"><span class="n">mod</span> <span class="o">&lt;-</span> <span class="nf">initHMM</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fair&quot;</span><span class="p">,</span><span class="s">&quot;Loaded&quot;</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">),</span><span class="n">startProbs</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span><span class="n">transProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">.1</span><span class="p">,</span><span class="m">.90</span><span class="p">)),</span><span class="n">emissionProbs</span> <span class="o">=</span> <span class="nf">rbind</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)),</span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="m">5</span><span class="p">),</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)))</span></span>
-<span class="code-line"><span class="nf">viterbi</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span><span class="n">observed</span><span class="p">)</span> <span class="o">==</span> <span class="n">resultswords</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="kn">require</span><span class="p">(</span>HMM<span class="p">)</span></span>
+<span class="code-line">mod <span class="o">&lt;-</span> initHMM<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Fair&quot;</span><span class="p">,</span><span class="s">&quot;Loaded&quot;</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">),</span>startProbs <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.5</span><span class="p">),</span>transProbs <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">.95</span><span class="p">,</span><span class="m">.05</span><span class="p">),</span><span class="kt">c</span><span class="p">(</span><span class="m">.1</span><span class="p">,</span><span class="m">.90</span><span class="p">)),</span>emissionProbs <span class="o">=</span> <span class="kp">rbind</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)),</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">10</span><span class="p">,</span><span class="m">5</span><span class="p">),</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)))</span></span>
+<span class="code-line">viterbi<span class="p">(</span>mod<span class="p">,</span>observed<span class="p">)</span> <span class="o">==</span> resultswords</span>
 <span class="code-line"><span class="c1">## :)</span></span>
 </pre></div>
 
-    </div>
+</div>
 </div>
 </div>
 
@@ -1467,7 +1291,7 @@ The goal is then to find the most likely sequence of fair and loaded die given t
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+<div class="prompt"></div>
 
 
 
@@ -1585,7 +1409,7 @@ The goal is then to find the most likely sequence of fair and loaded die given t
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html#disqus_thread",
+                href="../../category/markov-chains/hmms-viterbi-algorithm.html#disqus_thread",
                 id="disqus-accordion-toggle">
                 Comments
             </a>
@@ -1596,8 +1420,8 @@ The goal is then to find the most likely sequence of fair and loaded die given t
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'statsworks';
-        var disqus_identifier = 'https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html';
-    var disqus_url = 'https://seanammirati.github.io/category/markov-chains/hmms-viterbi-algorithm.html';
+        var disqus_identifier = '../../category/markov-chains/hmms-viterbi-algorithm.html';
+    var disqus_url = '../../category/markov-chains/hmms-viterbi-algorithm.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -1620,12 +1444,12 @@ The goal is then to find the most likely sequence of fair and loaded die given t
             <nav>
                 <h3> Articles in Markov Chains</h3>
                 <ul class="articles-timeline">
-                <li class="next-article"> <a href="https://seanammirati.github.io/category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
+                <li class="next-article"> <a href="../../category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
             </ul>
             <h3> All Articles</h3>
             <ul class='articles-timeline'>
-                <li class="previous-article">« <a href="https://seanammirati.github.io/category/multivariate-analysis/hotellings-t-test-example.html" title="Previous: Hotelling&#39;s T-Test Example">Hotelling's T-Test Example</a></li>
-                <li class="next-article"><a href="https://seanammirati.github.io/category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
+                <li class="previous-article">« <a href="../../category/multivariate-analysis/hotellings-t-test-example.html" title="Previous: Hotelling&#39;s T-Test Example">Hotelling's T-Test Example</a></li>
+                <li class="next-article"><a href="../../category/markov-chains/hidden-markov-models.html" title="Next: Hidden Markov Models - Extensions">Hidden Markov Models <small>Extensions</small></a> »</li>
 
             </ul>
             </nav>
@@ -1636,16 +1460,16 @@ The goal is then to find the most likely sequence of fair and loaded die given t
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2018-12-09T00:00:00-05:00">Dec 9, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://seanammirati.github.io/categories.html#markov-chains-ref">Markov Chains</a>
+            <a class="category-link" href="../../categories.html#markov-chains-ref">Markov Chains</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://seanammirati.github.io/tags/#hmms-ref">HMMS
+                <li><a href="../../tags/#hmms-ref">HMMS
                     <span>2</span>
 </a></li>
-                <li><a href="https://seanammirati.github.io/tags/#markov-chains-ref">markov chains
+                <li><a href="../../tags/#markov-chains-ref">markov chains
                     <span>2</span>
 </a></li>
-                <li><a href="https://seanammirati.github.io/tags/#viterbi-ref">viterbi
+                <li><a href="../../tags/#viterbi-ref">viterbi
                     <span>1</span>
 </a></li>
             </ul>
