@@ -95,9 +95,124 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -176,12 +291,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -194,27 +317,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -410,7 +545,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -420,11 +557,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -672,6 +822,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -710,7 +863,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -832,6 +985,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -848,16 +1005,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -873,6 +1038,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -923,8 +1093,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1063,8 +1240,7 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First, we will treat the csv "schools_ds" as the population that follows a random intercept model based on the group. We will use this to investigate the sampling strategies that one could use and see how the models compare. This data considers scores from various schools, with the score representing a students' score on a test, and the grpID represeting the school.</p>
 
@@ -1076,14 +1252,14 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;./schools_ds.csv&quot;</span><span class="p">)</span></span>
-<span class="code-line"><span class="kp">head</span><span class="p">(</span>data<span class="p">)</span></span>
-<span class="code-line"><span class="kn">require</span><span class="p">(</span>lme4<span class="p">)</span></span>
-<span class="code-line">mod1 <span class="o">&lt;-</span> lmer<span class="p">(</span>score<span class="o">~</span><span class="m">1</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">|</span>grpID<span class="p">),</span>data<span class="o">=</span>data<span class="p">)</span></span>
-<span class="code-line"><span class="kp">summary</span><span class="p">(</span>mod1<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./schools_ds.csv&quot;</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">require</span><span class="p">(</span><span class="n">lme4</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">mod1</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">score</span><span class="o">~</span><span class="m">1</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">|</span><span class="n">grpID</span><span class="p">),</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">summary</span><span class="p">(</span><span class="n">mod1</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1093,7 +1269,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1116,7 +1292,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -1128,7 +1304,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1162,8 +1338,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This exercise will be investigating the effect of sampling schema on the effectiveness of HLMS by looking at school data. Each school has a different number of students, and we wish to fit a random intercept model
 based on the school.</p>
@@ -1173,8 +1348,7 @@ based on the school.</p>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Helper-functions">Helper functions<a class="anchor-link" href="#Helper-functions">&#182;</a></h1>
 </div>
@@ -1185,24 +1359,23 @@ based on the school.</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>samplefromgroup <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>grp<span class="p">,</span>n<span class="p">){</span></span>
-<span class="code-line">  j<span class="o">=</span> <span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>grpID<span class="o">==</span>grp<span class="p">,</span><span class="m">1</span><span class="p">]),</span>n<span class="p">)</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>grpID<span class="o">==</span>grp<span class="p">,][</span>j<span class="p">,])</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">samplefromgroup</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">grp</span><span class="p">,</span><span class="n">n</span><span class="p">){</span></span>
+<span class="code-line">  <span class="n">j</span><span class="o">=</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">data[data</span><span class="o">$</span><span class="n">grpID</span><span class="o">==</span><span class="n">grp</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">),</span><span class="n">n</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="n">data[data</span><span class="o">$</span><span class="n">grpID</span><span class="o">==</span><span class="n">grp</span><span class="p">,</span><span class="n">][j</span><span class="p">,</span><span class="n">]</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">lt2df <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>l<span class="p">){</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind.data.frame</span><span class="p">,</span>l<span class="p">)))</span></span>
+<span class="code-line"><span class="n">lt2df</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">l</span><span class="p">){</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind.data.frame</span><span class="p">,</span><span class="n">l</span><span class="p">)))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Simulation">Simulation<a class="anchor-link" href="#Simulation">&#182;</a></h1>
 </div>
@@ -1213,108 +1386,108 @@ based on the school.</p>
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>simresults<span class="o">&lt;-</span><span class="kt">list</span><span class="p">()</span></span>
-<span class="code-line">  <span class="kr">for</span> <span class="p">(</span>sim <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="o">^</span><span class="m">3</span><span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">    sample1 <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
-<span class="code-line">    nschool <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span><span class="kp">unique</span><span class="p">(</span>data<span class="o">$</span>grpID<span class="p">))</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">simresults</span><span class="o">&lt;-</span><span class="nf">list</span><span class="p">()</span></span>
+<span class="code-line">  <span class="nf">for </span><span class="p">(</span><span class="n">sim</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="n">^3</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">    <span class="n">sample1</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">nschool</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">grpID</span><span class="p">))</span></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nschool<span class="p">){</span></span>
-<span class="code-line">      sample1<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>i<span class="p">,</span><span class="m">11</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nschool</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">sample1[[i]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="m">11</span><span class="p">)</span></span>
 <span class="code-line">    <span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample1 <span class="o">&lt;-</span> lt2df<span class="p">(</span>sample1<span class="p">)</span></span>
-<span class="code-line">    sample1</span>
+<span class="code-line">    <span class="n">sample1</span> <span class="o">&lt;-</span> <span class="nf">lt2df</span><span class="p">(</span><span class="n">sample1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">sample1</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample2 <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
-<span class="code-line">    <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nschool<span class="p">){</span></span>
-<span class="code-line">      sample2<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>i<span class="p">,</span><span class="m">2</span><span class="o">*</span>i<span class="p">)</span></span>
+<span class="code-line">    <span class="n">sample2</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
+<span class="code-line">    <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nschool</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">sample2[[i]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="m">2</span><span class="o">*</span><span class="n">i</span><span class="p">)</span></span>
 <span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    sample2 <span class="o">&lt;-</span> lt2df<span class="p">(</span>sample2<span class="p">)</span></span>
-<span class="code-line">    sample2</span>
+<span class="code-line">    <span class="n">sample2</span> <span class="o">&lt;-</span> <span class="nf">lt2df</span><span class="p">(</span><span class="n">sample2</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">sample2</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample3 <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
-<span class="code-line">    randomschool <span class="o">&lt;-</span> <span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span>nschool<span class="p">,</span><span class="m">5</span><span class="p">)</span></span>
-<span class="code-line">    trigger <span class="o">&lt;-</span> <span class="kp">any</span><span class="p">(</span>randomschool<span class="o">==</span><span class="m">1</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="kr">if</span><span class="p">(</span>trigger<span class="p">){</span></span>
-<span class="code-line">      remaining <span class="o">&lt;-</span> <span class="o">!</span>randomschool<span class="o">==</span><span class="m">1</span></span>
-<span class="code-line">      remsch <span class="o">&lt;-</span> randomschool<span class="p">[</span>remaining<span class="p">]</span></span>
-<span class="code-line">      randomselect23 <span class="o">&lt;-</span> <span class="kp">sample</span><span class="p">(</span>remsch<span class="p">,</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">      schoolselect22 <span class="o">&lt;-</span> remsch<span class="p">[</span>remsch<span class="o">!=</span>randomselect23<span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&amp;</span>remsch<span class="o">!=</span>randomselect23<span class="p">[</span><span class="m">2</span><span class="p">]]</span></span>
+<span class="code-line">    <span class="n">sample3</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">randomschool</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nschool</span><span class="p">,</span><span class="m">5</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">trigger</span> <span class="o">&lt;-</span> <span class="nf">any</span><span class="p">(</span><span class="n">randomschool</span><span class="o">==</span><span class="m">1</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line">      sample3<span class="p">[[</span><span class="m">1</span><span class="p">]]</span> <span class="o">&lt;-</span> data<span class="p">[</span>data<span class="o">$</span>grpID<span class="o">==</span><span class="m">1</span><span class="p">,]</span></span>
+<span class="code-line">    <span class="nf">if</span><span class="p">(</span><span class="n">trigger</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">remaining</span> <span class="o">&lt;-</span> <span class="o">!</span><span class="n">randomschool</span><span class="o">==</span><span class="m">1</span></span>
+<span class="code-line">      <span class="n">remsch</span> <span class="o">&lt;-</span> <span class="n">randomschool[remaining]</span></span>
+<span class="code-line">      <span class="n">randomselect23</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="n">remsch</span><span class="p">,</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">      <span class="n">schoolselect22</span> <span class="o">&lt;-</span> <span class="n">remsch[remsch</span><span class="o">!=</span><span class="n">randomselect23[1]</span><span class="o">&amp;</span><span class="n">remsch</span><span class="o">!=</span><span class="n">randomselect23[2]]</span></span>
 <span class="code-line"></span>
-<span class="code-line">      <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">){</span></span>
-<span class="code-line">        sample3<span class="p">[[</span>i<span class="m">+1</span><span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>randomselect23<span class="p">[</span>i<span class="p">],</span><span class="m">23</span><span class="p">)</span></span>
-<span class="code-line">        sample3<span class="p">[[</span>i<span class="m">+3</span><span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>schoolselect22<span class="p">[</span>i<span class="p">],</span><span class="m">22</span><span class="p">)</span></span>
+<span class="code-line"></span>
+<span class="code-line">      <span class="n">sample3[[1]]</span> <span class="o">&lt;-</span> <span class="n">data[data</span><span class="o">$</span><span class="n">grpID</span><span class="o">==</span><span class="m">1</span><span class="p">,</span><span class="n">]</span></span>
+<span class="code-line"></span>
+<span class="code-line">      <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">){</span></span>
+<span class="code-line">        <span class="n">sample3[[i</span><span class="m">+1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">randomselect23[i]</span><span class="p">,</span><span class="m">23</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">sample3[[i</span><span class="m">+3</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">schoolselect22[i]</span><span class="p">,</span><span class="m">22</span><span class="p">)</span></span>
 <span class="code-line">      <span class="p">}</span></span>
-<span class="code-line">    <span class="p">}</span> <span class="kp">else</span><span class="p">{</span></span>
-<span class="code-line">        <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>randomschool<span class="p">)){</span></span>
-<span class="code-line">          sample3<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>randomschool<span class="p">[</span>i<span class="p">],</span><span class="m">22</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span></span>
+<span class="code-line">        <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">randomschool</span><span class="p">)){</span></span>
+<span class="code-line">          <span class="n">sample3[[i]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">randomschool[i]</span><span class="p">,</span><span class="m">22</span><span class="p">)</span></span>
 <span class="code-line">        <span class="p">}</span></span>
 <span class="code-line">    <span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample3 <span class="o">&lt;-</span> lt2df<span class="p">(</span>sample3<span class="p">)</span></span>
-<span class="code-line">    sample3</span>
+<span class="code-line">    <span class="n">sample3</span> <span class="o">&lt;-</span> <span class="nf">lt2df</span><span class="p">(</span><span class="n">sample3</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">sample3</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample4 <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
+<span class="code-line">    <span class="n">sample4</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
 <span class="code-line"></span>
-<span class="code-line">    weights <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">()</span></span>
-<span class="code-line">    <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nschool<span class="p">){</span></span>
-<span class="code-line">      weights<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>data<span class="p">[</span>data<span class="o">$</span>grpID<span class="o">==</span>i<span class="p">,</span><span class="m">1</span><span class="p">])</span><span class="o">/</span><span class="kp">nrow</span><span class="p">(</span>data<span class="p">)</span></span>
+<span class="code-line">    <span class="n">weights</span> <span class="o">&lt;-</span> <span class="nf">vector</span><span class="p">()</span></span>
+<span class="code-line">    <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nschool</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">weights[i]</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">data[data</span><span class="o">$</span><span class="n">grpID</span><span class="o">==</span><span class="n">i</span><span class="p">,</span><span class="m">1</span><span class="n">]</span><span class="p">)</span><span class="o">/</span><span class="nf">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></span>
 <span class="code-line">    <span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">    randomschool2 <span class="o">&lt;-</span> <span class="kp">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span>nschool<span class="p">,</span><span class="m">5</span><span class="p">,</span>prob<span class="o">=</span>weights<span class="p">)</span></span>
-<span class="code-line">    trigger2 <span class="o">&lt;-</span> <span class="kp">any</span><span class="p">(</span>randomschool2<span class="o">==</span><span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">randomschool2</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nschool</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="n">prob</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">trigger2</span> <span class="o">&lt;-</span> <span class="nf">any</span><span class="p">(</span><span class="n">randomschool2</span><span class="o">==</span><span class="m">1</span><span class="p">)</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="kr">if</span><span class="p">(</span>trigger2<span class="p">){</span></span>
-<span class="code-line">      remaining2 <span class="o">&lt;-</span> <span class="o">!</span>randomschool2<span class="o">==</span><span class="m">1</span></span>
-<span class="code-line">      remsch2 <span class="o">&lt;-</span> randomschool2<span class="p">[</span>remaining2<span class="p">]</span></span>
-<span class="code-line">      randomselect232 <span class="o">&lt;-</span> <span class="kp">sample</span><span class="p">(</span>remsch2<span class="p">,</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">      schoolselect222 <span class="o">&lt;-</span> remsch2<span class="p">[</span>remsch2<span class="o">!=</span>randomselect232<span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&amp;</span>remsch2<span class="o">!=</span>randomselect232<span class="p">[</span><span class="m">2</span><span class="p">]]</span></span>
+<span class="code-line">    <span class="nf">if</span><span class="p">(</span><span class="n">trigger2</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">remaining2</span> <span class="o">&lt;-</span> <span class="o">!</span><span class="n">randomschool2</span><span class="o">==</span><span class="m">1</span></span>
+<span class="code-line">      <span class="n">remsch2</span> <span class="o">&lt;-</span> <span class="n">randomschool2[remaining2]</span></span>
+<span class="code-line">      <span class="n">randomselect232</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="n">remsch2</span><span class="p">,</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">      <span class="n">schoolselect222</span> <span class="o">&lt;-</span> <span class="n">remsch2[remsch2</span><span class="o">!=</span><span class="n">randomselect232[1]</span><span class="o">&amp;</span><span class="n">remsch2</span><span class="o">!=</span><span class="n">randomselect232[2]]</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line">      sample4<span class="p">[[</span><span class="m">1</span><span class="p">]]</span> <span class="o">&lt;-</span> data<span class="p">[</span>data<span class="o">$</span>grpID<span class="o">==</span><span class="m">1</span><span class="p">,]</span></span>
-<span class="code-line">      <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">){</span></span>
+<span class="code-line">      <span class="n">sample4[[1]]</span> <span class="o">&lt;-</span> <span class="n">data[data</span><span class="o">$</span><span class="n">grpID</span><span class="o">==</span><span class="m">1</span><span class="p">,</span><span class="n">]</span></span>
+<span class="code-line">      <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">){</span></span>
 <span class="code-line"></span>
-<span class="code-line">        sample4<span class="p">[[</span>i<span class="m">+1</span><span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>randomselect232<span class="p">[</span>i<span class="p">],</span><span class="m">23</span><span class="p">)</span></span>
-<span class="code-line">        sample4<span class="p">[[</span>i<span class="m">+3</span><span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>schoolselect222<span class="p">[</span>i<span class="p">],</span><span class="m">22</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">sample4[[i</span><span class="m">+1</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">randomselect232[i]</span><span class="p">,</span><span class="m">23</span><span class="p">)</span></span>
+<span class="code-line">        <span class="n">sample4[[i</span><span class="m">+3</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">schoolselect222[i]</span><span class="p">,</span><span class="m">22</span><span class="p">)</span></span>
 <span class="code-line">      <span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">    <span class="p">}</span> <span class="kp">else</span><span class="p">{</span></span>
-<span class="code-line">      <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>randomschool<span class="p">)){</span></span>
-<span class="code-line">        sample4<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> samplefromgroup<span class="p">(</span>randomschool2<span class="p">[</span>i<span class="p">],</span><span class="m">22</span><span class="p">)</span></span>
+<span class="code-line">    <span class="p">}</span> <span class="n">else</span><span class="p">{</span></span>
+<span class="code-line">      <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">randomschool</span><span class="p">)){</span></span>
+<span class="code-line">        <span class="n">sample4[[i]]</span> <span class="o">&lt;-</span> <span class="nf">samplefromgroup</span><span class="p">(</span><span class="n">randomschool2[i]</span><span class="p">,</span><span class="m">22</span><span class="p">)</span></span>
 <span class="code-line">      <span class="p">}</span></span>
 <span class="code-line">    <span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">    sample4 <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind.data.frame</span><span class="p">,</span>sample4<span class="p">))</span></span>
-<span class="code-line">    sample4</span>
+<span class="code-line">    <span class="n">sample4</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind.data.frame</span><span class="p">,</span><span class="n">sample4</span><span class="p">))</span></span>
+<span class="code-line">    <span class="n">sample4</span></span>
 <span class="code-line"></span>
 <span class="code-line"></span>
-<span class="code-line">    listofsamples <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>sample1<span class="p">,</span>sample2<span class="p">,</span>sample3<span class="p">,</span>sample4<span class="p">)</span></span>
-<span class="code-line">    parameters <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>nrow<span class="o">=</span><span class="m">3</span><span class="p">,</span>ncol<span class="o">=</span><span class="m">4</span><span class="p">)</span></span>
-<span class="code-line">    <span class="kp">rownames</span><span class="p">(</span>parameters<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Gamma00&quot;</span><span class="p">,</span><span class="s">&quot;Sigma&quot;</span><span class="p">,</span><span class="s">&quot;Tao0&quot;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="kp">colnames</span><span class="p">(</span>parameters<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Model 1&quot;</span><span class="p">,</span><span class="s">&quot;Model 2&quot;</span><span class="p">,</span><span class="s">&quot;Model 3&quot;</span><span class="p">,</span><span class="s">&quot;Model 4&quot;</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">listofsamples</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">sample1</span><span class="p">,</span><span class="n">sample2</span><span class="p">,</span><span class="n">sample3</span><span class="p">,</span><span class="n">sample4</span><span class="p">)</span></span>
+<span class="code-line">    <span class="n">parameters</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nf">rownames</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Gamma00&quot;</span><span class="p">,</span><span class="s">&quot;Sigma&quot;</span><span class="p">,</span><span class="s">&quot;Tao0&quot;</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nf">colnames</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Model 1&quot;</span><span class="p">,</span><span class="s">&quot;Model 2&quot;</span><span class="p">,</span><span class="s">&quot;Model 3&quot;</span><span class="p">,</span><span class="s">&quot;Model 4&quot;</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">    models <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">()</span></span>
-<span class="code-line">    <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>listofsamples<span class="p">)){</span></span>
-<span class="code-line">      models<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> lmer<span class="p">(</span>score<span class="o">~</span><span class="m">1</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">|</span>grpID<span class="p">),</span>data<span class="o">=</span>listofsamples<span class="p">[[</span>i<span class="p">]])</span></span>
-<span class="code-line">      parameters<span class="p">[</span><span class="m">1</span><span class="p">,</span>i<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">summary</span><span class="p">(</span>models<span class="p">[[</span>i<span class="p">]])</span><span class="o">$</span>coef<span class="p">[</span><span class="m">1</span><span class="p">]</span></span>
-<span class="code-line">      parameters<span class="p">[</span><span class="m">2</span><span class="p">,</span>i<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">summary</span><span class="p">(</span>models<span class="p">[[</span>i<span class="p">]])</span><span class="o">$</span>sigma</span>
-<span class="code-line">      parameters<span class="p">[</span><span class="m">3</span><span class="p">,</span>i<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>VarCorr<span class="p">(</span>models<span class="p">[[</span>i<span class="p">]]))[</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">]</span></span>
+<span class="code-line">    <span class="n">models</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span></span>
+<span class="code-line">    <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">listofsamples</span><span class="p">)){</span></span>
+<span class="code-line">      <span class="n">models[[i]]</span> <span class="o">&lt;-</span> <span class="nf">lmer</span><span class="p">(</span><span class="n">score</span><span class="o">~</span><span class="m">1</span><span class="o">+</span><span class="p">(</span><span class="m">1</span><span class="o">|</span><span class="n">grpID</span><span class="p">),</span><span class="n">data</span><span class="o">=</span><span class="n">listofsamples[[i]]</span><span class="p">)</span></span>
+<span class="code-line">      <span class="n">parameters[1</span><span class="p">,</span><span class="n">i]</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">models[[i]]</span><span class="p">)</span><span class="o">$</span><span class="n">coef[1]</span></span>
+<span class="code-line">      <span class="n">parameters[2</span><span class="p">,</span><span class="n">i]</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">models[[i]]</span><span class="p">)</span><span class="o">$</span><span class="n">sigma</span></span>
+<span class="code-line">      <span class="n">parameters[3</span><span class="p">,</span><span class="n">i]</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">VarCorr</span><span class="p">(</span><span class="n">models[[i]]</span><span class="p">))</span><span class="n">[1</span><span class="p">,</span><span class="m">5</span><span class="n">]</span></span>
 <span class="code-line">    <span class="p">}</span></span>
-<span class="code-line">    simresults<span class="p">[[</span>sim<span class="p">]]</span> <span class="o">&lt;-</span> parameters</span>
+<span class="code-line">    <span class="n">simresults[[sim]]</span> <span class="o">&lt;-</span> <span class="n">parameters</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">fullmodelparameters <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>mod1<span class="p">)</span><span class="o">$</span>coef<span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="kp">summary</span><span class="p">(</span>mod1<span class="p">)</span><span class="o">$</span>sigma<span class="p">,</span><span class="kp">as.data.frame</span><span class="p">(</span>VarCorr<span class="p">(</span>mod1<span class="p">))[</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">]),</span><span class="m">4</span><span class="p">),</span>nrow<span class="o">=</span><span class="m">3</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">fullmodelparameters</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="n">mod1</span><span class="p">)</span><span class="o">$</span><span class="n">coef[1]</span><span class="p">,</span><span class="nf">summary</span><span class="p">(</span><span class="n">mod1</span><span class="p">)</span><span class="o">$</span><span class="n">sigma</span><span class="p">,</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">VarCorr</span><span class="p">(</span><span class="n">mod1</span><span class="p">))</span><span class="n">[1</span><span class="p">,</span><span class="m">5</span><span class="n">]</span><span class="p">),</span><span class="m">4</span><span class="p">),</span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">simresults<span class="p">[[</span><span class="m">1</span><span class="p">]]</span> <span class="o">-</span> fullmodelparameters</span>
+<span class="code-line"><span class="n">simresults[[1]]</span> <span class="o">-</span> <span class="n">fullmodelparameters</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1324,7 +1497,7 @@ based on the school.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -1335,7 +1508,7 @@ based on the school.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1358,8 +1531,7 @@ based on the school.</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I then create a list of samples, and use each of these samples to sample using the models. I create a matrix that will store the parameters in <code>parameters</code>, and it stores the fixed effect ($\gamma_{0,0}$) and the variances of the random effects ($\sigma^2$ and $\tau^2$) for each model, using each sample. It then stores this information for each simulation, which is done $10^5$ times. This means the samples are created differently each time, and then the model is fit using each sample, and the information is stored in a list for each simulation. I then compare this to the model using the full population, which are the full model parameters. As an example, we can see the bias from the first simulation of each model, for each variable.</p>
 <p>I then compute the mean bias, mean squared error, and mean variance for each of the samples. I do this by summing all of the individual biases, squared errors, and variances, and dividing by the total number of simulations.</p>
@@ -1372,21 +1544,21 @@ based on the school.</p>
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>indbias <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>simresults<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x <span class="o">-</span> fullmodelparameters<span class="p">)</span></span>
-<span class="code-line">indsquarederror <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>simresults<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">(</span>x <span class="o">-</span> fullmodelparameters<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">mean <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span>simresults<span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="o">^</span><span class="m">5</span></span>
-<span class="code-line">indvariance <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>simresults<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">(</span>x <span class="o">-</span> <span class="kp">mean</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">indbias</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">simresults</span><span class="p">,</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fullmodelparameters</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">indsquarederror</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">simresults</span><span class="p">,</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">fullmodelparameters</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">mean</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span><span class="n">simresults</span><span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="n">^5</span></span>
+<span class="code-line"><span class="n">indvariance</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">simresults</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="n">^2</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">mse <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span>indsquarederror<span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="o">^</span><span class="m">5</span></span>
-<span class="code-line">variance <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span>indvariance<span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="o">^</span><span class="m">5</span></span>
-<span class="code-line">fullbias <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span>indbias<span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="o">^</span><span class="m">5</span></span>
+<span class="code-line"><span class="n">mse</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span><span class="n">indsquarederror</span><span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="n">^5</span></span>
+<span class="code-line"><span class="n">variance</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span><span class="n">indvariance</span><span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="n">^5</span></span>
+<span class="code-line"><span class="n">fullbias</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span><span class="n">indbias</span><span class="p">)</span><span class="o">/</span><span class="m">10</span><span class="n">^5</span></span>
 <span class="code-line"></span>
-<span class="code-line">mse</span>
-<span class="code-line">variance</span>
-<span class="code-line">fullbias</span>
+<span class="code-line"><span class="n">mse</span></span>
+<span class="code-line"><span class="n">variance</span></span>
+<span class="code-line"><span class="n">fullbias</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1396,7 +1568,7 @@ based on the school.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1416,7 +1588,7 @@ based on the school.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1436,7 +1608,7 @@ based on the school.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1459,16 +1631,14 @@ based on the school.</p>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The components of the MSE can be decomposed into the variance and the bias (MSE = $b^2$ + $\sigma^2$).</p>
 <p>This discussion is especially important to application because it is often expensive or impossible to gather data from the entire population (thus why we sample in the first place), and in the same vein, it may be expensive or difficult to gather data from all of the subsequent groups. Sampling the schools may be seen as desirable in this instance, as it will likely require less resources to acquire information from 5 groups rather than 10. However, we can see from the above that the effects of this on the models are somewhat large, and sampling from the number of schools does not produce the same results as sampling from each school directly.</p>

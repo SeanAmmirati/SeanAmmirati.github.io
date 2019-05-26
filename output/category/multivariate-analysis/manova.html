@@ -95,9 +95,124 @@
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -176,12 +291,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -194,27 +317,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -410,7 +545,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -420,11 +557,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -672,6 +822,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -710,7 +863,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -832,6 +985,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -848,16 +1005,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -873,6 +1038,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -923,8 +1093,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1063,8 +1240,7 @@ h6:hover .anchor-link {
 .ansi-bold { font-weight: bold; }
 </style>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we will be  doing MANOVA for the dataset below. We want to know if the means of tear, gloss and opacity are statistically
 significantly different from one another depending on the rate groups -- Low or High.</p>
@@ -1074,8 +1250,7 @@ significantly different from one another depending on the rate groups -- Low or 
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In evaluating MANOVA (Multivariate Analysis of Variance), we can consider a few different approaches to estimating the "size" of deviance from the between (the matrix $H$) and the within (the matrix $E$) distances. Each matrix represents something similar to the univariate ANOVA example, but we are now comparing the differences in matrices rather than in vectors. This makes the task more difficult, as we cannot simply use the F-distribution as a comparison of squared differences -- our results will also look like matrices, not single numbers.</p>
 <p>There have been four proposed solutions to this problem, named after Wilks, Roys, Pillai and Hotelling respectively. Each of these attempts to quantify the magnitude of the between matrix divided by the within matrix using the determinant or the eigenvalues of the product of these two matrices. If this value is greater than a certain threshold, we conclude that the groups are different, via a similar intuition with ANOVA. However, unlike ANOVA, no such simple distribution exists to describe the two error matrices.</p>
@@ -1089,111 +1264,111 @@ significantly different from one another depending on the rate groups -- Low or 
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>return_MANOVA_results <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>dataset<span class="p">,</span> group_column<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  F_dists <span class="o">&lt;-</span> find_approx_F_dist<span class="p">(</span>dataset<span class="p">,</span> group_column<span class="p">)</span></span>
-<span class="code-line">  results <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="kp">sapply</span><span class="p">(</span>X <span class="o">=</span> F_dists<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Wilks&#39;</span><span class="p">,</span><span class="s">&#39;Roy&#39;</span><span class="p">,</span><span class="s">&#39;Pillai&#39;</span><span class="p">,</span><span class="s">&#39;Hotelling&#39;</span><span class="p">)],</span> FUN <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>obj<span class="p">)</span> pf<span class="p">(</span>obj<span class="p">[</span><span class="m">1</span><span class="p">],</span> obj<span class="p">[</span><span class="m">2</span><span class="p">],</span> obj<span class="p">[</span><span class="m">3</span><span class="p">]))</span></span>
-<span class="code-line">  results <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>p_f <span class="o">=</span> results<span class="p">,</span> statistic <span class="o">=</span> F_dists<span class="o">$</span>untransformed<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">],</span></span>
-<span class="code-line">                   <span class="kt">data.frame</span><span class="p">(</span>F_dists<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Wilks&#39;</span><span class="p">,</span><span class="s">&#39;Roy&#39;</span><span class="p">,</span><span class="s">&#39;Pillai&#39;</span><span class="p">,</span><span class="s">&#39;Hotelling&#39;</span><span class="p">)],</span>row.names <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;F Approx.&#39;</span><span class="p">,</span> <span class="s">&#39;df1&#39;</span><span class="p">,</span> <span class="s">&#39;df2&#39;</span><span class="p">)))</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span>results<span class="p">)</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">return_MANOVA_results</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group_column</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">F_dists</span> <span class="o">&lt;-</span> <span class="nf">find_approx_F_dist</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group_column</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">results</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="o">-</span> <span class="nf">sapply</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">F_dists</span><span class="nf">[c</span><span class="p">(</span><span class="s">&#39;Wilks&#39;</span><span class="p">,</span><span class="s">&#39;Roy&#39;</span><span class="p">,</span><span class="s">&#39;Pillai&#39;</span><span class="p">,</span><span class="s">&#39;Hotelling&#39;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span> <span class="n">FUN</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="nf">pf</span><span class="p">(</span><span class="n">obj[1]</span><span class="p">,</span> <span class="n">obj[2]</span><span class="p">,</span> <span class="n">obj[3]</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">results</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">p_f</span> <span class="o">=</span> <span class="n">results</span><span class="p">,</span> <span class="n">statistic</span> <span class="o">=</span> <span class="n">F_dists</span><span class="o">$</span><span class="n">untransformed[1</span><span class="o">:</span><span class="m">4</span><span class="n">]</span><span class="p">,</span></span>
+<span class="code-line">                   <span class="nf">data.frame</span><span class="p">(</span><span class="n">F_dists</span><span class="nf">[c</span><span class="p">(</span><span class="s">&#39;Wilks&#39;</span><span class="p">,</span><span class="s">&#39;Roy&#39;</span><span class="p">,</span><span class="s">&#39;Pillai&#39;</span><span class="p">,</span><span class="s">&#39;Hotelling&#39;</span><span class="p">)</span><span class="n">]</span><span class="p">,</span><span class="n">row.names</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;F Approx.&#39;</span><span class="p">,</span> <span class="s">&#39;df1&#39;</span><span class="p">,</span> <span class="s">&#39;df2&#39;</span><span class="p">)))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">find_approx_F_dist <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>dataset<span class="p">,</span> group_column<span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line"><span class="n">find_approx_F_dist</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group_column</span><span class="p">)</span> <span class="p">{</span></span>
 <span class="code-line">  <span class="c1"># dataset (dataframe): dataset with groupings as integer values. </span></span>
 <span class="code-line">  <span class="c1"># group_column (string): string name of column with group entries, integer values. </span></span>
-<span class="code-line">  MANOVA_stat_lst <span class="o">&lt;-</span> find_MANOVA_statistics<span class="p">(</span>dataset<span class="p">,</span>group_column<span class="p">)</span></span>
+<span class="code-line">  <span class="n">MANOVA_stat_lst</span> <span class="o">&lt;-</span> <span class="nf">find_MANOVA_statistics</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">group_column</span><span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  Vh <span class="o">&lt;-</span> MANOVA_stat_lst<span class="p">[</span><span class="s">&#39;n_groups&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="m">1</span></span>
-<span class="code-line">  p <span class="o">&lt;-</span> <span class="kp">ncol</span><span class="p">(</span>dataset<span class="p">)</span> <span class="o">-</span> <span class="m">1</span></span>
-<span class="code-line">  Ve <span class="o">&lt;-</span> <span class="kp">nrow</span><span class="p">(</span>dataset<span class="p">)</span> <span class="o">-</span> Vh <span class="o">-</span> <span class="m">1</span></span>
-<span class="code-line">  s <span class="o">&lt;-</span> <span class="kp">min</span><span class="p">(</span>Vh<span class="p">,</span> p<span class="p">)</span> </span>
+<span class="code-line">  <span class="n">Vh</span> <span class="o">&lt;-</span> <span class="n">MANOVA_stat_lst[</span><span class="s">&#39;n_groups&#39;</span><span class="n">]</span> <span class="o">-</span> <span class="m">1</span></span>
+<span class="code-line">  <span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">ncol</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span></span>
+<span class="code-line">  <span class="n">Ve</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="n">Vh</span> <span class="o">-</span> <span class="m">1</span></span>
+<span class="code-line">  <span class="n">s</span> <span class="o">&lt;-</span> <span class="nf">min</span><span class="p">(</span><span class="n">Vh</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> </span>
 <span class="code-line">  </span>
-<span class="code-line">  Wilks_approx_F <span class="o">&lt;-</span> FforWilks<span class="p">(</span>Lambda <span class="o">=</span> MANOVA_stat_lst<span class="p">[</span><span class="s">&#39;Wilks&#39;</span><span class="p">],</span> Vh <span class="o">=</span> Vh<span class="p">,</span> p <span class="o">=</span> p<span class="p">,</span> Ve <span class="o">=</span> Ve<span class="p">)</span></span>
-<span class="code-line">  Roy_approx_F <span class="o">&lt;-</span> FBoundforRoy<span class="p">(</span>R <span class="o">=</span> MANOVA_stat_lst<span class="p">[</span><span class="s">&#39;Roys&#39;</span><span class="p">],</span> Vh <span class="o">=</span> Vh<span class="p">,</span> p <span class="o">=</span> p<span class="p">,</span> Ve <span class="o">=</span> Ve<span class="p">)</span></span>
-<span class="code-line">  Pillai_approx_F <span class="o">&lt;-</span> FapproxforPillai<span class="p">(</span>P <span class="o">=</span> MANOVA_stat_lst<span class="p">[</span><span class="s">&#39;Pillai&#39;</span><span class="p">],</span> Vh <span class="o">=</span> Vh<span class="p">,</span> p <span class="o">=</span> p<span class="p">,</span> Ve <span class="o">=</span> Ve<span class="p">,</span> s <span class="o">=</span> s<span class="p">)</span></span>
-<span class="code-line">  Hotelling_approx_F <span class="o">&lt;-</span> FapproxforHotelling<span class="p">(</span>H <span class="o">=</span> MANOVA_stat_lst<span class="p">[</span><span class="s">&#39;Hotelling&#39;</span><span class="p">],</span> Vh <span class="o">=</span> Vh<span class="p">,</span> p <span class="o">=</span> p<span class="p">,</span> Ve <span class="o">=</span> Ve<span class="p">)</span></span>
+<span class="code-line">  <span class="n">Wilks_approx_F</span> <span class="o">&lt;-</span> <span class="nf">FforWilks</span><span class="p">(</span><span class="n">Lambda</span> <span class="o">=</span> <span class="n">MANOVA_stat_lst[</span><span class="s">&#39;Wilks&#39;</span><span class="n">]</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span> <span class="o">=</span> <span class="n">Ve</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Roy_approx_F</span> <span class="o">&lt;-</span> <span class="nf">FBoundforRoy</span><span class="p">(</span><span class="n">R</span> <span class="o">=</span> <span class="n">MANOVA_stat_lst[</span><span class="s">&#39;Roys&#39;</span><span class="n">]</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span> <span class="o">=</span> <span class="n">Ve</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Pillai_approx_F</span> <span class="o">&lt;-</span> <span class="nf">FapproxforPillai</span><span class="p">(</span><span class="n">P</span> <span class="o">=</span> <span class="n">MANOVA_stat_lst[</span><span class="s">&#39;Pillai&#39;</span><span class="n">]</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span> <span class="o">=</span> <span class="n">Ve</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Hotelling_approx_F</span> <span class="o">&lt;-</span> <span class="nf">FapproxforHotelling</span><span class="p">(</span><span class="n">H</span> <span class="o">=</span> <span class="n">MANOVA_stat_lst[</span><span class="s">&#39;Hotelling&#39;</span><span class="n">]</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span> <span class="o">=</span> <span class="n">Ve</span><span class="p">)</span></span>
 <span class="code-line"></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>untransformed <span class="o">=</span> MANOVA_stat_lst<span class="p">,</span> Wilks <span class="o">=</span> Wilks_approx_F<span class="p">,</span>Roy <span class="o">=</span> Roy_approx_F<span class="p">,</span> Pillai <span class="o">=</span> Pillai_approx_F<span class="p">,</span> Hotelling <span class="o">=</span> Hotelling_approx_F<span class="p">))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">untransformed</span> <span class="o">=</span> <span class="n">MANOVA_stat_lst</span><span class="p">,</span> <span class="n">Wilks</span> <span class="o">=</span> <span class="n">Wilks_approx_F</span><span class="p">,</span><span class="n">Roy</span> <span class="o">=</span> <span class="n">Roy_approx_F</span><span class="p">,</span> <span class="n">Pillai</span> <span class="o">=</span> <span class="n">Pillai_approx_F</span><span class="p">,</span> <span class="n">Hotelling</span> <span class="o">=</span> <span class="n">Hotelling_approx_F</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">find_MANOVA_statistics <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>dataset<span class="p">,</span> group_column<span class="p">){</span></span>
+<span class="code-line"><span class="n">find_MANOVA_statistics</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group_column</span><span class="p">){</span></span>
 <span class="code-line">  <span class="c1"># dataset (dataframe): dataset with groupings as integer values. </span></span>
 <span class="code-line">  <span class="c1"># group_column (string): string name of column with group entries, integer values. </span></span>
 <span class="code-line">  </span>
-<span class="code-line">  grouped_ds_lst <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span><span class="kp">unique</span><span class="p">(</span>dataset<span class="p">[,</span>group_column<span class="p">])),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> dataset<span class="p">[</span>dataset<span class="p">[,</span>group_column<span class="p">]</span> <span class="o">==</span> i<span class="p">,</span><span class="o">!</span><span class="kp">names</span><span class="p">(</span>dataset<span class="p">)</span> <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span>group_column<span class="p">)])</span></span>
-<span class="code-line">  H <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span>grouped_ds_lst<span class="p">,</span><span class="kr">function</span><span class="p">(</span>g<span class="p">)</span> hypothesis_iv<span class="p">(</span>g<span class="p">,</span> dataset<span class="p">)))</span></span>
-<span class="code-line">  E <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span>grouped_ds_lst<span class="p">,</span><span class="kr">function</span><span class="p">(</span>g<span class="p">)</span> error_iv<span class="p">(</span>g<span class="p">,</span> dataset<span class="p">)))</span></span>
+<span class="code-line">  <span class="n">grouped_ds_lst</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">dataset[</span><span class="p">,</span><span class="n">group_column]</span><span class="p">)),</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">dataset[dataset[</span><span class="p">,</span><span class="n">group_column]</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span><span class="o">!</span><span class="nf">names</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="n">group_column</span><span class="p">)</span><span class="n">]</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">H</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">grouped_ds_lst</span><span class="p">,</span><span class="nf">function</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="nf">hypothesis_iv</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)))</span></span>
+<span class="code-line">  <span class="n">E</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">grouped_ds_lst</span><span class="p">,</span><span class="nf">function</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="nf">error_iv</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)))</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  Einv <span class="o">&lt;-</span> <span class="kp">solve</span><span class="p">(</span>E<span class="p">)</span></span>
-<span class="code-line">  HoverE <span class="o">&lt;-</span> H <span class="o">%*%</span> Einv</span>
-<span class="code-line">  eigen_det <span class="o">&lt;-</span> <span class="kp">eigen</span><span class="p">(</span>HoverE<span class="p">)</span></span>
-<span class="code-line">  ev <span class="o">&lt;-</span> eigen_det<span class="o">$</span>values</span>
+<span class="code-line">  <span class="n">Einv</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="n">E</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">HoverE</span> <span class="o">&lt;-</span> <span class="n">H</span> <span class="o">%*%</span> <span class="n">Einv</span></span>
+<span class="code-line">  <span class="n">eigen_det</span> <span class="o">&lt;-</span> <span class="nf">eigen</span><span class="p">(</span><span class="n">HoverE</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">ev</span> <span class="o">&lt;-</span> <span class="n">eigen_det</span><span class="o">$</span><span class="n">values</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  Wilks <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="kp">prod</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> ev<span class="p">))</span></span>
-<span class="code-line">  Roys <span class="o">&lt;-</span> <span class="p">(</span><span class="kp">max</span><span class="p">(</span>ev<span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="kp">max</span><span class="p">(</span>ev<span class="p">))</span></span>
-<span class="code-line">  Pillai <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">(</span>ev<span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> ev<span class="p">))</span></span>
-<span class="code-line">  Hotelling <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">(</span>ev<span class="p">)</span></span>
+<span class="code-line">  <span class="n">Wilks</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">/</span><span class="p">(</span><span class="nf">prod</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">ev</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">Roys</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">ev</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="nf">max</span><span class="p">(</span><span class="n">ev</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">Pillai</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">ev</span><span class="o">/</span><span class="p">(</span><span class="m">1</span> <span class="o">+</span> <span class="n">ev</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">Hotelling</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>Wilks <span class="o">=</span> Wilks<span class="p">,</span>Roys <span class="o">=</span> Roys<span class="p">,</span>Pillai <span class="o">=</span> Pillai<span class="p">,</span>Hotelling <span class="o">=</span> Hotelling<span class="p">,</span> n_groups <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>grouped_ds_lst<span class="p">)))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">Wilks</span> <span class="o">=</span> <span class="n">Wilks</span><span class="p">,</span><span class="n">Roys</span> <span class="o">=</span> <span class="n">Roys</span><span class="p">,</span><span class="n">Pillai</span> <span class="o">=</span> <span class="n">Pillai</span><span class="p">,</span><span class="n">Hotelling</span> <span class="o">=</span> <span class="n">Hotelling</span><span class="p">,</span> <span class="n">n_groups</span> <span class="o">=</span> <span class="nf">length</span><span class="p">(</span><span class="n">grouped_ds_lst</span><span class="p">)))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">hypothesis_iv <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>group<span class="p">,</span>dataset<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  A <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>group<span class="p">,</span><span class="kp">mean</span><span class="p">)</span></span>
-<span class="code-line">  B <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>dataset<span class="p">[,</span> <span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="kp">ncol</span><span class="p">(</span>dataset<span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)],</span><span class="kp">mean</span><span class="p">)</span></span>
-<span class="code-line">  dif <span class="o">&lt;-</span> A <span class="o">-</span> B</span>
-<span class="code-line">  <span class="kr">return</span><span class="p">((</span>dif <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>dif<span class="p">))</span><span class="o">*</span><span class="kp">nrow</span><span class="p">(</span>group<span class="p">))</span></span>
+<span class="code-line"><span class="n">hypothesis_iv</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">dataset</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">A</span> <span class="o">&lt;-</span> <span class="nf">sapply</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">B</span> <span class="o">&lt;-</span> <span class="nf">sapply</span><span class="p">(</span><span class="n">dataset[</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">ncol</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="n">]</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">dif</span> <span class="o">&lt;-</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">((</span><span class="n">dif</span> <span class="o">%*%</span> <span class="nf">t</span><span class="p">(</span><span class="n">dif</span><span class="p">))</span><span class="o">*</span><span class="nf">nrow</span><span class="p">(</span><span class="n">group</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">error_iv <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>group<span class="p">,</span>dataset<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  A <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>group<span class="p">,</span><span class="kp">mean</span><span class="p">)</span></span>
+<span class="code-line"><span class="n">error_iv</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">dataset</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">A</span> <span class="o">&lt;-</span> <span class="nf">sapply</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">mean</span><span class="p">)</span></span>
 <span class="code-line"> </span>
-<span class="code-line">  mattimestranspose <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>A<span class="p">)</span></span>
-<span class="code-line">    <span class="kr">return</span><span class="p">(</span>A <span class="o">%*%</span> <span class="kp">t</span><span class="p">(</span>A<span class="p">))</span></span>
+<span class="code-line">  <span class="n">mattimestranspose</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">A</span><span class="p">)</span></span>
+<span class="code-line">    <span class="nf">return</span><span class="p">(</span><span class="n">A</span> <span class="o">%*%</span> <span class="nf">t</span><span class="p">(</span><span class="n">A</span><span class="p">))</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  mylist <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>group<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> mattimestranspose<span class="p">(</span><span class="kp">t</span><span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>group<span class="p">[</span>i<span class="p">,]</span> <span class="o">-</span> A<span class="p">))))</span></span>
-<span class="code-line">  a1 <span class="o">&lt;-</span> <span class="kp">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span>mylist<span class="p">)</span></span>
+<span class="code-line">  <span class="n">mylist</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">group</span><span class="p">),</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">mattimestranspose</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">group[i</span><span class="p">,</span><span class="n">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">))))</span></span>
+<span class="code-line">  <span class="n">a1</span> <span class="o">&lt;-</span> <span class="nf">Reduce</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">,</span><span class="n">mylist</span><span class="p">)</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span>a1<span class="p">)</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">FforWilks <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>Lambda<span class="p">,</span> Vh<span class="p">,</span> p<span class="p">,</span> Ve<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  t <span class="o">&lt;-</span> <span class="p">(((</span>p<span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>Vh<span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">-</span> <span class="m">4</span><span class="p">)</span><span class="o">/</span><span class="p">((</span>p<span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>Vh<span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">-</span> <span class="m">5</span><span class="p">))</span><span class="o">^</span><span class="m">.5</span></span>
-<span class="code-line">  df1 <span class="o">&lt;-</span> p<span class="o">*</span>Vh</span>
-<span class="code-line">  w <span class="o">&lt;-</span> Ve <span class="o">+</span> Vh <span class="o">-</span> <span class="p">((</span>p <span class="o">+</span> Vh <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">  df2 <span class="o">&lt;-</span> w<span class="o">*</span>t <span class="o">-</span> <span class="p">(((</span>p<span class="o">*</span>Vh<span class="p">)</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">  Fapprox <span class="o">&lt;-</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="p">(</span>Lambda<span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="kp">t</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span>Lambda<span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="kp">t</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span>df2<span class="o">/</span>df1<span class="p">)</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>Fapprox <span class="o">=</span> Fapprox<span class="p">,</span> df1 <span class="o">=</span> df1<span class="p">,</span> df2 <span class="o">=</span> df2<span class="p">))</span></span>
+<span class="code-line"><span class="n">FforWilks</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">Lambda</span><span class="p">,</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">t</span> <span class="o">&lt;-</span> <span class="p">(((</span><span class="n">p^2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Vh^2</span><span class="p">)</span> <span class="o">-</span> <span class="m">4</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">p^2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">Vh^2</span><span class="p">)</span> <span class="o">-</span> <span class="m">5</span><span class="p">))</span><span class="n">^.5</span></span>
+<span class="code-line">  <span class="n">df1</span> <span class="o">&lt;-</span> <span class="n">p</span><span class="o">*</span><span class="n">Vh</span></span>
+<span class="code-line">  <span class="n">w</span> <span class="o">&lt;-</span> <span class="n">Ve</span> <span class="o">+</span> <span class="n">Vh</span> <span class="o">-</span> <span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="n">Vh</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">df2</span> <span class="o">&lt;-</span> <span class="n">w</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="p">(((</span><span class="n">p</span><span class="o">*</span><span class="n">Vh</span><span class="p">)</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Fapprox</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="m">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">Lambda</span><span class="nf">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">t</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">Lambda</span><span class="nf">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">t</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">df2</span><span class="o">/</span><span class="n">df1</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">Fapprox</span> <span class="o">=</span> <span class="n">Fapprox</span><span class="p">,</span> <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">FBoundforRoy <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>R<span class="p">,</span> Vh<span class="p">,</span> p<span class="p">,</span> Ve<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  v1 <span class="o">&lt;-</span> <span class="p">(</span>Ve <span class="o">-</span> p <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
-<span class="code-line">  v2 <span class="o">&lt;-</span> <span class="p">(</span>p <span class="o">-</span> Vh <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
+<span class="code-line"><span class="n">FBoundforRoy</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">v1</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">Ve</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
+<span class="code-line">  <span class="n">v2</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">Vh</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
 <span class="code-line">  </span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>Fapprox <span class="o">=</span> R<span class="o">*</span>v1<span class="o">/</span>v2<span class="p">,</span> df1 <span class="o">=</span> <span class="m">2</span><span class="o">*</span>v1 <span class="o">+</span> <span class="m">2</span><span class="p">,</span> df2 <span class="o">=</span> <span class="m">2</span><span class="o">*</span>v2 <span class="o">+</span> <span class="m">2</span><span class="p">))</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">Fapprox</span> <span class="o">=</span> <span class="n">R</span><span class="o">*</span><span class="n">v1</span><span class="o">/</span><span class="n">v2</span><span class="p">,</span> <span class="n">df1</span> <span class="o">=</span> <span class="m">2</span><span class="o">*</span><span class="n">v1</span> <span class="o">+</span> <span class="m">2</span><span class="p">,</span> <span class="n">df2</span> <span class="o">=</span> <span class="m">2</span><span class="o">*</span><span class="n">v2</span> <span class="o">+</span> <span class="m">2</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">FapproxforPillai <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>P<span class="p">,</span> Vh<span class="p">,</span> p<span class="p">,</span> Ve<span class="p">,</span> s<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  N <span class="o">&lt;-</span> <span class="p">(</span>Ve <span class="o">-</span> Vh <span class="o">+</span> s<span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
-<span class="code-line">  m <span class="o">&lt;-</span> <span class="p">(</span><span class="kp">abs</span><span class="p">(</span>Vh <span class="o">-</span> p<span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
-<span class="code-line">  num <span class="o">&lt;-</span> <span class="p">(</span><span class="m">2</span><span class="o">*</span>N <span class="o">+</span> s <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span>P</span>
-<span class="code-line">  den <span class="o">&lt;-</span> <span class="p">(</span><span class="m">2</span><span class="o">*</span>m <span class="o">+</span> s <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>s <span class="o">-</span> P<span class="p">)</span></span>
-<span class="code-line">  Fapprox <span class="o">&lt;-</span> num<span class="o">/</span>den</span>
-<span class="code-line">  df1 <span class="o">&lt;-</span> s<span class="o">*</span><span class="p">(</span><span class="m">2</span><span class="o">*</span>m <span class="o">+</span> s <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">  df2 <span class="o">&lt;-</span> s<span class="o">*</span><span class="p">(</span><span class="m">2</span><span class="o">*</span>N <span class="o">+</span> s <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>Fapprox <span class="o">=</span> Fapprox<span class="p">,</span> df1 <span class="o">=</span> df1<span class="p">,</span> df2 <span class="o">=</span> df2<span class="p">))</span></span>
+<span class="code-line"><span class="n">FapproxforPillai</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">N</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">Ve</span> <span class="o">-</span> <span class="n">Vh</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
+<span class="code-line">  <span class="n">m</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">Vh</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">2</span></span>
+<span class="code-line">  <span class="n">num</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">N</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="n">P</span></span>
+<span class="code-line">  <span class="n">den</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Fapprox</span> <span class="o">&lt;-</span> <span class="n">num</span><span class="o">/</span><span class="n">den</span></span>
+<span class="code-line">  <span class="n">df1</span> <span class="o">&lt;-</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">df2</span> <span class="o">&lt;-</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">N</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">Fapprox</span> <span class="o">=</span> <span class="n">Fapprox</span><span class="p">,</span> <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 <span class="code-line"></span>
-<span class="code-line">FapproxforHotelling <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>H<span class="p">,</span> Vh<span class="p">,</span> p<span class="p">,</span> Ve<span class="p">)</span> <span class="p">{</span></span>
-<span class="code-line">  a <span class="o">&lt;-</span> p<span class="o">*</span>Vh</span>
-<span class="code-line">  B <span class="o">&lt;-</span> <span class="p">((</span>Ve <span class="o">+</span> Vh <span class="o">-</span> p <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>Ve <span class="o">-</span> <span class="m">1</span><span class="p">))</span><span class="o">/</span><span class="p">((</span>Ve <span class="o">-</span> p <span class="o">-</span> <span class="m">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>Ve <span class="o">-</span> p<span class="p">))</span></span>
-<span class="code-line">  b <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">+</span> <span class="p">((</span>a <span class="o">+</span> <span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span>B <span class="o">-</span> <span class="m">1</span><span class="p">))</span></span>
-<span class="code-line">  cnum <span class="o">&lt;-</span> a<span class="o">*</span><span class="p">(</span>b <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
-<span class="code-line">  cden <span class="o">&lt;-</span> b<span class="o">*</span><span class="p">(</span>Ve <span class="o">-</span> p <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
-<span class="code-line">  Fapprox <span class="o">&lt;-</span> <span class="p">(</span>H<span class="o">*</span>cden<span class="p">)</span><span class="o">/</span>cnum</span>
-<span class="code-line">  <span class="kr">return</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span>Fapprox <span class="o">=</span> Fapprox<span class="p">,</span> df1 <span class="o">=</span> a<span class="p">,</span> df2 <span class="o">=</span> b<span class="p">))</span></span>
+<span class="code-line"><span class="n">FapproxforHotelling</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">Vh</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">Ve</span><span class="p">)</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="n">a</span> <span class="o">&lt;-</span> <span class="n">p</span><span class="o">*</span><span class="n">Vh</span></span>
+<span class="code-line">  <span class="n">B</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="n">Ve</span> <span class="o">+</span> <span class="n">Vh</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Ve</span> <span class="o">-</span> <span class="m">1</span><span class="p">))</span><span class="o">/</span><span class="p">((</span><span class="n">Ve</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="m">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Ve</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">b</span> <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">+</span> <span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="m">1</span><span class="p">))</span></span>
+<span class="code-line">  <span class="n">cnum</span> <span class="o">&lt;-</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">cden</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">Ve</span> <span class="o">-</span> <span class="n">p</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span></span>
+<span class="code-line">  <span class="n">Fapprox</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">H</span><span class="o">*</span><span class="n">cden</span><span class="p">)</span><span class="o">/</span><span class="n">cnum</span></span>
+<span class="code-line">  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">Fapprox</span> <span class="o">=</span> <span class="n">Fapprox</span><span class="p">,</span> <span class="n">df1</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">df2</span> <span class="o">=</span> <span class="n">b</span><span class="p">))</span></span>
 <span class="code-line"><span class="p">}</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1203,20 +1378,20 @@ significantly different from one another depending on the rate groups -- Low or 
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="code-line"><span></span>tear <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">6.5</span><span class="p">,</span> <span class="m">6.2</span><span class="p">,</span> <span class="m">5.8</span><span class="p">,</span> <span class="m">6.5</span><span class="p">,</span> <span class="m">6.5</span><span class="p">,</span> <span class="m">6.9</span><span class="p">,</span> <span class="m">7.2</span><span class="p">,</span> <span class="m">6.9</span><span class="p">,</span> <span class="m">6.1</span><span class="p">,</span> <span class="m">6.3</span><span class="p">,</span></span>
+<div class=" highlight hl-r"><pre><span class="code-line"><span></span><span class="n">tear</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">6.5</span><span class="p">,</span> <span class="m">6.2</span><span class="p">,</span> <span class="m">5.8</span><span class="p">,</span> <span class="m">6.5</span><span class="p">,</span> <span class="m">6.5</span><span class="p">,</span> <span class="m">6.9</span><span class="p">,</span> <span class="m">7.2</span><span class="p">,</span> <span class="m">6.9</span><span class="p">,</span> <span class="m">6.1</span><span class="p">,</span> <span class="m">6.3</span><span class="p">,</span></span>
 <span class="code-line">          <span class="m">6.7</span><span class="p">,</span> <span class="m">6.6</span><span class="p">,</span> <span class="m">7.2</span><span class="p">,</span> <span class="m">7.1</span><span class="p">,</span> <span class="m">6.8</span><span class="p">,</span> <span class="m">7.1</span><span class="p">,</span> <span class="m">7.0</span><span class="p">,</span> <span class="m">7.2</span><span class="p">,</span> <span class="m">7.5</span><span class="p">,</span> <span class="m">7.6</span><span class="p">)</span></span>
-<span class="code-line">gloss <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">9.5</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.2</span><span class="p">,</span> <span class="m">9.1</span><span class="p">,</span> <span class="m">10.0</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">9.5</span><span class="p">,</span> <span class="m">9.4</span><span class="p">,</span></span>
+<span class="code-line"><span class="n">gloss</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">9.5</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.6</span><span class="p">,</span> <span class="m">9.2</span><span class="p">,</span> <span class="m">9.1</span><span class="p">,</span> <span class="m">10.0</span><span class="p">,</span> <span class="m">9.9</span><span class="p">,</span> <span class="m">9.5</span><span class="p">,</span> <span class="m">9.4</span><span class="p">,</span></span>
 <span class="code-line">           <span class="m">9.1</span><span class="p">,</span> <span class="m">9.3</span><span class="p">,</span> <span class="m">8.3</span><span class="p">,</span> <span class="m">8.4</span><span class="p">,</span> <span class="m">8.5</span><span class="p">,</span> <span class="m">9.2</span><span class="p">,</span> <span class="m">8.8</span><span class="p">,</span> <span class="m">9.7</span><span class="p">,</span> <span class="m">10.1</span><span class="p">,</span> <span class="m">9.2</span><span class="p">)</span></span>
-<span class="code-line">opacity <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">4.4</span><span class="p">,</span> <span class="m">6.4</span><span class="p">,</span> <span class="m">3.0</span><span class="p">,</span> <span class="m">4.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">5.7</span><span class="p">,</span> <span class="m">2.0</span><span class="p">,</span> <span class="m">3.9</span><span class="p">,</span> <span class="m">1.9</span><span class="p">,</span> <span class="m">5.7</span><span class="p">,</span></span>
+<span class="code-line"><span class="n">opacity</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">4.4</span><span class="p">,</span> <span class="m">6.4</span><span class="p">,</span> <span class="m">3.0</span><span class="p">,</span> <span class="m">4.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="m">5.7</span><span class="p">,</span> <span class="m">2.0</span><span class="p">,</span> <span class="m">3.9</span><span class="p">,</span> <span class="m">1.9</span><span class="p">,</span> <span class="m">5.7</span><span class="p">,</span></span>
 <span class="code-line">             <span class="m">2.8</span><span class="p">,</span> <span class="m">4.1</span><span class="p">,</span> <span class="m">3.8</span><span class="p">,</span> <span class="m">1.6</span><span class="p">,</span> <span class="m">3.4</span><span class="p">,</span> <span class="m">8.4</span><span class="p">,</span> <span class="m">5.2</span><span class="p">,</span> <span class="m">6.9</span><span class="p">,</span> <span class="m">2.7</span><span class="p">,</span> <span class="m">1.9</span><span class="p">)</span></span>
-<span class="code-line">rate     <span class="o">&lt;-</span> <span class="kp">gl</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">10</span><span class="p">,</span> labels <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Low&quot;</span><span class="p">,</span> <span class="s">&quot;High&quot;</span><span class="p">))</span></span>
+<span class="code-line"><span class="n">rate</span>     <span class="o">&lt;-</span> <span class="nf">gl</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">10</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Low&quot;</span><span class="p">,</span> <span class="s">&quot;High&quot;</span><span class="p">))</span></span>
 <span class="code-line"></span>
-<span class="code-line">Y <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>tear<span class="p">,</span>gloss<span class="p">,</span>opacity<span class="p">,</span>rate<span class="p">))</span></span>
+<span class="code-line"><span class="n">Y</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">cbind</span><span class="p">(</span><span class="n">tear</span><span class="p">,</span><span class="n">gloss</span><span class="p">,</span><span class="n">opacity</span><span class="p">,</span><span class="n">rate</span><span class="p">))</span></span>
 <span class="code-line"></span>
-<span class="code-line">return_MANOVA_results<span class="p">(</span>Y<span class="p">,</span> <span class="s">&#39;rate&#39;</span><span class="p">)</span></span>
+<span class="code-line"><span class="nf">return_MANOVA_results</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="s">&#39;rate&#39;</span><span class="p">)</span></span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1226,7 +1401,7 @@ significantly different from one another depending on the rate groups -- Low or 
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1251,8 +1426,7 @@ significantly different from one another depending on the rate groups -- Low or 
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that all four methods approximately agree that this would be unlikely if the two groups followed the same Multivariate Normal Distribution.</p>
 
