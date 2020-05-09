@@ -1,0 +1,9 @@
+title: Approaches to Contingency Tables
+subtitle: A Bayesian Approach 
+author: Sean Ammirati
+category: Bayesian Analysis 
+slug: Approaches to Contingency Tables
+date: 2018/10/03
+tags: contingency tables, bayesian statistics, chi-squared, fischers exact
+summary: A brief exercise using contingency tables to show different approaches.
+status: Published
