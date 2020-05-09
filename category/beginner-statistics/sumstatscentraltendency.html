@@ -34,7 +34,7 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/styles.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
         <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
@@ -90,7 +90,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            
+
             <style type="text/css">/*!
 *
 * IPython notebook
@@ -812,8 +812,8 @@ div.output_area {
 div.output_area .MathJax_Display {
   text-align: left !important;
 }
-div.output_area 
-div.output_area 
+div.output_area
+div.output_area
 div.output_area img,
 div.output_area svg {
   max-width: 100%;
@@ -1043,7 +1043,7 @@ div.output_unrecognized a:hover {
 .rendered_html * + .alert {
   margin-top: 1em;
 }
-[dir="rtl"] 
+[dir="rtl"]
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1093,10 +1093,10 @@ h6:hover .anchor-link {
 .text_cell.rendered .input_area {
   display: none;
 }
-.text_cell.rendered 
+.text_cell.rendered
 .text_cell.rendered .rendered_html tr,
 .text_cell.rendered .rendered_html th,
-.text_cell.rendered 
+.text_cell.rendered
 .text_cell.unrendered .text_cell_render {
   display: none;
 }
@@ -1442,7 +1442,7 @@ h6:hover .anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One common example of an average is the arithmetic mean. We are all familiar with this from our schooling days:</p>
 \begin{equation}
-\bar{X}_{mean} = \frac{ \sum_{i=0}^{n} x_{i} }{n} 
+\bar{X}_{mean} = \frac{ \sum_{i=0}^{n} x_{i} }{n}
 \end{equation}
 </div>
 </div>
@@ -1511,10 +1511,10 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For example, we first list the points from smallest to largest:</p>
-$$ 
+$$
 50, 80, 80, 94, 95, 100
 $$<p>Then, we iteratively remove points from each side until we arrive at a single value (if the total number of points is odd) or two values (if it is even). This is shown below:</p>
-$$ 
+$$
 50, 80, 80, 94, 95, 100\\
     80, 80, 94, 95\\
         80, 94\\
@@ -1529,11 +1529,11 @@ $$<p>Note that we can also express this as follows:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Rank the $X_i$ from smallest to largest, where $i = 1, ..., n$. 
+<p>Rank the $X_i$ from smallest to largest, where $i = 1, ..., n$.
 Define $X^{(i)}$ as the $i$th <b>order statistic</b>, where $i$ is the rank in this list.</p>
 <p>Then:
 $$
-\tilde{X}_{median} = 
+\tilde{X}_{median} =
 \begin{cases}
     X^{(\frac{n+1}{2})},                               &amp; \text{if n is odd}\\
     \frac{X^{(\frac{n+2}{2})} + X^{(\frac{n}{2})}}{2}, &amp; \text{if n is even}
@@ -1756,8 +1756,8 @@ $$</p>
 $$
 TM = \frac{Q_1 + 2M + Q_3}{4}
 $$<p>Intuitively, this is the average of the Median (M) and the midhinge, defined as:</p>
-$$ 
-MH = \frac{Q_1 + Q_3}{2} 
+$$
+MH = \frac{Q_1 + Q_3}{2}
 $$<p>This is calculated below:</p>
 
 </div>
@@ -1833,7 +1833,7 @@ $$<p>This is calculated below:</p>
 $$
 \tilde{S} = {80, 80, 80, 94, 95, 95}
 $$<p>Here, we replaced 50 with 80 -- the next smallest value -- and 100 with 95 -- the next largest value. In this case, the data is quite small, so we would likely not want to do this, but for a large dataset this can be useful. We then take the average of the remaining values.</p>
-$$ 
+$$
 \frac{ \sum_i \tilde{s}_{i} }{n},\\
 \forall \tilde{s}_i \in \tilde{S}
 $$<p>If you don't understand the notation, don't worry. We're just taking an average of our "new" sample. I just did it to be precise.</p>
@@ -2177,11 +2177,11 @@ $$
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, as a rule of thumb, for a <b> unimodal </b> distribution (meaning there is only one mode), it is often but not always the case that:</p>
 <p>Let $\bar{X}_{median}$ be the median of a distribution and $\bar{X}_{mean}$ be the arithmetic mean. Then:</p>
-<p>if $\bar{X}_{median} &lt;&lt; \bar{X}_{mean}$, 
+<p>if $\bar{X}_{median} &lt;&lt; \bar{X}_{mean}$,
 X is <b> right skewed </b></p>
 <p>if $\bar{X}_{median} \approx \bar{X}_{mean}$,<br>
 X is approximately <b> symmetric </b></p>
-<p>if $\bar{X}_{median} &gt;&gt; \bar{X}_{mean}$, 
+<p>if $\bar{X}_{median} &gt;&gt; \bar{X}_{mean}$,
 X is <b> left skewed </b></p>
 <p>This can be used as a guideline to see how skewed our distribution is. However, it is not foolproof - in some cases this fails. See <a href="https://en.wikipedia.org/wiki/Skewness#Relationship_of_mean_and_median">this wikipedia article</a> for more information. For instance, consider -6, -4, 0, 0, 2, 8. The mean and median are zero, but this distribution is skewed to the left, i.e. not symmetric.</p>
 
@@ -2666,7 +2666,7 @@ X is <b> left skewed </b></p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Hmm, that seems odd. It turns out that the expectation, or arithmetic mean, of the sampling distribution of the sample mean is equal to the true population mean! 
+<p>Hmm, that seems odd. It turns out that the expectation, or arithmetic mean, of the sampling distribution of the sample mean is equal to the true population mean!
 This property actually follows directly from the definition of the arithmetic mean.</p>
 <p>We're going to go into some maths here, but feel free to skip over it if you don't want to. The point here is that <b> the sample mean is an unbiased estimator of the population mean </b>.</p>
 <p><b>Theorum 1:</b>
@@ -2689,14 +2689,14 @@ $$
 Each value of the population will appear in ${N}\choose{k}$ - ${N-1}\choose{k}$ = $M - \frac{M(N-k)}{N}$ samples. We can say this because it is the total number of possible samples ${N}\choose{k}$ minus the total number of samples of size $k$ which do not contain observation $j$, ${N-1}\choose{k}$. So then we have:</p>
 $$
 \frac{M - \frac{M(N-k)}{N}}{kM} \sum_i x_i
-$$<p>Expanding the left hand side: 
+$$<p>Expanding the left hand side:
 $$
 \frac{M - \frac{M(N-k)}{N}}{kM}
 = \frac{1}{k} - \frac{N-k}{kN}
 =\frac{1}{N}
 $$
 so
-$$ 
+$$
 \sum_{s=1}^{M} \frac{\bar{X}_s}{M} = \frac{ \sum_{i=1}^{N} x_{i} }{N}\\
 $$
 But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! Since we weighed each sample equally in this expectation, this is equivalent to sampling <b> randomly without replacement.</b> This means that we have proven the result -- the sample mean is an <b> unbiased estimator </b> of the population mean. This is a powerful result!</p>
@@ -2863,7 +2863,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 </div>
 </div>
 </div>
- 
+
 
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -2900,7 +2900,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
                  creator of Stats Works. He can be reached on Github, LinkedIn and email.</span><br />
 </div>
 
-            
+
             <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -3000,7 +3000,7 @@ But, we now see that this is exactly equal to the population mean, $\bar{X}_P$! 
 <div id="footer">
     <ul class="footer-content">
         <li class="elegant-subtitle"><span class="site-name">Stats Works</span> - Making Statistics Work for You</li>
-        <li class="elegant-power">Based on Elegant Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+
 
     </ul>
 </div>

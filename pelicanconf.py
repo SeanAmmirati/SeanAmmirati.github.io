@@ -48,8 +48,9 @@ USE_FOLDER_AS_CATEGORY = True
 DISPLAY_CATEGORIES_ON_MENU = True
 
 MARKUP = ('md', 'rmd', 'ipynb')
+from pelican_jupyter import markup as nb_markup
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math',
+PLUGINS = [nb_markup, 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.include_code', 'liquid_tags.notebook',
            'rmd_reader', 'neighbors', 'tipue_search']

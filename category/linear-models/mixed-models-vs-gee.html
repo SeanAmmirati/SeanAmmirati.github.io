@@ -34,7 +34,7 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/pygments.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/styles.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/admonition.css" media="screen">
         <link rel="stylesheet" type="text/css" href="https://seanammirati.github.io/theme/css/custom.css" media="screen">
         <link rel="shortcut icon" href="https://seanammirati.github.io/theme/images/favicon.ico" type="image/x-icon" />
@@ -90,7 +90,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
-            
+
             <style type="text/css">/*!
 *
 * IPython notebook
@@ -812,8 +812,8 @@ div.output_area {
 div.output_area .MathJax_Display {
   text-align: left !important;
 }
-div.output_area 
-div.output_area 
+div.output_area
+div.output_area
 div.output_area img,
 div.output_area svg {
   max-width: 100%;
@@ -1043,7 +1043,7 @@ div.output_unrecognized a:hover {
 .rendered_html * + .alert {
   margin-top: 1em;
 }
-[dir="rtl"] 
+[dir="rtl"]
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -1093,10 +1093,10 @@ h6:hover .anchor-link {
 .text_cell.rendered .input_area {
   display: none;
 }
-.text_cell.rendered 
+.text_cell.rendered
 .text_cell.rendered .rendered_html tr,
 .text_cell.rendered .rendered_html th,
-.text_cell.rendered 
+.text_cell.rendered
 .text_cell.unrendered .text_cell_render {
   display: none;
 }
@@ -1245,7 +1245,7 @@ h6:hover .anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is an example using 'fake' data for the difference between lmer (which assumes a constant (independent) covariance matrix for the error terms)
 and geepack (general estimating equations, which can handle an unknown convariance structure))</p>
-<p>This example highlights the power of using a GEE model over a HLM model when the covariance structure differs at different levels of the data. 
+<p>This example highlights the power of using a GEE model over a HLM model when the covariance structure differs at different levels of the data.
 The GEE model can be seen as a population estimating model -- i.e., it is preferable when we are trying to make inferences about the population rather than the individuals in the sample. We do not explicitly parametrize over the groups -- instead, we assign some covariance structure between members of each group and find the marginal distribution.</p>
 
 </div>
@@ -1376,7 +1376,7 @@ The GEE model can be seen as a population estimating model -- i.e., it is prefer
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we want to estimate the (log) time based on age and club. However, the data is clearly correlated -- each individual will have different 
+<p>Now, we want to estimate the (log) time based on age and club. However, the data is clearly correlated -- each individual will have different
 specifications. Consider that we believe that the average (log) time will be different for each individual, as a baseline. This is a mixed model
 more specifically a Random Intercept model. This is highlighted by the following equations.</p>
 
@@ -1486,7 +1486,7 @@ more specifically a Random Intercept model. This is highlighted by the following
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>However, this assumes that the covariance structure of the errors at each level are independent. This assumption is too simplifying -- 
+<p>However, this assumes that the covariance structure of the errors at each level are independent. This assumption is too simplifying --
 it is likely that the variables are correlated across individuals (for instance, it appears that the clubs are for particular age ranges). To account for this, we could add more random effects to the model (which would subsequently break the data down into even smaller groups), or we could use a GEE to forgo the subject-level estimations and estimate on the populations, assuming some covariance structure between groups.</p>
 
 </div>
@@ -1589,13 +1589,13 @@ it is likely that the variables are correlated across individuals (for instance,
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The main shift in inference here is from likelihood models (which are generally prefered) to a semi-parametric model that depends only on the
-first two moments. GEEs are better estimators of a population-level variance -- they cannot account for individual differences explicitly, as a GLMM could. In this example, however, we see that the GEE finds the log(age) value significant where the previous model had not. Depending on the 
+first two moments. GEEs are better estimators of a population-level variance -- they cannot account for individual differences explicitly, as a GLMM could. In this example, however, we see that the GEE finds the log(age) value significant where the previous model had not. Depending on the
 goal of the analysis, the GEE will produce better estimates asymptotically at the cost of sample-level inference.</p>
 
 </div>
 </div>
 </div>
- 
+
 
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -1632,7 +1632,7 @@ goal of the analysis, the GEE will produce better estimates asymptotically at th
                  creator of Stats Works. He can be reached on Github, LinkedIn and email.</span><br />
 </div>
 
-            
+
             <section>
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -1732,7 +1732,7 @@ goal of the analysis, the GEE will produce better estimates asymptotically at th
 <div id="footer">
     <ul class="footer-content">
         <li class="elegant-subtitle"><span class="site-name">Stats Works</span> - Making Statistics Work for You</li>
-        <li class="elegant-power">Based on Elegant Theme: <a href="https://github.com/Pelican-Elegant/elegant/" title="Theme Elegant Home Page">Elegant</a></li>
+
 
     </ul>
 </div>
