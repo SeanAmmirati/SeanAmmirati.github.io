@@ -12,7 +12,8 @@
 }
 .initial_img {
     display: grid;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 .center-fit {
     min-width: 100%;
