@@ -6,6 +6,12 @@
     src: url('fonts/simplifica_typeface-webfont.woff');
   }
 
+
+.recents_row {
+    display: flex;
+    align-items: center;
+}
+
 * {
     margin: 0;
     padding: 0;
