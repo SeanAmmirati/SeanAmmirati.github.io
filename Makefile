@@ -125,8 +125,6 @@ cf_upload: publish
 
 github: publish
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
-	echo "statsworks.info" > CNAME
-	git commit -a -m "adding CNAME"
 	git push origin $(GITHUB_PAGES_BRANCH)
 
 
