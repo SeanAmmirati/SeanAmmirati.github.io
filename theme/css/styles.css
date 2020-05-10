@@ -12,8 +12,8 @@
 }
 .initial_img {
     display: grid;
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
     max-height: 100vh;
     max-width: 100vw;
 }
