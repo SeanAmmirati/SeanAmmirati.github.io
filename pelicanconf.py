@@ -75,7 +75,7 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'English'
 
-THEME = 'pelican-themes/elegant'
+THEME = 'pelican-themes/statsworks'
 
 
 #Elegant Toggles

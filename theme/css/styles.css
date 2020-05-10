@@ -24,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Baskerville, Garamond, Georgia, 'DejaVu Serif', 'Times New Roman', Times, Serif;
+    font-family:'Goudy Bookletter 1911', Georgia, Times, serif;
     font-weight: normal;
 }
 h1 small, h1 a, h1 a:hover,
@@ -55,7 +55,7 @@ hr {
 /* Footer */
 #footer {
     border-top: 1px solid  rgba(0, 0, 0, .2);
-    font: .8em Calibri, Tahoma, Arial, Sans-Serif;
+    font: .8em 'Raleway', Helvetica, Arial, sans-serif;
     margin: 15px 0 0 0;
     padding: 0;
 }
@@ -95,7 +95,7 @@ ul.footer-content li {
     text-shadow: 0 0;
 }
 .disqus-comment-count {
-    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: .9em;
 }
 #disqus_thread {
@@ -171,10 +171,10 @@ div.highlight {
     line-height: 28px;
 }
 .tag-title {
-    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
 }
 .articles-in-tag li {
-    font: 1.1em/1.6em 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
+    font: 1.1em/1.6em 'Raleway', Helvetica, Arial, sans-serif;
 }
 /* Article */
 article p:not(#list-of-translations):not(#post-share-links) a,
@@ -192,7 +192,7 @@ article div.article-content ul:not(.articles-timeline) a:hover {
     text-shadow: none;
 }
 .article-content, div.recent-posts p {
-    font: 1.2em/1.6em 'PT Serif', Georgia, 'Times New Roman', Times, Serif;
+    font: 1.2em/1.6em 'Goudy Bookletter 1911', Georgia, Times, serif;
     text-align: justify;
 }
 .article-content {
@@ -223,7 +223,7 @@ article div.article-content ul:not(.articles-timeline) a:hover {
     position:absolute;
 }
 .article-content blockquote {
-    font-family: 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: inherit;
     font-variant: normal;
     line-height: 1.7em;
@@ -394,7 +394,7 @@ ul.list-articles-category {
 ul.list-articles-category li time {
     color: #8F8F8F;
     display: inline-block;
-    font: .9em 'PT Sans', 'Helvetica Neue', Arial, Sans-Serif;
+    font: .9em 'Raleway', Helvetica, Arial, sans-serif;
     width: 7em;
 }
 a.category-link {
@@ -404,7 +404,7 @@ a.category-link:hover {
     text-decoration: none;
 }
 a.list-of-categories {
-    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: 1.1em;
 }
 a.list-of-categories:hover {
@@ -419,7 +419,7 @@ ul.list-all-articles {
 }
 ul.list-all-articles li {
     border-bottom: 1px dotted #000;
-    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: 1.1em;
     padding: .3em 0;
     overflow: auto;
@@ -427,7 +427,7 @@ ul.list-all-articles li {
 ul.list-all-articles li time {
     color: #AAA;
     float: right;
-    font-family: 'PT Sans', 'Helvetica Neue', Arial, Sans-Serif;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     font-size: .9em;
 }
 div.blog-archives h2 {
@@ -456,7 +456,7 @@ div.blog-archives time, div.recent-posts time {
 }
 div.blog-archives time, div.recent-posts time, div.recent-posts section {
     color: #8F8F8F;
-    font: .9em 'PT Sans', 'Helvetica Neue', Arial, Sans-Serif;
+    font: .9em 'Raleway', Helvetica, Arial, sans-serif;
 }
 div.recent-posts section a {
     color: inherit;
@@ -567,7 +567,7 @@ a#allposts:hover {
 }
 .proj-desc {
     color: #999;
-    font: .9em 'PT Sans', 'Helvetica Neue', Arial, Sans-Serif;
+    font: .9em 'Raleway', Helvetica, Arial, sans-serif;
 }
 /* reST specific rules*/
 .literal {
@@ -584,7 +584,7 @@ a#allposts:hover {
 }
 /* Helper CSS classes */
 .amp {
-    font-family: 'Warnock Pro', 'Goudy Old Style', 'Palatino', 'Book Antiqua', Serif;
+    font-family: 'Goudy Bookletter 1911', Georgia, Times, serif;
     font-style: italic;
 }
 /* Use following classes to add floating images to your post */
