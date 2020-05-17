@@ -5,7 +5,28 @@
     font-family: simplifica;
     src: url('fonts/simplifica_typeface-webfont.woff');
   }
+.recents_row {
+    display: flex;
+    align-items: center;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.initial_img {
+    display: grid;
+    height: 100%;
+}
+.center-fit {
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+}
 
+.preview_img {
+    display: grid;
+    height: 120px;
+}
 
 body,
 html {

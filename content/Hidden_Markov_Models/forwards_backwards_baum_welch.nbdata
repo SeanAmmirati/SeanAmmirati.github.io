@@ -5,4 +5,5 @@ date: 2018-12-14
 category: Markov Chains
 tags: HMMS, markov chains, forwards-backwards
 status: published
-summary: A overview of extensions of HMMs including the forward backward algorithm and the Baum-Welch algorithm. 
+summary: A overview of extensions of HMMs, including the forward backward algorithm and the Baum-Welch algorithm.
+cover: images/hmm_extended.png

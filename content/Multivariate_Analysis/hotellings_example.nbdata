@@ -4,4 +4,5 @@ date: 2018-11-18
 category: Multivariate Analysis
 tags: hotellings, multivariate, t-test
 status: published
-summary: An example of using the multivariate analogue of the t-test. 
+summary: An example of using the multivariate analogue of the t-test.
+cover: images/hotellings_t.png

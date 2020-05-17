@@ -53,7 +53,7 @@ PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = [nb_markup, 'render_math',
            'better_codeblock_line_numbering',
            'liquid_tags.include_code', 'liquid_tags.notebook',
-           'rmd_reader', 'neighbors', 'tipue_search']
+           'rmd_reader', 'neighbors', 'tipue_search', 'extract_toc']
 
 DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'authors', 'archives', 'search']
 
@@ -62,8 +62,11 @@ MARKDOWN = {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
+        'markdown.extensions.toc': {}
     }
 }
+
+RECENT_ARTICLE_SUMMARY = True
 # Jupyter Notebook
 IGNORE_FILES = ['.ipynb_checkpoints']
 

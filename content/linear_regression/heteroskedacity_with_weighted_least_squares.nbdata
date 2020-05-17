@@ -4,4 +4,5 @@ date: 2019-01-24
 category: Linear Models
 tags: theory, weighted least squares, linear regression, heteroskedacity
 status: published
-summary: A theoretical approach to the problem of heteroskedacity with WLS. 
+summary: A theoretical approach to the problem of heteroskedacity with WLS.
+cover: images/weighted_least_squares_cover.svg

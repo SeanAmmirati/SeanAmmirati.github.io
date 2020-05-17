@@ -94,17 +94,28 @@
             {% from '_includes/_defaults.html' import RECENT_ARTICLES_COUNT with context %}
             {% if loop.index0 < RECENT_ARTICLES_COUNT %}
             <article itemscope>
-                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a>
-                <section>
-                    posted in
-                <a href="{{ SITEURL }}/{{ CATEGORIES_URL|default('categories') }}#{{ article.category.slug }}-ref">{{ article.category }}</a>
-                <div class="recent-posts-time">
-                <time itemprop="dateCreated" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
-                </div>
-                </section>
-                {% if RECENT_ARTICLE_SUMMARY %}
-                    <p>{{article.summary}}</p>
-                {% endif %}
+
+                    <div class="recents_row">
+                        <div class="span4">
+                            {% if article.cover %}
+                                <img class="center-fit" src="{{ SITEURL }}/{{ article.cover }}" alt=""></img>
+                            {% endif %}
+                        </div>
+                        <div class="span8" align="left">
+                            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a>
+                            <section>
+                                posted in
+                            <a href="{{ SITEURL }}/{{ CATEGORIES_URL|default('categories') }}#{{ article.category.slug }}-ref">{{ article.category }}</a>
+                            <div class="recent-posts-time">
+                            <time itemprop="dateCreated" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+                            </div>
+                            </section>
+                            {% if RECENT_ARTICLE_SUMMARY %}
+                                <p>{{article.summary}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
             </article>
             {% endif %}
             {% endfor %}

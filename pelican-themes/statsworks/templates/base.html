@@ -92,9 +92,11 @@
             </div>
         </div>
         <div class="container-fluid">
+            {% if article and article.cover %}
             <div class="initial_img">
-            <img class="center-fit" src="{{ SITEURL }}/mountains.jpeg"></img>
+            <img class="center-fit" src="{{ SITEURL }}/{{ article.cover }}" alt=""></img>
             </div>
+            {% endif %}
             <div class="row-fluid">
                 <div class="span1"></div>
                 <div class="span10">

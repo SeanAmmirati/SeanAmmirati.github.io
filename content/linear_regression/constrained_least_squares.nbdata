@@ -5,3 +5,4 @@ category: Linear Models
 tags: theory, constrained least squares, linear regression
 status: published
 summary: A theoretical approach to a constrained least squares problem.
+cover: images/constrained_least_squares_cover.svg

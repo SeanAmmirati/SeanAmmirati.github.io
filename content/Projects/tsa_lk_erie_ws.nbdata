@@ -1,8 +1,9 @@
 title: Time Series Analysis: Lake Erie
 author: Sean Ammirati
-category: Projects 
+category: Projects
 slug: tsa_lake_erie
 tags: time series, spectral analysis, arima, sarima, holt-winters
 date: 2018/09/26
-summary: A time series analysis of Lake Erie water levels using various techniques. 
+summary: A time series analysis of Lake Erie water levels using various techniques.
+cover: images/time_series_erie_cover.png
 status: Published
